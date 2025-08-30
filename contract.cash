@@ -1,0 +1,34 @@
+pragma cashscript ^0.11.0;
+
+
+contract Paluwagan (
+    pubkey member_1_Pubkey,
+    pubkey member_2_Pubkey,
+    pubkey member_3_Pubkey,
+    pubkey member_4_Pubkey,
+    pubkey member_5_Pubkey,
+    int potAmount,
+    int period,
+) {
+
+    function redeem () {
+        require(this.age >= period);  // needs to be spent only after <period> days since deposit
+
+        // ensure that all members contributed:
+        // even if one member paid twice, and one did not pay, the checking of amount will cover up for it
+        int constant MEMBERS_COUNT = 5;
+        require(tx.inputs.length >= MEMBERS_COUNT);
+        
+        // 0: to redeemer address and
+        // 1: contribution of the redeemer for the next cycle sent back to the contract immediately
+        require(tx.inputs[0].lockingBytecode == tx.outputs[1].lockingBytecode);
+        require(tx.outputs.length == 2);
+        
+        // spent amount must be all the contributions minus the fee and the contribution of the redeemer for the next cycle
+        int fee = 1100;
+        int individualContribution = potAmount / MEMBERS_COUNT;
+        int amount = potAmount - individualContribution - fee;
+        require(tx.outputs[0].value == amount);
+    }
+
+}
