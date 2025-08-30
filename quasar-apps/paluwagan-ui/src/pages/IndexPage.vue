@@ -1,17 +1,23 @@
 <template>
-  <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    />
-  </q-page>
+  <div class="flex justify-center q-pa-lg">
+    <!-- insert here -->
+    <refresh-balance-button />
+    <send-to-pool-button />
+  </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
 
+import RefreshBalanceButton from 'src/components/buttons/RefreshBalanceButton.vue'
+import SendToPoolButton from 'src/components/buttons/SendToPoolButton.vue'
+
 export default defineComponent({
   name: 'IndexPage',
-})
+
+  components: {
+    RefreshBalanceButton,
+    SendToPoolButton
+  }
+});
 </script>
