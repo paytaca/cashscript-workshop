@@ -7,41 +7,27 @@
     <link rel="stylesheet" href="/node_modules/reveal.js/dist/reveal.css">
     <link rel="stylesheet" href="/node_modules/reveal.js/dist/theme/league.css">
     <link rel="stylesheet" href="/node_modules/reveal.js/plugin/highlight/monokai.css">
-    <style>
-        .code-section {
-            font-size: 0.85em;
-        }
-        .code-explanation {
-            margin-top: 0.5em;
-            padding: 0.5em;
-            background: rgba(255,255,255,0.1);
-            border-radius: 8px;
-            font-size: 0.75em;
-        }
-        .code-explanation ul {
-            margin: 0.3em 0;
-            padding-left: 1.2em;
-        }
-        .code-explanation li {
-            margin: 0.2em 0;
-        }
-        .code-explanation p {
-            margin: 0.3em 0;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
     <div class="reveal">
         <div class="slides">
             <section>
-                <h1>Cashscript Language</h1>
-                <h3>Day 1 - Afternoon Session</h3>
-                <p>Writing Bitcoin Cash smart contracts</p>
+                <div>
+                    <h1 class="flex items-center justify-center gap-3 mb-4">
+                        Cashscript Language
+                    </h1>
+                    <h3 class="text-2xl mb-2">Day 1 - Afternoon Session</h3>
+                    <p class="text-lg">Writing Bitcoin Cash smart contracts</p>
+                </div>
             </section>
 
             <section>
-                <h2>What is Cashscript?</h2>
-                <ul>
+                <h2 class="flex items-center gap-3">
+                    What is 
+                    <img src="../../images/logos/cashscript.svg" alt="Cashscript Logo" class="w-14 h-14 inline-block">Cashscript?
+                </h2>
+                <ul class="text-left space-y-2">
                     <li>Smart contract language for Bitcoin Cash</li>
                     <li>Based on Bitcoin Script</li>
                     <li>Compiles to bytecode</li>
@@ -57,7 +43,7 @@
             <!-- Complete contract overview first -->
             <section>
                 <h3>Complete Contract Overview</h3>
-                <div class="code-section">
+                <div class="">
                     <pre><code class="language-javascript" data-line-numbers="1-12">contract TransferWithTimeout(
     bytes20 sender,
     bytes20 recipient,
@@ -72,14 +58,8 @@
     }
 }</code></pre>
                 </div>
-                <div class="code-explanation">
-                    <p><strong>This contract allows time-locked transfers with signature verification!</strong></p>
-                    <ul>
-                        <li>Lines 1-4: Contract declaration and parameters</li>
-                        <li>Line 5: Function definition</li>
-                        <li>Lines 6-8: Security validations</li>
-                        <li>Line 10: Transfer execution</li>
-                    </ul>
+                <div class="mt-4 p-4 bg-white/10 rounded-lg">
+                    <p class="font-bold mb-2">This contract allows time-locked transfers with signature verification!</p>
                 </div>
             </section>
 
@@ -87,7 +67,7 @@
             <section>
                 <section>
                     <h3>1. Contract Declaration</h3>
-                    <div class="code-section">
+                    <div>
                         <pre><code class="language-javascript" data-line-numbers="1-5">contract TransferWithTimeout(
     bytes20 sender,
     bytes20 recipient,
@@ -102,8 +82,8 @@
     }
 }</code></pre>
                     </div>
-                    <div class="code-explanation">
-                        <ul>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1">
                             <li><strong>contract</strong> - keyword to define a smart contract</li>
                             <li><strong>TransferWithTimeout</strong> - contract name</li>
                             <li><strong>Parameters</strong> - contract inputs (sender, recipient, timeout)</li>
@@ -113,7 +93,7 @@
 
                 <section>
                     <h3>2. Function Definition</h3>
-                    <div class="code-section">
+                    <div>
                         <pre><code class="language-javascript" data-line-numbers="6">contract TransferWithTimeout(
     bytes20 sender,
     bytes20 recipient,
@@ -128,8 +108,8 @@
     }
 }</code></pre>
                     </div>
-                    <div class="code-explanation">
-                        <ul>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1">
                             <li><strong>function</strong> - defines an executable function</li>
                             <li><strong>transfer</strong> - function name</li>
                             <li><strong>sig s</strong> - digital signature parameter</li>
@@ -140,7 +120,7 @@
 
                 <section>
                     <h3>3. Signature Validation</h3>
-                    <div class="code-section">
+                    <div>
                         <pre><code class="language-javascript" data-line-numbers="7">contract TransferWithTimeout(
     bytes20 sender,
     bytes20 recipient,
@@ -155,8 +135,8 @@
     }
 }</code></pre>
                     </div>
-                    <div class="code-explanation">
-                        <ul>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1">
                             <li><strong>require()</strong> - validation function that must pass</li>
                             <li><strong>checkSig(s, pk)</strong> - verifies the signature against public key</li>
                             <li>This ensures only the owner can execute the function</li>
@@ -166,7 +146,7 @@
 
                 <section>
                     <h3>4. Sender Verification</h3>
-                    <div class="code-section">
+                    <div>
                         <pre><code class="language-javascript" data-line-numbers="8">contract TransferWithTimeout(
     bytes20 sender,
     bytes20 recipient,
@@ -181,8 +161,8 @@
     }
 }</code></pre>
                     </div>
-                    <div class="code-explanation">
-                        <ul>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1">
                             <li><strong>hash160(pk)</strong> - converts public key to address hash</li>
                             <li><strong>== sender</strong> - compares with the contract's sender parameter</li>
                             <li>Ensures the signer is the intended sender</li>
@@ -192,7 +172,7 @@
 
                 <section>
                     <h3>5. Time Lock Check</h3>
-                    <div class="code-section">
+                    <div>
                         <pre><code class="language-javascript" data-line-numbers="9">contract TransferWithTimeout(
     bytes20 sender,
     bytes20 recipient,
@@ -207,8 +187,8 @@
     }
 }</code></pre>
                     </div>
-                    <div class="code-explanation">
-                        <ul>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1">
                             <li><strong>tx.time</strong> - current block timestamp</li>
                             <li><strong>>= timeout</strong> - must be after the timeout period</li>
                             <li>Implements time-based restrictions</li>
@@ -218,23 +198,23 @@
 
                 <section>
                     <h3>6. Output Creation</h3>
-                    <div class="code-section">
-                        <pre><code class="language-javascript" data-line-numbers="10">contract TransferWithTimeout(
+                    <div>
+                        <pre><code class="language-javascript text-md" data-line-numbers="11">contract TransferWithTimeout(
     bytes20 sender,
-    bytes20 recipient,
-    int timeout
-) {
-    function transfer(sig s, pubkey pk) {
-        require(checkSig(s, pk));
-        require(hash160(pk) == sender);
-        require(tx.time >= timeout);
-        
-        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
-    }
-}</code></pre>
+                    bytes20 recipient,
+                    int timeout
+                ) {
+                    function transfer(sig s, pubkey pk) {
+                        require(checkSig(s, pk));
+                        require(hash160(pk) == sender);
+                        require(tx.time >= timeout);
+                        
+                        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
+                    }
+                }</code></pre>
                     </div>
-                    <div class="code-explanation">
-                        <ul>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1">
                             <li><strong>OutputP2PKH</strong> - creates a Pay-to-Public-Key-Hash output</li>
                             <li><strong>recipient</strong> - destination address</li>
                             <li><strong>tx.value</strong> - amount to transfer</li>
@@ -246,7 +226,7 @@
 
             <section>
                 <h2>Key Features</h2>
-                <ul>
+                <ul class="space-y-2">
                     <li>Functions and parameters</li>
                     <li>Built-in validation</li>
                     <li>Output creation</li>
