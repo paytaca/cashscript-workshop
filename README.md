@@ -268,33 +268,9 @@ This workshop is designed to be collaborative and improve over time. Contributio
 3. Make your improvements
 4. Submit a pull request
 
-## Resources
-
-### Official Documentation
-- [Cashscript Documentation](https://cashscript.org/)
-- [Bitcoin Cash Developer Portal](https://developer.bitcoin.com/)
-- [Quasar Framework Documentation](https://quasar.dev/)
-
-### Community
-- [Bitcoin Cash Discord](https://discord.gg/bitcoincash)
-- [Cashscript Community](https://github.com/Bitcoin-com/cashscript)
-
-### Additional Learning
-- Bitcoin Cash whitepaper and technical specifications
-- Smart contract security best practices
-- Frontend development with modern frameworks
-
 ## License
 
 This workshop content is provided under the [MIT License](LICENSE) for educational purposes.
-
-## Support
-
-For workshop-related questions or technical support:
-
-- Create an issue in this repository
-- Contact the workshop organizers
-- Check the troubleshooting section in the workshop materials
 
 ---
 
