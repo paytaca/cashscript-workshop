@@ -1,8 +1,10 @@
 {
-    "dependencies": {
-        "cashc": "^0.11.0",
-        "cashscript": "^0.11.0",
-        "@psf/bch-js": "^6.4.0"
-    },
-    "type": "module"
+  "dependencies": {
+    "@bitauth/libauth": "^3.0.0",
+    "@psf/bch-js": "^6.4.0",
+    "bitcore-lib": "^10.0.5",
+    "cashc": "^0.11.0",
+    "cashscript": "^0.11.0"
+  },
+  "type": "module"
 }
