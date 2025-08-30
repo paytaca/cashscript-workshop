@@ -1,0 +1,9 @@
+pragma cashscript ^0.11.0;
+
+contract Paluwagan (
+    // contract parameters
+) {
+    function redeem (/* function parameters */) {
+        // function code here 
+    }
+}
