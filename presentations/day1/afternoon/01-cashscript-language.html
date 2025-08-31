@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cashscript Language - Day 1</title>
+    <title>CashScript - Day 1</title>
     <link rel="stylesheet" href="/node_modules/reveal.js/dist/reveal.css">
     <link rel="stylesheet" href="/node_modules/reveal.js/dist/theme/league.css">
     <link rel="stylesheet" href="/node_modules/reveal.js/plugin/highlight/monokai.css">
@@ -15,52 +15,136 @@
             <section>
                 <div>
                     <h1 class="flex items-center justify-center gap-3 mb-4">
-                        Cashscript Language
+                        <div class="text-green-300">CashScript Language</div>
                     </h1>
-                    <h3 class="text-2xl mb-2">Day 1 - Afternoon Session</h3>
-                    <p class="text-lg">Writing Bitcoin Cash smart contracts</p>
+                    <p class="text-4xl">Writing Bitcoin Cash smart contracts</p>
                 </div>
             </section>
 
             <section>
                 <h2 class="flex items-center gap-3">
-                    What is 
-                    <img src="../../images/logos/cashscript.svg" alt="Cashscript Logo" class="w-14 h-14 inline-block">Cashscript?
+                    <img src="../../images/logos/cashscript.svg" alt="CashScript Logo" class="w-20 h-20">
+                    <div class="text-green-300">What is CashScript?</div>
                 </h2>
                 <ul class="text-left space-y-2">
-                    <li>Smart contract language for Bitcoin Cash</li>
+                    <li>Smart contract language for Bitcoin Cash (2019)</li>
+                    <li>Stateless programming</li>
                     <li>Based on Bitcoin Script</li>
                     <li>Compiles to bytecode</li>
-                    <li>Type-safe and developer-friendly</li>
                 </ul>
             </section>
 
             <section>
-                <h2>Basic Syntax - Contract Structure</h2>
-                <p>Let's analyze a complete contract step by step:</p>
+                <h2><div class="text-green-300">Basic Syntax - Contract Structure</div></h2>
+                <p>Tama na salita, code na ta!</p>
             </section>
-
-            <!-- Complete contract overview first -->
+            
             <section>
-                <h3>Complete Contract Overview</h3>
-                <div class="">
-                    <pre><code class="language-javascript" data-line-numbers="1-12">contract TransferWithTimeout(
-    bytes20 sender,
-    bytes20 recipient,
-    int timeout
-) {
-    function transfer(sig s, pubkey pk) {
-        require(checkSig(s, pk));
-        require(hash160(pk) == sender);
-        require(tx.time >= timeout);
-        
-        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
+                <!-- Complete contract overview first -->
+                <section>
+                    <h3><div class="text-green-300">Contract Overview</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1-9">pragma cashscript ^0.11.0;
+
+contract Password (string password) {
+
+    function spend (string input_password) {
+        require(input_password == password);
     }
+
+}
+</code></pre>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg">
+                        <p class="text-2xl">A simple contract requiring a password to spend funds</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">1. Contract Version</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1">pragma cashscript ^0.11.0;
+
+contract Password (string password) {
+
+    function spend (string input_password) {
+        require(input_password == password);
+    }
+
 }</code></pre>
-                </div>
-                <div class="mt-4 p-4 bg-white/10 rounded-lg">
-                    <p class="font-bold mb-2">This contract allows time-locked transfers with signature verification!</p>
-                </div>
+                    </div>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><strong class="text-green-300">pragma</strong> - import keyword for cashscript</li>
+                            <li><strong class="text-green-300">cashscript</strong> - the CashScript package</li>
+                            <li><strong class="text-green-300">^0.11.0</strong> - CashScript contract version</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">2. Contract Name & Constructor</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="3">pragma cashscript ^0.11.0;
+
+contract Password (string password) {
+
+    function spend (string input_password) {
+        require(input_password == password);
+    }
+
+}</code></pre>
+                    </div>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                        <ul class="space-y-1">
+                            <li><strong class="text-green-300">contract</strong> - keyword to create a contract</li>
+                            <li><strong class="text-green-300">Password</strong> - contract name</li>
+                            <li><strong class="text-green-300">(string password)</strong> - constructor with 1 parameter</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">3. Contract Function</divdiv></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="5">pragma cashscript ^0.11.0;
+
+contract Password (string password) {
+
+    function spend (string input_password) {
+        require(input_password == password);
+    }
+
+}</code></pre>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                        <ul class="space-y-1">
+                            <li><strong class="text-green-300">function</strong> - keyword to create a function</li>
+                            <li><strong class="text-green-300">spend</strong> - function name</li>
+                            <li><strong class="text-green-300">(string input_password)</strong> - function parameter</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">4. Contract Constraint</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="6">pragma cashscript ^0.11.0;
+
+contract Password (string password) {
+
+    function spend (string input_password) {
+        require(input_password == password);
+    }
+
+}</code></pre>
+                    </div>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <div class="text-2xl">Checks if user input password is the same with the set password before spending funds inside the contract</div>
+                    </div>
+                </section>
             </section>
 
             <!-- Vertical slides for code breakdown -->
