@@ -2,7 +2,7 @@
   <q-btn
     rounded
     color="blue"
-    label="Refresh Pool Balance"
+    label="Refresh Balance"
     @click="refreshContractBalance"
   />
 </template>
@@ -20,6 +20,10 @@ export default defineComponent({
     contractAddress: { type: String, required: true, default: '' }
   },
 
+  emits: [
+    'on-balance-refresh'
+  ],
+
   methods: {
     async refreshContractBalance() {
       const loadingDialog = this.$q.dialog({
@@ -28,7 +32,7 @@ export default defineComponent({
       })
 
       const balance = await getBalance(this.contractAddress)
-      console.log(balance)
+      this.$emit('on-balance-refresh', balance)
 
       loadingDialog.hide()
     }
