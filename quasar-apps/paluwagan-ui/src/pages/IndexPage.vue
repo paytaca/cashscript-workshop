@@ -1,7 +1,9 @@
 <template>
   <div class="flex justify-center q-pa-lg">
     <!-- insert here -->
-    <refresh-balance-button />
+    <refresh-balance-button
+      :contract-address="'bchtest:qzxu7zvdgquka95v83m6u8ywzrsdk4vah5wrmerdu0'"
+    />
     <send-to-pool-button />
     <scan-button />
   </div>
