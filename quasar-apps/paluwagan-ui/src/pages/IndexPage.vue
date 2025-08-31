@@ -9,6 +9,7 @@
      </div>
     <send-to-pool-button />
     <scan-button />
+    <create-paluwagan-button />
   </div>
 </template>
 
@@ -19,6 +20,7 @@ import SendToPoolButton from 'src/components/buttons/SendToPoolButton.vue'
 import ScanButton from 'src/components/buttons/ScanButton.vue'
 import PoolBalanceCard from 'src/components/cards/PoolBalanceCard.vue'
 import MembersListCard from 'src/components/cards/MembersListCard.vue'
+import CreatePaluwaganButton from 'src/components/buttons/CreatePaluwaganButton.vue'
 
 export default defineComponent({
   name: 'IndexPage',
@@ -27,7 +29,8 @@ export default defineComponent({
     SendToPoolButton,
     ScanButton,
     PoolBalanceCard,
-    MembersListCard
+    MembersListCard,
+    CreatePaluwaganButton
   },
 
   data() {

@@ -17,10 +17,10 @@
 
       <div class="flex flex-center">
         <q-btn
+          v-close-popup
           rounded
           label="Close"
           color="red"
-          v-close-popup
         />
       </div>
     </q-card>
