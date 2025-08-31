@@ -33,7 +33,7 @@ import { defineComponent } from 'vue';
 import QrCode from 'src/components/QrCode.vue';
 
 export default defineComponent({
-  name: 'ContractQrDialog',
+  name: 'AddressQrDialog',
 
   components: {
     QrCode

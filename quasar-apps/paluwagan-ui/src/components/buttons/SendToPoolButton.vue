@@ -3,22 +3,22 @@
     rounded
     color="blue"
     label="Send Money to Pool"
-    @click="displayContractQrDialog"
+    @click="displayAddressQrDialog"
   />
 </template>
 
 <script>
 import { defineComponent } from 'vue'
 
-import ContractQrDialog from 'src/components/dialogs/ContractQrDialog.vue'
+import AddressQrDialog from 'src/components/dialogs/AddressQrDialog.vue'
 
 export default defineComponent({
   name: 'SendToPoolButton',
 
   methods: {
-    displayContractQrDialog() {
+    displayAddressQrDialog() {
       this.$q.dialog({
-        component: ContractQrDialog
+        component: AddressQrDialog
       })
     }
   }

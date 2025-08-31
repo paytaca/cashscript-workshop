@@ -14,7 +14,7 @@ import { defineComponent } from 'vue'
 
 import RefreshBalanceButton from 'src/components/buttons/RefreshBalanceButton.vue'
 import SendToPoolButton from 'src/components/buttons/SendToPoolButton.vue'
-import ScanButton from 'src/components/buttons/ScanButton.vue';
+import ScanButton from 'src/components/buttons/ScanButton.vue'
 
 export default defineComponent({
   name: 'IndexPage',
@@ -23,6 +23,12 @@ export default defineComponent({
     RefreshBalanceButton,
     SendToPoolButton,
     ScanButton
+  },
+
+  data() {
+    return {
+      paluwaganContract: undefined
+    }
   }
 });
 </script>
