@@ -2,81 +2,55 @@ pragma cashscript ^0.11.0;
 
 
 contract Paluwagan (
-    bytes20 member_1_pubkey_hash,
-    bytes20 member_2_pubkey_hash,
-    bytes20 member_3_pubkey_hash,
-    bytes20 member_4_pubkey_hash,
-    bytes20 member_5_pubkey_hash,
+    bytes20 member1,
+    bytes20 member2,
+    bytes20 member3,
+    bytes20 member4,
+    bytes20 member5,
+    bytes32 nftCategory,
     int potAmount,
     int period,
 ) {
     
-    function redeem (bytes32 userNftCategory, bytes32 counterNftCategory) {
+    function redeem () {
+        // all UTXO age must be at least <period> days old
         require(this.age >= period);
 
-        /**
-            First 5 inputs = UTXOs of user's contributions
-            6th input = user NFT of the redeemer
-            7th input = counter NFT
-         */
+        // at least 5 UTXOs (contributions) must be present in the transaction
         int constant MEMBERS_COUNT = 5;
-        require(tx.inputs.length >= MEMBERS_COUNT + 2);
+        require(tx.inputs.length >= MEMBERS_COUNT);
         
         /**
-            user NFT's commitment:
-            20 bytes = user's pubkey hash
-            1 byte = user's index (redeem order number)
-         */
-        bytes20 userNftPubkeyHash, bytes userNftIndex = tx.outputs[2].nftCommitment.split(20);
-        // check if user NFT pubkey hash is a member
-        require(
-            userNftPubkeyHash == member_1_pubkey_hash ||
-            userNftPubkeyHash == member_2_pubkey_hash ||
-            userNftPubkeyHash == member_3_pubkey_hash ||
-            userNftPubkeyHash == member_4_pubkey_hash ||
-            userNftPubkeyHash == member_5_pubkey_hash
-        );
-
-        /**
-            counter NFT's commitment:
-            1 byte = next redeemer's index (redeem order number)
-         */
-        int inputCounterNftIndex = int(tx.inputs[7].nftCommitment);
-        int outputCounterNftIndex = int(tx.outputs[3].nftCommitment);
-        require(inputCounterNftIndex == int(userNftIndex));
-        // check if commitment has been updated properly
-        if (inputCounterNftIndex == 5) {
-            require(outputCounterNftIndex == 0);
-        } else {
-            require(outputCounterNftIndex == inputCounterNftIndex + 1);
-        }
-
-        /**
-            0th output: to redeemer (pot amount - redeemer's next contribution - fee)
-            1st output: to contract (redeemer's next contribution)
-            2nd output: to contract (user NFT)
-            3rd output: to contract (counter NFT with updated commitment)
+            0th output: to contract (Tracker NFT with updated commitment)
+            1st output: to redeemer (pot amount - redeemer's next contribution - fee)
+            2nd output: to contract (redeemer's next contribution)
         */
 
         // 0th output
+        require(tx.outputs[0].value == 1000);  // dust
+        require(tx.outputs[0].tokenCategory == nftCategory + 0x01);  // must be a mutable NFT
+
+        // passing of schedule using the NFT commitment as tracker
+        bytes20 commitmentPubkeyHash = bytes20(tx.inputs[0].nftCommitment);
+        if (commitmentPubkeyHash == member1) { require(tx.outputs[0].nftCommitment == member2); }
+        else if (commitmentPubkeyHash == member2) { require(tx.outputs[0].nftCommitment == member3); }
+        else if (commitmentPubkeyHash == member3) { require(tx.outputs[0].nftCommitment == member4); }
+        else if (commitmentPubkeyHash == member4) { require(tx.outputs[0].nftCommitment == member5); }
+        else if (commitmentPubkeyHash == member5) { require(tx.outputs[0].nftCommitment == member1); }
+
+        // 2nd output
         int fee = 1100;
         int individualContribution = potAmount / MEMBERS_COUNT;
         int amount = potAmount - individualContribution - fee;
-        bytes25 redeemer = new LockingBytecodeP2PKH(userNftPubkeyHash);
-        require(tx.outputs[0].lockingBytecode == redeemer);
-        require(tx.outputs[0].value == amount);
+        bytes20 redeemerPubkeyHash = bytes20(tx.inputs[0].nftCommitment);  // 0th input must be the tracker NFT
+        bytes25 redeemer = new LockingBytecodeP2PKH(redeemerPubkeyHash);
+        require(tx.outputs[2].lockingBytecode == tx.inputs[0].lockingBytecode);  // must be sent back to contract
+        require(tx.outputs[2].value == amount);
 
         // 1st output
         require(tx.outputs[1].lockingBytecode == redeemer);
         require(tx.outputs[1].value == potAmount / 5);
 
-        // 2nd output
-        require(userNftCategory == tx.outputs[2].tokenCategory);  // check if IMMUTABLE
-        require(tx.inputs[6].lockingBytecode == tx.outputs[2].lockingBytecode);  // send back to contract
-
-        // 3rd output
-        require(counterNftCategory + 0x01 == tx.outputs[2].tokenCategory);  // check if MUTABLE
-        require(tx.inputs[7].lockingBytecode == tx.outputs[3].lockingBytecode);  // send back to contract
     }
 
 }
