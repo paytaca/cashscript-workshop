@@ -29,14 +29,14 @@
                 <ul class="text-left space-y-2">
                     <li>Smart contract language for Bitcoin Cash (2019)</li>
                     <li>Stateless programming</li>
-                    <li>Based on Bitcoin Script</li>
+                    <li>Stack-based operations</li>
                     <li>Compiles to bytecode</li>
+                    <li>No loops!</li>
                 </ul>
             </section>
 
             <section>
                 <h2><div class="text-green-300">Basic Syntax - Contract Structure</div></h2>
-                <p>Tama na salita, code na ta!</p>
             </section>
             
             <section>
@@ -76,9 +76,9 @@ contract Password (string password) {
                     </div>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
                         <ul class="space-y-1 text-2xl">
-                            <li><strong class="text-green-300">pragma</strong> - import keyword for cashscript</li>
-                            <li><strong class="text-green-300">cashscript</strong> - the CashScript package</li>
-                            <li><strong class="text-green-300">^0.11.0</strong> - CashScript contract version</li>
+                            <li><code class="text-green-300">pragma</code> - import keyword for cashscript</li>
+                            <li><code class="text-green-300">cashscript</code> - the CashScript package</li>
+                            <li><code class="text-green-300">^0.11.0</code> - CashScript contract version</li>
                         </ul>
                     </div>
                 </section>
@@ -98,11 +98,31 @@ contract Password (string password) {
                     </div>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
                         <ul class="space-y-1">
-                            <li><strong class="text-green-300">contract</strong> - keyword to create a contract</li>
-                            <li><strong class="text-green-300">Password</strong> - contract name</li>
-                            <li><strong class="text-green-300">(string password)</strong> - constructor with 1 parameter</li>
+                            <li><code class="text-green-300">contract</code> - keyword to create a contract</li>
+                            <li><code class="text-green-300">Password</code> - contract name</li>
+                            <li><code class="text-green-300">(string password)</code> - constructor with 1 parameter</li>
                         </ul>
                     </div>
+                </section>
+
+                <section>
+                    <h2><div class="text-green-300">Data Types</div></h2>
+                    <ul class="space-y-1">
+                        <li><code class="text-green-300">int</code> - Integer</li>
+                        <li><code class="text-green-300">string</code> - String</li>
+                        <li><code class="text-green-300">bytes</code> - Bytes </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2><div class="text-green-300">Special Bytes Length</div></h2>
+                    <ul class="space-y-1">
+                        <li><code class="text-green-300">pubkey</code> - Public Key <i>(33 bytes)</i></li>
+                        <li><code class="text-green-300">sig</code> - Transaction Signature <i>(65 bytes)</i></li>
+                        <li><code class="text-green-300">datasig</code> - Data Signature <i>(64 bytes)</i></li>
+                        <li><code class="text-green-300">bytes20</code> - pubkey hashes</li>
+                        <li><code class="text-green-300">bytes32</code> - token categories</li>
+                        <li><code class="text-green-300">bytes35</code> - locking bytecodes</li>
+                    </ul>
                 </section>
 
                 <section>
@@ -121,9 +141,9 @@ contract Password (string password) {
 
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
                         <ul class="space-y-1">
-                            <li><strong class="text-green-300">function</strong> - keyword to create a function</li>
-                            <li><strong class="text-green-300">spend</strong> - function name</li>
-                            <li><strong class="text-green-300">(string input_password)</strong> - function parameter</li>
+                            <li><code class="text-green-300">function</code> - keyword to create a function</li>
+                            <li><code class="text-green-300">spend</code> - function name</li>
+                            <li><code class="text-green-300">(string input_password)</code> - function parameter</li>
                         </ul>
                     </div>
                 </section>
@@ -145,14 +165,25 @@ contract Password (string password) {
                         <div class="text-2xl">Checks if user input password is the same with the set password before spending funds inside the contract</div>
                     </div>
                 </section>
+
+                <section>
+                    <h2><div class="text-green-300">Operators</div></h2>
+                    <ul class="space-y-1">
+                        <li>Arithmetic: <code class="language-javascript text-green-300">&nbsp;  +, -, *, /</code></li>
+                        <li>Boolean: <code class="language-javascript text-green-300">&nbsp; &&, ||, ==, <, >, >=, <=</code></li>
+                        <li>Conditional: <code class="language-javascript text-green-300">&nbsp; if, else, else if</code></li>
+                    </ul>
+                </section>
             </section>
 
             <!-- Vertical slides for code breakdown -->
             <section>
                 <section>
-                    <h3>1. Contract Declaration</h3>
+                    <h3><div class="text-green-300">Transfer With Timeout</div></h3>
                     <div>
-                        <pre><code class="language-javascript" data-line-numbers="1-5">contract TransferWithTimeout(
+                        <pre><code class="language-javascript" data-line-numbers="1-16">pragma cashscript ^0.11.0;
+
+contract TransferWithTimeout(
     bytes20 sender,
     bytes20 recipient,
     int timeout
@@ -162,23 +193,24 @@ contract Password (string password) {
         require(hash160(pk) == sender);
         require(tx.time >= timeout);
         
-        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
+        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(recipient);
+        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
     }
-}</code></pre>
+}
+</code></pre>
                     </div>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
-                        <ul class="space-y-1">
-                            <li><strong>contract</strong> - keyword to define a smart contract</li>
-                            <li><strong>TransferWithTimeout</strong> - contract name</li>
-                            <li><strong>Parameters</strong> - contract inputs (sender, recipient, timeout)</li>
-                        </ul>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg">
+                        <p class="text-2xl">The contract's fund can only be spent after a certain time/date</p>
                     </div>
                 </section>
 
                 <section>
-                    <h3>2. Function Definition</h3>
+                    <h3><div class="text-green-300">1. Sender Verification</div></h3>
                     <div>
-                        <pre><code class="language-javascript" data-line-numbers="6">contract TransferWithTimeout(
+                        <pre><code class="language-javascript" data-line-numbers="9-10">pragma cashscript ^0.11.0;
+
+contract TransferWithTimeout(
     bytes20 sender,
     bytes20 recipient,
     int timeout
@@ -188,24 +220,25 @@ contract Password (string password) {
         require(hash160(pk) == sender);
         require(tx.time >= timeout);
         
-        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
+        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(recipient);
+        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
     }
 }</code></pre>
                     </div>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
-                        <ul class="space-y-1">
-                            <li><strong>function</strong> - defines an executable function</li>
-                            <li><strong>transfer</strong> - function name</li>
-                            <li><strong>sig s</strong> - digital signature parameter</li>
-                            <li><strong>pubkey pk</strong> - public key parameter</li>
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">checkSig(s, pk)</code> - checks if the transaction is signed</li>
+                            <li><code class="text-green-300">hash160(pk)</code> - RIPEMD-160 hash of the public key (returns bytes20)</li>
                         </ul>
                     </div>
                 </section>
 
                 <section>
-                    <h3>3. Signature Validation</h3>
+                    <h3><div class="text-green-300">2. Time Constraint</div></h3>
                     <div>
-                        <pre><code class="language-javascript" data-line-numbers="7">contract TransferWithTimeout(
+                        <pre><code class="language-javascript" data-line-numbers="11">pragma cashscript ^0.11.0;
+
+contract TransferWithTimeout(
     bytes20 sender,
     bytes20 recipient,
     int timeout
@@ -215,23 +248,38 @@ contract Password (string password) {
         require(hash160(pk) == sender);
         require(tx.time >= timeout);
         
-        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
+        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(recipient);
+        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
     }
-}</code></pre>
+}
+</code></pre>
                     </div>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
-                        <ul class="space-y-1">
-                            <li><strong>require()</strong> - validation function that must pass</li>
-                            <li><strong>checkSig(s, pk)</strong> - verifies the signature against public key</li>
-                            <li>This ensures only the owner can execute the function</li>
+                        You can access the transaction data using the special object <code class="text-green-300">tx</code>.
+                    </div>
+                </section>
+
+                <section>
+                    <h2><div class="text-green-300">Transaction Data</div></h2>
+                    <ul class="space-y-1">
+                        <li><code class="text-green-300">tx.inputs</code> - get all transaction inputs used for the transaction</li>
+                        <li><code class="text-green-300">tx.outputs</code> - get all transaction outputs used for the transaction</li>
+                    </ul>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">tx.inputs.length</code> - get total number of inputs</li>
+                            <li><code class="text-green-300">tx.outputs[0].value</code> - get amount of the 0th output</li>
                         </ul>
                     </div>
                 </section>
 
                 <section>
-                    <h3>4. Sender Verification</h3>
+                    <h3><div class="text-green-300">3. Output Checking</div></h3>
                     <div>
-                        <pre><code class="language-javascript" data-line-numbers="8">contract TransferWithTimeout(
+                        <pre><code class="language-javascript" data-line-numbers="13-14">pragma cashscript ^0.11.0;
+
+contract TransferWithTimeout(
     bytes20 sender,
     bytes20 recipient,
     int timeout
@@ -241,81 +289,34 @@ contract Password (string password) {
         require(hash160(pk) == sender);
         require(tx.time >= timeout);
         
-        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
+        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(recipient);
+        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
     }
-}</code></pre>
+}
+</code></pre>
                     </div>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
-                        <ul class="space-y-1">
-                            <li><strong>hash160(pk)</strong> - converts public key to address hash</li>
-                            <li><strong>== sender</strong> - compares with the contract's sender parameter</li>
-                            <li>Ensures the signer is the intended sender</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>5. Time Lock Check</h3>
-                    <div>
-                        <pre><code class="language-javascript" data-line-numbers="9">contract TransferWithTimeout(
-    bytes20 sender,
-    bytes20 recipient,
-    int timeout
-) {
-    function transfer(sig s, pubkey pk) {
-        require(checkSig(s, pk));
-        require(hash160(pk) == sender);
-        require(tx.time >= timeout);
-        
-        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
-    }
-}</code></pre>
-                    </div>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
-                        <ul class="space-y-1">
-                            <li><strong>tx.time</strong> - current block timestamp</li>
-                            <li><strong>>= timeout</strong> - must be after the timeout period</li>
-                            <li>Implements time-based restrictions</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>6. Output Creation</h3>
-                    <div>
-                        <pre><code class="language-javascript text-md" data-line-numbers="11">contract TransferWithTimeout(
-    bytes20 sender,
-                    bytes20 recipient,
-                    int timeout
-                ) {
-                    function transfer(sig s, pubkey pk) {
-                        require(checkSig(s, pk));
-                        require(hash160(pk) == sender);
-                        require(tx.time >= timeout);
-                        
-                        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
-                    }
-                }</code></pre>
-                    </div>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
-                        <ul class="space-y-1">
-                            <li><strong>OutputP2PKH</strong> - creates a Pay-to-Public-Key-Hash output</li>
-                            <li><strong>recipient</strong> - destination address</li>
-                            <li><strong>tx.value</strong> - amount to transfer</li>
-                            <li>This is the actual transfer action</li>
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">line 13</code> - converts a pubkey hash to a P2PKH locking bytecode</li>
+                            <li><code class="text-green-300">line 14</code> - checks if the 0th output funds are sent to the designated recipient</li>
                         </ul>
                     </div>
                 </section>
             </section>
 
             <section>
-                <h2>Key Features</h2>
+                <h2><div class="text-green-300">Key Features</div></h2>
                 <ul class="space-y-2">
                     <li>Functions and parameters</li>
                     <li>Built-in validation</li>
                     <li>Output creation</li>
                     <li>Time-based conditions</li>
                 </ul>
+            </section>
+
+            <section>
+                <h2><div class="text-green-300">Coding Demo</div></h2>
+                <p>Tama na salita, code na ta!</p>
             </section>
 
             <section>
