@@ -7,9 +7,11 @@ export function compileContract(members, potAmount, period) {
 
   const contractParameters = [
     ...members,
-    potAmount,
-    period
+    BigInt(potAmount),
+    BigInt(period),
   ]
 
   return new Contract(artifact, contractParameters, { provider })
 }
+
+// redeemTransaction(walletObj, nft)

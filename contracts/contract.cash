@@ -10,9 +10,9 @@ contract Paluwagan (
     int potAmount,
     int period,
 ) {
-
+    
     function redeem (bytes32 userNftCategory, bytes32 counterNftCategory) {
-        require(tx.inputs[0].sequenceNumber >= period);
+        require(this.age >= period);
 
         /**
             First 5 inputs = UTXOs of user's contributions
