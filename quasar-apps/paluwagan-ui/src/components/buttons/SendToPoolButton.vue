@@ -16,7 +16,7 @@ export default defineComponent({
   name: 'SendToPoolButton',
 
   props: {
-    contractAddress: { type: String, required: true, default: '' }
+    address: { type: String, required: true, default: '' }
   },
 
   methods: {
@@ -24,7 +24,7 @@ export default defineComponent({
       this.$q.dialog({
         component: AddressQrDialog,
         componentProps: {
-          address: this.contractAddress
+          address: this.address
         }
       })
     }
