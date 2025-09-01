@@ -3,7 +3,7 @@
     persistent
     ref="loadingDialogRef"
   >
-    <q-card class="row justify-center q-pa-md">
+    <q-card class="row justify-center q-pa-md" style="width: 40vw">
       <div class="row col-12">
         <!-- fields go here -->
       </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-center q-pa-lg">
+  <div class="row justify-center q-pa-lg q-gutter-md">
     <!-- insert here -->
      <div class="row col-12 justify-center">
        <pool-balance-card />
@@ -35,7 +35,7 @@ export default defineComponent({
 
   data() {
     return {
-      paluwaganContract: undefined
+      membersList: []
     }
   }
 });

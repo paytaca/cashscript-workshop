@@ -34,6 +34,10 @@ export default defineComponent({
     return {
       membersList: []
     }
+  },
+
+  mounted() {
+    // TODO retrieve members list in Pinia
   }
 })
 </script>
