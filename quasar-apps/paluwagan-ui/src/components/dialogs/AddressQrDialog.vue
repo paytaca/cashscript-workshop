@@ -6,11 +6,11 @@
     <q-card class="q-pa-md">
       <div class="row flex-center">
         <span class="col-12 text-center text-bold">
-          bitcoincash:zryskvwcxe3gx7j5knkxaza0hgncm0whlcmgjxdww3
+          {{ address }}
         </span>
 
         <qr-code
-          :text="'bitcoincash:zryskvwcxe3gx7j5knkxaza0hgncm0whlcmgjxdww3'"
+          :text="address"
           :size="300"
         />
       </div>
@@ -34,6 +34,10 @@ import QrCode from 'src/components/QrCode.vue';
 
 export default defineComponent({
   name: 'AddressQrDialog',
+
+  props: {
+    address: { type: String, required: true, default: '' }
+  },
 
   components: {
     QrCode

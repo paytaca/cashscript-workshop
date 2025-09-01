@@ -7,7 +7,9 @@
      <div class="row col-12 justify-center">
        <members-list-card />
      </div>
-    <send-to-pool-button />
+    <send-to-pool-button
+      :contract-address="'bitcoincash:zryskvwcxe3gx7j5knkxaza0hgncm0whlcmgjxdww3'"
+    />
     <scan-button />
     <create-paluwagan-button />
   </div>
