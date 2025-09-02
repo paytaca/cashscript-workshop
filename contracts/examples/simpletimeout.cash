@@ -1,0 +1,14 @@
+pragma cashscript ^0.11.0;
+//
+/**
+This contract adds time-based spending. Before timeout, only the password works.
+After timeout, the receiver with a valid signature can take the funds
+*/
+contract TimeoutTransfer(bytes password, int timeout, pubkey receiver) {
+    function spend(bytes guess, sig s) {
+        require(guess == bytes(mysecret));      // 1: Password must match
+        if (tx.time >= timeout) {               // 2: After timeout, funds can go to receiver
+            require(checkSig(s, receiver));     // 3: Receiver can unlock after timeout
+        }
+    }
+}

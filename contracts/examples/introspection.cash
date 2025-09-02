@@ -1,0 +1,23 @@
+pragma cashscript ^0.11.0;                                // 1
+
+/*
+This contract showcases transaction introspection. Instead of relying on user 
+input arguments, it inspects the spending transaction directly. It checks that 
+the transaction pays a specified recipient (given by a constructor parameter) 
+and that the fee falls within a valid range. This introduces important features:
+- Accessing transaction inputs and outputs.
+- Performing arithmetic on values (to calculate fees).
+- Constructing and comparing locking bytecode (P2PKH script)
+*/
+contract Introspection(bytes20 recipientPkh, int minFee, int maxFee) { // 2: Params
+    function spend() {                                    // 3
+        int inValue = tx.inputs[this.activeInputIndex].value; // 4: Input value
+        int outValue = tx.outputs[0].value;               // 5: First output value
+        int fee = inValue - outValue;                     // 6: Calculate fee
+
+        require(fee >= minFee && fee <= maxFee);          // 7: Fee must be within bounds
+
+        bytes25 expected = new LockingBytecodeP2PKH(recipientPkh); // 8: Construct recipient script
+        require(tx.outputs[0].lockingBytecode == expected);        // 9: Check output matches
+    }
+}

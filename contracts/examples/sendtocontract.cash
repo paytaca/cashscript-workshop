@@ -1,0 +1,26 @@
+pragma cashscript ^0.11.0;                                            // 1
+
+/**
+This contract enforces that any funds spent from it must be redirected to a 
+specific Pay-to-Script-Hash (P2SH) address. Instead of sending to a public key 
+hash (like P2PKH), it locks funds to another contract or script identified by 
+its redeem script hash. This allows chaining contracts together by forcing 
+spends to flow into another smart contract.  
+*/
+contract SendToContract(bytes20 redeemScriptHash) {                   // 2: Stores redeem script hash
+    function spend() {                                                // 3
+        bytes23 expected = new LockingBytecodeP2SH(redeemScriptHash); // 4: Construct P2SH script
+        require(tx.outputs[0].lockingBytecode == expected);           // 5: Check output is P2SH
+    }
+}
+
+/**
+Note: Use simplepassword contract as destination address during demo
+Speaker Notes:
+1. Compiler version.
+2. Contract stores the hash of a redeem script.
+3. Spend function has no arguments.
+4. Constructs a P2SH locking script using the stored hash.
+5. Requires that the first output of the transaction matches this P2SH.
+   Demonstrates how to enforce P2SH outputs via introspection.
+*/

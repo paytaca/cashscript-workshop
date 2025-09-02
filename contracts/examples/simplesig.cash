@@ -1,0 +1,12 @@
+pragma cashscript ^0.11.0;                   // 1
+/**
+Explainer:
+This contract is equivalent to a standard Pay-to-PubKey-Hash (P2PKH).
+It requires the spender to prove ownership of a private key.
+*/
+contract SimpleSig(bytes20 pkh) {            // 2: Stores public key hash
+    function spend(pubkey pk, sig s) {       // 3: Spend requires pubkey and signature
+        require(hash160(pk) == pkh);         // 4: Verify pubkey matches stored hash
+        require(checkSig(s, pk));            // 5: Verify signature with pubkey
+    }
+}
