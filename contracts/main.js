@@ -22,7 +22,7 @@ const generatePubkeyHashes = async () => {
 }
 
 const run = async () => {
-    const artifact = compileFile("./contract.cash")
+    const artifact = compileFile("./examples/paluwagan.cash")
     const provider = new ElectrumNetworkProvider("chipnet")
     const pubkeyHashes = await generatePubkeyHashes()
     const nftTokenCategory = '12345678901234567890123456789012345'

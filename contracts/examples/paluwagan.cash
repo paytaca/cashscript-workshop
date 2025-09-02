@@ -20,12 +20,6 @@ contract Paluwagan (
         int constant MEMBERS_COUNT = 5;
         require(tx.inputs.length >= MEMBERS_COUNT);
         
-        /**
-            0th output: to contract (Tracker NFT with updated commitment)
-            1st output: to redeemer (pot amount - redeemer's next contribution - fee)
-            2nd output: to contract (redeemer's next contribution)
-        */
-
         // 0th output
         require(tx.outputs[0].value == 1000);  // dust
         require(tx.outputs[0].tokenCategory == nftCategory + 0x01);  // must be a mutable NFT
@@ -38,19 +32,25 @@ contract Paluwagan (
         else if (commitmentPubkeyHash == member4) { require(tx.outputs[0].nftCommitment == member5); }
         else if (commitmentPubkeyHash == member5) { require(tx.outputs[0].nftCommitment == member1); }
 
-        // 2nd output
+        /**
+            0th output: to contract (Tracker NFT with updated commitment)
+            1st output: to redeemer (pot amount - redeemer's next contribution - fee)
+            2nd output: to contract (redeemer's next contribution)
+        */
+
         int fee = 1100;
         int individualContribution = potAmount / MEMBERS_COUNT;
         int amount = potAmount - individualContribution - fee;
         bytes20 redeemerPubkeyHash = bytes20(tx.inputs[0].nftCommitment);  // 0th input must be the tracker NFT
         bytes25 redeemer = new LockingBytecodeP2PKH(redeemerPubkeyHash);
-        require(tx.outputs[2].lockingBytecode == tx.inputs[0].lockingBytecode);  // must be sent back to contract
-        require(tx.outputs[2].value == amount);
 
         // 1st output
         require(tx.outputs[1].lockingBytecode == redeemer);
-        require(tx.outputs[1].value == potAmount / 5);
+        require(tx.outputs[1].value == amount);
 
+        // 2nd output
+        require(tx.outputs[2].lockingBytecode == tx.inputs[0].lockingBytecode);  // must be sent back to contract
+        require(tx.outputs[2].value == individualContribution);
     }
 
 }

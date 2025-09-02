@@ -1,0 +1,16 @@
+pragma cashscript ^0.11.0;
+
+contract TransferWithTimeout(
+    bytes20 sender,
+    bytes20 recipient,
+    int timeout
+) {
+    function transfer(sig s, pubkey pk) {
+        require(checkSig(s, pk));
+        require(hash160(pk) == sender);
+        require(tx.time >= timeout);
+        
+        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(recipient);
+        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
+    }
+}
