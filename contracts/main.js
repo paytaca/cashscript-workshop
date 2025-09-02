@@ -1,25 +1,7 @@
 import { compileFile } from "cashc"
 import { Contract, ElectrumNetworkProvider, TransactionBuilder } from "cashscript"
-import { WalletGenerator } from "./wallet.js"
+import { generatePubkeyHashes } from "./utils.js"
 
-
-const generatePubkeyHashes = async () => {
-    const mnemonic = 'random words for testing only'
-    const wallets = [
-        new WalletGenerator(mnemonic + '1'),
-        new WalletGenerator(mnemonic + '2'),
-        new WalletGenerator(mnemonic + '3'),
-        new WalletGenerator(mnemonic + '4'),
-        new WalletGenerator(mnemonic + '5'),
-    ]
-    const members = []
-    for (const wallet of wallets) {
-        const _wallet = await wallet.generate()
-        // console.log(_wallet)
-        members.push(_wallet.receiving.pkHash)
-    }
-    return members
-}
 
 const run = async () => {
     const artifact = compileFile("./examples/paluwagan.cash")

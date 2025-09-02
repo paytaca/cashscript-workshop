@@ -1,0 +1,16 @@
+pragma cashscript ^0.11.0;
+
+
+// this contract must only send to a specific contract
+contract P2SHLockingBytecode (bytes32 recipientContractScriptHash) {
+
+    function transfer () {
+        // should have only 1 output (to recipient contract)
+        require(tx.outputs.length == 1);
+        
+        // output must send to recipient contract
+        bytes35 recipientContract = new LockingBytecodeP2SH32(recipientContractScriptHash);
+        require(tx.outputs[0].lockingBytecode == recipientContract);
+    }
+
+}

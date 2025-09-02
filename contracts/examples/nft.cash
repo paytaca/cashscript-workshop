@@ -1,0 +1,31 @@
+pragma cashscript ^0.11.0;
+
+/*
+    - contract where the funds can be spent only when the input password matches the
+    password stored in the NFT commitment
+
+    - password in the NFT can also be updated
+ */
+contract PasswordWithNFT (bytes32 category, pubkey ownerPubkey) {
+
+    function spend (string inputPassword) {
+        // password should be same before spending
+        bytes nftPassword = tx.inputs[0].nftCommitment;
+        require(nftPassword == bytes(inputPassword));
+    }
+
+    function update (sig ownerSignature) {
+        // only owner can change the password
+        require(checkSig(ownerSignature, ownerPubkey));
+
+        // old and new password should not be the same
+        bytes oldPassword = tx.inputs[0].nftCommitment;
+        bytes newPassword = tx.outputs[0].nftCommitment;
+        require(oldPassword != newPassword);
+
+        // nft in output and input must be the same category and is mutable
+        require(category + 0x01 == tx.inputs[0].tokenCategory);
+        require(category + 0x01 == tx.outputs[0].tokenCategory);
+    }
+
+}
