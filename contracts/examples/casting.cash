@@ -17,14 +17,3 @@ contract CastingDemo(int expected) {            // 2: Stores expected integer
     }
 }
 
-/*
-Speaker Notes:
-1. Compiler version.
-2. Contract stores an integer value.
-3. Spend requires providing a bytes argument.
-4. Casts the bytes argument into an integer.
-5. Checks that this integer matches the stored expected value.
-6. Converts the integer back into bytes.
-7. Ensures the result matches the original input.
-   This demonstrates type casting and strict data handling in CashScript.
-*/

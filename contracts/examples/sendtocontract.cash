@@ -13,14 +13,3 @@ contract SendToContract(bytes20 redeemScriptHash) {                   // 2: Stor
         require(tx.outputs[0].lockingBytecode == expected);           // 5: Check output is P2SH
     }
 }
-
-/**
-Note: Use simplepassword contract as destination address during demo
-Speaker Notes:
-1. Compiler version.
-2. Contract stores the hash of a redeem script.
-3. Spend function has no arguments.
-4. Constructs a P2SH locking script using the stored hash.
-5. Requires that the first output of the transaction matches this P2SH.
-   Demonstrates how to enforce P2SH outputs via introspection.
-*/
