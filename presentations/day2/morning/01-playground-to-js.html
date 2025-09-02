@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Playground to JS - Day 2</title>
+    <link rel="stylesheet" href="/node_modules/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/node_modules/reveal.js/dist/theme/league.css">
+    <link rel="stylesheet" href="/node_modules/reveal.js/plugin/highlight/monokai.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <div>
+                    <h1 class="flex items-center justify-center gap-3 mb-4">
+                        From Playground to JavaScript
+                    </h1>
+                    <h3 class="text-2xl mb-2">Day 2 - Morning Session</h3>
+                    <p class="text-lg">
+                        Moving out from CashScript Playground to JavaScript
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <div>
+                    <pre><code class="language-javascript" data-line-numbers="1-13">contract TransferWithTimeout(
+    bytes20 sender,
+    bytes20 recipient,
+    int timeout
+) {
+    function transfer(sig s, pubkey pk) {
+        require(checkSig(s, pk));
+        require(hash160(pk) == sender);
+        require(tx.time >= timeout);
+        
+        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
+    }
+}
+                    </code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Back to Main</h2>
+                <p><a href="../../index.html">← Workshop Overview</a></p>
+            </section>
+        </div>
+    </div>
+
+    <script src="/node_modules/reveal.js/dist/reveal.js"></script>
+    <script src="/node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            transition: 'fade',
+            plugins: [RevealHighlight]
+        });
+    </script>
+</body>
+</html>
