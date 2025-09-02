@@ -26,17 +26,11 @@
 
             <section>
                 <div>
-                    <pre><code class="language-javascript" data-line-numbers="1-13">contract TransferWithTimeout(
-    bytes20 sender,
-    bytes20 recipient,
-    int timeout
-) {
-    function transfer(sig s, pubkey pk) {
-        require(checkSig(s, pk));
-        require(hash160(pk) == sender);
-        require(tx.time >= timeout);
-        
-        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
+                    <pre><code class="language-javascript" data-line-numbers="1-7">pragma cashscript ^0.11.0;
+
+contract Password (string password) {
+    function spend (string inputPassword) {
+        require(inputPassword == password);
     }
 }
                     </code></pre>
