@@ -1,16 +1,20 @@
 pragma cashscript ^0.11.0;
 
+// only transfer at a specific recipient but not before a specific time/date
 contract TransferWithTimeout(
     bytes20 sender,
     bytes20 recipient,
     int timeout
 ) {
+
     function transfer(sig s, pubkey pk) {
-        require(checkSig(s, pk));
-        require(hash160(pk) == sender);
-        require(tx.time >= timeout);
+        require(checkSig(s, pk));  // must be signed by sender
+        require(hash160(pk) == sender);  // must be signed by sender
+        require(tx.time >= timeout);  // must be spent after a specific time/date
         
+        // can only be spent to a specific recipient (P2PKH -- to another wallet)
         bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(recipient);
         require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
     }
+
 }

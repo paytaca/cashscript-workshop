@@ -9,7 +9,7 @@ pragma cashscript ^0.11.0;
 contract PasswordWithNFT (bytes32 category, pubkey ownerPubkey) {
 
     function spend (string inputPassword) {
-        // password should be same before spending
+        // input password should be same with the password from the NFT
         bytes nftPassword = tx.inputs[0].nftCommitment;
         require(nftPassword == bytes(inputPassword));
     }

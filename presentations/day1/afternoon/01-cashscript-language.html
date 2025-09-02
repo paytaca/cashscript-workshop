@@ -179,23 +179,31 @@ contract Password (string password) {
             <!-- Vertical slides for code breakdown -->
             <section>
                 <section>
-                    <h3><div class="text-green-300">Transfer With Timeout</div></h3>
-                    <div>
-                        <pre><code class="language-javascript" data-line-numbers="1-16">pragma cashscript ^0.11.0;
+                    <h2><div class="text-green-300">Contract w/ Time Constraints</div></h2>
+                </section>
 
+                <section>
+                    <h3><div class="text-green-300">Contract Overview</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1-20">pragma cashscript ^0.11.0;
+
+// only transfer at a specific recipient but not before a specific time/date
 contract TransferWithTimeout(
     bytes20 sender,
     bytes20 recipient,
     int timeout
 ) {
+
     function transfer(sig s, pubkey pk) {
-        require(checkSig(s, pk));
-        require(hash160(pk) == sender);
-        require(tx.time >= timeout);
+        require(checkSig(s, pk));  // must be signed by sender
+        require(hash160(pk) == sender);  // must be signed by sender
+        require(tx.time >= timeout);  // must be spent after a specific time/date
         
+        // can only be spent to a specific recipient (P2PKH -- to another wallet)
         bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(recipient);
         require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
     }
+
 }
 </code></pre>
                     </div>
@@ -208,21 +216,25 @@ contract TransferWithTimeout(
                 <section>
                     <h3><div class="text-green-300">1. Sender Verification</div></h3>
                     <div>
-                        <pre><code class="language-javascript" data-line-numbers="9-10">pragma cashscript ^0.11.0;
+                        <pre><code class="language-javascript" data-line-numbers="11-12">pragma cashscript ^0.11.0;
 
+// only transfer at a specific recipient but not before a specific time/date
 contract TransferWithTimeout(
     bytes20 sender,
     bytes20 recipient,
     int timeout
 ) {
+
     function transfer(sig s, pubkey pk) {
-        require(checkSig(s, pk));
-        require(hash160(pk) == sender);
-        require(tx.time >= timeout);
+        require(checkSig(s, pk));  // must be signed by sender
+        require(hash160(pk) == sender);  // must be signed by sender
+        require(tx.time >= timeout);  // must be spent after a specific time/date
         
+        // can only be spent to a specific recipient (P2PKH -- to another wallet)
         bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(recipient);
         require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
     }
+
 }</code></pre>
                     </div>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
@@ -236,21 +248,25 @@ contract TransferWithTimeout(
                 <section>
                     <h3><div class="text-green-300">2. Time Constraint</div></h3>
                     <div>
-                        <pre><code class="language-javascript" data-line-numbers="11">pragma cashscript ^0.11.0;
+                        <pre><code class="language-javascript" data-line-numbers="13">pragma cashscript ^0.11.0;
 
+// only transfer at a specific recipient but not before a specific time/date
 contract TransferWithTimeout(
     bytes20 sender,
     bytes20 recipient,
     int timeout
 ) {
+
     function transfer(sig s, pubkey pk) {
-        require(checkSig(s, pk));
-        require(hash160(pk) == sender);
-        require(tx.time >= timeout);
+        require(checkSig(s, pk));  // must be signed by sender
+        require(hash160(pk) == sender);  // must be signed by sender
+        require(tx.time >= timeout);  // must be spent after a specific time/date
         
+        // can only be spent to a specific recipient (P2PKH -- to another wallet)
         bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(recipient);
         require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
     }
+
 }
 </code></pre>
                     </div>
@@ -277,30 +293,180 @@ contract TransferWithTimeout(
                 <section>
                     <h3><div class="text-green-300">3. Output Checking</div></h3>
                     <div>
-                        <pre><code class="language-javascript" data-line-numbers="13-14">pragma cashscript ^0.11.0;
+                        <pre><code class="language-javascript" data-line-numbers="16-17">pragma cashscript ^0.11.0;
 
+// only transfer at a specific recipient but not before a specific time/date
 contract TransferWithTimeout(
     bytes20 sender,
     bytes20 recipient,
     int timeout
 ) {
+
     function transfer(sig s, pubkey pk) {
-        require(checkSig(s, pk));
-        require(hash160(pk) == sender);
-        require(tx.time >= timeout);
+        require(checkSig(s, pk));  // must be signed by sender
+        require(hash160(pk) == sender);  // must be signed by sender
+        require(tx.time >= timeout);  // must be spent after a specific time/date
         
+        // can only be spent to a specific recipient (P2PKH -- to another wallet)
         bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(recipient);
         require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
     }
+
 }
 </code></pre>
                     </div>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
                         <ul class="space-y-1 text-2xl">
-                            <li><code class="text-green-300">line 13</code> - converts a pubkey hash to a P2PKH locking bytecode</li>
-                            <li><code class="text-green-300">line 14</code> - checks if the 0th output funds are sent to the designated recipient</li>
+                            <li><code class="text-green-300">line 14</code> - converts a pubkey hash to a P2PKH locking bytecode</li>
+                            <li><code class="text-green-300">line 15</code> - checks if the 0th output funds are sent to the designated recipient</li>
                         </ul>
                     </div>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h2><div class="text-green-300">CashTokens</div></h2>
+                    <div class="text-4xl">Fungible Tokens & NFTs</div>
+                </section>
+                
+                <section>
+                    <h3><div class="text-green-300">Contract Overview</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1-31">pragma cashscript ^0.11.0;
+
+/*
+    - contract where the funds can be spent only when the input password matches the
+    password stored in the NFT commitment
+
+    - password in the NFT can also be updated
+ */
+contract PasswordWithNFT (bytes32 category, pubkey ownerPubkey) {
+
+    function spend (string inputPassword) {
+        // input password should be same with the password from the NFT
+        bytes nftPassword = tx.inputs[0].nftCommitment;
+        require(nftPassword == bytes(inputPassword));
+    }
+
+    function update (sig ownerSignature) {
+        // only owner can change the password
+        require(checkSig(ownerSignature, ownerPubkey));
+
+        // old and new password should not be the same
+        bytes oldPassword = tx.inputs[0].nftCommitment;
+        bytes newPassword = tx.outputs[0].nftCommitment;
+        require(oldPassword != newPassword);
+
+        // nft in output and input must be the same category and is mutable
+        require(category + 0x01 == tx.inputs[0].tokenCategory);
+        require(category + 0x01 == tx.outputs[0].tokenCategory);
+    }
+
+}
+</code></pre>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg">
+                        <p class="text-2xl">A password-protected contract where the password is stored on the NFT</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">1. Password Verification</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="11-15">pragma cashscript ^0.11.0;
+
+/*
+    - contract where the funds can be spent only when the input password matches the
+    password stored in the NFT commitment
+
+    - password in the NFT can also be updated
+ */
+contract PasswordWithNFT (bytes32 category, pubkey ownerPubkey) {
+
+    function spend (string inputPassword) {
+        // input password should be same with the password from the NFT
+        bytes nftPassword = tx.inputs[0].nftCommitment;
+        require(nftPassword == bytes(inputPassword));
+    }
+
+    function update (sig ownerSignature) {
+        // only owner can change the password
+        require(checkSig(ownerSignature, ownerPubkey));
+
+        // old and new password should not be the same
+        bytes oldPassword = tx.inputs[0].nftCommitment;
+        bytes newPassword = tx.outputs[0].nftCommitment;
+        require(oldPassword != newPassword);
+
+        // nft in output and input must be the same category and is mutable
+        require(category + 0x01 == tx.inputs[0].tokenCategory);
+        require(category + 0x01 == tx.outputs[0].tokenCategory);
+    }
+
+}</code></pre>
+                    </div>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">tx.inputs[0].nftCommitment</code> - fetches the 0th input NFT commitment</li>
+                            <li><code class="text-green-300">require(nftPassword == bytes(inputPassword))</code> - password verification</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">2. Password Update</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="17-29">pragma cashscript ^0.11.0;
+
+/*
+    - contract where the funds can be spent only when the input password matches the
+    password stored in the NFT commitment
+
+    - password in the NFT can also be updated
+ */
+contract PasswordWithNFT (bytes32 category, pubkey ownerPubkey) {
+
+    function spend (string inputPassword) {
+        // input password should be same with the password from the NFT
+        bytes nftPassword = tx.inputs[0].nftCommitment;
+        require(nftPassword == bytes(inputPassword));
+    }
+
+    function update (sig ownerSignature) {
+        // only owner can change the password
+        require(checkSig(ownerSignature, ownerPubkey));
+
+        // old and new password should not be the same
+        bytes oldPassword = tx.inputs[0].nftCommitment;
+        bytes newPassword = tx.outputs[0].nftCommitment;
+        require(oldPassword != newPassword);
+
+        // nft in output and input must be the same category and is mutable
+        require(category + 0x01 == tx.inputs[0].tokenCategory);
+        require(category + 0x01 == tx.outputs[0].tokenCategory);
+    }
+
+}
+</code></pre>
+                    </div>
+                    
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">tx.inputs[0].tokenCategory</code> - fetches the 0th input token category</li>
+                            <li><code class="text-green-300">category + 0x01</code> - ensure that the NFT token is a <i class="text-green-300">mutable</i> token</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2><div class="text-green-300">Types of NFT</div></h2>
+                    <ul class="space-y-1">
+                        <li><code class="text-green-300">Mutable</code> - commitment data <i class="text-green-300">can</i> be modified</li>
+                        <li><code class="text-green-300">Immutable</code> - commitment data <i class="text-green-300">cannot</i> be modified</li>
+                        <li><code class="text-green-300">Minting</code> - can produce more child NFTs <i class="text-green-300">(parent)</i></li>
+                    </ul>
                 </section>
             </section>
 
