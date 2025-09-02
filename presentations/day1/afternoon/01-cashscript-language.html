@@ -287,7 +287,6 @@
                                         bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(recipient);
                                         require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
                                     }
-
                                 }
                             </code>
                         </pre>
@@ -569,6 +568,464 @@
                 </section>
             </section>
 
+            <!-- ron start -->
+            <section>
+                <section>
+                    <h2>
+                        <div class="text-green-300">Global Functions</div>
+                    </h2>
+                    <div class="text-4xl">CashScript has several built-in functions for things like cryptographic and arithmetic applications, and it includes many common arithmetic and other operators that you would expect in a programming language.</div>
+                </section>
+
+                <section>
+                    <h2><div class="text-green-300">Global Functions</div></h2>
+                    <div class="text-4xl">Arithmetic Functions</div>
+                    <div>
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns the absolute value of argument a.
+                        int abs(int a)
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns the minimum value of arguments a and b.
+                        int min(int a, int b)
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns the maximum value of arguments a and b.
+                        int max(int a, int b)
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns true if and only if x >= low && x < high.
+                        int within(int x, int low, int high)
+                        </code></pre>
+                    </div>
+                </section>
+                <section>
+                    <h2><div class="text-green-300">Global Functions</div></h2>
+                    <div class="text-4xl">Hashing Functions</div>
+                    <div>
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns the RIPEMD-160 hash of argument x.
+                        bytes20 ripemd160(any x)
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns the SHA-1 hash of argument x.
+                        bytes20 sha1(int x)
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns the SHA-256 hash of argument x.
+                        bytes32 sha256(any x)
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns the RIPEMD-160 hash of the SHA-256 hash of argument x.
+                        bytes32 hash160(int x)
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns the double SHA-256 hash of argument x.
+                        bytes32 hash256(int x)
+                        </code></pre>
+
+                    </div>
+                </section>
+                <section>
+                    <h2><div class="text-green-300">Global Functions</div></h2>
+                    <div class="text-4xl">Signature Checking Functions</div>
+                    <div>
+                        <pre>
+                            <code class="language-javascript" data-trim>
+                                //Returns the RIPEMD-160 hash of argument x. 
+                                bool checkSig(sig s, pubkey pk)
+                            </code>
+                        </pre>
+                        <pre>
+                            <code class="language-javascript" data-trim>
+                                //Performs a multi-signature check using a
+                                //list of transaction signatures and public keys.
+                                bool checkMultiSig(sig[] sigs, pubkey[] pks)
+                            </code>
+                        </pre>
+                        <pre>
+                            <code class="language-javascript" data-trim>
+                                //Checks that sig s is a valid signature 
+                                //for message msg and matches with public key pk.
+                                bool checkDataSig(datasig s, bytes msg, pubkey pk) 
+                            </code>
+                        </pre>
+                    </div>
+                </section>
+                <section>
+                    <h2><div class="text-green-300">Global Functions</div></h2>
+                    <div class="flex flex-wrap gap-10 mt-1">
+                        <!-- Arithmetic Functions -->
+                        <div class="flex-1 min-w-[300px]">
+                        <div class="text-2xl">Arithmetic</div>
+                        <pre><code class="language-javascript" data-trim>int abs(int a)</code></pre>
+                        <pre><code class="language-javascript" data-trim>int min(int a, int b)</code></pre>
+                        <pre><code class="language-javascript" data-trim>int max(int a, int b)</code></pre>
+                        <pre><code class="language-javascript" data-trim>int within(int x, int low, int high)</code></pre>
+                        </div>
+
+                        <!-- Hashing Functions -->
+                        <div class="flex-1 min-w-[300px]">
+                        <div class="text-2xl">Hashing</div>
+                        <pre><code class="language-javascript" data-trim>bytes20 ripemd160(any x)</code></pre>
+                        <pre><code class="language-javascript" data-trim>bytes20 sha1(int x)</code></pre>
+                        <pre><code class="language-javascript" data-trim>bytes32 sha256(any x)</code></pre>
+                        <pre><code class="language-javascript" data-trim>bytes32 hash160(int x)</code></pre>
+                        <pre><code class="language-javascript" data-trim>bytes32 hash256(int x)</code></pre>
+                        </div>
+
+                        <!-- Signature Checking Functions -->
+                        <div class="flex-1 min-w-[300px]">
+                        <div class="text-2xl mb-1">Signature Checking</div>
+                        <pre><code class="language-javascript" data-trim>bool checkSig(sig s, pubkey pk)</code></pre>
+                        <pre><code class="language-javascript" data-trim>bool checkMultiSig(sig[] sigs, pubkey[] pks)</code></pre>
+                        <pre><code class="language-javascript" data-trim>bool checkDataSig(datasig s, bytes msg, pubkey pk)</code></pre>
+                        </div>
+
+                    </div>
+                    </section>
+
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Demo</div>
+                        <div class="mt-6">
+                            <ul class="text-xl mt-6 space-y-4">
+                            <li><strong>Imagine you have a secret number</strong> that you want to keep safe.</li>
+                            <li>Instead of storing it in one place, you split it into <strong>two shards</strong>: <code>a</code> and <code>b</code>.</li>
+                            <li><strong>Store the shards separately:</strong> each shard can be written down, stored digitally, or kept in different locations.</li>
+                            <li><strong>No single shard reveals the secret:</strong> individually, each shard is meaningless.</li>
+                            <li><strong>Reconstruction:</strong> Only by combining both shards can the contract verify the secret.</li>
+                            <li><strong>Order doesn’t matter:</strong> The contract uses <code>abs(a - b)</code>, so <code>a</code> and <code>b</code> can be provided in any order.</li>
+                            <li><strong>Constraints:</strong> 
+                            <ul class="ml-6 space-y-2">
+                                <li><code>min(a, b) >= 1</code></li>
+                                <li><code>max(a, b) > 100000</code></li>
+                            </ul>
+                            </li>
+                            <li><strong>Security:</strong> The absolute difference is committed via <code>secretNumberHash</code>, preventing tampering.</li>
+                            <li><strong>Authorization:</strong> Only the owner can spend the contract using a valid signature on <code>secretNumberHash</code>.</li>
+                        </ul>
+                        </div>
+                    </section>
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Example</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="2-10">
+                                    pragma cashscript ^0.8.0;
+                                    /**
+                                    * @params {pubkey} owner - 
+                                    * The public key of the owner of this contract.
+                                    *
+                                    * @params {bytes32} secretNumberHash - 
+                                    * The sha256 hash of the absolute difference 
+                                    * of num1 and num2 secret shards
+                                    */
+                                    contract SecretNumberShardsDemo(pubkey owner, bytes32 secretNumberHash) {
+
+                                        function unlockUsingSecretNumbers(int num1, int num2) {
+                                            // Compute min and max of the inputs
+                                            int small = min(num1, num2);
+                                            int big = max(num1, num2);
+
+                                            // Enforce constraints on min and max
+                                            require(small >= 1, "Min must be at least 1");
+                                            require(big > 10000, "Max must be greater than 10000");
+
+                                            // Compute absolute difference
+                                            int diff = abs(num1 - num2);
+
+                                            // Require that the hash of the difference matches the committed message hash
+                                            require(sha256(diff) == secretNumberHash, "Hash mismatch");
+                                        }
+
+                                        function unlockUsingPrivateKey (sig s) {
+                                            require(checkSig(s, owner), "Invalid signature");
+                                        }
+                                    }
+
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Example</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="12">
+                                    pragma cashscript ^0.8.0;
+                                    /**
+                                    * @params {pubkey} owner - 
+                                    * The public key of the owner of this contract.
+                                    *
+                                    * @params {bytes32} secretNumberHash - 
+                                    * The sha256 hash of the absolute difference 
+                                    * of num1 and num2 secret shards
+                                    */
+                                    contract SecretNumberShardsDemo(pubkey owner, bytes32 secretNumberHash) {
+
+                                        function unlockUsingSecretNumbers(int num1, int num2) {
+                                            // Compute min and max of the inputs
+                                            int small = min(num1, num2);
+                                            int big = max(num1, num2);
+
+                                            // Enforce constraints on min and max
+                                            require(small >= 1, "Min must be at least 1");
+                                            require(big > 10000, "Max must be greater than 10000");
+
+                                            // Compute absolute difference
+                                            int diff = abs(num1 - num2);
+
+                                            // Require that the hash of the difference matches the committed message hash
+                                            require(sha256(diff) == secretNumberHash, "Hash mismatch");
+                                        }
+
+                                        function unlockUsingPrivateKey (sig s) {
+                                            require(checkSig(s, owner), "Invalid signature");
+                                        }
+                                    }
+
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Example</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="28">
+                                    pragma cashscript ^0.8.0;
+                                    /**
+                                    * @params {pubkey} owner - 
+                                    * The public key of the owner of this contract.
+                                    *
+                                    * @params {bytes32} secretNumberHash - 
+                                    * The sha256 hash of the absolute difference 
+                                    * of num1 and num2 secret shards
+                                    */
+                                    contract SecretNumberShardsDemo(pubkey owner, bytes32 secretNumberHash) {
+
+                                        function unlockUsingSecretNumbers(int num1, int num2) {
+                                            // Compute min and max of the inputs
+                                            int small = min(num1, num2);
+                                            int big = max(num1, num2);
+
+                                            // Enforce constraints on min and max
+                                            require(small >= 1, "Min must be at least 1");
+                                            require(big > 10000, "Max must be greater than 10000");
+
+                                            // Compute absolute difference
+                                            int diff = abs(num1 - num2);
+
+                                            // Require that the hash of the difference matches the committed message hash
+                                            require(sha256(diff) == secretNumberHash, "Hash mismatch");
+                                        }
+
+                                        function unlockUsingPrivateKey (sig s) {
+                                            require(checkSig(s, owner), "Invalid signature");
+                                        }
+                                    }
+
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Example</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="7-8">
+                                    pragma cashscript ^0.8.0;
+
+                                    contract SecretNumberShardsDemo(pubkey owner, bytes32 secretNumberHash) {
+
+                                        function unlockUsingSecretNumbers(int num1, int num2) {
+                                            // Compute min and max of the inputs
+                                            int small = min(num1, num2);
+                                            int big = max(num1, num2);
+
+                                            // Enforce constraints on min and max
+                                            require(small >= 1, "Min must be at least 1");
+                                            require(big > 10000, "Max must be greater than 10000");
+
+                                            // Compute absolute difference
+                                            int diff = abs(num1 - num2);
+
+                                            // Require that the hash of the difference matches the committed message hash
+                                            require(sha256(diff) == secretNumberHash, "Hash mismatch");
+                                        }
+
+                                        function unlockUsingPrivateKey (sig s) {
+                                            require(checkSig(s, owner), "Invalid signature");
+                                        }
+                                    }
+
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Example</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="11-12">
+                                    pragma cashscript ^0.8.0;
+
+                                    contract SecretNumberShardsDemo(pubkey owner, bytes32 secretNumberHash) {
+
+                                        function unlockUsingSecretNumbers(int num1, int num2) {
+                                            // Compute min and max of the inputs
+                                            int small = min(num1, num2);
+                                            int big = max(num1, num2);
+
+                                            // Enforce constraints on min and max
+                                            require(small >= 1, "Min must be at least 1");
+                                            require(big > 10000, "Max must be greater than 10000");
+
+                                            // Compute absolute difference
+                                            int diff = abs(num1 - num2);
+
+                                            // Require that the hash of the difference matches the committed message hash
+                                            require(sha256(diff) == secretNumberHash, "Hash mismatch");
+                                        }
+
+                                        function unlockUsingPrivateKey (sig s) {
+                                            require(checkSig(s, owner), "Invalid signature");
+                                        }
+                                    }
+
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Example</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="15">
+                                    pragma cashscript ^0.8.0;
+
+                                    contract SecretNumberShardsDemo(pubkey owner, bytes32 secretNumberHash) {
+
+                                        function unlockUsingSecretNumbers(int num1, int num2) {
+                                            // Compute min and max of the inputs
+                                            int small = min(num1, num2);
+                                            int big = max(num1, num2);
+
+                                            // Enforce constraints on min and max
+                                            require(small >= 1, "Min must be at least 1");
+                                            require(big > 10000, "Max must be greater than 10000");
+
+                                            // Compute absolute difference
+                                            int diff = abs(num1 - num2);
+
+                                            // Require that the hash of the difference
+                                            // matches the committed message hash
+                                            require(sha256(diff) == secretNumberHash, "Hash mismatch");
+                                        }
+
+                                        function unlockUsingPrivateKey (sig s) {
+                                            require(checkSig(s, owner), "Invalid signature");
+                                        }
+                                    }
+
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Example</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="17-19">
+                                    pragma cashscript ^0.8.0;
+
+                                    contract SecretNumberShardsDemo(pubkey owner, bytes32 secretNumberHash) {
+
+                                        function unlockUsingSecretNumbers(int num1, int num2) {
+                                            // Compute min and max of the inputs
+                                            int small = min(num1, num2);
+                                            int big = max(num1, num2);
+
+                                            // Enforce constraints on min and max
+                                            require(small >= 1, "Min must be at least 1");
+                                            require(big > 10000, "Max must be greater than 10000");
+
+                                            // Compute absolute difference
+                                            int diff = abs(num1 - num2);
+
+                                            // Require that the hash of the difference
+                                            // matches the committed message hash
+                                            require(sha256(diff) == secretNumberHash, "Hash mismatch");
+                                        }
+
+                                        function unlockUsingPrivateKey (sig s) {
+                                            require(checkSig(s, owner), "Invalid signature");
+                                        }
+                                    }
+
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Example</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="22-28">
+                                    pragma cashscript ^0.8.0;
+                                    
+                                    contract SecretNumberShardsDemo(pubkey owner, bytes32 secretNumberHash) {
+
+                                        function unlockUsingSecretNumbers(int num1, int num2) {
+                                            // Compute min and max of the inputs
+                                            int small = min(num1, num2);
+                                            int big = max(num1, num2);
+
+                                            // Enforce constraints on min and max
+                                            require(small >= 1, "Min must be at least 1");
+                                            require(big > 10000, "Max must be greater than 10000");
+
+                                            // Compute absolute difference
+                                            int diff = abs(num1 - num2);
+
+                                            // Require that the hash of the difference
+                                            // matches the committed secret hash
+                                            require(sha256(diff) == secretNumberHash, "Hash mismatch");
+                                        }
+
+                                        /**
+                                        * Incase you lost the secret numbers you can still
+                                        * recover funds using your wallet.
+                                        */
+                                        function unlockUsingPrivateKey (sig s) {
+                                            require(checkSig(s, owner), "Invalid signature");
+                                        }
+                                    }
+
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
+
+                
+            </section>
+            <!-- ron end -->
             <section>
                 <h2>
                     <div class="text-green-300">Key Features</div>
