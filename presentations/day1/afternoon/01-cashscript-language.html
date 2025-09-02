@@ -463,10 +463,77 @@ contract PasswordWithNFT (bytes32 category, pubkey ownerPubkey) {
                 <section>
                     <h2><div class="text-green-300">Types of NFT</div></h2>
                     <ul class="space-y-1">
-                        <li><code class="text-green-300">Mutable</code> - commitment data <i class="text-green-300">can</i> be modified</li>
-                        <li><code class="text-green-300">Immutable</code> - commitment data <i class="text-green-300">cannot</i> be modified</li>
-                        <li><code class="text-green-300">Minting</code> - can produce more child NFTs <i class="text-green-300">(parent)</i></li>
+                        <li><code class="text-green-300">Immutable (0x00)</code> - commitment data <i class="text-green-300">cannot</i> be modified</li>
+                        <li><code class="text-green-300">Mutable (0x01)</code> - commitment data <i class="text-green-300">can</i> be modified</li>
+                        <li><code class="text-green-300">Minting (0x02)</code> - can produce more child NFTs <i class="text-green-300">(parent)</i></li>
                     </ul>
+                </section>
+            </section>
+
+                        <section>
+                <section>
+                    <h2><div class="text-green-300">Sending to Another Contract</div></h2>
+                    <div class="text-4xl">Locking Bytecodes & Script Hashes</div>
+                </section>
+                
+                <section>
+                    <h3><div class="text-green-300">Contract Overview</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1-16">pragma cashscript ^0.11.0;
+
+
+// this contract must only send to a specific contract
+contract P2SHLockingBytecode (bytes32 recipientContractScriptHash) {
+
+    function transfer () {
+        // should have only 1 output (to recipient contract)
+        require(tx.outputs.length == 1);
+        
+        // output must send to recipient contract
+        bytes35 recipientContract = new LockingBytecodeP2SH32(recipientContractScriptHash);
+        require(tx.outputs[0].lockingBytecode == recipientContract);
+    }
+
+}
+</code></pre>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg">
+                        <p class="text-2xl">A contract that can only send to another contract</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">1. Transfer Constraints</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="11-13">pragma cashscript ^0.11.0;
+
+
+// this contract must only send to a specific contract
+contract P2SHLockingBytecode (bytes32 recipientContractScriptHash) {
+
+    function transfer () {
+        // should have only 1 output (to recipient contract)
+        require(tx.outputs.length == 1);
+        
+        // output must send to recipient contract
+        bytes35 recipientContract = new LockingBytecodeP2SH32(recipientContractScriptHash);
+        require(tx.outputs[0].lockingBytecode == recipientContract);
+    }
+
+}</code></pre>
+                    </div>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">line 12</code> - converts a script hash to a locking bytecode</li>
+                            <li><code class="text-green-300">line 13</code> - checks if recipient is the dedicated contract</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2><div class="text-green-300">P2SH</div></h2>
+                    <p>Pay-to-Script-Hash or paying to a script's (contract's) hash</p>
                 </section>
             </section>
 
