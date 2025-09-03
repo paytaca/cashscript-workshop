@@ -17,7 +17,7 @@
                     <h1 class="flex items-center justify-center gap-3 mb-4">
                         <div class="text-green-300">CashScript Language</div>
                     </h1>
-                    <p class="text-4xl">Writing Bitcoin Cash smart contracts</p>
+                    <p class="text-4xl">Writing Bitcoin Cash Smart Contracts</p>
                 </div>
             </section>
 
@@ -577,15 +577,6 @@ contract P2SHLockingBytecode (bytes32 recipientContractScriptHash) {
                 </section>
             </section>
 
-            <section>
-                <h2><div class="text-green-300">Key Features</div></h2>
-                <ul class="space-y-2">
-                    <li>Functions and parameters</li>
-                    <li>Built-in validation</li>
-                    <li>Output creation</li>
-                    <li>Time-based conditions</li>
-                </ul>
-            </section>
                         <!-- ron start -->
             <section>
                 <section>
@@ -657,21 +648,21 @@ contract P2SHLockingBytecode (bytes32 recipientContractScriptHash) {
                     <div>
                         <pre>
                             <code class="language-javascript" data-trim>
-                                //Returns the RIPEMD-160 hash of argument x. 
+                                // Returns the RIPEMD-160 hash of argument x. 
                                 bool checkSig(sig s, pubkey pk)
                             </code>
                         </pre>
                         <pre>
                             <code class="language-javascript" data-trim>
-                                //Performs a multi-signature check using a
-                                //list of transaction signatures and public keys.
+                                // Performs a multi-signature check using a
+                                // list of transaction signatures and public keys.
                                 bool checkMultiSig(sig[] sigs, pubkey[] pks)
                             </code>
                         </pre>
                         <pre>
                             <code class="language-javascript" data-trim>
-                                //Checks that sig s is a valid signature 
-                                //for message msg and matches with public key pk.
+                                // Checks that sig s is a valid signature 
+                                // for message msg and matches with public key pk.
                                 bool checkDataSig(datasig s, bytes msg, pubkey pk) 
                             </code>
                         </pre>
