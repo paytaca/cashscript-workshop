@@ -65,14 +65,37 @@ cashc ./Contract.cash --output ./artifact.json
                 <ul class="space-y-2">
                     <li>JavaScript Compilation (from <code>cashc</code> package)</li>
                     <ul class="space-y-2">
-                        <li><pre><code class="language-javascript">compileFile()</code></pre></li>
-                        <li><pre><code class="language-javascript">compileString()</code></pre></li>
+                        <li>compiles a contract into an artifact on the fly within JS</li>
                     </ul>
                 </ul>
             </section>
 
             <section>
-                <h3>Task: Create artifact file using CLI</h3>
+                <h2>Compiler</h2>
+                <ul class="space-y-2">
+                    <li>JavaScript Compilation (from <code>cashc</code> package)</li>
+                    <pre><code class="language-javascript">compileFile(sourceFile: PathLike): Artifact</code></pre>
+                    <ul class="space-y-2">
+                        <li>compiles a contract from a source file</li>
+                        <li>handy when using Node.js with the contract file locally available</li>
+                    </ul>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Compiler</h2>
+                <ul class="space-y-2">
+                    <li>JavaScript Compilation (from <code>cashc</code> package)</li>
+                    <pre><code class="language-javascript">compileString(sourceCode: string): Artifact</code></pre>
+                    <ul class="space-y-2">
+                        <li>compiles a contract from a source code string</li>
+                        <li>useful for quick compilation and discarding, and when source code is not locally available</li>
+                    </ul>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Activity: Create artifact file using CLI</h3>
                 <ol class="space-y-2">
                     <li>Navigate to <code>contracts/examples</code></li>
                     <li>Open CLI and run <pre style="width: 100% !important;"><code class="language-bash">cashc ./password.cash</code></pre></li>
@@ -180,8 +203,8 @@ cashc ./Contract.cash --output ./artifact.json
             </section>
 
             <section>
-                <h3>Task: Compile Password contract</h3>
-                <ol class="space-y-2">
+                <h3>Activity: Compile Password contract</h3>
+                <ol class="space-y-2 text-4xl">
                     <li>Navigate to <code>contracts/examples</code> and open <code>password-compile.js</code></li>
                     <li>Change password in <code>contractArgs</code> variable (or keep it that way)</li>
                     <li>Console log <code>contract</code> variable</li>
@@ -199,7 +222,7 @@ cashc ./Contract.cash --output ./artifact.json
 
             <section>
                 <h2>Transaction Builder</h2>
-                <ul class="space-y-2">
+                <ul class="space-y-2 text-4xl">
                     <li>
                         basic transactions include adding input(s) and output(s)
                         <ul class="space-y-2">
@@ -324,15 +347,15 @@ const tx = await transactionBuilder
     .build()</code></pre>
                         <ul class="space-y-2">
                             <li>builds the transaction and returns the signed transaction hex string (does not yet send)</li>
-                            <li>can be imported into other applications or libraries</li>
+                            <li>can be imported into other applications or libraries for further use</li>
                         </ul>
                     </li>
                 </ul>
             </section>
 
             <section>
-                <h3>Task: Build a transaction</h3>
-                <ol class="space-y-2">
+                <h3>Activity: Build a transaction</h3>
+                <ol class="space-y-2 text-3xl">
                     <li>Navigate to <code>contracts/examples</code> and open <code>password-transact.js</code></li>
                     <li>Add <code>.build()</code> to the transaction being built</li>
                     <li>Console log the variable <code>tx</code></li>
@@ -343,8 +366,17 @@ const tx = await transactionBuilder
             </section>
 
             <section>
+                <h2>More information</h2>
+                <h3>Check out the CashScript docs website</h3>
+                <a>https://cashscript.org/docs/basics/about</a>
+            </section>
+
+            <section>
                 <h2>Back to Main</h2>
                 <p><a href="../../index.html">← Workshop Overview</a></p>
+                <h3>OR</h3>
+                <h2>Move to Next</h2>
+                <p><a href="./02-quasar-framework.html">Quasar Framework →</a></p>
             </section>
         </div>
     </div>
