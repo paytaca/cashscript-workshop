@@ -586,7 +586,8 @@ contract P2SHLockingBytecode (bytes32 recipientContractScriptHash) {
                     <li>Time-based conditions</li>
                 </ul>
             </section>
-                        <!-- ron start -->
+            <!-- ron start -->
+            <!-- ron 1 -->
             <section>
                 <section>
                     <h2>
@@ -1049,6 +1050,204 @@ contract P2SHLockingBytecode (bytes32 recipientContractScriptHash) {
                         </div>
                     </section>
 
+                
+            </section>
+            <!-- ron 2 -->
+            <section>
+                <section>
+                    <h2>
+                        <div class="text-green-300">Global Variables</div>
+                    </h2>
+                    <div class="text-4xl">In CashScript, Global Variables are special built-in values that can be accessed from anywhere inside your contract.
+
+They are automatically provided by the CashScript compiler and represent properties of the current transaction, blockchain state, or contract execution environment.
+
+You don’t need to define them — they’re always available, similar to global constants in traditional programming languages.</div>
+                </section>
+                <section>
+                    <h2><div class="text-green-300">Global Variables</div></h2>
+                    <div class="text-4xl">Global Timelock Variables</div>
+                    <div>
+                        <p data-trim>A timelock is a rule that restricts when a Bitcoin Cash UTXO can be spent.
+                           It ensures that a transaction is only valid after a certain block height or timestamp.
+                           CashScript exposes global variables that allow you to inspect the transaction’s locktime
+                           and sequence numbers to implement these rules.
+                        </p>
+                    </div>
+                </section>
+                <section>
+                    <h2><div class="text-green-300">Global Variables</div></h2>
+                    <div class="text-4xl">Global Timelock Variables</div>
+                    <div>
+                        <pre><code class="language-javascript" data-trim>
+                        // Corresponds to the nLocktime field of a transaction
+                        // It's used to create absolute time lock. It can either
+                        // be a block number or timestamp
+                        tx.time
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        // Corresponds to the nSequence field of the current evaluated input.
+                        // The value of this.age can either represent a number of blocks, 
+                        // or a number of chunks, which are 512 seconds
+                        this.age
+                        </code></pre>
+                    </div>
+                </section>
+                <section>
+                    <h2><div class="text-green-300">Global Variables</div></h2>
+                    <div class="text-4xl">Introspection Variables</div>
+                    <div>
+                        <p data-trim>
+                            In CashScript, Introspection Variables are special global variables that let a contract inspect and reason about the spending transaction itself.
+                            They expose details about the transaction itself. Ability to "look inside" the spending transaction from code is called introspection.
+                        </p>
+                    </div>
+                </section>
+                <section>
+                    <h2><div class="text-green-300">Global Functions</div></h2>
+                    <div class="text-4xl">Introspection Variables</div>
+                    <div>
+                        <pre><code class="language-javascript" data-trim>
+                        int this.activeInputIndex
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        bytes this.activeBytecode
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        int tx.version
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        int tx.locktime
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        int tx.inputs.length
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        int tx.inputs[i].value
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        int tx.inputs[i].outpointIndex
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        int tx.inputs[i].sequenceNumber
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        bytes tx.inputs[i].tokenCategory
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        bytes tx.inputs[i].nftCommitment
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        int tx.inputs[i].tokenAmount
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        int tx.outputs.length
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        bytes tx.outputs[i].lockingBytecode
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        bytes tx.output[i].nftCommitment
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        bytes tx.output[i].tokenAmount
+                        </code></pre>
+
+                    </div>
+                </section>
+
+                <section>
+                    <h2><div class="text-green-300">Global Variables</div></h2>
+                    <div class="text-4xl">Demo</div>
+                    <div class="mt-6">
+                        <ul class="text-xl mt-6 space-y-4">
+                        <li><strong>Imagine you want to start a project</strong> — maybe launching a new product, funding a community initiative, or creating something meaningful.</li>
+                        <li>You have the idea, the passion, and the skills — but you <strong>lack the funds</strong>.</li>
+                        <li>Traditionally, you’d rely on a crowdfunding platform. But that means <strong>trusting a middleman</strong> with the money and hoping they distribute it fairly.</li>
+                        <li><strong>What if we could create a contract</strong> that makes sure funds are <strong>automatically transferred</strong> to the campaign creator, with rules enforced directly by the blockchain?</li>
+                        <li><strong>What if the contract itself could:</strong>
+                            <ul class="ml-6 space-y-2">
+                            <li>Verify that at least 5 people contributed — ensuring real support from the community.</li>
+                            <li>Check that the fundraising goal is reached or the deadline has passed before allowing payouts.</li>
+                            <li>Enforce a small platform fee automatically, rewarding the provider without disputes.</li>
+                            <li>Send the remaining funds <strong>directly to the creator’s wallet</strong>, guaranteed by code, not trust.</li>
+                            </ul>
+                        </li>
+                        <li><strong>This is the Fundraiser contract:</strong> a trustless, transparent way to run crowdfunding on Bitcoin Cash, where everyone knows the rules are fair and unbreakable.</li>
+                        </ul>
+                    </div>
+                    </section>
+
+                    <section>
+                        <h2><div class="text-green-300">Global Variables</div></h2>
+                        <div class="text-4xl">Demo Contract</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="2-15">
+                                    pragma cashscript ^0.11.0;
+                                    /**
+                                    * @param {bytes20} platformProviderPubKeyHash - 
+                                    * The public key hash of a platform provider.
+                                    * 
+                                    * @param {pubkey} campaignCreatorPubKey - 
+                                    * The public key of the person needing the funds
+                                    *
+                                    * @param {int} campaignGoal - 
+                                    * The target funds
+                                    * 
+                                    * @param {int} campaignDeadline - 
+                                    * The minimum blockheight before the funds can be sent to the campaign creator.
+                                    */
+                                    contract Fundraiser(bytes20 platformProviderPubKeyHash, pubkey campaignCreatorPubKey, int campaignGoal, int campaignDeadline) {
+
+                                        function claimFunds(sig claimerSig) {
+                                            // Ensure tx version is 0, locktime which is use
+                                            require(tx.version == 2);
+                                            // 1. This contract must have atleast 5 utxos,
+                                            // this is like saying atleast 5 must have
+                                            // contributed to the contract. 
+                                            require(tx.inputs.length > 5);
+
+                                            // Campaign must be successful (goal reached)
+                                            if (tx.outputs[0].value < campaignGoal) {
+                                                require(tx.time >= campaignDeadline);
+                                            }
+                                            <!-- require(tx.outputs[0].value >= campaignGoal); -->
+
+                                            // Verify that the claimer of funds is the campaign creator
+                                            require(checkSig(claimerSig, campaignCreatorPubKey));
+                                            
+                                            // Creator gets the funds (minus platform fee)
+                                            // Platform fee calculation (5% example)
+                                            int platformFee = tx.outputs[0].value * 5 / 100;
+                                            int transactionFee = 1000;
+                                            int campaignFunds = tx.outputs[0].value - platformFee - transactionFee;
+                                            
+                                            // Ensure proper output structure
+                                            require(tx.outputs.length == 2);
+
+                                            // Output 0: Platform provider receives fee
+                                            bytes providerLockingBytecode = new LockingBytecodeP2PKH(platformProviderPubKeyHash);
+                                            require(tx.outputs[0].lockingBytecode == providerLockingBytecode);
+                                            require(tx.outputs[0].value == platformFee);
+                                            
+                                            // Output 1: Campaign funds sent to the campaign creator
+                                            bytes20 campaignCreatorPublicKeyHash = hash160(campaignCreatorPubKey);
+                                            bytes campaignCreatorLockingBytecode = new LockingBytecodeP2PKH(campaignCreatorPublicKeyHash);
+                                            require(tx.outputs[1].lockingBytecode == campaignCreatorLockingBytecode);
+                                            require(tx.outputs[1].value == campaignFunds);
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
                 
             </section>
             <!-- ron end -->
