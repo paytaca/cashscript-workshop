@@ -38,6 +38,311 @@ contract Password (string password) {
             </section>
 
             <section>
+                <h2>Compiler</h2>
+                <pre><code class="language-bash">npm install cashc</code></pre>
+                <ul class="space-y-2">
+                    <li>
+                        for compiling CashScript <code>.cash</code>
+                        files into <code>.json</code> / <code>.ts</code> files
+                    </li>
+                    <li>then used to instantiate the contract using the CashScript SDK</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Compiler</h2>
+                <ul class="space-y-2">
+                    <li>Command Line Interface (CLI)</li>
+                </ul>
+                <pre><code class="language-bash">
+cashc ./Contract.cash
+cashc ./Contract.cash --output ./artifact.json
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Compiler</h2>
+                <ul class="space-y-2">
+                    <li>JavaScript Compilation (from <code>cashc</code> package)</li>
+                    <ul class="space-y-2">
+                        <li><pre><code class="language-javascript">compileFile()</code></pre></li>
+                        <li><pre><code class="language-javascript">compileString()</code></pre></li>
+                    </ul>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Task: Create artifact file using CLI</h3>
+                <ol class="space-y-2">
+                    <li>Navigate to <code>contracts/examples</code></li>
+                    <li>Open CLI and run <pre style="width: 100% !important;"><code class="language-bash">cashc ./password.cash</code></pre></li>
+                    <li>Run <pre style="width: 100% !important;"><code class="language-bash">cashc ./password.cash --output ./password.json</code></pre></li>
+                </ol>
+            </section>
+
+            <section>
+                <section>
+                    <h2>Contract Instantiation</h2>
+                    <pre><code class="language-javascript" data-line-numbers="1-8">new Contract(
+    artifact: Artifact,
+    constructorArgs: ConstructorArgument[],
+    options? : {
+        provider: NetworkProvider,
+        addressType: 'p2sh20' | 'p2sh32',
+    }
+)</code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        creates a new Contract from given parameters
+                    </div>
+                </section>
+    
+                <section>
+                    <h2>Contract Instantiation</h2>
+                    <pre><code class="language-javascript" data-line-numbers="2">new Contract(
+    artifact: Artifact,
+    constructorArgs: ConstructorArgument[],
+    options? : {
+        provider: NetworkProvider,
+        addressType: 'p2sh20' | 'p2sh32',
+    }
+)</code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        an Artifact file either generated from CLI or compiled in JS
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Contract Instantiation</h2>
+                    <pre><code class="language-javascript" data-line-numbers="3">new Contract(
+    artifact: Artifact,
+    constructorArgs: ConstructorArgument[],
+    options? : {
+        provider: NetworkProvider,
+        addressType: 'p2sh20' | 'p2sh32',
+    }
+)</code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        values to be used as parameters as stated in the contract
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Contract Instantiation</h2>
+                    <pre><code class="language-javascript" data-line-numbers="5">new Contract(
+    artifact: Artifact,
+    constructorArgs: ConstructorArgument[],
+    options? : {
+        provider: NetworkProvider,
+        addressType: 'p2sh20' | 'p2sh32',
+    }
+)</code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        network where the CashScript SDK will connect to
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Contract Instantiation</h2>
+                    <h3>Network Providers</h3>
+                    <pre><code class="language-javascript">new ElectrumNetworkProvider(network?: Network, options?: Options)</code></pre>
+                    <ul class="space-y-2 text-2xl">
+                        <li>network: <code>'mainnet' | 'chipnet' | 'testnet3' | 'testnet4'</code></li>
+                        <li>options: for specifying custom electrum client or hostname, and enable manual connection management</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Contract Instantiation</h2>
+                    <h3>Network Providers</h3>
+                    <pre><code class="language-javascript">new MockNetworkProvider(options?: { updateUtxoSet: boolean })</code></pre>
+                    <ul class="space-y-2 text-2xl">
+                        <li>evaluate transactions locally without interacting with the BCH network</li>
+                        <li>useful for testing (manual or automated)</li>
+                        <li>UTXOs can be generated randomly or with a custom one</li>
+                        <li><code>updateUtxoSet</code> - determine whether the UTXOs should be updated after a transaction is sent</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Contract Instantiation</h2>
+                    <pre><code class="language-javascript" data-line-numbers="6">new Contract(
+    artifact: Artifact,
+    constructorArgs: ConstructorArgument[],
+    options? : {
+        provider: NetworkProvider,
+        addressType: 'p2sh20' | 'p2sh32',
+    }
+)</code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        the resulting address type of the contract
+                    </div>
+                </section>
+            </section>
+
+            <section>
+                <h3>Task: Compile Password contract</h3>
+                <ol class="space-y-2">
+                    <li>Navigate to <code>contracts/examples</code> and open <code>password-compile.js</code></li>
+                    <li>Change password in <code>contractArgs</code> variable (or keep it that way)</li>
+                    <li>Console log <code>contract</code> variable</li>
+                    <li>Open CLI and run <pre><code class="language-bash">node password.js</code></pre></li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Transaction Builder</h2>
+                <pre><code class="language-javascript">new TransactionBuilder(options: { provider: NetworkProvider })</code></pre>
+                <ul class="space-y-2">
+                    <li>tool for constructing transactions that will determine how the funds inside the contract is spent</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Transaction Builder</h2>
+                <ul class="space-y-2">
+                    <li>
+                        basic transactions include adding input(s) and output(s)
+                        <ul class="space-y-2">
+                            <li>input - the current UTXOs of the contract</li>
+                            <li>output - dictates where the funds are sent</li>
+                        </ul>
+                    </li>
+                    <li>
+                        unlockers
+                        <ul class="space-y-2">
+                            <li>the covenants (functions) in the contract that does checks and runs rules before sending funds</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Transaction Builder</h2>
+                <ul class="space-y-2">
+                    <li><code>addInput()</code></li>
+                    <pre style="width: 100% !important;"><code class="language-javascript">transactionBuilder.addInput(
+    utxo: Utxo,
+    unlocker: Unlocker,
+    options?: InputOptions
+): this</code></pre>
+                    <li><code>addInputs()</code></li>
+                    <pre style="width: 100% !important;"><code class="language-javascript">transactionBuilder.addInputs(
+    utxos: Utxo[],
+    unlocker: Unlocker,
+    options?: InputOptions
+): this</code></pre>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Transaction Builder</h2>
+                <ul class="space-y-2">
+                    <li><code>addOutput()</code></li>
+                    <pre style="width: 100% !important;"><code class="language-javascript">transactionBuilder.addOutput(output: Output): this</code></pre>
+                    <li><code>addOutputs()</code></li>
+                    <pre style="width: 100% !important;"><code class="language-javascript">transactionBuilder.addOutputs(outputs: Output[]): this</code></pre>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Transaction Builder</h2>
+                <pre><code class="language-javascript">interface Output {
+    to: string | Uint8Array; // address
+    amount: bigint;
+    token?: {
+        amount: bigint;
+        category: string;
+        nft?: {
+            capability: 'none' | 'mutable' | 'minting';
+            commitment: string;
+        }
+    }
+}</code></pre>
+            </section>
+
+            <section>
+                <h3>Example: <code>password-transact.js</code></h3>
+                <pre><code class="language-javascript">// set up network provider
+const provider = new MockNetworkProvider()
+
+// instantiate Transaction Builder
+const transactionBuilder = new TransactionBuilder({ provider })
+
+// get the utxos of the contract
+const utxos = await contract.getUtxos()
+
+// declare the output
+const outputs = [
+  {
+    to: 'bchtest:qzxu7zvdgquka95v83m6u8ywzrsdk4vah5wrmerdu0',
+    amount: 5_000n
+  },
+  // change address (back to contract)
+  {
+    to: contract.address,
+    amount: 10_000n - 5_000n - 1100n
+  }
+]
+
+// build the transaction 
+const tx = await transactionBuilder
+  .addInputs(utxos, contract.unlock.spend('change_or_keep_password'))
+  .addOutputs(outputs)</code></pre>
+            </section>
+
+            <section>
+                <h3>Completing the Transaction</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <code>send()</code>
+                        <pre><code class="language-javascript" data-line-numbers="7">await transactionBuilder
+    .addInputs(
+        utxos,
+        contract.unlock.spend('change_or_keep_password')
+    )
+    .addOutputs(outputs)
+    .send()</code></pre>
+                        <ul class="space-y-2">
+                            <li>sends the transaction to the BCH network and returns the transaction details</li>
+                            <li>incomplete transactions and failed rules will incur errors</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Completing the Transaction</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <code>build()</code>
+                        <pre><code class="language-javascript" data-line-numbers="7">transactionBuilder
+    .addInputs(
+        utxos,
+        contract.unlock.spend('change_or_keep_password')
+    )
+    .addOutputs(outputs)
+    .build()</code></pre>
+                        <ul class="space-y-2">
+                            <li>builds the transaction and returns the signed transaction hex string (does not yet send)</li>
+                            <li>can be imported into other applications or libraries</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Task: Build a transaction</h3>
+                <ol class="space-y-2">
+                    <li>Navigate to <code>contracts/examples</code> and open <code>password-transact.js</code></li>
+                    <li>Add <code>.build()</code> to the transaction being built</li>
+                    <li>Console log the variable <code>tx</code></li>
+                    <li>Open CLI and run <pre><code class="language-bash">node password-transact.js</code></pre></li>
+                    <li>Go back to the file and replace <code>.build()</code> with <code>.send()</code> and add <code>await</code> before <code>transactionBuilder</code></li>
+                    <li>Run the command above again</li>
+                </ol>
+            </section>
+
+            <section>
                 <h2>Back to Main</h2>
                 <p><a href="../../index.html">← Workshop Overview</a></p>
             </section>
