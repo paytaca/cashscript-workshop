@@ -1,6 +1,4 @@
 pragma cashscript ^0.11.0;
-
-
 /*
     A contract where it can only send to a specific P2PKH wallet
  */
@@ -12,7 +10,7 @@ contract P2PKHLockingBytecode (bytes20 ownerPubkeyHash, bytes20 recipientPubkeyH
         // verify signature of owner using pubkey
         require(checkSig(s, pk));
         // checks if recipient is the correct recipient wallet
-        bytes23 recipient = new LockingBytecodeP2SH20(recipientPubkeyHash);
+        bytes23 recipient = new LockingBytecodeP2PKH(recipientPubkeyHash);
         require(tx.outputs[0].lockingBytecode == recipient);
     }
 

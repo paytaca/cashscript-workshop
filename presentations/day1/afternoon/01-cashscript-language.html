@@ -75,6 +75,8 @@ OP_DUP OP_HASH160 OP_EQUALVERIFY OP_CHECKSIG
                 </section>
             </section>
             
+            <!-- 1. password contract -->
+
             <section>
                 <section>
                     <h2><div class="text-green-300">Basic Syntax - Contract Structure</div></h2>
@@ -215,8 +217,239 @@ contract Password (string password) {
                     </ul>
                 </section>
             </section>
+            
 
-            <!-- Vertical slides for code breakdown -->
+            <!-- 2. inputs/outputs contract -->
+
+            <section>
+                <section>
+                    <h2><div class="text-green-300">Inputs/Outputs Constraints</div></h2>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">Contract Overview</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1-12">pragma cashscript ^0.11.0;
+
+
+contract InputOutputs () {
+
+    function spend () {
+        require(tx.inputs.length == 1);  // inputs must be exactly 1
+        require(tx.outputs[0].value >= 2000);  // output 0 must be at least 2000 satoshis
+        require(tx.outputs.length == 2);  // there must be exactly 2 outputs
+    }
+
+}
+</code></pre>
+                    </div>
+
+                        <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">tx.inputs.length == 1</code> - inputs must be exactly 1</li>
+                            <li><code class="text-green-300">tx.outputs[0].value >= 2000</code> - output 0 must be at least 2000 satoshis</li>
+                            <li><code class="text-green-300">^tx.outputs.length == 2</code> - there must be exactly 2 outputs</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2><div class="text-green-300">Transaction Data</div></h2>
+                    <ul class="space-y-1">
+                        <li><code class="text-green-300">tx.inputs</code> - get all transaction inputs used for the transaction</li>
+                        <li><code class="text-green-300">tx.outputs</code> - get all transaction outputs used for the transaction</li>
+                    </ul>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">tx.inputs.length</code> - get total number of inputs</li>
+                            <li><code class="text-green-300">tx.outputs[0].value</code> - get amount of the 0th output</li>
+                        </ul>
+                    </div>
+                </section>
+            </section>
+
+            <!-- 3. p2pkh verification contract -->
+
+            <section>
+                <section>
+                    <h2><div class="text-green-300">Signature-Based Constraint</div></h2>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">Contract Overview</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1-17">pragma cashscript ^0.11.0;
+/*
+    A contract requiring a signature from the owner before spending.
+
+    This is how normal BCH transactions (non-contract transactions) are verified
+    during spending (you verify and pay to a pubkey hash, hence P2PKH)
+ */
+contract P2PKHVerification (bytes20 ownerPubkeyHash) {
+
+    function spend (sig s, pubkey pk) {
+        // check if owner pubkey hash is equivalent to the hashed input pubkey
+        require(hash160(pk) == ownerPubkeyHash);
+        // verify signature of owner using pubkey
+        require(checkSig(s, pk));
+    }
+
+}
+</code></pre>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ol class="space-y-1 text-2xl">
+                            <li>Validate if pubkey hash is same with the hashed pubkey in the parameter</li>
+                            <li>Check if signature is compatible with the pubkey</li>
+                        </ol>
+                    </div>
+                </section>
+            </section>
+
+            <!-- 4. p2pkh locking bytecode contract -->
+
+            <section>
+                <section>
+                    <h2><div class="text-green-300">Specific Wallet Spending</div></h2>
+                    <p class="text-4xl">Locking Bytecodes & Script Pubkeys</p>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">Contract Overview</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1-17">pragma cashscript ^0.11.0;
+/*
+    A contract where it can only send to a specific P2PKH wallet
+ */
+contract P2PKHLockingBytecode (bytes20 ownerPubkeyHash, bytes20 recipientPubkeyHash) {
+
+    function spend (sig s, pubkey pk) {
+        // check if owner pubkey hash is equivalent to the hashed input pubkey
+        require(hash160(pk) == ownerPubkeyHash);
+        // verify signature of owner using pubkey
+        require(checkSig(s, pk));
+        // checks if recipient is the correct recipient wallet
+        bytes23 recipient = new LockingBytecodeP2PKH(recipientPubkeyHash);
+        require(tx.outputs[0].lockingBytecode == recipient);
+    }
+
+}
+</code></pre>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        This contract spends to a specific address only
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">1. Transfer to Wallet Constraint</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="13-14">pragma cashscript ^0.11.0;
+/*
+    A contract where it can only send to a specific P2PKH wallet
+ */
+contract P2PKHLockingBytecode (bytes20 ownerPubkeyHash, bytes20 recipientPubkeyHash) {
+
+    function spend (sig s, pubkey pk) {
+        // check if owner pubkey hash is equivalent to the hashed input pubkey
+        require(hash160(pk) == ownerPubkeyHash);
+        // verify signature of owner using pubkey
+        require(checkSig(s, pk));
+        // checks if recipient is the correct recipient wallet
+        bytes23 recipient = new LockingBytecodeP2PKH(recipientPubkeyHash);
+        require(tx.outputs[0].lockingBytecode == recipient);
+    }
+
+}</code></pre>
+                    </div>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">line 13</code> - get the locking bytecode from the recipient pubkey hash</li>
+                            <li><code class="text-green-300">line 14</code> - require that the funds be sent to the recipient</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2><div class="text-green-300">P2PKH</div></h2>
+                    <p><i class="text-green-300">Pay-to-Public-Key-Hash</i> or paying to a public key hash of a P2PKH wallet</p>
+                </section>
+            </section>
+
+            <!-- 5. p2sh locking bytecode contract -->
+
+            <section>
+                <section>
+                    <h2><div class="text-green-300">Sending to Another Contract</div></h2>
+                    <div class="text-4xl">Locking Bytecodes & Script Hashes</div>
+                </section>
+                
+                <section>
+                    <h3><div class="text-green-300">Contract Overview</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1-16">pragma cashscript ^0.11.0;
+
+
+// this contract must only send to a specific contract
+contract P2SHLockingBytecode (bytes32 recipientContractScriptHash) {
+
+    function transfer () {
+        // should have only 1 output (to recipient contract)
+        require(tx.outputs.length == 1);
+        
+        // output must send to recipient contract
+        bytes35 recipientContract = new LockingBytecodeP2SH32(recipientContractScriptHash);
+        require(tx.outputs[0].lockingBytecode == recipientContract);
+    }
+
+}
+</code></pre>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg">
+                        <p class="text-2xl">A contract that can only send to another contract</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">1. Transfer Constraints</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="11-13">pragma cashscript ^0.11.0;
+
+
+// this contract must only send to a specific contract
+contract P2SHLockingBytecode (bytes32 recipientContractScriptHash) {
+
+    function transfer () {
+        // should have only 1 output (to recipient contract)
+        require(tx.outputs.length == 1);
+        
+        // output must send to recipient contract
+        bytes35 recipientContract = new LockingBytecodeP2SH32(recipientContractScriptHash);
+        require(tx.outputs[0].lockingBytecode == recipientContract);
+    }
+
+}</code></pre>
+                    </div>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">line 12</code> - converts a script hash to a locking bytecode</li>
+                            <li><code class="text-green-300">line 13</code> - checks if recipient is the dedicated contract</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2><div class="text-green-300">P2SH</div></h2>
+                    <p><i class="text-green-300">Pay-to-Script-Hash</i> or paying to a script's (contract's) hash</p>
+                </section>
+            </section>
+
+            <!-- 6. timeout verification -->
+
             <section>
                 <section>
                     <h2><div class="text-green-300">Contract w/ Time Constraints</div></h2>
@@ -316,21 +549,6 @@ contract TransferWithTimeout(
                 </section>
 
                 <section>
-                    <h2><div class="text-green-300">Transaction Data</div></h2>
-                    <ul class="space-y-1">
-                        <li><code class="text-green-300">tx.inputs</code> - get all transaction inputs used for the transaction</li>
-                        <li><code class="text-green-300">tx.outputs</code> - get all transaction outputs used for the transaction</li>
-                    </ul>
-
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
-                        <ul class="space-y-1 text-2xl">
-                            <li><code class="text-green-300">tx.inputs.length</code> - get total number of inputs</li>
-                            <li><code class="text-green-300">tx.outputs[0].value</code> - get amount of the 0th output</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
                     <h3><div class="text-green-300">3. Output Checking</div></h3>
                     <div>
                         <pre><code class="language-javascript" data-line-numbers="16-17">pragma cashscript ^0.11.0;
@@ -363,6 +581,8 @@ contract TransferWithTimeout(
                     </div>
                 </section>
             </section>
+            
+            <!-- 7. NFT -->
 
             <section>
                 <section>
@@ -510,74 +730,8 @@ contract PasswordWithNFT (bytes32 category, pubkey ownerPubkey) {
                 </section>
             </section>
 
-                        <section>
-                <section>
-                    <h2><div class="text-green-300">Sending to Another Contract</div></h2>
-                    <div class="text-4xl">Locking Bytecodes & Script Hashes</div>
-                </section>
-                
-                <section>
-                    <h3><div class="text-green-300">Contract Overview</div></h3>
-                    <div>
-                        <pre><code class="language-javascript" data-line-numbers="1-16">pragma cashscript ^0.11.0;
+            <!-- ron start -->
 
-
-// this contract must only send to a specific contract
-contract P2SHLockingBytecode (bytes32 recipientContractScriptHash) {
-
-    function transfer () {
-        // should have only 1 output (to recipient contract)
-        require(tx.outputs.length == 1);
-        
-        // output must send to recipient contract
-        bytes35 recipientContract = new LockingBytecodeP2SH32(recipientContractScriptHash);
-        require(tx.outputs[0].lockingBytecode == recipientContract);
-    }
-
-}
-</code></pre>
-                    </div>
-
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg">
-                        <p class="text-2xl">A contract that can only send to another contract</p>
-                    </div>
-                </section>
-
-                <section>
-                    <h3><div class="text-green-300">1. Transfer Constraints</div></h3>
-                    <div>
-                        <pre><code class="language-javascript" data-line-numbers="11-13">pragma cashscript ^0.11.0;
-
-
-// this contract must only send to a specific contract
-contract P2SHLockingBytecode (bytes32 recipientContractScriptHash) {
-
-    function transfer () {
-        // should have only 1 output (to recipient contract)
-        require(tx.outputs.length == 1);
-        
-        // output must send to recipient contract
-        bytes35 recipientContract = new LockingBytecodeP2SH32(recipientContractScriptHash);
-        require(tx.outputs[0].lockingBytecode == recipientContract);
-    }
-
-}</code></pre>
-                    </div>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
-                        <ul class="space-y-1 text-2xl">
-                            <li><code class="text-green-300">line 12</code> - converts a script hash to a locking bytecode</li>
-                            <li><code class="text-green-300">line 13</code> - checks if recipient is the dedicated contract</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h2><div class="text-green-300">P2SH</div></h2>
-                    <p><i class="text-green-300">Pay-to-Script-Hash</i> or paying to a script's (contract's) hash</p>
-                </section>
-            </section>
-
-                    <!-- ron start -->
             <section>
                 <section>
                     <h2>
@@ -1042,6 +1196,7 @@ contract P2SHLockingBytecode (bytes32 recipientContractScriptHash) {
 
                 
             </section>
+
             <!-- ron end -->
 
             <section>
