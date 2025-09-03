@@ -1,6 +1,12 @@
 pragma cashscript ^0.11.0;
 
+/*
+    A paluwagan is a contract where users can save money by contributing to the pot on an agreement amount,
+    where each user can only receive the pot at his/her scheduled payout date/time.
 
+    During each payout, the redeemer gets all the pot money - fee, then contributes again for the next
+    cycle of payout.
+ */
 contract Paluwagan (
     bytes20 member1,
     bytes20 member2,

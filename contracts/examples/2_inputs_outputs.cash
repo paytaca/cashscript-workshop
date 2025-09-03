@@ -1,0 +1,12 @@
+pragma cashscript ^0.11.0;
+
+
+contract InputOutputs () {
+
+    function spend () {
+        require(tx.inputs.length == 1);  // inputs must be exactly 1
+        require(tx.outputs[0].value >= 2000);  // output 0 must be at least 2000 satoshis
+        require(tx.outputs.length == 2);  // there must be exactly 2 outputs
+    }
+
+}
