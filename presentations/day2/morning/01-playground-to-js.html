@@ -15,7 +15,9 @@
             <section>
                 <div>
                     <h1 class="flex items-center justify-center gap-3 mb-4">
-                        From Playground to JavaScript
+                        <p>
+                            From <span class="text-green-500">Playground</span> to <span class="text-yellow-300">JavaScript</span>
+                        </p>
                     </h1>
                     <h3 class="text-2xl mb-2">Day 2 - Morning Session</h3>
                     <p class="text-lg">
@@ -25,79 +27,104 @@
             </section>
 
             <section>
-                <div>
-                    <pre><code class="language-javascript" data-line-numbers="1-7">pragma cashscript ^0.11.0;
-
+                <section data-auto-animate>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1-7">pragma cashscript ^0.11.0;
+    
 contract Password (string password) {
     function spend (string inputPassword) {
         require(inputPassword == password);
     }
 }
-                    </code></pre>
+                        </code></pre>
+                    </div>
+                </section>
 
-                    <h3>What's next?</h3>
-                </div>
+                <section data-auto-animate>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1-7">pragma cashscript ^0.11.0;
+    
+contract Password (string password) {
+    function spend (string inputPassword) {
+        require(inputPassword == password);
+    }
+}
+                        </code></pre>
+                        <h3>What's next?</h3>
+                    </div>
+                </section>
             </section>
 
             <section>
-                <h2>Compiler</h2>
-                <pre><code class="language-bash">npm install cashc</code></pre>
-                <ul class="space-y-2">
-                    <li>
-                        for compiling CashScript <code>.cash</code>
-                        files into <code>.json</code> / <code>.ts</code> files
-                    </li>
-                    <li>then used to instantiate the contract using the CashScript SDK</li>
-                </ul>
+                <h2>
+                    <p>Moving <span class="text-green-500">CashScript</span> Outside</p>
+                </h2>
             </section>
 
             <section>
-                <h2>Compiler</h2>
-                <ul class="space-y-2">
-                    <li>Command Line Interface (CLI)</li>
-                    <pre><code class="language-bash">
-cashc ./Contract.cash
-cashc ./Contract.cash --output ./artifact.json
-                    </code></pre>
+                <section data-auto-animate>
+                    <h2>Compiler</h2>
+                    <pre><code class="language-bash">   npm install cashc</code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-2">
+                            <li>
+                                for compiling CashScript <code class="text-green-500 font-bold">.cash</code>
+                                files into <code class="text-yellow-300 font-bold">.json</code> /
+                                <code class="text-blue-400 font-bold">.ts</code> files
+                            </li>
+                            <li>then used to instantiate the contract using the CashScript SDK</li>
+                        </ul>
+                    </div>
+                </section>
+    
+                <section data-auto-animate>
+                    <h2>Compiler</h2>
+                    <p>Command Line Interface (CLI)</p>
+                    <pre><code class="language-bash">    cashc [source_file] [options]
+    cashc ./Contract.cash
+    cashc ./Contract.cash --output ./artifact.json</code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-2">
+                            <li>displays/creates an artifact of the CashScript <code class="text-green-500">.cash</code> file</li>
+                            <li>recommended method to compile artifact files</li>
+                        </ul>
+                    </div>
+                </section>
+    
+                <section data-auto-animate>
+                    <h2>Compiler</h2>
+                    <p>JavaScript Compilation (from <code class="text-yellow-300">cashc</code> package)</p>
                     <ul class="space-y-2">
-                        <li>displays/creates an artifact of the CashScript <code>.cash</code> file</li>
-                        <li>recommended method to compile artifact files</li>
+                        <li><p>
+                            compiles a <span class="text-green-500">contract</span> into an
+                            <span class="text-yellow-300">artifact</span> on the fly within <span class="text-yellow-300">JS</span>
+                        </p></li>
                     </ul>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Compiler</h2>
-                <ul class="space-y-2">
-                    <li>JavaScript Compilation (from <code>cashc</code> package)</li>
-                    <ul class="space-y-2">
-                        <li>compiles a contract into an artifact on the fly within JS</li>
-                    </ul>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Compiler</h2>
-                <ul class="space-y-2">
-                    <li>JavaScript Compilation (from <code>cashc</code> package)</li>
-                    <pre><code class="language-javascript">compileFile(sourceFile: PathLike): Artifact</code></pre>
-                    <ul class="space-y-2">
-                        <li>compiles a contract from a source file</li>
-                        <li>handy when using Node.js with the contract file locally available</li>
-                    </ul>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Compiler</h2>
-                <ul class="space-y-2">
-                    <li>JavaScript Compilation (from <code>cashc</code> package)</li>
-                    <pre><code class="language-javascript">compileString(sourceCode: string): Artifact</code></pre>
-                    <ul class="space-y-2">
-                        <li>compiles a contract from a source code string</li>
-                        <li>useful for quick compilation and discarding, and when source code is not locally available</li>
-                    </ul>
-                </ul>
+                </section>
+    
+                <section data-auto-animate>
+                    <h2>Compiler</h2>
+                    <p>JavaScript Compilation (from <code class="text-yellow-300">cashc</code> package)</p>
+                    <pre><code class="language-javascript">     compileFile(sourceFile: PathLike): Artifact</code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-2">
+                            <li>compiles a contract from a source file</li>
+                            <li>handy when using Node.js with the contract file locally available</li>
+                        </ul>
+                    </div>
+                </section>
+    
+                <section data-auto-animate>
+                    <h2>Compiler</h2>
+                    <p>JavaScript Compilation (from <code class="text-yellow-300">cashc</code> package)</p>
+                    <pre><code class="language-javascript">     compileString(sourceCode: string): Artifact</code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-2">
+                            <li>compiles a contract from a source code string</li>
+                            <li>useful for quick compilation and discarding, and when source code is not locally available</li>
+                        </ul>
+                    </div>
+                </section>
             </section>
 
             <section>
@@ -110,7 +137,7 @@ cashc ./Contract.cash --output ./artifact.json
             </section>
 
             <section>
-                <section>
+                <section data-auto-animate>
                     <h2>Contract Instantiation</h2>
                     <pre><code class="language-javascript" data-line-numbers="1-8">new Contract(
     artifact: Artifact,
@@ -125,7 +152,7 @@ cashc ./Contract.cash --output ./artifact.json
                     </div>
                 </section>
     
-                <section>
+                <section data-auto-animate>
                     <h2>Contract Instantiation</h2>
                     <pre><code class="language-javascript" data-line-numbers="2">new Contract(
     artifact: Artifact,
@@ -140,7 +167,7 @@ cashc ./Contract.cash --output ./artifact.json
                     </div>
                 </section>
 
-                <section>
+                <section data-auto-animate>
                     <h2>Contract Instantiation</h2>
                     <pre><code class="language-javascript" data-line-numbers="3">new Contract(
     artifact: Artifact,
@@ -155,7 +182,7 @@ cashc ./Contract.cash --output ./artifact.json
                     </div>
                 </section>
 
-                <section>
+                <section data-auto-animate>
                     <h2>Contract Instantiation</h2>
                     <pre><code class="language-javascript" data-line-numbers="5">new Contract(
     artifact: Artifact,
@@ -170,29 +197,33 @@ cashc ./Contract.cash --output ./artifact.json
                     </div>
                 </section>
 
-                <section>
+                <section data-auto-animate>
                     <h2>Contract Instantiation</h2>
                     <h3>Network Providers</h3>
                     <pre><code class="language-javascript">new ElectrumNetworkProvider(network?: Network, options?: Options)</code></pre>
-                    <ul class="space-y-2 text-2xl">
-                        <li>network: <code>'mainnet' | 'chipnet' | 'testnet3' | 'testnet4'</code></li>
-                        <li>options: for specifying custom electrum client or hostname, and enable manual connection management</li>
-                    </ul>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-2 text-2xl">
+                            <li>network: <code>'mainnet' | 'chipnet' | 'testnet3' | 'testnet4'</code></li>
+                            <li>options: for specifying custom electrum client or hostname, and enable manual connection management</li>
+                        </ul>
+                    </div>
                 </section>
 
-                <section>
+                <section data-auto-animate>
                     <h2>Contract Instantiation</h2>
                     <h3>Network Providers</h3>
                     <pre><code class="language-javascript">new MockNetworkProvider(options?: { updateUtxoSet: boolean })</code></pre>
-                    <ul class="space-y-2 text-2xl">
-                        <li>evaluate transactions locally without interacting with the BCH network</li>
-                        <li>useful for testing (manual or automated)</li>
-                        <li>UTXOs can be generated randomly or with a custom one</li>
-                        <li><code>updateUtxoSet</code> - determine whether the UTXOs should be updated after a transaction is sent</li>
-                    </ul>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-2 text-2xl">
+                            <li>evaluate transactions locally without interacting with the BCH network</li>
+                            <li>useful for testing (manual or automated)</li>
+                            <li>UTXOs can be generated randomly or with a custom one</li>
+                            <li><code>updateUtxoSet</code> - determine whether the UTXOs should be updated after a transaction is sent</li>
+                        </ul>
+                    </div>
                 </section>
 
-                <section>
+                <section data-auto-animate>
                     <h2>Contract Instantiation</h2>
                     <pre><code class="language-javascript" data-line-numbers="6">new Contract(
     artifact: Artifact,
@@ -219,65 +250,87 @@ cashc ./Contract.cash --output ./artifact.json
             </section>
 
             <section>
-                <h2>Transaction Builder</h2>
-                <pre><code class="language-javascript">new TransactionBuilder(options: { provider: NetworkProvider })</code></pre>
-                <ul class="space-y-2">
-                    <li>tool for constructing transactions that will determine how the funds inside the contract is spent</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Transaction Builder</h2>
-                <ul class="space-y-2 text-4xl">
-                    <li>
-                        basic transactions include adding input(s) and output(s)
+                <section data-auto-animate>
+                    <h2>Transaction Builder</h2>
+                    <pre><code class="language-javascript">new TransactionBuilder(options: { provider: NetworkProvider })</code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
                         <ul class="space-y-2">
-                            <li>input - the current UTXOs of the contract</li>
-                            <li>output - dictates where the funds are sent</li>
+                            <li>tool for constructing transactions that will determine how the funds inside the contract is spent</li>
                         </ul>
-                    </li>
-                    <li>
-                        unlockers
-                        <ul class="space-y-2">
-                            <li>the covenants (functions) in the contract that does checks and runs rules before sending funds</li>
-                        </ul>
-                    </li>
-                </ul>
-            </section>
+                    </div>
+                </section>
+    
+                <section data-auto-animate>
+                    <h2>Transaction Builder</h2>
+                    <ul class="space-y-2 text-4xl">
+                        <li>
+                            <span>
+                                basic transactions include adding <span class="text-yellow-300">input(s)</span>
+                                and <span class="text-yellow-300">output(s)</span>
+                            </span>
+                            <ul class="space-y-2">
+                                <li>input - the current UTXOs of the contract + <span class="text-yellow-300">unlocker</span></li>
+                                <li>output - dictates where the funds are sent</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
 
-            <section>
-                <h2>Transaction Builder</h2>
-                <ul class="space-y-2">
-                    <li><code>addInput()</code></li>
-                    <pre style="width: 100% !important;"><code class="language-javascript">transactionBuilder.addInput(
+                <section data-auto-animate>
+                    <h2>Transaction Builder</h2>
+                    <ul class="space-y-2 text-4xl">
+                        <li>
+                            <span>
+                                basic transactions include adding <span class="text-yellow-300">input(s)</span>
+                                and <span class="text-yellow-300">output(s)</span>
+                            </span>
+                            <ul class="space-y-2">
+                                <li>input - the current UTXOs of the contract + <span class="text-yellow-300">unlocker</span></li>
+                                <li>output - dictates where the funds are sent</li>
+                            </ul>
+                        </li>
+                        <li>
+                            unlockers
+                            <ul class="space-y-2">
+                                <li>the functions in the contract that does checks and runs rules before funds are sent</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+    
+                <section data-auto-animate>
+                    <h2>Transaction Builder</h2>
+                    <ul class="space-y-2">
+                        <li><code>addInput()</code></li>
+                        <pre style="width: 100% !important;"><code class="language-javascript">transactionBuilder.addInput(
     utxo: Utxo,
     unlocker: Unlocker,
     options?: InputOptions
 ): this</code></pre>
-                    <li><code>addInputs()</code></li>
-                    <pre style="width: 100% !important;"><code class="language-javascript">transactionBuilder.addInputs(
+                        <li><code>addInputs()</code></li>
+                        <pre style="width: 100% !important;"><code class="language-javascript">transactionBuilder.addInputs(
     utxos: Utxo[],
     unlocker: Unlocker,
     options?: InputOptions
 ): this</code></pre>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Transaction Builder</h2>
-                <ul class="space-y-2">
-                    <li><code>addOutput()</code></li>
-                    <pre style="width: 100% !important;"><code class="language-javascript">transactionBuilder.addOutput(output: Output): this</code></pre>
-                    <li><code>addOutputs()</code></li>
-                    <pre style="width: 100% !important;"><code class="language-javascript">transactionBuilder.addOutputs(outputs: Output[]): this</code></pre>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Transaction Builder</h2>
-                <pre><code class="language-javascript">interface Output {
+                    </ul>
+                </section>
+    
+                <section data-auto-animate>
+                    <h2>Transaction Builder</h2>
+                    <ul class="space-y-2">
+                        <li><code>addOutput()</code></li>
+                        <pre style="width: 100% !important;"><code class="language-javascript">transactionBuilder.addOutput(output: Output): this</code></pre>
+                        <li><code>addOutputs()</code></li>
+                        <pre style="width: 100% !important;"><code class="language-javascript">transactionBuilder.addOutputs(outputs: Output[]): this</code></pre>
+                    </ul>
+                </section>
+    
+                <section data-auto-animate>
+                    <h2>Transaction Builder</h2>
+                    <pre><code class="language-javascript">interface Output {
     to: string | Uint8Array; // address
-    amount: bigint;
+    amount: bigint; // e.g. 12_345n (= 0.00012345 BCH)
     token?: {
         amount: bigint;
         category: string;
@@ -287,6 +340,7 @@ cashc ./Contract.cash --output ./artifact.json
         }
     }
 }</code></pre>
+                </section>
             </section>
 
             <section>
@@ -320,43 +374,41 @@ const tx = await transactionBuilder
             </section>
 
             <section>
-                <h3>Completing the Transaction</h3>
-                <ul class="space-y-2">
-                    <li>
-                        <code>send()</code>
-                        <pre><code class="language-javascript" data-line-numbers="7">await transactionBuilder
+                <section data-auto-animate>
+                    <h3>Completing the Transaction</h3>
+                    <code>send()</code>
+                    <pre><code class="language-javascript" data-line-numbers="7">await transactionBuilder
     .addInputs(
         utxos,
         contract.unlock.spend('change_or_keep_password')
     )
     .addOutputs(outputs)
     .send()</code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
                         <ul class="space-y-2">
                             <li>sends the transaction to the BCH network and returns the transaction details</li>
                             <li>incomplete transactions and failed rules will incur errors</li>
                         </ul>
-                    </li>
-                </ul>
-            </section>
-
-            <section>
-                <h3>Completing the Transaction</h3>
-                <ul class="space-y-2">
-                    <li>
-                        <code>build()</code>
-                        <pre><code class="language-javascript" data-line-numbers="7">transactionBuilder
+                    </div>
+                </section>
+    
+                <section data-auto-animate>
+                    <h3>Completing the Transaction</h3>
+                    <code>build()</code>
+                    <pre><code class="language-javascript" data-line-numbers="7">transactionBuilder
     .addInputs(
         utxos,
         contract.unlock.spend('change_or_keep_password')
     )
     .addOutputs(outputs)
     .build()</code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
                         <ul class="space-y-2">
                             <li>builds the transaction and returns the signed transaction hex string (does not yet send)</li>
                             <li>can be imported into other applications or libraries for further use</li>
                         </ul>
-                    </li>
-                </ul>
+                    </div>
+                </section>
             </section>
 
             <section>
