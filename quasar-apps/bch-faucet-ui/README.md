@@ -1,6 +1,6 @@
-# Paluwagan App (paluwagan)
+# BCH Faucet App (faucet)
 
-A simple app to demonstrate how \"paluwagan\" works
+A simple app to demonstrate how the BCH Faucet works
 
 ## Install the dependencies
 
