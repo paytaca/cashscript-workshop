@@ -1,0 +1,127 @@
+<section>
+    <h2>
+        <div class="text-green-300">Global Functions</div>
+    </h2>
+    <div class="text-4xl">CashScript has several built-in functions for things like cryptographic and arithmetic applications,</div>
+    <aside class="notes">
+
+        It includes many common arithmetic and other operators that you would expect in a programming language.
+
+    </aside>
+
+</section>
+
+<section>
+    <h2><div class="text-green-300">Global Functions</div></h2>
+    <div class="text-4xl">Arithmetic Functions</div>
+    <div>
+        <pre><code class="language-javascript" data-trim>
+        // Returns the absolute value of argument a.
+        int abs(int a)
+        </code></pre>
+
+        <pre><code class="language-javascript" data-trim>
+        // Returns the minimum value of arguments a and b.
+        int min(int a, int b)
+        </code></pre>
+
+        <pre><code class="language-javascript" data-trim>
+        // Returns the maximum value of arguments a and b.
+        int max(int a, int b)
+        </code></pre>
+
+        <pre><code class="language-javascript" data-trim>
+        // Returns true if and only if x >= low && x < high.
+        int within(int x, int low, int high)
+        </code></pre>
+    </div>
+</section>
+<section>
+    <h2><div class="text-green-300">Global Functions</div></h2>
+    <div class="text-4xl">Hashing Functions</div>
+    <div>
+        <pre><code class="language-javascript" data-trim>
+        // Returns the RIPEMD-160 hash of argument x.
+        bytes20 ripemd160(any x)
+        </code></pre>
+
+        <pre><code class="language-javascript" data-trim>
+        // Returns the SHA-1 hash of argument x.
+        bytes20 sha1(int x)
+        </code></pre>
+
+        <pre><code class="language-javascript" data-trim>
+        // Returns the SHA-256 hash of argument x.
+        bytes32 sha256(any x)
+        </code></pre>
+
+        <pre><code class="language-javascript" data-trim>
+        // Returns the RIPEMD-160 hash of the SHA-256 hash of argument x.
+        bytes32 hash160(int x)
+        </code></pre>
+
+        <pre><code class="language-javascript" data-trim>
+        // Returns the double SHA-256 hash of argument x.
+        bytes32 hash256(int x)
+        </code></pre>
+
+    </div>
+</section>
+<section>
+    <h2><div class="text-green-300">Global Functions</div></h2>
+    <div class="text-4xl">Signature Checking Functions</div>
+    <div>
+        <pre>
+            <code class="language-javascript" data-trim>
+                // Returns the RIPEMD-160 hash of argument x. 
+                bool checkSig(sig s, pubkey pk)
+            </code>
+        </pre>
+        <pre>
+            <code class="language-javascript" data-trim>
+                // Performs a multi-signature check using a
+                // list of transaction signatures and public keys.
+                bool checkMultiSig(sig[] sigs, pubkey[] pks)
+            </code>
+        </pre>
+        <pre>
+            <code class="language-javascript" data-trim>
+                // Checks that sig s is a valid signature 
+                // for message msg and matches with public key pk.
+                bool checkDataSig(datasig s, bytes msg, pubkey pk) 
+            </code>
+        </pre>
+    </div>
+</section>
+<section>
+    <h2><div class="text-green-300">Global Functions</div></h2>
+    <div class="flex flex-wrap gap-10 mt-1">
+        <!-- Arithmetic Functions -->
+        <div class="flex-1 min-w-[300px]">
+        <div class="text-2xl">Arithmetic</div>
+        <pre><code class="language-javascript" data-trim>int abs(int a)</code></pre>
+        <pre><code class="language-javascript" data-trim>int min(int a, int b)</code></pre>
+        <pre><code class="language-javascript" data-trim>int max(int a, int b)</code></pre>
+        <pre><code class="language-javascript" data-trim>int within(int x, int low, int high)</code></pre>
+        </div>
+
+        <!-- Hashing Functions -->
+        <div class="flex-1 min-w-[300px]">
+        <div class="text-2xl">Hashing</div>
+        <pre><code class="language-javascript" data-trim>bytes20 ripemd160(any x)</code></pre>
+        <pre><code class="language-javascript" data-trim>bytes20 sha1(int x)</code></pre>
+        <pre><code class="language-javascript" data-trim>bytes32 sha256(any x)</code></pre>
+        <pre><code class="language-javascript" data-trim>bytes32 hash160(int x)</code></pre>
+        <pre><code class="language-javascript" data-trim>bytes32 hash256(int x)</code></pre>
+        </div>
+
+        <!-- Signature Checking Functions -->
+        <div class="flex-1 min-w-[300px]">
+        <div class="text-2xl mb-1">Signature Checking</div>
+        <pre><code class="language-javascript" data-trim>bool checkSig(sig s, pubkey pk)</code></pre>
+        <pre><code class="language-javascript" data-trim>bool checkMultiSig(sig[] sigs, pubkey[] pks)</code></pre>
+        <pre><code class="language-javascript" data-trim>bool checkDataSig(datasig s, bytes msg, pubkey pk)</code></pre>
+        </div>
+
+    </div>
+</section>
