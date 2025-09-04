@@ -1,17 +1,16 @@
-import { compileFile } from "cashc";
 import { Contract, ElectrumNetworkProvider } from "cashscript";
 
-export function compileContract(members, potAmount, period) {
-  const artifact = compileFile("../contracts/Paluwagan.cash")
+import FaucetContractArtifact from '../contracts/Faucet.json';
+import { addressToPkhash } from "./common.js";
+
+export function createContractInstance(payoutAmount, ownerAddress, passcode) {
   const provider = new ElectrumNetworkProvider("chipnet")
 
   const contractParameters = [
-    ...members,
-    BigInt(potAmount),
-    BigInt(period),
+    BigInt(payoutAmount),
+    addressToPkhash(ownerAddress),
+    passcode,
   ]
 
-  return new Contract(artifact, contractParameters, { provider })
+  return new Contract(FaucetContractArtifact, contractParameters, { provider })
 }
-
-// redeemTransaction(walletObj, nft)

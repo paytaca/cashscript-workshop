@@ -1,4 +1,11 @@
+import { decodeCashAddress } from "@bitauth/libauth";
 import { ElectrumNetworkProvider } from "cashscript";
+
+export function addressToPkhash(address) {
+  const decoded = decodeCashAddress(address)
+  if (typeof decoded === 'string') throw new Error(decoded);
+  return decoded.payload
+}
 
 export async function getBalance(address) {
   const utxos = await getUtxos(address);
@@ -19,3 +26,4 @@ export async function getUtxos(address) {
   const provider = new ElectrumNetworkProvider("chipnet")
   return provider.getUtxos(address)
 }
+

@@ -1,0 +1,87 @@
+{
+  "contractName": "Faucet",
+  "constructorInputs": [
+    {
+      "name": "payout",
+      "type": "int"
+    },
+    {
+      "name": "ownerPkhash",
+      "type": "bytes20"
+    },
+    {
+      "name": "passcode",
+      "type": "bytes"
+    }
+  ],
+  "abi": [
+    {
+      "name": "claim",
+      "inputs": [
+        {
+          "name": "unlockPasscode",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "name": "ownerUnlock",
+      "inputs": [
+        {
+          "name": "s",
+          "type": "sig"
+        },
+        {
+          "name": "pk",
+          "type": "pubkey"
+        }
+      ]
+    }
+  ],
+  "bytecode": "OP_3 OP_PICK OP_0 OP_NUMEQUAL OP_IF 2c01 OP_0 OP_UTXOVALUE OP_SWAP OP_SUB OP_OVER OP_SUB OP_TXINPUTCOUNT OP_1 OP_NUMEQUALVERIFY OP_TXOUTPUTCOUNT OP_2 OP_LESSTHANOREQUAL OP_VERIFY OP_3 OP_ROLL OP_5 OP_ROLL OP_EQUALVERIFY OP_0 OP_OUTPUTVALUE OP_ROT OP_NUMEQUALVERIFY OP_DUP 2202 OP_GREATERTHAN OP_IF OP_1 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_1 OP_OUTPUTBYTECODE OP_INPUTINDEX OP_UTXOBYTECODE OP_EQUALVERIFY OP_ENDIF OP_2DROP OP_DROP OP_1 OP_ELSE OP_3 OP_ROLL OP_1 OP_NUMEQUALVERIFY OP_4 OP_PICK OP_HASH160 OP_ROT OP_EQUALVERIFY OP_2SWAP OP_SWAP OP_CHECKSIG OP_NIP OP_NIP OP_ENDIF",
+  "source": "pragma cashscript ^0.11.0;\n\ncontract Faucet(int payout, bytes20 ownerPkhash, bytes passcode) {\n    function claim(bytes unlockPasscode) {\n        int constant TX_FEE = 300;\n        int remainingSats = tx.inputs[0].value - TX_FEE - payout;\n\n        require(tx.inputs.length == 1);\n        require(tx.outputs.length <= 2);\n\n        require(passcode == unlockPasscode);\n        require(tx.outputs[0].value == payout);\n\n        // if there is remaining satoshis, return back to contract \n        if (remainingSats > 546) {\n            require(tx.outputs[1].value == remainingSats);\n            require(tx.outputs[1].lockingBytecode == tx.inputs[this.activeInputIndex].lockingBytecode);\n        }\n    }\n\n    function ownerUnlock(sig s, pubkey pk) {\n        require(hash160(pk) == ownerPkhash);\n        require(checkSig(s, pk));\n    }\n}\n",
+  "debug": {
+    "bytecode": "5379009c63022c0100c67c947894c3519dc452a169537a557a8800cc7b9d76022202a06351cc789d51cdc0c788686d755167537a519d5479a97b88727cac777768",
+    "sourceMap": "4:4:19:5;;;;;5:30:5:33;6:38:6:39;:28::46:1;:49::55:0;:28:::1;:58::64:0;:28:::1;8:16:8:32:0;:36::37;:8::39:1;9:16:9:33:0;:37::38;:16:::1;:8::40;11:16:11:24:0;;:28::42;;:8::44:1;12:27:12:28:0;:16::35:1;:39::45:0;:8::47:1;15:12:15:25:0;:28::31;:12:::1;:33:18:9:0;16:31:16:32;:20::39:1;:43::56:0;:12::58:1;17:31:17:32:0;:20::49:1;:63::84:0;:53::101:1;:12::103;15:33:18:9;4:4:19:5;;;;21::24::0;;;;22:24:22:26;;:16::27:1;:31::42:0;:8::44:1;23:25:23:30:0;;:8::33:1;21:4:24:5;;3:0:25:1",
+    "logs": [],
+    "requires": [
+      {
+        "ip": 17,
+        "line": 8
+      },
+      {
+        "ip": 21,
+        "line": 9
+      },
+      {
+        "ip": 26,
+        "line": 11
+      },
+      {
+        "ip": 30,
+        "line": 12
+      },
+      {
+        "ip": 38,
+        "line": 16
+      },
+      {
+        "ip": 43,
+        "line": 17
+      },
+      {
+        "ip": 57,
+        "line": 22
+      },
+      {
+        "ip": 61,
+        "line": 23
+      }
+    ]
+  },
+  "compiler": {
+    "name": "cashc",
+    "version": "0.11.4"
+  },
+  "updatedAt": "2025-09-04T02:37:29.796Z"
+}

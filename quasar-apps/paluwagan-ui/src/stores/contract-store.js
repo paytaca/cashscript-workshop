@@ -1,37 +1,40 @@
 import { defineStore } from 'pinia'
-import { compileContract } from 'src/lib/contract'
+import { createContractInstance } from 'src/lib/contract'
 
 export const useContractStore = defineStore('contract', {
   state: () => ({
     // Data about contract: add parameters, address, balance
     address: '',
     parameters: {
-      members: [],
-      potAmount: 0,
-      period: 0,
+      payoutAmount: 0,
+      ownerAddress: '',
+      passcode: '',
     },
     balance: 0,
   }),
   getters: {
     // provide getter functions
     contractInstance() {
-      return compileContract(
-        this.parameters.members,
-        this.parameters.potAmount,
-        this.parameters.period,
+      return createContractInstance(
+        this.parameters.payoutAmount,
+        this.parameters.ownerAddress,
+        this.parameters.passcode,
       )
-    }
+    },
+    bchBalance() {
+      return this.balance / 10 ** 8
+    },
   },
   actions: {
     // Add actions: loadContract(...parameters), refreshBalance()
-    saveContract(members, potAmount, period) {
-      const contract = compileContract(members, potAmount, period);
+    saveContract(payoutAmount, ownerAddress, passcode) {
+      const contract = createContractInstance(payoutAmount, ownerAddress, passcode);
       this.$patch({
         address: contract.address,
         parameters: {
-          members,
-          potAmount: parseInt(potAmount),
-          period: parseInt(period),
+          payoutAmount: parseInt(payoutAmount),
+          ownerAddress: ownerAddress,
+          passcode: passcode,
         },
         balance: 0,
       })

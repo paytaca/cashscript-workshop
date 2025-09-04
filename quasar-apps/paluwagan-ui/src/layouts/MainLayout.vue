@@ -4,7 +4,7 @@
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
         <q-toolbar-title class="text-center text-bold">
-          PALUWAGAN
+          BitcoinCash Faucet
         </q-toolbar-title>
       </q-toolbar>
     </q-header>

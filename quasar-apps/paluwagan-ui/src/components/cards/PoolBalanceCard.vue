@@ -1,13 +1,9 @@
 <template>
-  <q-card
-    bordered
-    class="q-pa-md"
-    style="width: 50vw"
-  >
+  <q-card bordered class="q-pa-md">
     <div class="row justify-between text-h6">
       Pool Balance: {{ poolBalance }} BCH
       <refresh-balance-button
-        :contract-address="'bchtest:qzxu7zvdgquka95v83m6u8ywzrsdk4vah5wrmerdu0'"
+        :contract-address="contractAddress"
         @on-balance-refresh="onBalanceRefresh"
       />
     </div>
@@ -24,6 +20,13 @@ export default defineComponent({
 
   components: {
     RefreshBalanceButton
+  },
+
+  props: {
+    contractAddress: { 
+      type: String,
+      default: 'bchtest:qzxu7zvdgquka95v83m6u8ywzrsdk4vah5wrmerdu0',
+    },
   },
 
   data() {

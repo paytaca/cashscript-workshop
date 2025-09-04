@@ -1,6 +1,6 @@
 <template>
-  <div class="row justify-center q-pa-lg q-gutter-md">
-   <!-- insert here -->
+  <div class="q-pa-lg q-gutter-md index-page-container">
+    <!-- insert here -->
   </div>
 </template>
 
@@ -17,3 +17,10 @@ export default defineComponent({
   }
 });
 </script>
+<style scoped>
+.index-page-container {
+  max-width: min(500px, 85vw);
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
