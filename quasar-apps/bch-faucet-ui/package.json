@@ -1,8 +1,8 @@
 {
-  "name": "paluwagan",
+  "name": "faucet",
   "version": "0.0.1",
-  "description": "A simple app to demonstrate how \"paluwagan\" works",
-  "productName": "Paluwagan App",
+  "description": "A simple app to demonstrate how the BCH faucet works",
+  "productName": "Faucet App",
   "author": "LukeHeimen <kdlanante@up.edu.ph>",
   "private": true,
   "type": "module",
