@@ -25,6 +25,1335 @@
             </section>
 
             <section>
+                <h3>What is quasar</h3>
+                <p>Quasar is an MIT licensed open-source Vue.js based framework,
+                    which allows you as a web developer to quickly create responsive
+                    websites/apps
+                </p>
+            </section>
+            <section>
+                <h3>Vue.js</h3>
+                <div>
+                    Quasar is build on top of Vue.js, 
+                    a JavaScript framework creating a declarative, component-based programming
+                    model to efficiently develop complex user interfaces
+                </div>
+            </section>
+            <section>
+                <h3>Why Quasar?</h3>
+                <ul>
+                    <li>Easily create interactive user interface with VueJS</li>
+                    <li>Huge list web app components & utilities</li>
+                    <li>Requires a single codebase for all platforms</li>
+                </ul>
+            </section>
+            <section>
+                <section>
+                    <div class="rounded-lg p-2 bg-white/10 text-6xl text-center">
+                        One codebase > All platforms
+                    </div>
+                    <ul>
+                        <li>Web application</li>
+                        <li>Mobile application</li>
+                        <li>Desktop application</li>
+                        <li>Browser extension</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Web App</h3>
+                    <ul>
+                        <li>Single Page App (SPA)</li>
+                        <li>Progressive Web App (PWA)</li>
+                        <li>Server-side rendering (SSR)</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Mobile App</h3>
+                    <div class="text-3xl">
+                        Capacitor JS builds web applications into native mobile apps
+                    </div>
+                    <ul>
+                        <li>Android</li>
+                        <li>iOS</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Desktop App</h3>
+                    <div class="text-3xl">
+                        Electron JS builds web applications into desktop apps
+                    </div>
+                    <ul>
+                        <li>Windows</li>
+                        <li>Mac</li>
+                        <li>Linux</li>
+                    </ul>
+                </section>
+            </section>
+
+            <section>
+                <h5>Activity: Setup development</h5>
+                <ol>
+                    <li>
+                        <div>Git clone repo:</div>
+                        <pre>git clone https://github.com/paytaca/cashscript-workshop.git</pre>
+                    </li>
+                    <li>
+                        <div>Change directory:</div>
+                        <pre>cd cashscript-workshop/quasar-apps/bch-faucet-ui</pre>
+                    </li>
+                    <li>
+                        <div>Install packages:</div>
+                        <pre>npm install</pre>
+                    </li>
+                    <li>
+                        <div>Run dev server:</div>
+                        <pre>npx quasar dev</pre>
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <div>Project structure</div>
+                <pre><code data-trim class="language-text">
+                    quasar-project/
+                    ├── quasar.conf.js   # Quasar configuration
+                    ├── package.json     # Dependencies & scripts
+                    ├── index.html       # Main html file
+                    ├── public/          # Static assets
+                    ├── src/
+                    │   ├── assets/      # Images, etc.
+                    │   ├── css/         # CSS, SASS, SCSS files
+                    │   ├── boot/        # App boot files
+                    │   ├── components/  # Reusable UI components
+                    │   ├── layouts/     # App layouts
+                    │   ├── pages/       # Route pages
+                    │   ├── router/      # Routes
+                    │   ├── stores/      # Pinia stores
+                    │   └── App.vue      # Root component
+                    └── dist/            # Build output
+                </code></pre>
+            </section>
+            <section>
+                <h3>Vue App Structure</h3>
+                <div>Vue app is composed of components put together into an tree-like structure</div>
+                <div class="flex justify-center">
+                    <img src="../../images/ComponentsDiagram.svg" alt="Components diagram">
+                </div>
+            </section>
+            <section>
+                <section>
+                    <h3>Vue file</h3>
+                    <div>
+                        Each component is written as single <i class="text-yellow-200">.vue</i>
+                        file with 3 sections:
+                    </div>
+                    <ul>
+                        <li>Template (HTML)</li>
+                        <li>Script (Javascript)</li>
+                        <li>Style (CSS)</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Template</h3>
+                    <div>Defines the HTML structure of your component.</div>
+                    <pre><code data-trim class="language-html">
+                        <template>
+                            <div>
+                                <div>Count is: {{ count }}</div>
+                                <button @click="count++">Click me</button>
+                            </div>
+                        </template>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Script</h3>
+                    <div>
+                        Contains the JavaScript logic of your component,
+                        where you define variables, functions, etc.
+                    </div>
+                    <pre><code data-trim class="language-javascript">
+                        <script>
+                        import { defineComponent } from 'vue'
+
+                        export default defineComponent({
+                            name: 'CounterButton',
+                            data() {
+                                return {
+                                    count: 0
+                                }
+                            }
+                        })
+                        </script>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Style</h3>
+                    <div>
+                        Holds the CSS (or preprocessor like SCSS/SASS) for your component.
+                    </div>
+                    <pre><code data-trim class="language-css">
+                        <style scoped>
+                        button {
+                            font-weight: bold;
+                        }
+                        </style>
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>Activity: Edit IndexPage.vue</h3>
+                    <ol>
+                        <li>Open <i class="text-blue-300">IndexPage.vue</i> in <i class="text-blue-300">/src/pages/</i> folder</li>
+                        <li>Display a message in the <span class="text-blue-500">template</span> section</li>
+                        <li>Setup component logic in <span class="text-blue-500">script</span> section</li>
+                    </ol>
+                </section>
+                <section>
+                    <pre><code data-trim class="language-html">
+                        <template>
+                            <div>
+                                <h1> Hello World! </h1>
+                                <div> Welcome to Index Page </div>
+                            </div>
+                        </template>
+                    </code></pre>
+                    <pre><code data-trim class="language-javascript">
+                        <script>
+                        import { defineComponent } from 'vue'
+                        export default defineComponent({
+                            name: 'IndexPage',
+                            data() {
+                                return { }
+                            }
+                        })
+                        </script>
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <h2>Vue JS Basics</h2>
+            </section>
+            <section>
+                <section>
+                    <h3>Declarative Rendering</h3>
+                    <div>
+                        You describe what the UI should look like based
+                        on the state of your component
+                    </div>
+                </section>
+                <section>
+                    <h3>Declarative Rendering</h3>
+                    <div>
+                        Unlike imperative style
+                        <span class="fragment">
+                            where you have to:
+                            <i class="text-blue-300">document</i>.<i class="text-yellow-200">getElementById</i>(...)
+                        </span>
+                        <span class="fragment">
+                            , set .<i class="text-blue-300">innerHTML</i>
+                        </span>
+                        <span class="fragment">
+                            , <i class="text-blue-300">classList.<span class="text-yellow-200">add</span>(...)</i>
+                        </span>
+                    </div>
+                    <div class="fragment">Vue framework takes care of this</div>
+                </section>
+                <section>
+                    <h3>Declarative Rendering</h3>
+                    <div class="flex justify-center">
+                        <!-- TODO: Improve diagram -->
+                        <img src="../../images/declarative-rendering.svg"/>
+                    </div>
+                </section>
+                <section>
+                    <h3>Declarative Rendering</h3>
+                    <div>Declare the component's state variables in <strong class="text-yellow-200">data()</strong></div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="5-9">
+                        <script>
+                        import { defineComponent } from 'vue'
+                        export default defineComponent({
+                            name: 'IndexPage',
+                            data() {
+                                return {
+                                    count: 0,
+                                }
+                            }
+                        })
+                        </script>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Declarative Rendering</h3>
+                    <div>
+                        Use double curly braces <strong class="text-yellow-400">{{ }}</strong> to
+                        display variables and expressions in html components
+                    </div>
+                    <pre><code data-trim class="language-html" data-line-numbers="3-4">
+                        <template>
+                            <div>
+                                <button>Count: {{ count }}</button>
+                                <h1>{{ count * 3 }}</h1>
+                            </div>
+                        </template>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Declarative Rendering</h3>
+                    <div>
+                        Use data binding to pass variables or expressions as html attributes
+                        using <strong class="text-blue-300">v-bind</strong>
+                    </div>
+                    <pre><code data-trim class="language-html" data-line-numbers="3-5">
+                        <template>
+                            <div>
+                                <div v-bind:id="count"></div>
+                                <div :id="count"></div>
+                                <div :id="count * 3"></div>
+                            </div>
+                        </template>
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>Activity: Display contract parameters</h3>
+                    <ol>
+                        <li>
+                            Add the Faucet contract's parameters
+                            in <strong class="text-yellow-200">data()</strong>
+                        </li>
+                        <li class="fragment">
+                            Display their values in template
+                        </li>
+                    </ol>
+                </section>
+                <section>
+                    <h3>Activity: Display contract parameters</h3>
+                    <div>
+                        Add the Faucet contract's parameters
+                        in <strong class="text-yellow-200">data()</strong>
+                    </div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="5-11">
+                        <script>
+                        import { defineComponent } from 'vue'
+                        export default defineComponent({
+                            name: 'IndexPage',
+                            data() {
+                                return {
+                                    payoutAmount: 0,
+                                    ownerAddress: '',
+                                    passcode: '',
+                                }
+                            }
+                        })
+                        </script>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Activity: Display contract parameters</h3>
+                    <div>
+                        Display their values in template
+                    </div>
+                    <pre><code data-trim class="language-html" data-line-numbers="3-5">
+                        <template>
+                            <div>
+                                <div>Payout amount: {{ payoutAmount }}</div>
+                                <div>Owner address: {{ ownerAddress }}</div>
+                                <div>Passcode: {{ passcode }}</div>
+                            </div>
+                        </template>
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>Handling events</h3>
+                    <div>
+                        Listening to DOM events using
+                        <strong class="text-blue-300">v-on</strong> or
+                        <strong class="text-blue-300">@</strong>. 
+                    </div>
+
+                    <pre><code data-trim class="language-html">
+                        <button v-on:click="increment">Click me</button>
+
+                        <button v-on:click="count++">Click me</button>
+
+                        <button @click="increment">Click me</button>
+
+                        <button @click="count++">Click me</button>
+        
+                        <button @click="increment()">Click me</button>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Handling events</h3>
+                    <div>
+                        Functions referenced in template are declared in
+                        <strong class="text-blue-300">methods</strong>
+                    </div>
+
+                    <pre><code data-trim class="language-javascript" data-line-numbers="3-7">
+                        export default defineComponent({
+                            // ...
+                            methods: {
+                                increment() {
+                                    this.count += 1;
+                                }
+                            }
+                        })
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Handling events</h3>
+                    <div>
+                        Inside the function, you can access state variables using
+                        <strong class="text-blue-500">this</strong> object
+                    </div>
+
+                    <pre><code data-trim class="language-javascript" data-line-numbers="5">
+                        export default defineComponent({
+                            // ...
+                            methods: {
+                                increment() {
+                                    this.count += 1;
+                                }
+                            }
+                        })
+                    </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>Activity: Using Events</h3>
+                    <div>Create contract instance on button click</div>
+                    <ol>
+                        <li class="fragment">
+                            Add a button in that runs a function on click
+                        </li>
+                        <li class="fragment">
+                            The function will create a smart contract instance using an external function
+                            <ul>
+                                <li class="fragment">
+                                    From <i class="text-blue-300">src/lib/contract.js</i>
+                                    , import
+                                    <i class="text-blue-300">
+                                        createContractInstance(payoutAmount, ownerAddress, passcode)
+                                    </i>
+                                </li>
+                                <li class="fragment">
+                                    Use the state variables from the previous activity as parameters
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fragment">
+                            Add the compiled contract's address as a state variable and display it's value.
+                        </li>
+                    </ol>
+                </section>
+                <section>
+                    <h3>Activity: Using Events</h3>
+                    <div>Add a button in that runs a function on click</div>
+                    <pre><code data-trim class="language-html" data-line-numbers="3">
+                        <template>
+                            // ...
+                            <button @click="createFaucetContractInstance">Create</button>
+                        </template>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Activity: Using Events</h3>
+                    <div>From src/lib/contract.js, import createContractInstance(membersList, potAmount, period)</div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="2">
+                        <script>
+                        import { createContractInstance } from 'src/lib/contract.js'
+                        // defineComponent({ ...
+                        </script>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Activity: Using Events</h3>
+                    <div>Use the state variables from the previous activity as parameters</div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="4-12">
+                        <script>
+                        import { createContractInstance } from 'src/lib/contract.js'
+                        // defineComponent({ ...
+                            methods: {
+                                createFaucetContractInstance() {
+                                    const contract = createContractInstance(
+                                        this.payoutAmount,
+                                        this.ownerAddress,
+                                        this.passcode,
+                                    )
+                                }
+                            }
+                        </script>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Activity: Using Events</h3>
+                    <div>Add the compiled contract's address as a state variable and display the result.</div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="5">
+                        createFaucetContractInstance() {
+                            const contract = createContractInstance(
+                                // ...
+                            )
+                            this.contractAddress = contract.address
+                        }
+                    </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <h3>More Vue JS Basics</h3>
+                <ul>
+                    <li>Rendering lists</li>
+                    <li>Conditional Rendering</li>
+                    <li>Computed Property</li>
+                    <li>Watchers</li>
+                    <li>Lifecycle Hooks</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Components</h3>
+                <ul>
+                    <li>We've been using a single component only</li>
+                    <li>One key feature of Vue is to have nested components</li>
+                </ul>
+                <img src="../../images/ComponentsDiagram.svg" alt="Components diagram">
+            </section>
+            <section>
+                <section>
+                    <h3>Using components</h3>
+                    <pre><code data-trim class="language-python" data-line-numbers="3,7,10-12">
+                        <template>
+                            <div> 
+                                &ltCounterButton/>
+                            </div>
+                        </template>
+                        <script>
+                        import CounterButton from '../components/CounterButton.vue'
+                        export default defineComponent({
+                            // ...
+                            components: {
+                                CounterButton,
+                            }
+                            // ...
+                        })
+                        </script>
+
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Using components</h3>
+                    <div>1. Import the component</div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="2">
+                        <script>
+                        import CounterButton from '../components/CounterButton.vue'
+                        // ...
+                        </script>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Using components</h3>
+                    <div>2. Register the component to the parent component</div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="3-5">
+                        export default defineComponent({
+                            // ...
+                            components: {
+                                CounterButton,
+                            }
+                            // ...
+                        })
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Using components</h3>
+                    <div>3. Then use the component in the template</div>
+                    <pre><code data-trim class="language-html" data-line-numbers="3">
+                        <template>
+                            <div>
+                                &ltCounterButton/>
+                            </div>
+                        </template>
+                    </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>Component Props</h3>
+                    <div>
+                        A child component can accept input from the parent via props.
+                    </div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="3-6">
+                    // CounterButton.vue
+                    export default {
+                        props: {
+                            text: String,
+                            size: String,
+                        }
+                    }
+                    </code></pre>
+    
+                    <pre><code data-trim class="language-html" data-line-numbers="4">
+                    // ParentComponent.vue
+                    <template>
+                        <div>
+                            &ltCounterButton :text="buttonText" :size="400"/>
+                        </div>
+                    </template>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Component Props</h3>
+                    <div>Declare the props in child components</div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="3-10">
+                        export default {
+                            name: 'CounterButton',
+                            props: {
+                                size: Number,
+                                text: {
+                                    type: String,
+                                    required: true,
+                                    default: 'Count is:',
+                                },
+                            }
+                        }
+                    </code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                        Each prop can be a data type or object with additional options
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Component Props</h3>
+                    <div>We pass props to the child component using attribute binding</div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="3">
+                        <template>
+                            <div>
+                                &ltCounterButton :text="buttonText" :size="400"/>
+                            </div>
+                        </template>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Component Props</h3>
+                    <div>
+                        Props are <strong class="text-yellow-400">ready-only</strong>
+                    </div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="5-9">
+                        export default defineComponent({
+                            props: { text: String }
+                            methods: {
+                                fooBar() {
+                                    // This is ok!
+                                    console.log(this.text);
+
+                                    // This is not ok!
+                                    this.text = 'Updated text';
+                                }
+                            }
+                        })
+                    </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>Activity: Using components</h3>
+                    <div>
+                        Display contract address as QRcode using the component:
+                        <i class="text-blue-300">/src/components/buttons/SendToPoolButton.vue</i>
+                    </div>
+                    <ol>
+                        <li class="fragment">
+                            Add component <i class="text-blue-300">SendToPoolButton</i>
+                            <ol type="a">
+                                <li>Import from <i class="text-blue-300">/src/components/buttons</i></li>
+                                <li>Register component in <i class="text-blue-300">IndexPage</i></li>
+                                <li>Use component in template</li>
+                            </ol>
+                        </li>
+                        <li class="fragment">
+                            Pass a prop address using the contract address from
+                            the previous activity
+                        </li>
+                    </ol>
+                </section>
+                <section>
+                    <h3>Activity: Using components</h3>
+                    <div>Import from <i class="text-blue-300">/src/components/buttons</i></div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="2">
+                        <script>
+                        import SendToPoolButton from '../components/buttons/SendToPoolButton.vue'
+                        // ...
+                        </script>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Activity: Using components</h3>
+                    <div>2. Register component in <i class="text-blue-300">IndexPage</i></div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="3-5">
+                        export default defineComponent({
+                            name: 'IndexPage'
+                            components: {
+                                SendToPoolButton,
+                            }
+                            // ...
+                        })
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Activity: Using components</h3>
+                    <div>Use component in template and pass the contract's address as prop</div>
+                    <pre><code data-trim class="language-html" data-line-numbers="3">
+                        <template>
+                            <div>
+                                &ltSendToPoolButton :address="contractAddress"/>
+                            </div>
+                        </template>
+                    </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>Form Input Bindings</h3>
+                    <div>
+                        The <strong class="text-blue-300">v-model</strong> allows
+                        two-way data binding, for form input elements,
+                        automatically syncing the input's value and the variables value
+                    </div>
+                    <pre><code data-trim class="language-html" data-line-numbers="">
+                        <input v-model="message" />
+
+                        <input v-model="checked" type="checkbox" />
+
+                        <textarea v-model="message"></textarea>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Form Input Bindings</h3>
+                    <div>
+                        It works on all form related elements
+                    </div>
+                    <pre><code data-trim class="language-html" data-line-numbers="">
+                        <input v-model="message" />
+
+                        <input v-model="checked" type="checkbox" />
+
+                        <select v-model="selectedOption">
+                            <!-- options here -->
+                        </select>
+
+                        <input type="radio" v-model="pick" :value="first" />
+                        <input type="radio" v-model="pick" :value="second" />
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Form Input Bindings</h3>
+                    <div>
+                        It is a shortcut for
+                        <span class="text-blue-300">v-bind</span> and
+                        <span class="text-blue-300">v-on</span>.
+                        Binding it to appropriate attributes and event
+                    </div>
+                    <pre><code data-trim class="language-html" data-line-numbers="">
+                        &ltinput v-model="message"&#47;&gt
+
+                        &ltinput
+                            :value="message"
+                            v-on:input="event => message = event.target.value"
+                        &#47;&gt
+                    </code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                        For instance, <span class="text-blue-300">type="checkbox"</span>
+                        binds to <span class="text-blue-300">checked</span>
+                        attribute
+                    </div>
+                </section>
+
+                <section>
+                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
+                    <div>
+                        The vue directive have modifiers that adds
+                        extra behavior
+                    </div>
+                    <pre><code data-trim class="language-html">
+                        <input v-model.lazy="message"/>
+                        <input v-model.number="checked" type="numeric"/>
+                        <input v-model.trim="message"/>
+                        ...
+                        <input v-model.lazy.trim="message"/>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
+                    <div>
+                        <span class="text-blue-300">.lazy</span>
+                        updates the variable's value after losing focus
+                    </div>
+                    <pre><code data-trim class="language-html">
+                        <input v-model.lazy="message"/>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
+                    <div>
+                        <span class="text-blue-300">.number</span>
+                        typecast's the value as a number instead of string
+                    </div>
+                    <pre><code data-trim class="language-html">
+                        <input v-model.number="amount" type="numeric"/>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
+                    <div>
+                        <span class="text-blue-300">.trim</span>
+                        removes the whitespace at the start and end of the value
+                    </div>
+                    <pre><code data-trim class="language-html">
+                        <input v-model.trim="message"/>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
+                    <div>
+                        It is also possible to mix modifiers
+                    </div>
+                    <pre><code data-trim class="language-html">
+                        <input v-model.lazy.trim="message"/>
+                    </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>Activity: Create a form</h3>
+                    <div>
+                        Edit
+                        <i class="text-blue-300">FaucetContractFormCard.vue</i>
+                        in
+                        <i class="text-blue-300">src/components/src/cards/</i>
+                        to create a form for Faucet contract parameters.
+                    </div>
+                    <ol>
+                        <li class="fragment">
+                            Add necessary input elements for each contract parameter.
+                        </li>
+                        <li class="fragment">
+                            Add state variables and bind values using
+                            <span class="text-blue-300">v-model</span>
+                            and appropriate modifiers.
+                        </li>
+                        <li class="fragment">
+                            Add <i class="text-blue-300">FaucetContractFormCard</i>
+                            component in <i class="text-blue-300">IndexPage</i>
+                        </li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h3>Activity: Create a form</h3>
+                    <div>
+                        Add necessary input elements for each contract parameter.
+                    </div>
+                    <pre><code data-trim class="language-html">
+                        <input placeholder="Payout Amount" type="number"/>
+
+                        <input placeholder="Owner address"/>
+
+                        <input placeholder="Passcode"/>
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Activity: Create a form</h3>
+                    <div>
+                        Add state variables and bind values using
+                        <span class="text-blue-300">v-model</span>
+                        and appropriate modifiers.
+                    </div>
+                    <pre><code data-trim class="language-html">
+                        <input v-model.number="payoutAmount" placeholder="Payout Amount"/>
+                        <input v-model.trim="ownerAddress" placeholder="Owner address"/>
+                        <input v-model="passcode" placeholder="Passcode"/>
+                    </code></pre>
+
+                    <pre><code data-trim class="language-javascript" data-line-numbers="">
+                        data() {
+                            return {
+                                payoutAmount: 0,
+                                ownerAddress: '',
+                                passcode: '',
+                            }
+                        }
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Activity: Create a form</h3> 
+                    <div>
+                        Add <i class="text-blue-300">FaucetContractFormCard</i>
+                        component in <i class="text-blue-300">IndexPage</i>
+                    </div>
+
+                    <pre><code data-trim class="language-html">
+                        <template>
+                            &ltFaucetContractFormCard&#47;&gt
+                        </template>
+                    </code></pre>
+
+                    <pre><code data-trim class="language-javascript">
+                        import FaucetContractFormCard from '../components/cards/FaucetContractFormCard.vue'
+                        export default defineComponent({
+                            name: 'IndexPage',
+
+                            components: {
+                                FaucetContractFormCard,
+                            }
+                        })
+                    </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>Component events</h3>
+                    <div>
+                        While props is used to communicate from parent to child components,
+                        events are used to communicate from child to parent components.
+                    </div>
+                    <!-- TODO: replace with diagram instead, move code to next slide instead? -->
+                    <pre><code data-trim class="language-html" data-line-numbers="2,5,6">
+                        <!-- ChildComponent.vue -->
+                        <button @click="$emit('selfDestruct')">Click me</button>
+
+                        <!-- ParentComponent.vue -->
+                        &ltChildComponent @self-destruct="selfDestructHandler"/>
+                        &ltChildComponent @selfDestruct="selfDestructHandler"/>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Component events</h3>
+                    <div>
+                        The child component can emit events using
+                        <span class="text-blue-300">$emit</span>
+                        function
+                    </div>
+                    <pre><code data-trim class="language-html" data-line-numbers="2">
+                        <template>
+                            <button @click="$emit('selfDestruct')">Click me</button>
+                        </template>
+                    </code></pre>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="4">
+                        export default defineComponent({
+                            methods: {
+                                onButtonClick() {
+                                    this.$emit('selfDestruct')
+                                }
+                            }
+                        })
+                    </code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                        <span class="text-yellow-300">$emit(...)</span> first parameter is the event name
+                    </div>
+                </section>
+                <section>
+                    <h3>Component event arguments</h3>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="2">
+                        // ChildComponent.vue
+                        this.$emit('selfDestruct', arg1, ... , argN)
+                    </code></pre>
+
+                    <pre><code data-trim class="language-javascript" data-line-numbers="3">
+                        // ParentComponent.vue
+                        methods: {
+                            selfDestructHandler(arg1, ..., argN) {
+                                // ... 
+                            }
+                        }
+                    </code></pre>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                        <span class="text-yellow-300">$emit(...)</span> parameter after the event name
+                        are passed as arguments
+                    </div>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>Activity: Component Events</h3>
+                    <div>
+                        Emit an event in <i class="text-blue-300">FaucetContractFormCard</i>,
+                        add save the form's values in <i class="text-blue-300">IndexPage</i>'s
+                        state variables
+                    </div>
+                    <ol>
+                        <li class="fragment">
+                            In <i class="text-blue-300">FaucetContractFormCard</i>, add a submit
+                            button that will emit an event submitted when clicked.
+                        </li>
+                        <li class="fragment">
+                            Include the form's state variables as event argument
+                        </li>
+                        <li class="fragment">
+                            In <i class="text-blue-300">IndexPage</i>, capture the submitted event.
+                        </li>
+                        <li class="fragment">
+                            In <i class="text-blue-300">IndexPage</i>,
+                            use the event's arguments to update the state variables
+                            and recreate the contract address.
+                        </li>
+                    </ol>
+                </section>
+                <section>
+                    <h3>Activity: Component Events</h3>
+                    <div>
+                        Add a submit button that will emit an event submitted when clicked.
+                    </div>
+                    <pre><code data-trim class="language-html" data-line-numbers="">
+                        <button @click="submitForm">Create Contract</button>
+                    </code></pre>
+
+                    <pre><code data-trim class="language-javascript" data-line-numbers="3">
+                        methods: {
+                            submitForm() {
+                                this.$emit('createContract')
+                            }
+                        }
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Activity: Component Events</h3>
+                    <div>
+                        Include the form's state variables as event argument
+                    </div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="3-7">
+                        methods: {
+                            submitForm() {
+                                this.$emit(
+                                    'createContract',
+                                    this.payoutAmount,
+                                    this.ownerAddress,
+                                    this.passcode
+                                )
+                            }
+                        }
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Activity: Component Events</h3>
+                    <div>
+                        In <i class="text-blue-300">IndexPage</i>,
+                        use the event's arguments to update the state variables
+                        and recreate the contract address.
+                    </div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="2-7">
+                        methods: {
+                            onCreateContract(payoutAmount, ownerAddress, passcode) {
+                                this.payoutAmount = payoutAmount;
+                                this.ownerAddress = ownerAddress;
+                                this.passcode = passcode;
+                                this.createFaucetContractInstance();
+                            }
+                        }
+                    </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <h2>Quasar Components</h2>
+            </section>
+            <section>
+                <section>
+                    <h3>Quasar Components</h3>
+                    <ul>
+                        <li>Wide range of ready made components</li>
+                        <li>Highly customizable</li>
+                        <li>Material Design compliant</li>
+                        <li>Registered globally, no need for imports</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Quasar Buttons</h3>
+                    <pre><code data-trim class="language-javascript">
+                        <template>
+                            &ltq-btn label="Click me"&#47;&gt
+                            &ltq-btn label="Red" :color="btnColor"&#47;&gt
+                            &ltq-btn no-caps :label="brownBtnLabel" color="brown-9"&#47;&gt
+                            &ltq-btn label="Blue" color="primary" :loading="isLoading"&#47;&gt
+                            &ltq-btn icon="delete" color="red"&#47;&gt
+                        </template>
+                    </code></pre>
+                    <img src="../../images/quasar-btn.png" class="mx-auto"/>
+                </section>
+
+                <section>
+                    <h3>Quasar Form Inputs</h3>
+                    <pre><code data-trim class="language-javascript">
+                        <template>
+                            &ltq-input v-model="name" label="Name" &#47;&gt
+                            &ltq-input v-model="name" label="Name" outlined &#47;&gt
+                            &ltq-file v-model="file" label="File Picker" &#47;&gt
+                            &ltq-select v-model="selected" label="Select" :options="['Google', 'Facebook', 'Instagram']"&#47;&gt
+                            &ltq-toggle v-model="isSwitchedOn" label="Switch"&#47;&gt
+                            &ltq-checkbox v-model="isChecked" label="Checkbox"&#47;&gt
+                        </template>
+                    </code></pre>
+                    <img src="../../images/quasar-form.png" class="h-30"/>
+                </section>
+
+                <section>
+                    <h3>Quasar Components</h3>
+                    <div>
+                        Full list of components in documentation page
+                        <a href="https://quasar.dev/components" data-preview-link>
+                            https://quasar.dev/components
+                        </a>
+                    </div>
+                </section>
+            </section>
+
+            <section>
+                <div>Components use props & events to pass around data.</div>
+                <div>
+                    <span class="fragment">
+                        With a larger apps with numerous components,
+                    </span>
+                    <span class="fragment">this can get messy</span>
+                </div>
+                <div class="fragment">
+                    How can we address this?
+                </div>
+                <div class="fragment">
+                    A global storage. 
+                </div>
+            </section>
+
+            <section>
+                <section>
+                    <div class="flex justify-center items-center text-center space-x-4">
+                        <img src="../../images/logos/pinia.svg" class="h-48">
+                        <div class="text-6xl text-yellow-300">Pinia</div>
+                    </div>
+                    <div>
+                        Library for managing shared state in Vue.
+                    </div>
+                </section>
+                <section>
+
+                    <h3 class="flex justify-center items-center text-center space-x-2">
+                        <span>What does</span>
+                        <img src="../../images/logos/pinia.svg" class="h-12">
+                        <div class="text-yellow-300">Pinia</div>
+                        <span>do?</span>
+                    </h3>
+                    <ul>
+                        <li>Holds shared data accessible to all components</li>
+                        <li>It works with VueJS' reactivity</li>
+                        <li>
+                            Can keep data persisted
+                            <ul>
+                                <li>
+                                    Through
+                                    <span class="text-green-400">pinia-plugin-persistedstate-2</span>
+                                    library
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <pre><code data-trim class="language-text" data-line-numbers="3-5">
+                        quasar-project/
+                        ├── src/
+                        │   ├── stores/               # Pinia folder
+                        │   │   ├── index.js          # Creation file
+                        |   |   └── example-store.js  # Pinia store example 
+                        └── ...
+                    </code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                        Quasar framework has pinia setup by default.
+                    </div>
+                </section>
+                <section>
+                    <h3>Defining a store</h3>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="">
+                        // src/store/contract-store.js
+
+                        import { defineStore } from 'pinia'
+
+                        export const useContractStore = defineStore('contract', {
+                            state: () => ({
+                                // State variables
+                                address: '',
+                                balance: 0,
+                            }),
+                            getters: {
+                                // Getter functions, computed state variables
+                                formattedBalance() {
+                                    return `${this.balance} BCH`
+                                }
+                            },
+                            actions: {
+                                // Store methods
+                                updateAddress(newAddress) {
+                                    this.address = newAddress;
+                                },
+                            },
+                        })
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Using the store</h3>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="">
+                        import { mapState } from 'pinia';
+                        import { useContractStore } from 'src/store/contract-store.js';
+
+                        export default defineComponent({
+                            computed: {
+                                // Pass the useContractStore and not call it!
+                                ...mapState(useContractStore, {
+                                    // 
+                                    contractBalance: 'balance',
+                                    contractAddress: 'address',
+
+                                    // You can use a function as well to derive the value.
+                                    // The function parameter is a store object
+                                    ownerAddress: (contractStore) => {
+                                        return contractStore.parameters.ownerAddress
+                                    }
+                                })
+                            },
+                            methods: {
+                                updateContract(newAddress, newBalance) {
+                                    const contractStore = useContractStore();
+
+                                    contractStore.updateAddress(newAddress);
+                                    contractStore.balance = newBalance;
+                                }
+                            }
+                        })
+                    </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <section>
+
+                    <h3>Activity: Use contract store</h3>
+                    <div>
+                        Update <i class="text-blue-300">IndexPage</i> and
+                        <i class="text-blue-300">FaucetContractFormCard</i> to use
+                        <i class="text-yellow-200">useContractStore</i> in
+                        <i class="text-blue-300">/src/store/contract-store.js</i>
+                    </div>
+                    <ol>
+                        <li class="fragment">
+                            In <i class="text-blue-300">IndexPage</i>,
+                            update contract parameter variables to use contract store
+                        </li>
+                        <li class="fragment">
+                            In <i class="text-blue-300">FaucetContractFormCard</i>
+                            <ol>
+                                <li class="fragment">
+                                    Update initial value of form fields to
+                                    use values from contract store.
+                                </li>
+                                <li class="fragment">
+                                    Use contract store's action
+                                    <i class="text-yellow-200">saveContract</i>
+                                    to update store state variables instead of using
+                                    <i class="text-yellow-200">$emit</i>
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+                </section>
+                <section>
+                    <h3>Activity: Use contract store</h3>
+                    <div>
+                        In <i class="text-blue-300">IndexPage</i>,
+                        update contract parameter variables to use contract store.
+                    </div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="1,2,8-19">
+                        import { useContractStore } from '../stores/contract-store';
+                        import { mapState } from 'pinia';
+
+                        export default defineComponent({
+                            name: 'IndexPage',
+                            // ..
+                            computed: {
+                                ...mapState(useContractStore, {
+                                    contractAddress: 'address',
+                                    payoutAmountBch: 'payoutAmountBch',
+
+                                    ownerAddress: contractStore => {
+                                        return contractStore.parameters.ownerAddress
+                                    },
+
+                                    passcode: contractStore => {
+                                        return contractStore.parameters.passcode
+                                    },
+                                }),
+                            }
+                        })
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Activity: Use contract store</h3>
+                    <div>
+                        Update initial value of form fields to use values from contract store.
+                    </div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="1,6-9">
+                        import { useContractStore } from 'src/stores/contract-store'
+                        export default defineComponent({
+                            name: 'FaucetContractFormCard',
+                            // ...
+                            mounted() {
+                                const contractStore = useContractStore();
+                                this.payoutAmount = contractStore.parameters.payoutAmount;
+                                this.ownerAddress = contractStore.parameters.ownerAddress;
+                                this.passcode = contractStore.parameters.passcode;
+                            }
+                        })
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Activity: Use contract store</h3>
+                    <div>
+                        Use contract store's action
+                        <i class="text-yellow-200">saveContract</i>
+                        to update store state variables instead of using
+                        <i class="text-yellow-200">$emit</i>
+                    </div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="1,7-12">
+                        import { useContractStore } from 'src/stores/contract-store'
+                        export default defineComponent({
+                            name: 'FaucetContractFormCard',
+                            // ...
+                            methods: {
+                                submitForm() {
+                                    const contractStore = useContractStore();
+                                    contractStore.saveContract(
+                                        this.payoutAmount,
+                                        this.ownerAddress,
+                                        this.passcode,
+                                    );
+                                }
+                            }
+                        })
+                    </code></pre>
+                </section>
+            </section>
+            <section>
                 <h2>Back to Main</h2>
                 <p><a href="../../index.html">← Workshop Overview</a></p>
             </section>
