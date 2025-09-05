@@ -1,100 +1,340 @@
 <section>
-    <h2>
+    <h3>
         <div class="text-green-300">Global Functions</div>
-    </h2>
-    <div class="text-4xl">CashScript has several built-in functions for things like cryptographic and arithmetic applications,</div>
+    </h3>
+    <div class="grid mt-6 gap-y-4 justify-center">
+        <div>
+            Built-in helpful functions that you can use in your contract.
+        </div>
+        <div class="grid grid-cols-2 gap-4 mt-8">
+            <div>
+                <div>Javascript</div>
+                <pre><code data-trim>
+                    Math.max(1,2)
+                </code></pre>
+            </div>
+            <div>
+                <div>Cashscript</div>
+                <pre><code data-trim>
+                    max(1,2)
+                </code></pre>
+            </div>
+        </div>
+    </div>
+    <aside class="notes">
+        <p>
+        CashScript has several built-in functions for things like cryptographic and arithmetic applications,
+        and it includes many common arithmetic and other operators that you would expect in a programming language.
+        </p>
+    </aside>
+</section>
+
+
+<section>
+    <h3><div class="text-green-300">Global Functions</div></h3>
+    <div>Assertion</div>
+    <div class="text-2xl">The most important function/statement in CashScript contract.</div>
+    <div class="grid grid-cols-2 items-start mt-8">
+        <!-- Left: Definition -->
+        <div>
+            <div class="text-2xl">Definition</div>
+            <pre><code class="language-javascript" data-trim>
+                // Checks if a condition
+                // is true
+                // @param {bool} expression 
+                require(bool expression);
+            </code></pre>
+        </div>
+
+        <!-- Right: Sample code -->
+        <div>
+            <div class="text-2xl"><a href="https://playground.cashscript.org" data-preview-link>Example</a></div>
+            <pre><code class="language-javascript" data-trim>
+                pragma cashscript ^0.11.0;
+
+                contract MyContract() {
+                    function spend(int amount) {
+                        require(true);
+                        
+                        // Ex: Allow spending
+                        // if amount is at
+                        // least 1000 but 
+                        // not more than 2000
+                        require(amount >= 1000);
+                        require(amount <= 2000);
+                    }
+                }
+            </code></pre>
+        </div>
+    </div>
     <aside class="notes">
 
-        It includes many common arithmetic and other operators that you would expect in a programming language.
+        <strong>What it is:</strong>
+        <p>The most important function of CashScript contracts is the require function. It takes a boolean expression </p>
+        <p><code>require()</code> is a built-in function in CashScript that checks if a condition is true.</p>
 
+        <strong>Why it exists:</strong>
+        <p>It ensures that only transactions meeting certain rules can spend coins.</p>
+        <ul>
+            <li>If the condition is true, the transaction can go through.</li>
+            <li>If the condition is false, the transaction fails and the coins stay locked.</li>
+        </ul>
+
+        <strong>How to think about it:</strong>
+        <p>Imagine a gatekeeper:</p>
+        <p><code>require(condition)</code> is like saying: “You can pass only if this is true.”</p>
+        <p>If not, the gate stays closed.</p>
     </aside>
-
 </section>
 
 <section>
-    <h2><div class="text-green-300">Global Functions</div></h2>
+    <h3><div class="text-green-300">Global Functions</div></h3>
     <div class="text-4xl">Arithmetic Functions</div>
     <div>
         <pre><code class="language-javascript" data-trim>
-        // Returns the absolute value of argument a.
-        int abs(int a)
+        // Removes the negative sign
+        int abs(int a);
         </code></pre>
-
         <pre><code class="language-javascript" data-trim>
         // Returns the minimum value of arguments a and b.
         int min(int a, int b)
         </code></pre>
-
         <pre><code class="language-javascript" data-trim>
         // Returns the maximum value of arguments a and b.
         int max(int a, int b)
         </code></pre>
-
         <pre><code class="language-javascript" data-trim>
         // Returns true if and only if x >= low && x < high.
         int within(int x, int low, int high)
         </code></pre>
     </div>
 </section>
+
 <section>
-    <h2><div class="text-green-300">Global Functions</div></h2>
-    <div class="text-4xl">Hashing Functions</div>
-    <div>
-        <pre><code class="language-javascript" data-trim>
-        // Returns the RIPEMD-160 hash of argument x.
-        bytes20 ripemd160(any x)
-        </code></pre>
+    <h3><div class="text-green-300">Global Functions</div></h3>
+    <div class="text-4xl">Arithmetic Functions</div>
 
-        <pre><code class="language-javascript" data-trim>
-        // Returns the SHA-1 hash of argument x.
-        bytes20 sha1(int x)
-        </code></pre>
-
-        <pre><code class="language-javascript" data-trim>
-        // Returns the SHA-256 hash of argument x.
-        bytes32 sha256(any x)
-        </code></pre>
-
-        <pre><code class="language-javascript" data-trim>
-        // Returns the RIPEMD-160 hash of the SHA-256 hash of argument x.
-        bytes32 hash160(int x)
-        </code></pre>
-
-        <pre><code class="language-javascript" data-trim>
-        // Returns the double SHA-256 hash of argument x.
-        bytes32 hash256(int x)
-        </code></pre>
-
+    <div class="grid grid-cols-2 items-start mt-8">
+        <div>
+            <div class="text-2xl">Definition</div>
+            <pre><code class="language-javascript" data-trim data-line-numbers="2-3">
+            int abs(int a);
+            int min(int a, int b);
+            int max(int a, int b);
+            int within(int x, int low, int high);
+            </code></pre>
+        </div>
+        <!-- Right: Sample code -->
+        <div>
+            <div class="text-2xl"><a href="https://playground.cashscript.org" data-preview-link>Example</a></div>
+            <pre><code class="language-javascript" data-line-numbers="5-6" data-trim>
+                pragma cashscript ^0.11.0;
+                contract MyContract() {
+                    function spend(int a, int b) {
+                        int small = min(a, b);
+                        int big = max(a, b);
+                        require(small > 1);
+                        require(big < 10);
+                    }
+                }
+            </code></pre>
+        </div>
     </div>
 </section>
+
 <section>
-    <h2><div class="text-green-300">Global Functions</div></h2>
+    <h3><div class="text-green-300">Global Functions</div></h3>
+    <div class="text-4xl">Hashing Functions</div>
+    <div class="text-2xl text-justify">Takes an input, applies mathematical formula to the input, returns a fixed size output. <a href="https://emn178.github.io/online-tools/sha256.html" data-preview-link>Online hasing tools</a></div>
+    <div>
+        <pre><code class="language-javascript" data-trim>
+        // Returns the RIPEMD-160 hash of x, 20 bytes → 40 hex characters
+        bytes20 ripemd160(any x);
+        </code></pre>
+
+        <pre><code class="language-javascript" data-trim>
+        // Returns the SHA-1 hash of x, 20 bytes → 40 hex characters
+        bytes20 sha1(any x);
+        </code></pre>
+
+        <pre><code class="language-javascript" data-trim>
+        // Returns the SHA-256 hash of x, 32 bytes → 64 hex characters 
+        bytes32 sha256(any x);
+        </code></pre>
+
+        <pre><code class="language-javascript" data-trim>
+        // Returns the RIPEMD-160 hash of the SHA-256 hash of argument x, 20 bytes → 40 hex characters
+        // commonly used for Bitcoin Cash addresses.
+        bytes32 hash160(any x);
+        </code></pre>
+
+        <pre><code class="language-javascript" data-trim>
+        // Returns the double SHA-256 hash of x, 32 bytes → 64 hex characters
+        // Used in Bitcoin Cash for transaction IDs, block hashes
+        bytes32 hash256(any x);
+        </code></pre>
+    </div>
+    <aside class="notes">
+        <h3>🔑 What is a Hashing Function?</h3>
+        <p>A hashing function is like a special machine that:</p>
+        <ul>
+            <li>Takes any input (a word, a file, a number, even an entire book).</li>
+            <li>Runs it through a mathematical blender.</li>
+            <li>Always gives you a fixed-size output called a hash (usually shown as a string of numbers and letters).</li>
+        </ul>
+
+        <h3>✨ Key Properties</h3>
+        <ul>
+            <li><strong>One-way</strong> → You can easily turn input into a hash, but you can’t reverse it to get the original input.</li>
+            <li><strong>Deterministic</strong> → Same input will always give the same hash.</li>
+            <li><strong>Fast</strong> → Computers can calculate it very quickly.</li>
+            <li><strong>Unique (mostly)</strong> → Different inputs should give different hashes (collisions are extremely rare).</li>
+            <li><strong>Fixed length</strong> → No matter how big the input, the output hash is always the same size.</li>
+        </ul>
+    </aside>
+</section>
+
+
+<section>
+    <h3><div class="text-green-300">Global Functions</div></h3>
+    <div class="text-4xl">Hashing Functions</div>
+
+    <div class="grid grid-cols-2 items-start mt-8">
+        <div>
+            <div class="text-2xl">Definition</div>
+            <pre><code class="language-javascript" data-trim data-line-numbers="3">
+            bytes20 ripemd160(any x);
+            bytes20 sha1(any x);
+            bytes32 sha256(any x);
+            bytes32 hash160(any x);
+            bytes32 hash256(any x);
+            </code></pre>
+        </div>
+        <!-- Right: Sample code -->
+        <div>
+            <div class="text-2xl"><a href="https://playground.cashscript.org" target="_blank" rel="noopener noreferrer">Example</a></div>
+            <pre><code class="language-javascript" data-line-numbers="4" data-trim>
+                pragma cashscript ^0.11.0;
+                contract MyContract() {
+                    function spend(bytes password) {
+                        bytes32 secret = sha256("mysecret");
+                        // Only the one 
+                        // who knows the
+                        // sha256 hash of 
+                        // the word "mysecret"
+                        // can spend.
+                        require(secret == password);
+                    }
+                }
+            </code></pre>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <h3><div class="text-green-300">Global Functions</div></h3>
     <div class="text-4xl">Signature Checking Functions</div>
+    <div class="text-2xl text-center">Special tools that let a smart contract verify digital signatures</div>
     <div>
         <pre>
             <code class="language-javascript" data-trim>
-                // Returns the RIPEMD-160 hash of argument x. 
-                bool checkSig(sig s, pubkey pk)
+                // Checks if a single transaction signature matches a public key.
+                bool checkSig(sig transactionSignature, pubkey publicKey);
             </code>
         </pre>
         <pre>
             <code class="language-javascript" data-trim>
-                // Performs a multi-signature check using a
-                // list of transaction signatures and public keys.
+                // Checks if multiple transaction signatures are valid for a set of public keys (used in multisig)
                 bool checkMultiSig(sig[] sigs, pubkey[] pks)
             </code>
         </pre>
         <pre>
             <code class="language-javascript" data-trim>
-                // Checks that sig s is a valid signature 
-                // for message msg and matches with public key pk.
-                bool checkDataSig(datasig s, bytes msg, pubkey pk) 
+                // Checks that signatureOfData is a valid signature
+                // for data and matches and signed byte the
+                // owner of the publicKey.
+                bool checkDataSig(datasig signatureOfData, bytes data, pubkey publicKey); 
             </code>
         </pre>
     </div>
+    <aside class="notes">
+        
+        <p>Signature checking functions in CashScript are special tools that let a smart contract verify digital signatures.</p>
+
+        <p>A digital signature is like a proof that someone with the right private key agreed to a transaction or message.</p>
+
+        <p>The smart contract uses these functions to check if the signature(s) provided are valid.</p>
+
+        <p>If the check passes → the transaction can spend the coins.</p>
+
+        <p>If the check fails → the coins stay locked.</p>
+
+        <p>👉 In other words: these functions are the contract’s way of asking, “Did the real owner approve this?”</p>
+
+        <p><strong>checkSig(sig, pubkey):</strong> Verifies that a single signature was made with the private key corresponding to the given public key. Used to prove ownership of coins.</p>
+
+        <p><strong>checkMultiSig(sigs, pubkeys):</strong> Verifies that a required number of signatures are valid from a set of public keys. Common in multisig wallets, like 2-of-3 setups.</p>
+
+        <p><strong>checkDataSig(datasig, msg, pubkey):</strong> Verifies a signature on a custom message or data, not on the spending transaction itself. Useful for oracles or off-chain agreements.</p>
+
+        <p>👉 In short: <code>checkSig</code> is for single signatures, <code>checkMultiSig</code> for multisig setups, and <code>checkDataSig</code> for arbitrary messages.</p>
+    </aside>
+
 </section>
+
 <section>
-    <h2><div class="text-green-300">Global Functions</div></h2>
+    <h3><div class="text-green-300">Global Functions</div></h3>
+    <div class="text-4xl">Signature Checking Functions</div>
+    <div class="grid grid-cols-1 items-start mt-8">
+        <div>
+            <div class="text-2xl">Definition</div>
+            <pre><code class="language-javascript" data-trim data-line-numbers="3">
+            bool checkSig(sig transactionSignature, pubkey publicKey);
+            bool checkMultisig(sig[] transactionSignatures, pubkey[] publicKeys);
+            bool checkDataSig(datasig signatureOfData, bytes data, pubkey publicKey);
+            </code></pre>
+        </div>
+        <!-- Right: Sample code -->
+        <div>
+            <div class="text-2xl"><a href="https://playground.cashscript.org" target="_blank" rel="noopener noreferrer">Example</a></div>
+            <pre><code class="language-javascript" data-line-numbers="4" data-trim>
+                pragma cashscript ^0.11.0;
+                contract MyContract(pubkey publicKey) {
+                    function spend(datasig signatureOfData) {
+                        bytes data = bytes("I owner of the pubkey approve this spend");
+                        require(checkDataSig(signatureOfData, data, publicKey));
+                    }
+                }
+            </code></pre>
+        </div>
+    </div>
+    <aside class="notes">
+        [What we need]
+            public key = The public key of only one who can spend from this contract
+            signature of the text = "I owner of the pubkey approve this spend" during spend
+
+        [What to do] 
+            1. copy the private key wif of a sample wallet in Cashscript playground  
+            2. go to https://bitaps.com/signature
+            3. create the signature
+
+            Convert string to bytes:
+
+            const str = "I owner of the pubkey approve this spend";
+            const encoder = new TextEncoder();
+            const bytes = encoder.encode(str);
+
+            Convert bytes to hex:
+
+            const hexBytes = Array.from(bytes).map(b => b.toString(16).padStart(2, "0")).join("");
+            console.log(hexBytes); // "49206f776e6572206f6620746865207075626b657920617070726f76652074686973207370656e64"
+
+    </aside>
+</section>
+
+<section>
+    <h3><div class="text-green-300">Global Functions</div></h3>
     <div class="flex flex-wrap gap-10 mt-1">
         <!-- Arithmetic Functions -->
         <div class="flex-1 min-w-[300px]">
@@ -112,7 +352,7 @@
         <pre><code class="language-javascript" data-trim>bytes20 sha1(int x)</code></pre>
         <pre><code class="language-javascript" data-trim>bytes32 sha256(any x)</code></pre>
         <pre><code class="language-javascript" data-trim>bytes32 hash160(int x)</code></pre>
-        <pre><code class="language-javascript" data-trim>bytes32 hash256(int x)</code></pre>
+        <pre><code class="language-javascript" data-trim>bytes32 hash356(int x)</code></pre>
         </div>
 
         <!-- Signature Checking Functions -->
