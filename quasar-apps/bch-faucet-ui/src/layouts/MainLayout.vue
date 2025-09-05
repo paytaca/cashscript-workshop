@@ -71,6 +71,7 @@ export default defineComponent({
             { label: 'Computed properties', routeName: 'example-v-computed' },
             { label: 'Watchers', routeName: 'example-v-watchers' },
             { label: 'Lifecycle Hooks', routeName: 'example-v-lifecycle' },
+            { label: 'Form Inputs', routeName: 'example-v-input' },
           ]
         },
         {

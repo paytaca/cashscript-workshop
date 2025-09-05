@@ -16,6 +16,7 @@ const routes = [
       { path: 'vue/computed', component: () => import('src/pages/examples/vue/5_ComputedProperty.vue'), name: 'example-v-computed' },
       { path: 'vue/watchers', component: () => import('src/pages/examples/vue/6_Watchers.vue'), name: 'example-v-watchers' },
       { path: 'vue/lifecycle', component: () => import('src/pages/examples/vue/7_LifecycleHooks.vue'), name: 'example-v-lifecycle' },
+      { path: 'vue/inputs', component: () => import('src/pages/examples/vue/8_FormInputs.vue'), name: 'example-v-input' },
 
       { path: 'apps/todo', component: () => import('src/pages/examples/apps/TodoApp.vue'), name: 'example-app-todo' },
     ]
