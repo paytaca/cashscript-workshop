@@ -1,14 +1,15 @@
 <template>
-  <div style="display: inline-block; text-align: center;">
+  <div class="q-gutter-md">
     <button
-      :disabled="isCountingDown || destroyed"
+      :disabled="isCountingDown"
       @click="startCountdown"
-      style="padding: 8px 16px; background: red; color: white; border: none; cursor: pointer;"
+      class="self-destruct-button"
     >
-      <span v-if="!isCountingDown && !destroyed">💣 Self Destruct</span>
-      <span v-else-if="isCountingDown">⏳ {{ countdown }}</span>
-      <span v-else>💥 Destroyed</span>
+      {{  btnText }}
     </button>
+    <button @click="resetCountdown" class="reset-button">Reset Countdown</button>
+
+    <div></div>
   </div>
 </template>
 
@@ -24,9 +25,11 @@ export default {
   data () {
     return {
       countdown: this.countdownSeconds,
+      btnText: '💣 Self Destruct',
       isCountingDown: false,
       destroyed: false,
-      timer: null
+      timer: null,
+      countdownStart: null,
     }
   },
   methods: {
@@ -35,17 +38,36 @@ export default {
 
       this.isCountingDown = true
       this.countdown = this.countdownSeconds
+      this.btnText = '⏳ ' + this.countdown;
+      this.countdownStart = new Date().toLocaleTimeString();
 
       this.timer = setInterval(() => {
         if (this.countdown > 1) {
           this.countdown--
+          this.btnText = '⏳ ' + this.countdown;
         } else {
           clearInterval(this.timer)
           this.destroyed = true
           this.isCountingDown = false
-          this.$emit('self-destruct') // 🔥 notify parent
+          this.btnText = '💥 Destroyed';
+
+          const countdownTimestamp = {
+            start: this.countdownStart,
+            end: new Date().toLocaleTimeString(),
+          }
+          this.$emit('self-destruct', countdownTimestamp) // 🔥 notify parent
         }
       }, 1000)
+    },
+    resetCountdown() {
+      this.destroyed = false;
+      this.countdown = this.countdownSeconds;
+      this.isCountingDown = false;
+      this.btnText = '💣 Self Destruct';
+
+      clearInterval(this.timer);
+      this.timer = null;
+      this.$emit('reset');
     }
   },
   beforeUnmount () {
@@ -53,3 +75,19 @@ export default {
   }
 }
 </script>
+<style scoped>
+button {
+  padding: 8px 16px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.self-destruct-button {
+  background: red;
+}
+
+.reset-button {
+  background: grey;
+}
+</style>
