@@ -235,14 +235,14 @@
                 <h2>Vue JS Basics</h2>
             </section>
             <section>
-                <section>
+                <section data-auto-animate>
                     <h3>Declarative Rendering</h3>
                     <div>
                         You describe what the UI should look like based
                         on the state of your component
                     </div>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Declarative Rendering</h3>
                     <div>
                         Unlike imperative style
@@ -259,14 +259,14 @@
                     </div>
                     <div class="fragment">Vue framework takes care of this</div>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Declarative Rendering</h3>
                     <div class="flex justify-center">
                         <!-- TODO: Improve diagram -->
                         <img src="../../images/declarative-rendering.svg"/>
                     </div>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Declarative Rendering</h3>
                     <div>Declare the component's state variables in <strong class="text-yellow-200">data()</strong></div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="5-9">
@@ -283,7 +283,7 @@
                         </script>
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Declarative Rendering</h3>
                     <div>
                         Use double curly braces <strong class="text-yellow-400">{{ }}</strong> to
@@ -298,7 +298,7 @@
                         </template>
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Declarative Rendering</h3>
                     <div>
                         Use data binding to pass variables or expressions as html attributes
@@ -316,7 +316,7 @@
                 </section>
             </section>
             <section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Display contract parameters</h3>
                     <ol>
                         <li>
@@ -328,7 +328,7 @@
                         </li>
                     </ol>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Display contract parameters</h3>
                     <div>
                         Add the Faucet contract's parameters
@@ -350,7 +350,7 @@
                         </script>
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Display contract parameters</h3>
                     <div>
                         Display their values in template
@@ -367,7 +367,7 @@
                 </section>
             </section>
             <section>
-                <section>
+                <section data-auto-animate>
                     <h3>Handling events</h3>
                     <div>
                         Listening to DOM events using
@@ -387,7 +387,7 @@
                         <button @click="increment()">Click me</button>
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Handling events</h3>
                     <div>
                         Functions referenced in template are declared in
@@ -405,7 +405,7 @@
                         })
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Handling events</h3>
                     <div>
                         Inside the function, you can access state variables using
@@ -426,7 +426,7 @@
             </section>
 
             <section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Using Events</h3>
                     <div>Create contract instance on button click</div>
                     <ol>
@@ -453,7 +453,7 @@
                         </li>
                     </ol>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Using Events</h3>
                     <div>Add a button in that runs a function on click</div>
                     <pre><code data-trim class="language-html" data-line-numbers="3">
@@ -463,9 +463,14 @@
                         </template>
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Using Events</h3>
-                    <div>From src/lib/contract.js, import createContractInstance(membersList, potAmount, period)</div>
+                    <div>
+                        From
+                        <i class="text-blue-300">src/lib/contract.js</i>,
+                        import
+                        <i class="text-blue-300">createContractInstance(membersList, potAmount, period)</i>
+                    </div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="2">
                         <script>
                         import { createContractInstance } from 'src/lib/contract.js'
@@ -473,7 +478,7 @@
                         </script>
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Using Events</h3>
                     <div>Use the state variables from the previous activity as parameters</div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="4-12">
@@ -492,7 +497,7 @@
                         </script>
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Using Events</h3>
                     <div>Add the compiled contract's address as a state variable and display the result.</div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="5">
@@ -526,7 +531,7 @@
                 <img src="../../images/ComponentsDiagram.svg" alt="Components diagram">
             </section>
             <section>
-                <section>
+                <section data-auto-animate>
                     <h3>Using components</h3>
                     <pre><code data-trim class="language-python" data-line-numbers="3,7,10-12">
                         <template>
@@ -547,7 +552,7 @@
 
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Using components</h3>
                     <div>1. Import the component</div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="2">
@@ -557,7 +562,7 @@
                         </script>
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Using components</h3>
                     <div>2. Register the component to the parent component</div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="3-5">
@@ -570,7 +575,7 @@
                         })
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Using components</h3>
                     <div>3. Then use the component in the template</div>
                     <pre><code data-trim class="language-html" data-line-numbers="3">
@@ -584,7 +589,7 @@
             </section>
 
             <section>
-                <section>
+                <section data-auto-animate>
                     <h3>Component Props</h3>
                     <div>
                         A child component can accept input from the parent via props.
@@ -608,7 +613,7 @@
                     </template>
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Component Props</h3>
                     <div>Declare the props in child components</div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="3-10">
@@ -629,7 +634,7 @@
                     </div>
                 </section>
 
-                <section>
+                <section data-auto-animate>
                     <h3>Component Props</h3>
                     <div>We pass props to the child component using attribute binding</div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="3">
@@ -640,7 +645,7 @@
                         </template>
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Component Props</h3>
                     <div>
                         Props are <strong class="text-yellow-400">ready-only</strong>
@@ -663,7 +668,7 @@
             </section>
 
             <section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Using components</h3>
                     <div>
                         Display contract address as QRcode using the component:
@@ -684,7 +689,7 @@
                         </li>
                     </ol>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Using components</h3>
                     <div>Import from <i class="text-blue-300">/src/components/buttons</i></div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="2">
@@ -694,7 +699,7 @@
                         </script>
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Using components</h3>
                     <div>2. Register component in <i class="text-blue-300">IndexPage</i></div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="3-5">
@@ -707,7 +712,7 @@
                         })
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Using components</h3>
                     <div>Use component in template and pass the contract's address as prop</div>
                     <pre><code data-trim class="language-html" data-line-numbers="3">
@@ -721,7 +726,7 @@
             </section>
 
             <section>
-                <section>
+                <section data-auto-animate>
                     <h3>Form Input Bindings</h3>
                     <div>
                         The <strong class="text-blue-300">v-model</strong> allows
@@ -736,7 +741,7 @@
                         <textarea v-model="message"></textarea>
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Form Input Bindings</h3>
                     <div>
                         It works on all form related elements
@@ -755,7 +760,7 @@
                     </code></pre>
                 </section>
 
-                <section>
+                <section data-auto-animate>
                     <h3>Form Input Bindings</h3>
                     <div>
                         It is a shortcut for
@@ -778,7 +783,7 @@
                     </div>
                 </section>
 
-                <section>
+                <section data-auto-animate>
                     <h3><span class="text-blue-300">v-model</span> modifiers</h3>
                     <div>
                         The vue directive have modifiers that adds
@@ -792,7 +797,7 @@
                         <input v-model.lazy.trim="message"/>
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3><span class="text-blue-300">v-model</span> modifiers</h3>
                     <div>
                         <span class="text-blue-300">.lazy</span>
@@ -802,7 +807,7 @@
                         <input v-model.lazy="message"/>
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3><span class="text-blue-300">v-model</span> modifiers</h3>
                     <div>
                         <span class="text-blue-300">.number</span>
@@ -812,7 +817,7 @@
                         <input v-model.number="amount" type="numeric"/>
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3><span class="text-blue-300">v-model</span> modifiers</h3>
                     <div>
                         <span class="text-blue-300">.trim</span>
@@ -822,7 +827,7 @@
                         <input v-model.trim="message"/>
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3><span class="text-blue-300">v-model</span> modifiers</h3>
                     <div>
                         It is also possible to mix modifiers
@@ -834,7 +839,7 @@
             </section>
 
             <section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Create a form</h3>
                     <div>
                         Edit
@@ -859,7 +864,7 @@
                     </ol>
                 </section>
 
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Create a form</h3>
                     <div>
                         Add necessary input elements for each contract parameter.
@@ -873,7 +878,7 @@
                     </code></pre>
                 </section>
 
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Create a form</h3>
                     <div>
                         Add state variables and bind values using
@@ -896,7 +901,7 @@
                         }
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Create a form</h3> 
                     <div>
                         Add <i class="text-blue-300">FaucetContractFormCard</i>
@@ -923,7 +928,7 @@
             </section>
 
             <section>
-                <section>
+                <section data-auto-animate>
                     <h3>Component events</h3>
                     <div>
                         While props is used to communicate from parent to child components,
@@ -939,7 +944,7 @@
                         &ltChildComponent @selfDestruct="selfDestructHandler"/>
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Component events</h3>
                     <div>
                         The child component can emit events using
@@ -964,7 +969,7 @@
                         <span class="text-yellow-300">$emit(...)</span> first parameter is the event name
                     </div>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Component event arguments</h3>
                     <pre><code data-trim class="language-javascript" data-line-numbers="2">
                         // ChildComponent.vue
@@ -988,7 +993,7 @@
             </section>
 
             <section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Component Events</h3>
                     <div>
                         Emit an event in <i class="text-blue-300">FaucetContractFormCard</i>,
@@ -1013,7 +1018,7 @@
                         </li>
                     </ol>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Component Events</h3>
                     <div>
                         Add a submit button that will emit an event submitted when clicked.
@@ -1030,7 +1035,7 @@
                         }
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Component Events</h3>
                     <div>
                         Include the form's state variables as event argument
@@ -1048,7 +1053,7 @@
                         }
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Component Events</h3>
                     <div>
                         In <i class="text-blue-300">IndexPage</i>,
@@ -1072,7 +1077,7 @@
                 <h2>Quasar Components</h2>
             </section>
             <section>
-                <section>
+                <section data-auto-animate>
                     <h3>Quasar Components</h3>
                     <ul>
                         <li>Wide range of ready made components</li>
@@ -1081,7 +1086,7 @@
                         <li>Registered globally, no need for imports</li>
                     </ul>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Quasar Buttons</h3>
                     <pre><code data-trim class="language-javascript">
                         <template>
@@ -1095,7 +1100,7 @@
                     <img src="../../images/quasar-btn.png" class="mx-auto"/>
                 </section>
 
-                <section>
+                <section data-auto-animate>
                     <h3>Quasar Form Inputs</h3>
                     <pre><code data-trim class="language-javascript">
                         <template>
@@ -1110,7 +1115,7 @@
                     <img src="../../images/quasar-form.png" class="h-30"/>
                 </section>
 
-                <section>
+                <section data-auto-animate>
                     <h3>Quasar Components</h3>
                     <div>
                         Full list of components in documentation page
@@ -1246,7 +1251,7 @@
             </section>
 
             <section>
-                <section>
+                <section data-auto-animate>
 
                     <h3>Activity: Use contract store</h3>
                     <div>
@@ -1277,7 +1282,7 @@
                         </li>
                     </ol>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Use contract store</h3>
                     <div>
                         In <i class="text-blue-300">IndexPage</i>,
@@ -1307,7 +1312,7 @@
                         })
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Use contract store</h3>
                     <div>
                         Update initial value of form fields to use values from contract store.
@@ -1326,7 +1331,7 @@
                         })
                     </code></pre>
                 </section>
-                <section>
+                <section data-auto-animate>
                     <h3>Activity: Use contract store</h3>
                     <div>
                         Use contract store's action
