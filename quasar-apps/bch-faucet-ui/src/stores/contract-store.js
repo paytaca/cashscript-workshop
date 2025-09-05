@@ -21,6 +21,9 @@ export const useContractStore = defineStore('contract', {
         this.parameters.passcode,
       )
     },
+    payoutAmountBch() {
+      return this.parameters.payoutAmount / 10 ** 8
+    },
     bchBalance() {
       return this.balance / 10 ** 8
     },

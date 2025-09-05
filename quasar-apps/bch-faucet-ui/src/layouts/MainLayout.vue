@@ -15,6 +15,7 @@
       :width="200"
       :breakpoint="700"
       elevated
+      overlay
     >
       <q-item to="/" clickable v-ripple>
         <q-item-section>
@@ -72,6 +73,20 @@ export default defineComponent({
             { label: 'Watchers', routeName: 'example-v-watchers' },
             { label: 'Lifecycle Hooks', routeName: 'example-v-lifecycle' },
             { label: 'Form Inputs', routeName: 'example-v-input' },
+            { label: 'Components', routeName: 'example-v-components' },
+          ]
+        },
+        {
+          label: 'Quasar',
+          links: [
+            { label: 'Buttons', routeName: 'example-q-btn' },
+            { label: 'Form Inputs', routeName: 'example-q-input' },
+            { label: 'Quasar Classes', routeName: 'example-q-classes' },
+            { label: 'Cards', routeName: 'example-q-card' },
+            { label: 'Tables', routeName: 'example-q-table' },
+            { label: 'Dialog', routeName: 'example-q-dialog' },
+            { label: 'Tab Panel', routeName: 'example-q-tab-panel' },
+            { label: 'List Item', routeName: 'example-q-list-item' },
           ]
         },
         {

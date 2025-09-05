@@ -17,6 +17,16 @@ const routes = [
       { path: 'vue/watchers', component: () => import('src/pages/examples/vue/6_Watchers.vue'), name: 'example-v-watchers' },
       { path: 'vue/lifecycle', component: () => import('src/pages/examples/vue/7_LifecycleHooks.vue'), name: 'example-v-lifecycle' },
       { path: 'vue/inputs', component: () => import('src/pages/examples/vue/8_FormInputs.vue'), name: 'example-v-input' },
+      { path: 'vue/components', component: () => import('src/pages/examples/vue/9_Components.vue'), name: 'example-v-components' },
+
+      { path: 'quasar/buttons', component: () => import('src/pages/examples/quasar/ButtonExamples.vue'), name: 'example-q-btn' },
+      { path: 'quasar/inputs', component: () => import('src/pages/examples/quasar/FormInputExamples.vue'), name: 'example-q-input' },
+      { path: 'quasar/classes', component: () => import('src/pages/examples/quasar/QuasarClasses.vue'), name: 'example-q-classes' },
+      { path: 'quasar/cards', component: () => import('src/pages/examples/quasar/CardExamples.vue'), name: 'example-q-card' },
+      { path: 'quasar/tables', component: () => import('src/pages/examples/quasar/TableExamples.vue'), name: 'example-q-table' },
+      { path: 'quasar/dialogs', component: () => import('src/pages/examples/quasar/DialogExamples.vue'), name: 'example-q-dialog' },
+      { path: 'quasar/tab-panels', component: () => import('src/pages/examples/quasar/TabPanelExamples.vue'), name: 'example-q-tab-panel' },
+      { path: 'quasar/list-items', component: () => import('src/pages/examples/quasar/ListItemExamples.vue'), name: 'example-q-list-item' },
 
       { path: 'apps/todo', component: () => import('src/pages/examples/apps/TodoApp.vue'), name: 'example-app-todo' },
     ]
