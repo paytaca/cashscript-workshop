@@ -302,8 +302,7 @@
                 pragma cashscript ^0.11.0;
                 contract MyContract(pubkey publicKey) {
                     function spend(datasig signatureOfData) {
-                        bytes data = bytes("I owner of the pubkey approve this spend");
-                        require(checkDataSig(signatureOfData, data, publicKey));
+                        require(checkDataSig(signatureOfData, bytes('approve'), publicKey));
                     }
                 }
             </code></pre>
