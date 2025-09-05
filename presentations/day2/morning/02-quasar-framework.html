@@ -1358,6 +1358,19 @@
                     </code></pre>
                 </section>
             </section>
+
+            <section data-auto-animate>
+                <h3>Bringing It All Together</h3>
+                <pre class="bg-white justify-items-center mermaid">
+                    sequenceDiagram
+                    App->>JS: get data from users
+                    JS->>Contract: process necessary contract details
+                    Contract->>JS: instantiate contract
+                    JS->>App: display contract details
+                    App->>JS: perform operations to contract
+                </pre>
+            </section>
+
             <section>
                 <h2>Back to Main</h2>
                 <p><a href="../../index.html">← Workshop Overview</a></p>
@@ -1365,6 +1378,10 @@
         </div>
     </div>
 
+    <script type="module">
+      import mermaid from '/node_modules/mermaid/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
     <script src="/node_modules/reveal.js/dist/reveal.js"></script>
     <script src="/node_modules/reveal.js/plugin/highlight/highlight.js"></script>
     <script>

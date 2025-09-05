@@ -26,6 +26,14 @@
                 </div>
             </section>
 
+            <section data-auto-animate>
+                <h2>Before starting...</h2>
+                <span class="fragment">
+                    <h3>Clone <span class="text-purple-400 font-bold">CashScript Workshop</span> repo</h3>
+                    <pre><code class="language-bash">git clone https://github.com/paytaca/cashscript-workshop.git</code></pre>
+                </span>
+            </section>
+
             <section>
                 <section data-auto-animate>
                     <div>
@@ -76,6 +84,20 @@ contract Password (string password) {
                             <li>recommended method to compile artifact files</li>
                         </ul>
                     </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>Compiler</h2>
+                    <pre><code class="language-bash">Options:
+  -V, --version          Output the version number.
+  -o, --output [path]    Specify a file to output the generated artifact.
+  -h, --hex              Compile the contract to hex format rather than a full artifact.
+  -A, --asm              Compile the contract to ASM format rather than a full artifact.
+  -c, --opcount          Display the number of opcodes in the compiled bytecode.
+  -s, --size             Display the size in bytes of the compiled bytecode.
+  -f, --format [format]  Specify the format of the output. (choices: "json", "ts", default: "json")
+  -?, --help             Display help</code></pre>
+                    <a href="https://cashscript.org/docs/compiler/#cli-usage" data-preview-link>https://cashscript.org/docs/compiler/#cli-usage</a>
                 </section>
     
                 <section data-auto-animate>
@@ -390,13 +412,15 @@ const tx = transactionBuilder
                     <li>Add <code class="text-purple-400 font-bold">.build()</code> to the transaction being built</li>
                     <li>Console log the variable <code class="text-purple-400 font-bold">tx</code></li>
                     <li>Open CLI and run <pre><code class="language-bash">node password-transact.js</code></pre></li>
-                    <li>
-                        Go back to the file and replace <code class="text-purple-400 font-bold">.build()</code>
-                        with <code class="text-purple-400 font-bold">.send()</code> and add
-                        <code class="text-purple-400 font-bold">await</code> before
-                        <code class="text-purple-400 font-bold">transactionBuilder</code>
-                    </li>
-                    <li>Run the command above again</li>
+                    <span class="fragment">
+                        <li>
+                            Go back to the file and replace <code class="text-purple-400 font-bold">.build()</code>
+                            with <code class="text-purple-400 font-bold">.send()</code> and add
+                            <code class="text-purple-400 font-bold">await</code> before
+                            <code class="text-purple-400 font-bold">transactionBuilder</code>
+                        </li>
+                        <li>Run the command above again</li>
+                    </span>
                 </ol>
             </section>
 
