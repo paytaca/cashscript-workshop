@@ -1361,13 +1361,13 @@
 
             <section data-auto-animate>
                 <h3>Bringing It All Together</h3>
-                <pre class="bg-white mermaid">
-                    flowchart LR
-                        A[Christmas] -->|Get money| B(Go shopping)
-                        B --> C{Let me think}
-                        C -->|One| D[Laptop]
-                        C -->|Two| E[iPhone]
-                        C -->|Three| F[fa:fa-car Car]
+                <pre class="bg-white justify-items-center mermaid">
+                    sequenceDiagram
+                    App->>JS: get data from users
+                    JS->>Contract: process necessary contract details
+                    Contract->>JS: instantiate contract
+                    JS->>App: display contract details
+                    App->>JS: perform operations to contract
                 </pre>
             </section>
 
