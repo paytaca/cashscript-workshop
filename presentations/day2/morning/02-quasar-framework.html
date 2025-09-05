@@ -1378,9 +1378,32 @@
         </div>
     </div>
 
-    <script type="module">
-      import mermaid from '/node_modules/mermaid/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ startOnLoad: true });
+    <script src="/node_modules/mermaid/dist/mermaid.js"></script>
+    <script>
+
+        const MermaidPlugin = {
+            id: 'mermaid',
+            init: (deck) => {
+            mermaid.initialize({ startOnLoad: false });
+
+            deck.on('ready', () => {
+                renderMermaidSlides();
+            });
+
+            deck.on('slidechanged', () => {
+                renderMermaidSlides();
+            });
+
+            function renderMermaidSlides() {
+                document.querySelectorAll('.mermaid').forEach((el) => {
+                if (!el.hasAttribute('data-processed')) {
+                    mermaid.init(undefined, el);
+                    el.setAttribute('data-processed', true);
+                }
+                });
+            }
+            }
+        };
     </script>
     <script src="/node_modules/reveal.js/dist/reveal.js"></script>
     <script src="/node_modules/reveal.js/plugin/highlight/highlight.js"></script>
@@ -1388,7 +1411,7 @@
         Reveal.initialize({
             hash: true,
             transition: 'fade',
-            plugins: [RevealHighlight]
+            plugins: [RevealHighlight, MermaidPlugin]
         });
     </script>
 </body>
