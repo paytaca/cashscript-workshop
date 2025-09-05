@@ -55,6 +55,21 @@ export default defineComponent({
       console.log('Claim result:', result);
       this.recipientAddress = '';
       this.passcode = '';
+
+      if (typeof result === 'string') {
+        this.$q.dialog({
+          title: 'Claim failed',
+          message: result,
+          ok: true,
+        })
+      } else {
+        const url = `https://chipnet.bch.ninja/tx/${result.txid}`
+        this.$q.dialog({
+          title: 'Claim success!',
+          message: `<a href="${url}" target="_blank">View txid</a>`,
+          html: true,
+        })
+      }
     }
   }
 })

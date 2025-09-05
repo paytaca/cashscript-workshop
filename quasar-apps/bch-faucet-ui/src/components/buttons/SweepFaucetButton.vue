@@ -56,6 +56,13 @@ export default defineComponent({
       console.log('Sweep result:', result);
       this.wif = '';
       this.recipientAddress = '';
+
+      const url = `https://chipnet.bch.ninja/tx/${result.txid}`
+      this.$q.dialog({
+        title: 'Swept funds!',
+        message: `<a href="${url}" target="_blank">View txid</a>`,
+        html: true,
+      })
     }
   }
 })
