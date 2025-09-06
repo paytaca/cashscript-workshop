@@ -27,7 +27,7 @@
             <section data-auto-animate>
                 <h3>Goal</h3>
                 <div class="p-2 rounded-lg bg-white/10">
-                    Create a user interface for the BCH faucet contract with Quasar Framework
+                    Create a user interface for the PasswordVault contract with Quasar Framework
                 </div>
                 <ul>
                     <li class="fragment">Create contract instance through the app</li>
@@ -147,7 +147,7 @@
                     </li>
                     <li>
                         <div>Change directory:</div>
-                        <pre>cd cashscript-workshop/quasar-apps/bch-faucet-ui</pre>
+                        <pre>cd cashscript-workshop/quasar-apps/password-vault-ui</pre>
                     </li>
                     <li>
                         <div>Install packages:</div>
@@ -367,7 +367,7 @@
                     <h3>Activity: Display contract parameters</h3>
                     <ol>
                         <li>
-                            Add the Faucet contract's parameters
+                            Add the PasswordVault contract's parameters
                             in <strong class="text-yellow-200">data()</strong>
                         </li>
                         <li class="fragment">
@@ -378,7 +378,7 @@
                 <section data-auto-animate>
                     <h3>Activity: Display contract parameters</h3>
                     <div>
-                        Add the Faucet contract's parameters
+                        Add the PasswordVault contract's parameters
                         in <strong class="text-yellow-200">data()</strong>
                     </div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="5-11">
@@ -511,7 +511,7 @@
                     <pre><code data-trim class="language-html" data-line-numbers="3">
                         <template>
                             // ...
-                            <button @click="createFaucetContractInstance">Create</button>
+                            <button @click="createPasswordVaultInstance">Create</button>
                         </template>
                     </code></pre>
                 </section>
@@ -538,7 +538,7 @@
                         import { createContractInstance } from 'src/lib/contract.js'
                         // defineComponent({ ...
                             methods: {
-                                createFaucetContractInstance() {
+                                createPasswordVaultInstance() {
                                     const contract = createContractInstance(
                                         this.payoutAmount,
                                         this.ownerAddress,
@@ -553,7 +553,7 @@
                     <h3>Activity: Using Events</h3>
                     <div>Add the compiled contract's address as a state variable and display the result.</div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="5">
-                        createFaucetContractInstance() {
+                        createPasswordVaultInstance() {
                             const contract = createContractInstance(
                                 // ...
                             )
@@ -1060,10 +1060,10 @@
                     <h3>Activity: Create a form</h3>
                     <div>
                         Edit
-                        <i class="text-blue-300">FaucetContractFormCard.vue</i>
+                        <i class="text-blue-300">PasswordVaultFormCard.vue</i>
                         in
                         <i class="text-blue-300">src/components/src/cards/</i>
-                        to create a form for Faucet contract parameters.
+                        to create a form for PasswordVault contract parameters.
                     </div>
                     <ol>
                         <li class="fragment">
@@ -1075,7 +1075,7 @@
                             and appropriate modifiers.
                         </li>
                         <li class="fragment">
-                            Add <i class="text-blue-300">FaucetContractFormCard</i>
+                            Add <i class="text-blue-300">PasswordVaultFormCard</i>
                             component in <i class="text-blue-300">IndexPage</i>
                         </li>
                     </ol>
@@ -1121,23 +1121,23 @@
                 <section data-auto-animate>
                     <h3>Activity: Create a form</h3> 
                     <div>
-                        Add <i class="text-blue-300">FaucetContractFormCard</i>
+                        Add <i class="text-blue-300">PasswordVaultFormCard</i>
                         component in <i class="text-blue-300">IndexPage</i>
                     </div>
 
                     <pre><code data-trim class="language-html">
                         <template>
-                            &ltFaucetContractFormCard&#47;&gt
+                            &ltPasswordVaultFormCard&#47;&gt
                         </template>
                     </code></pre>
 
                     <pre><code data-trim class="language-javascript">
-                        import FaucetContractFormCard from '../components/cards/FaucetContractFormCard.vue'
+                        import PasswordVaultFormCard from '../components/cards/PasswordVaultFormCard.vue'
                         export default defineComponent({
                             name: 'IndexPage',
 
                             components: {
-                                FaucetContractFormCard,
+                                PasswordVaultFormCard,
                             }
                         })
                     </code></pre>
@@ -1153,7 +1153,7 @@
 
                             <i class="text-blue-300">events</i> are used to communicate from child to parent.
                         </div>
-                        <img src="../../images/component-prop-event.svg" style="height:75vh;"/>
+                        <img src="../../images/component-prop-event.svg" style="height:28rem;"/>
                     </div>
                 </section>
                 <section>
@@ -1229,13 +1229,13 @@
                 <section data-auto-animate>
                     <h3>Activity: Component Events</h3>
                     <div>
-                        Emit an event in <i class="text-blue-300">FaucetContractFormCard</i>,
+                        Emit an event in <i class="text-blue-300">PasswordVaultFormCard</i>,
                         add save the form's values in <i class="text-blue-300">IndexPage</i>'s
                         state variables
                     </div>
                     <ol>
                         <li class="fragment">
-                            In <i class="text-blue-300">FaucetContractFormCard</i>, add a submit
+                            In <i class="text-blue-300">PasswordVaultFormCard</i>, add a submit
                             button that will emit an event submitted when clicked.
                         </li>
                         <li class="fragment">
@@ -1299,7 +1299,7 @@
                                 this.payoutAmount = payoutAmount;
                                 this.ownerAddress = ownerAddress;
                                 this.passcode = passcode;
-                                this.createFaucetContractInstance();
+                                this.createPasswordVaultInstance();
                             }
                         }
                     </code></pre>
@@ -1378,7 +1378,7 @@
                 <div>Components use props & events to pass around data.</div>
                 <div>
                     <span class="fragment">
-                        With a larger apps with numerous components,
+                        With larger apps with numerous components,
                     </span>
                     <span class="fragment">this can get messy</span>
                 </div>
@@ -1514,7 +1514,7 @@
                     <h3>Activity: Use contract store</h3>
                     <div>
                         Update <i class="text-blue-300">IndexPage</i> and
-                        <i class="text-blue-300">FaucetContractFormCard</i> to use
+                        <i class="text-blue-300">PasswordVaultFormCard</i> to use
                         <i class="text-yellow-200">useContractStore</i> in
                         <i class="text-blue-300">/src/store/contract-store.js</i>
                     </div>
@@ -1524,7 +1524,7 @@
                             update contract parameter variables to use contract store
                         </li>
                         <li class="fragment">
-                            In <i class="text-blue-300">FaucetContractFormCard</i>
+                            In <i class="text-blue-300">PasswordVaultFormCard</i>
                             <ol>
                                 <li class="fragment">
                                     Update initial value of form fields to
@@ -1578,7 +1578,7 @@
                     <pre><code data-trim class="language-javascript" data-line-numbers="1,6-9">
                         import { useContractStore } from 'src/stores/contract-store'
                         export default defineComponent({
-                            name: 'FaucetContractFormCard',
+                            name: 'PasswordVaultFormCard',
                             // ...
                             mounted() {
                                 const contractStore = useContractStore();
@@ -1600,7 +1600,7 @@
                     <pre><code data-trim class="language-javascript" data-line-numbers="1,7-12">
                         import { useContractStore } from 'src/stores/contract-store'
                         export default defineComponent({
-                            name: 'FaucetContractFormCard',
+                            name: 'PasswordVaultFormCard',
                             // ...
                             methods: {
                                 submitForm() {
@@ -1622,16 +1622,16 @@
                     <h3>Next steps</h3>
                     <div>We got most UI functions we need, let's add the missing functionalties</div>
                     <ol>
-                        <li class="fragment">Display faucet contract's balance</li>
-                        <li class="fragment">Claiming BCH from faucet</li>
-                        <li class="fragment">Sweeping unused BCH from faucet</li>
+                        <li class="fragment">Display PasswordVault contract's balance</li>
+                        <li class="fragment">Claiming BCH from the vault</li>
+                        <li class="fragment">Sweeping unused BCH from the vault</li>
                             <ul class="fragment">
                                 <li>Open the transaction from the explorer</li>
                             </ul>
                     </ol>
                 </section>
                 <section>
-                    <h3>Display faucet contract's balance</h3>
+                    <h3>Display PasswordVault contract's balance</h3>
                     <pre><code data-trim class="language-html" data-line-numbers="2">
                         <template>
                             <div> Balance: {{ contractBalanceBch }} BCH </div>
@@ -1653,33 +1653,33 @@
                     <h3>Activity: Adding claim BCH form</h3>
                     <pre><code data-trim class="language-html" data-line-numbers="2">
                         <template>
-                            &ltClaimFaucetCard&#47;&gt
+                            &ltClaimVaultCard&#47;&gt
                         </template>
                     </code></pre>
                     <pre><code data-trim class="language-javascript" data-line-numbers="1,5">
-                        import ClaimFaucetCard from 'src/components/cards/ClaimFaucetCard.vue';
+                        import ClaimVaultCard from 'src/components/cards/ClaimVaultCard.vue';
 
                         export default defineComponent({
                             components: {
-                                ClaimFaucetCard,
+                                ClaimVaultCard,
                                 // ...
                             }
                         })
                     </code></pre>
                 </section>
                 <section>
-                    <h3>Activity: Sweeping unused BCH from faucet</h3>
+                    <h3>Activity: Sweeping unused BCH from vault</h3>
                     <pre><code data-trim class="language-html" data-line-numbers="2">
                         <template>
-                            &ltSweepFaucetButton&#47;&gt
+                            &ltSweepVaultButton&#47;&gt
                         </template>
                     </code></pre>
                     <pre><code data-trim class="language-javascript" data-line-numbers="1,5">
-                        import SweepFaucetButton from 'src/components/cards/SweepFaucetButton.vue';
+                        import SweepVaultButton from 'src/components/cards/SweepVaultButton.vue';
 
                         export default defineComponent({
                             components: {
-                                SweepFaucetButton,
+                                SweepVaultButton,
                                 // ...
                             }
                         })
