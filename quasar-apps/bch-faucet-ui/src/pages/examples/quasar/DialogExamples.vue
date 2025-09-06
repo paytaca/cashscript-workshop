@@ -43,10 +43,13 @@
     <q-btn label="Show Alert ($q.dialog)" color="primary" @click="showAlert" />
     <q-btn label="Show Confirm ($q.dialog)" color="orange" @click="showConfirm" />
     <q-btn label="Show Prompt ($q.dialog)" color="teal" @click="showPrompt" />
+    <q-btn label="Custom Dialog Component ($q.dialog)" color="amber" @click="showCustomDialog" />
   </div>
 </template>
 
 <script>
+import LoadingDialog from 'src/components/dialogs/LoadingDialog.vue'
+
 export default {
   name: "DialogCheatsheet",
   data () {
@@ -98,6 +101,16 @@ export default {
       }).onOk(name => {
         this.$q.notify({ type: 'info', message: `Hello, ${name}!` })
       })
+    },
+    showCustomDialog() {
+      const dialog = this.$q.dialog({
+        component: LoadingDialog,
+        componentProps: {
+          message: 'Custom loading dialog. Closing after 3 seconds',
+        }
+      })
+      
+      setTimeout(() => dialog.hide(), 3000)
     }
   }
 }
