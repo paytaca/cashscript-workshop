@@ -8,7 +8,33 @@
     <link rel="stylesheet" href="/node_modules/reveal.js/dist/theme/league.css">
     <link rel="stylesheet" href="/node_modules/reveal.js/plugin/highlight/monokai.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    <style>
+        /* Make slides scrollable if content is too tall */
+        .reveal .slides section {
+        max-height: 100vh;      /* Don't exceed viewport height */
+        overflow-y: auto;        /* Enable vertical scrolling */
+        padding: 2rem;           /* Optional: adds breathing room */
+        box-sizing: border-box;  /* Ensure padding doesn't break layout */
+        /* Hide scrollbar */
+        scrollbar-width: none;        /* Firefox */
+        -ms-overflow-style: none;     /* IE 10+ */
+        }
+
+        /* Optional: style scrollbar for better visibility */
+        .reveal .slides section::-webkit-scrollbar {
+        width: 8px;
+        }
+
+        .reveal .slides section::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.4);
+        border-radius: 4px;
+        }
+
+        .reveal .slides section::-webkit-scrollbar-track {
+        background: transparent;
+        }
+
+    </style>
 </head>
 <body>
     <div class="reveal">
@@ -17,7 +43,7 @@
             <section data-external="slides/what-is-a-smart-contract.html"></section>
 
             <!-- Basics -->
-            <section data-external="slides/about-cashcript.html"></section>
+            <section data-external="slides/about-cashscript.html"></section>
             <section data-external="slides/cashscript-ide.html"></section>
             <!-- <section data-external="slides/getting-started.html"></section> -->
             
@@ -27,6 +53,10 @@
             <!-- <section data-external="slides/types-and-operators.html"></section>  -->
             <!-- <section data-external="slides/contract-structure.html"></section>  -->
             <section data-external="slides/global-functions.html"></section>
+            <section data-external="slides/global-variables-introspection-variables.html"></section>
+            <section data-external="slides/global-variables-lock-creators.html"></section>
+            <section data-external="slides/global-variables-time-locks-1.html"></section>
+            <section data-external="slides/global-variables-time-locks-3.html"></section>
             <!-- <section data-external="slides/global-variables.html"></section>  -->
             <!-- <section data-external="slides/examples.html"></section>  -->
             <section>
@@ -53,12 +83,15 @@
     <!-- Chalkboard plugin -->
     <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/plugin.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@11.4.1/plugin/mermaid/mermaid.js"></script>
 
     <script>
+        
         Reveal.initialize({
             hash: true,
             transition: 'fade',
-            plugins: [RevealNotes, RevealHighlight, RevealChalkboard, RevealCustomControls],
+            plugins: [RevealNotes, RevealHighlight, RevealChalkboard, RevealCustomControls, RevealMermaid],
             dependencies: [
                 {
                     src: 'plugins/external/external.js',
