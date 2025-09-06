@@ -1,0 +1,96 @@
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div class="mb-4">-- Global Time Lock Variables --</div>
+    <div>
+        <div class="text-2xl">Anatomy of a transaction</div>
+        <pre><code data-trim data-line-numbers="5, 8">
+            tx = {
+                inputs: [{
+                    outpointIndex: number;
+                    outpointTransactionHash: ByteStringRepresentation;
+                    sequenceNumber: number;
+                    unlockingBytecode: Bytecode;
+                }];
+                locktime: number;
+                outputs: [{
+                    lockingBytecode: Bytecode;
+                    token?: {
+                        amount: NumericRepresentation;
+                        category: ByteStringRepresentation;
+                        nft?: {
+                            capability: `${NonFungibleTokenCapability}`;
+                            commitment: ByteStringRepresentation;
+                        };
+                    };
+                    valueSatoshis: NumericRepresentation;
+                }];
+                version: number;
+            }
+        </code></pre>
+    </div>
+    <aside class="notes">
+        Before we proceed, let's first take a look at the anatomy of a transaction.
+        Locktime and sequenceNumber are 2 fields in a transaction that can be used 
+        to achieve time based constraint.
+    </aside>
+
+</section>
+
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div class="mb-4">-- Global Time Lock Variables --</div>
+    <div>
+        <div class="text-2xl">Anatomy of a transaction</div>
+        <pre><code data-trim data-line-numbers=", 2">
+            tx.locktime 
+            tx.inputs[i].sequenceNumber
+        </code></pre>
+        <div>
+            - If locktime < 500,000,000 → interpreted as a block height
+            - If locktime ≥ 500,000,000 → interpreted as a UNIX timestamp (seconds since 1970-01-01)
+        </div>
+    </div>
+    <aside class="notes">
+        locktime:
+            Specifies the earliest block height or Unix timestamp a transaction can be confirmed
+            Example: tx.locktime = 800000 → the transaction cannot be mined until block 800,000.
+            Analogy: Absolute locktime → “Can only spend after Jan 1, 2025.”
+            If locktime < 500,000,000 → interpreted as a block height
+            If locktime ≥ 500,000,000 → interpreted as a UNIX timestamp (seconds since 1970-01-01)
+            9,495 years to reach blocktime 500,000,000
+        sequenceNumber:
+            Controls when a specific input can be spent relative to the UTXO’s confirmation
+            Supports time-based or block-based relative delays.
+            Example: sequenceNumber = 10 (block-based) → can spend this input 10 blocks after the UTXO is confirmed
+            Relative locktime → “Can spend 10 blocks after I receive the coins.”
+    </aside>
+
+</section>
+
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div class="mb-4">-- Global Time Lock Variables --</div>
+    <div>
+        <div class="text-2xl">Anatomy of a transaction</div>
+        <pre><code data-trim data-line-numbers="1, 2">
+            tx.locktime 
+            tx.inputs[i].sequenceNumber
+        </code></pre>
+    </div>
+    <aside class="notes">
+        Before we proceed, let's first take a look at the anatomy of a transaction.
+        locktime:
+            Specifies the earliest block height or Unix timestamp a transaction can be confirmed
+            Example: tx.locktime = 800000 → the transaction cannot be mined until block 800,000.
+            Analogy: Absolute locktime → “Can only spend after Jan 1, 2025.”
+            If locktime < 500,000,000 → interpreted as a block height
+            If locktime ≥ 500,000,000 → interpreted as a UNIX timestamp (seconds since 1970-01-01)
+            9,495 years to reach blocktime 500,000,000
+        sequenceNumber:
+            Controls when a specific input can be spent relative to the UTXO’s confirmation
+            Supports time-based or block-based relative delays.
+            Example: sequenceNumber = 10 (block-based) → can spend this input 10 blocks after the UTXO is confirmed
+            Relative locktime → “Can spend 10 blocks after I receive the coins.”
+    </aside>
+
+</section>
