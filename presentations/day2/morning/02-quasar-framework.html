@@ -24,6 +24,54 @@
                 </div>
             </section>
 
+            <section data-auto-animate>
+                <h3>Goal</h3>
+                <div class="p-2 rounded-lg bg-white/10">
+                    Create a user interface for the BCH faucet contract with Quasar Framework
+                </div>
+                <ul>
+                    <li class="fragment">Create contract instance through the app</li>
+                    <li class="fragment">Claim BCH from the contract</li>
+                    <li class="fragment">Retrieve the unused funds from our contract</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Why We Need a UI</h3>
+                <div class="flex space-x-4">
+                    <div class="fragment flex-1 px-2 py-10 bg-white/10 rounded-lg flex-col justify-center">
+                        <div class="text-4xl mb-2">👩‍💻 Cashscript Playground</div>
+                        <div class="text-2xl">Developers write and test contracts in a coding environment</div>
+                        <!-- <ul class="text-2xl">
+                            <li>Developer writes & tests contract in code editor</li>
+                            <li>Useful for learning</li>
+                            <li>Not practical for end-users</li>
+                        </ul> -->
+                    </div>
+                    <div class="fragment flex-1 px-2 py-10 bg-white/10 rounded-lg flex-col justify-center">
+                        <div class="text-4xl mb-2">💻 Command Line</div>
+                        <div class="text-2xl">
+                            Run contracts manually with commands—powerful but technical and error-prone
+                        </div>
+                        <!-- <ul class="text-2xl">
+                            <li>Terminal / console for manual commands</li>
+                            <li>User must type raw parameters (addresses, keys, amounts)</li>
+                            <li>Not user friendly</li>
+                        </ul> -->
+                    </div>
+                    <div class="fragment flex-1 px-2 py-10 bg-white/10 rounded-lg flex-col justify-center">
+                        <div class="text-4xl mb-2">📱 User interface</div>
+                        <div class="text-2xl">
+                            Simple forms and buttons that make contracts easy for anyone to use
+                        </div>
+                        <!-- <ul class="text-2xl">
+                            <li>Clean graphical interface</li>
+                            <li>Accessible to non-technical users</li>
+                        </ul> -->
+                    </div>
+                </div>
+            </section>
+
             <section>
                 <h3>What is quasar</h3>
                 <p>Quasar is an MIT licensed open-source Vue.js based framework,
@@ -50,7 +98,7 @@
             <section>
                 <section>
                     <div class="rounded-lg p-2 bg-white/10 text-6xl text-center">
-                        One codebase > All platforms
+                        One codebase = All platforms
                     </div>
                     <ul>
                         <li>Web application</li>
@@ -262,8 +310,7 @@
                 <section data-auto-animate>
                     <h3>Declarative Rendering</h3>
                     <div class="flex justify-center">
-                        <!-- TODO: Improve diagram -->
-                        <img src="../../images/declarative-rendering.svg"/>
+                        <img src="../../images/declarative-rendering.svg" class="h-64"/>
                     </div>
                 </section>
                 <section data-auto-animate>
@@ -386,6 +433,10 @@
         
                         <button @click="increment()">Click me</button>
                     </code></pre>
+
+                    <div class="p-2 rounded-lg bg-white/10">
+                        Accepts a function or an expression
+                    </div>
                 </section>
                 <section data-auto-animate>
                     <h3>Handling events</h3>
@@ -408,16 +459,17 @@
                 <section data-auto-animate>
                     <h3>Handling events</h3>
                     <div>
-                        Inside the function, you can access state variables using
+                        Inside the function, you can access state variables & other functions using
                         <strong class="text-blue-500">this</strong> object
                     </div>
 
-                    <pre><code data-trim class="language-javascript" data-line-numbers="5">
+                    <pre><code data-trim class="language-javascript" data-line-numbers="5-6">
                         export default defineComponent({
                             // ...
                             methods: {
                                 increment() {
                                     this.count += 1;
+                                    this.anotherMethod();
                                 }
                             }
                         })
@@ -469,7 +521,7 @@
                         From
                         <i class="text-blue-300">src/lib/contract.js</i>,
                         import
-                        <i class="text-blue-300">createContractInstance(membersList, potAmount, period)</i>
+                        <i class="text-blue-300">createContractInstance(payoutAmount, ownerAddress, passcode)</i>
                     </div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="2">
                         <script>
@@ -511,15 +563,180 @@
                 </section>
             </section>
 
+            <section data-auto-animate>
+                <h3>Contract instantiation</h3>
+                <div id="contract-instantiation-diagram-1" class="mermaid p-2 bg-white rounded-lg">
+                    sequenceDiagram
+                    App->>Component: User click a button
+                    Component->>JS: Component runs external function
+                    JS->>Cashscript: Process necessary contract details
+                    Cashscript->>JS: Contract creation with cashscript
+                    JS->>Component: Save contract details to component state
+                    Component->>App: Display contract details
+                </div>
+            </section>
+
             <section>
-                <h3>More Vue JS Basics</h3>
-                <ul>
-                    <li>Rendering lists</li>
-                    <li>Conditional Rendering</li>
-                    <li>Computed Property</li>
-                    <li>Watchers</li>
-                    <li>Lifecycle Hooks</li>
-                </ul>
+                <section>
+                    <h3>More Vue JS Basics</h3>
+                    <ul>
+                        <li>Rendering lists</li>
+                        <li>Conditional Rendering</li>
+                        <li>Computed Property</li>
+                        <li>Watchers</li>
+                        <li>Lifecycle Hooks</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>List rendering</h3>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                        Using <strong class="text-blue-300">v-for</strong>,
+                        we can loop using arrays, objects, and integers.
+                    </div>
+                    <pre><code data-trim class="language-html" data-line-numbers="">
+                        <!-- Looping with arrays -->
+                        <li v-for="(fruit, index) in fruits" :key="index">
+                            Fruit #{{ index + 1 }} : {{ fruit }}
+                        </li>
+
+                        <!-- Looping with objects -->
+                        <li v-for="(value, key) in profile" :key="key">
+                            {{ key }} : {{ value }}
+                        </li>
+
+                        <!-- Looping with a number -->
+                        <li v-for="(index) in 10" :key="index">
+                            <!-- Starts at 1 -->
+                            Item {{ index }}
+                        </li>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Conditional Rendering</h3>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                        <ul>
+                            <li>
+                                <strong class="text-blue-300">v-if</strong> and
+                                <strong class="text-blue-300">v-else-if</strong>
+                                accepts any valid javascript expression
+                            </li>
+                            <li>
+                                <strong class="text-blue-300">v-if</strong>
+                                removes the element from DOM
+                            </li>
+                            <li>
+                                <strong class="text-blue-300">v-show</strong>
+                                hides elements using CSS with
+                                <i>display: none;</i>
+                            </li>
+                        </ul>
+                    </div>
+                    <pre><code data-trim class="language-html" data-line-numbers="">
+                        <p v-if="count == 0">Count is now zero</p>
+                        <p v-else-if="count > 0">Count is positive</p>
+                        <p v-else-if="count < 0">Count is negative</p>
+                        <p v-else><!-- Default --></p>
+
+                        <p v-show="count == 0">
+                            This will only show when count is 0
+                        </p>
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Computed properties</h3>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                        <ul>
+                            <li>State variables that are derived from other state variables</li>
+                            <li>Reactive, automatically updates value when dependencies change</li>
+                        </ul>
+                    </div>
+                    <pre><code data-trim class="language-html" data-line-numbers="">
+                        <template>
+                            {{ count }}
+                            {{ reverseCount }}
+                            {{ repeatCharacter }}
+                        </template>
+                    </code></pre>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="2-13">
+                        export default defineComponent({
+                            computed: {
+                                reverseCount() {
+                                    return this.count * -1
+                                },
+                                repeatCharacter() {
+                                    if (this.count < 0) return 'Count is negative'
+                                    return 'A'.repeat(this.count)
+                                },
+                            }
+                        })
+                        
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Watchers</h3>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                        Functions that run when a state variable or computed property changes
+                    </div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="2-11">
+                        export default defineComponent({
+                            watch: {
+                                count(newValue, oldValue) {
+                                    console.log(
+                                        'Count changed!',
+                                        'Before:', oldValue,
+                                        'After:', newValue
+                                    );
+                                    this.displayCount(); // 'this' keyword is accessible
+                                },
+                            }
+                        })
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Lifecycle Hooks</h3>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                        Functions that run based on the stages of the component's lifecyle
+                    </div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="2-36">
+                        export default defineComponent({
+                            /* Vue Component's Lifecycle hooks */
+                            beforeCreate() {
+                                window.alert('Before create!');
+                            },
+
+                            // 'this' object is accessible in lifecycle hooks,
+                            // except `beforeCreate()`
+                            created() {
+                                window.alert('Created');
+                                console.log('Count', this.count);
+                            },
+
+                            beforeMount() {
+                                window.alert('Before mount');
+                            },
+
+                            mounted() {
+                                window.alert('Mounted');
+                            },
+
+                            beforeUpdate() {
+                                console.log('Before update')
+                            },
+
+                            updated() {
+                                console.log('Updated')
+                            },
+
+                            beforeUnmount() {
+                                window.alert('Before unmount')
+                            },
+
+                            unmounted() {
+                                window.alert('Unmounted')
+                            }
+                        })
+                    </code></pre>
+                </section>
             </section>
 
             <section>
@@ -930,10 +1147,17 @@
             <section>
                 <section data-auto-animate>
                     <h3>Component events</h3>
-                    <div>
-                        While props is used to communicate from parent to child components,
-                        events are used to communicate from child to parent components.
+                    <div class="flex items-center">
+                        <div class="text-left">
+                            <i class="text-blue-200">props</i> communicate from parent to child,
+
+                            <i class="text-blue-300">events</i> are used to communicate from child to parent.
+                        </div>
+                        <img src="../../images/component-prop-event.svg" style="height:75vh;"/>
                     </div>
+                </section>
+                <section>
+                    <h3>Component events</h3>
                     <!-- TODO: replace with diagram instead, move code to next slide instead? -->
                     <pre><code data-trim class="language-html" data-line-numbers="2,5,6">
                         <!-- ChildComponent.vue -->
@@ -976,7 +1200,21 @@
                         this.$emit('selfDestruct', arg1, ... , argN)
                     </code></pre>
 
-                    <pre><code data-trim class="language-javascript" data-line-numbers="3">
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                        <span class="text-yellow-300">$emit(...)</span> parameter after the event name
+                        are passed as arguments
+                    </div>
+                </section>
+                <section>
+                    <h3>Component events</h3>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                        Parent component can listen to events from child component through
+                        <i class="text-blue-300">v-on</i> or <i class="text-blue-300">@</i>
+                    </div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="1">
+                        &ltChildComponent @self-destruct="selfDestructHandler"/>
+                    </code></pre>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="3-5">
                         // ParentComponent.vue
                         methods: {
                             selfDestructHandler(arg1, ..., argN) {
@@ -984,11 +1222,6 @@
                             }
                         }
                     </code></pre>
-
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
-                        <span class="text-yellow-300">$emit(...)</span> parameter after the event name
-                        are passed as arguments
-                    </div>
                 </section>
             </section>
 
@@ -1071,6 +1304,21 @@
                         }
                     </code></pre>
                 </section>
+            </section>
+
+
+            <section data-auto-animate>
+                <h3>Contract instantiation</h3>
+                <div id="contract-instantiation-diagram-2" class="mermaid p-2 bg-white rounded-lg">
+                    sequenceDiagram
+                    App->>FormComponent: User inputs contract parameters
+                    App->>FormComponent: User click a button
+                    FormComponent->>IndexPage: Emits an event containing new contract parameters
+                    IndexPage->>IndexPage: Saves new contract parameters
+                    IndexPage->>Cashscript: Recreate new contract instance
+                    Cashscript->>IndexPage: Save contract details to component state
+                    IndexPage->>App: Display contract details
+                </pre>
             </section>
 
             <section>
@@ -1171,9 +1419,19 @@
                                     <span class="text-green-400">pinia-plugin-persistedstate-2</span>
                                     library
                                 </li>
+                                <li>Store data is saved in <i>localStorage</i></li>
                             </ul>
                         </li>
                     </ul>
+                </section>
+                <section>
+                    <h3 class="flex justify-center items-center text-center space-x-2">
+                        <img src="../../images/logos/pinia.svg" class="h-12">
+                        <div class="text-yellow-300">Pinia</div>
+                    </h3>
+                    <div class="flex justify-center">
+                        <img src="../../images/pinia-diagram.svg" style="height:34rem;"/>
+                    </div>
                 </section>
                 <section>
                     <pre><code data-trim class="language-text" data-line-numbers="3-5">
@@ -1359,9 +1617,79 @@
                 </section>
             </section>
 
+            <section>
+                <section>
+                    <h3>Next steps</h3>
+                    <div>We got most UI functions we need, let's add the missing functionalties</div>
+                    <ol>
+                        <li class="fragment">Display faucet contract's balance</li>
+                        <li class="fragment">Claiming BCH from faucet</li>
+                        <li class="fragment">Sweeping unused BCH from faucet</li>
+                            <ul class="fragment">
+                                <li>Open the transaction from the explorer</li>
+                            </ul>
+                    </ol>
+                </section>
+                <section>
+                    <h3>Display faucet contract's balance</h3>
+                    <pre><code data-trim class="language-html" data-line-numbers="2">
+                        <template>
+                            <div> Balance: {{ contractBalanceBch }} BCH </div>
+                        </template>
+                    </code></pre>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="5">
+                        export default defineComponent({
+                            name: 'IndexPage',
+                            computed: {
+                                ...mapState(useContractStore, {
+                                    contractBalanceBch: 'bchBalance',
+                                    // ...
+                                })
+                            }
+                        })
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Activity: Adding claim BCH form</h3>
+                    <pre><code data-trim class="language-html" data-line-numbers="2">
+                        <template>
+                            &ltClaimFaucetCard&#47;&gt
+                        </template>
+                    </code></pre>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="1,5">
+                        import ClaimFaucetCard from 'src/components/cards/ClaimFaucetCard.vue';
+
+                        export default defineComponent({
+                            components: {
+                                ClaimFaucetCard,
+                                // ...
+                            }
+                        })
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Activity: Sweeping unused BCH from faucet</h3>
+                    <pre><code data-trim class="language-html" data-line-numbers="2">
+                        <template>
+                            &ltSweepFaucetButton&#47;&gt
+                        </template>
+                    </code></pre>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="1,5">
+                        import SweepFaucetButton from 'src/components/cards/SweepFaucetButton.vue';
+
+                        export default defineComponent({
+                            components: {
+                                SweepFaucetButton,
+                                // ...
+                            }
+                        })
+                    </code></pre>
+                </section>
+            </section>
+
             <section data-auto-animate>
                 <h3>Bringing It All Together</h3>
-                <pre class="bg-white justify-items-center mermaid">
+                <div class="mermaid p-2 bg-white rounded-lg">
                     sequenceDiagram
                     App->>JS: get data from users
                     JS->>Contract: process necessary contract details
@@ -1380,28 +1708,29 @@
 
     <script src="/node_modules/mermaid/dist/mermaid.js"></script>
     <script>
-
         const MermaidPlugin = {
             id: 'mermaid',
             init: (deck) => {
-            mermaid.initialize({ startOnLoad: false });
+                mermaid.initialize({ startOnLoad: false });
 
-            deck.on('ready', () => {
-                renderMermaidSlides();
-            });
+                setTimeout(() => {
+                    deck.on('ready', () => {
+                        renderMermaidSlides();
+                    });
+                }, 500)
 
-            deck.on('slidechanged', () => {
-                renderMermaidSlides();
-            });
-
-            function renderMermaidSlides() {
-                document.querySelectorAll('.mermaid').forEach((el) => {
-                if (!el.hasAttribute('data-processed')) {
-                    mermaid.init(undefined, el);
-                    el.setAttribute('data-processed', true);
-                }
+                deck.on('slidechanged', () => {
+                    renderMermaidSlides();
                 });
-            }
+
+                function renderMermaidSlides() {
+                    document.querySelectorAll('.mermaid').forEach((el) => {
+                        if (!el.hasAttribute('data-processed')) {
+                            mermaid.init(undefined, el);
+                            el.setAttribute('data-processed', true);
+                        }
+                    });
+                }
             }
         };
     </script>
