@@ -1,6 +1,7 @@
 <template>
   <q-card>
     <q-card-section>
+      <div class="text-h6">Parameters</div>
       <!-- fields go here -->
     </q-card-section>
 
@@ -20,8 +21,5 @@ export default defineComponent({
       // state variables here
     }
   },
-  methods: {
-    // methods here
-  }
 })
 </script>

@@ -9,17 +9,11 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'IndexPage',
-
-  data() {
-    return {
-      // variables go here
-    }
-  }
 });
 </script>
 <style scoped>
 .index-page-container {
-  max-width: min(500px, 85vw);
+  max-width: min(600px, 85vw);
   margin-left: auto;
   margin-right: auto;
 }
