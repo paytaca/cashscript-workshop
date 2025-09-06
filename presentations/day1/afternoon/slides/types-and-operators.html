@@ -1,0 +1,130 @@
+<section>
+    <h2><div class="text-green-300">Types & Operators</div></h2>
+    <p><div class="text-4xl">How To Do Operations?</div></p>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Boolean</div></h2>
+    <pre><code class="language-javascript" data-line-numbers="1-4">true || false
+</code></pre>
+    <ul class="space-y-1 text-2xl">
+        <li>Operators: <code class="language-javascript text-green-300">&nbsp;!, &&, ||, ==, !=</code></li>
+    </ul>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Integer</div></h2>
+    <pre><code class="language-javascript" data-line-numbers="1-4">1000000
+1_000_000
+1e6
+1E6
+</code></pre>
+    <ul class="space-y-1 text-2xl">
+        <li>Arithmetic Operators: <code class="language-javascript text-green-300">&nbsp;  +, -, *, /, %</code></li>
+        <li>Comparison Operators: <code class="language-javascript text-green-300">&nbsp;<, >, >=, <=</code></li>
+        <li>Range: <code class="language-javascript text-green-300">&nbsp;-2^63 to 2^63 - 1</code> (Uses BigInt)</li>
+    </ul>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Date & Time</div></h2>
+    <pre><code class="language-javascript" data-line-numbers="1-2">int timestamp = date("2021-02-17T01:30:00");
+require(timestamp == 1613554200);
+</code></pre>
+    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+        Dates are treated as integer on contracts and are always represented by <code class="text-green-300">date("YYYY-MM-DDThh:mm:ss")</code>
+    </div>
+</section>
+
+<section>
+    <h2><div class="text-green-300">String</div></h2>
+    <pre><code class="language-javascript" data-line-numbers="1-4">"Bitcoin Cash"
+'Bitcoin Cash'
+</code></pre>
+    <ul class="space-y-1 text-2xl">
+        <li>Operators: <code class="language-javascript text-green-300">&nbsp; +</code></li>
+        <li>Comparison Operators: <code class="language-javascript text-green-300">&nbsp;!=, ==</code></li>
+        <li>Members:
+            <ul class="space-y-1 text-2xl">
+                <li><code class="language-javascript text-green-300">length</code></li>
+                <li><code class="language-javascript text-green-300">split(int)</code></li>
+                <li><code class="language-javascript text-green-300">slice(int, int)</code></li>
+                <li><code class="language-javascript text-green-300">reverse()</code></li>
+            </ul>
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Byte</div></h2>
+    <pre><code class="language-javascript" data-line-numbers="1-4">0x123456
+</code></pre>
+    <ul class="space-y-1 text-2xl">
+        <li>Operators: <code class="language-javascript text-green-300">&nbsp; +, &, |, ^</code></li>
+        <li>Comparison Operators: <code class="language-javascript text-green-300">&nbsp;!=, ==</code></li>
+        <li>Members:
+            <ul class="space-y-1 text-2xl">
+                <li><code class="language-javascript text-green-300">length</code></li>
+                <li><code class="language-javascript text-green-300">split(int)</code></li>
+                <li><code class="language-javascript text-green-300">slice(int, int)</code></li>
+                <li><code class="language-javascript text-green-300">reverse()</code></li>
+            </ul>
+        </li>
+    </ul>
+</section>
+
+
+<section>
+    <h2><div class="text-green-300">Special Bytes Types</div></h2>
+    <ul class="space-y-1">
+        <li><code class="text-green-300">pubkey</code> - Public Key <i>(33 bytes)</i></li>
+        <li><code class="text-green-300">sig</code> - Transaction Signature <i>(65 bytes)</i></li>
+        <li><code class="text-green-300">datasig</code> - Data Signature <i>(64 bytes)</i></li>
+        <li><code class="text-green-300">bytes20</code> - pubkey hashes</li>
+        <li><code class="text-green-300">bytes32</code> - token categories</li>
+        <li><code class="text-green-300">bytes35</code> - locking bytecodes</li>
+    </ul>
+
+    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+        Operators used by these types are <code class="text-green-300">&nbsp;==, !=</code>
+    </div>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Array</div></h2>
+    <pre><code class="language-javascript" data-line-numbers="1-4">checkMultisig([sig1, sig2], [pk1, pk2, pk3]);
+</code></pre>
+    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+        Arrays are not yet supported except for this function above
+    </div>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Tuple</div></h2>
+    <pre><code class="language-javascript" data-line-numbers="1-4">string hello, string world = "Hello World".split(6);
+</code></pre>
+    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+        Tuples are the type that is returned when calling the split member function on a string or bytes type
+    </div>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Type Casting</div></h2>
+    <p><div class="text-4xl">How To Convert Data?</div></p>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Type Casting</div></h2>
+
+    <pre><code class="language-javascript" data-line-numbers="1-4">pubkey pk = pubkey(0x0000);
+bytes editedPk = bytes(pk) + 0x1234;
+bytes4 zeroBytes = bytes4(0); // 0x00000000
+</code></pre>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Casting Table</div></h2>
+    <div class="flex justify-center">
+        <img src="../../../images/typecasting.png" class="w-100 h-100" alt="Type Casting Table">
+    </div>
+</section>

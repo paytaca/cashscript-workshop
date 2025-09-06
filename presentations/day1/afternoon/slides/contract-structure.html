@@ -58,27 +58,7 @@ contract MyContract (string password) {
         The constructor arguments are the main data compiled into the contract. These are provided when creating the contract
     </div>
 </section>
-<!--
-<section>
-    <h2><div class="text-green-300">Data Types</div></h2>
-    <ul class="space-y-1">
-        <li><code class="text-green-300">int</code> - Integer</li>
-        <li><code class="text-green-300">string</code> - String</li>
-        <li><code class="text-green-300">bytes</code> - Bytes </li>
-    </ul>
-</section>
-<section>
-    <h2><div class="text-green-300">Special Bytes Length</div></h2>
-    <ul class="space-y-1">
-        <li><code class="text-green-300">pubkey</code> - Public Key <i>(33 bytes)</i></li>
-        <li><code class="text-green-300">sig</code> - Transaction Signature <i>(65 bytes)</i></li>
-        <li><code class="text-green-300">datasig</code> - Data Signature <i>(64 bytes)</i></li>
-        <li><code class="text-green-300">bytes20</code> - pubkey hashes</li>
-        <li><code class="text-green-300">bytes32</code> - token categories</li>
-        <li><code class="text-green-300">bytes35</code> - locking bytecodes</li>
-    </ul>
-</section>
--->
+
 <section>
     <h3><div class="text-green-300">Functions</divdiv></h3>
     <div>
@@ -120,16 +100,7 @@ contract MyContract (string password) {
         <div class="text-2xl">Rules mainly determine if you can spend the funds or not</div>
     </div>
 </section>
-<!--
-<section>
-    <h2><div class="text-green-300">Operators</div></h2>
-    <ul class="space-y-1">
-        <li>Arithmetic: <code class="language-javascript text-green-300">&nbsp;  +, -, *, /</code></li>
-        <li>Boolean: <code class="language-javascript text-green-300">&nbsp; &&, ||, ==, <, >, >=, <=</code></li>
-        <li>Conditional: <code class="language-javascript text-green-300">&nbsp; if, else, else if</code></li>
-    </ul>
-</section>
--->
+
 <section>
     <h3><div class="text-green-300">Variables</div></h3>
     <pre><code class="language-javascript" data-line-numbers="6-10">pragma cashscript ^0.11.0;
@@ -159,13 +130,14 @@ contract MyContract (string password) {
 
 <section>
     <h3><div class="text-green-300">Comments</div></h3>
-    <pre><code class="language-javascript" data-line-numbers="6-11">pragma cashscript ^0.11.0;
+    <pre><code class="language-javascript" data-line-numbers="6-12">pragma cashscript ^0.11.0;
 
 contract MyContract (string password) {
 
     function spend (string inputPassword) {
         // int myNumber = 3000;
         // string constant myString = 'Bitcoin Cash';
+        
         /*
             This is a
             multi-line comment.
