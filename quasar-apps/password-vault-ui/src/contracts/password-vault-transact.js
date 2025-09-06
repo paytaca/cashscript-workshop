@@ -1,12 +1,12 @@
 import { MockNetworkProvider, TransactionBuilder, randomUtxo } from "cashscript"
-import { faucetContract } from './faucet-instantiate.js'
+import { passwordVaultContract } from './password-vault-instantiate.js'
 
 // set up network provider
 const provider = new MockNetworkProvider()
 
 // add random utxo
 provider.addUtxo(
-  faucetContract.address,
+  passwordVaultContract.address,
   randomUtxo({ satoshis: 10_000n })
 )
 
@@ -14,7 +14,7 @@ provider.addUtxo(
 const transactionBuilder = new TransactionBuilder({ provider })
 
 // get the utxos of the contract
-const utxos = await faucetContract.getUtxos()
+const utxos = await passwordVaultContract.getUtxos()
 
 // declare the output
 const outputs = [
@@ -24,12 +24,12 @@ const outputs = [
   },
   // change address (back to contract)
   {
-    to: faucetContract.address,
+    to: passwordVaultContract.address,
     amount: 10_000n - 5_000n - 1100n
   }
 ]
 
 // build the transaction 
 const tx = transactionBuilder
-  .addInputs(utxos, faucetContract.unlock.claim('123456'))
+  .addInputs(utxos, passwordVaultContract.unlock.claim('123456'))
   .addOutputs(outputs)

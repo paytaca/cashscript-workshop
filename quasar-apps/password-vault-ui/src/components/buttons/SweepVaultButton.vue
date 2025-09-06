@@ -24,7 +24,7 @@ import LoadingDialog from '../dialogs/LoadingDialog.vue';
 
 
 export default defineComponent({
-  name: 'SweepFaucetButton',
+  name: 'SweepVaultButton',
   data() {
     return {
       showDialog: false,
@@ -60,7 +60,8 @@ export default defineComponent({
       const url = `https://chipnet.bch.ninja/tx/${result.txid}`
       this.$q.dialog({
         title: 'Swept funds!',
-        message: `<a href="${url}" target="_blank">View txid</a>`,
+        message: `TXID: ${result.txid}<br/><a href="${url}" target="_blank">View txid</a>`,
+        style: 'word-break: break-all;',
         html: true,
       })
     }

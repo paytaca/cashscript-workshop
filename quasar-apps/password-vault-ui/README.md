@@ -1,6 +1,6 @@
-# BCH Faucet App (faucet)
+# Password Vault App
 
-A simple app to demonstrate how the BCH Faucet works
+A simple app to demonstrate cashscript smart contracts
 
 ## Install the dependencies
 

@@ -16,14 +16,14 @@
 
 <script>
 import { mapState } from 'pinia';
-import { claimFaucet } from 'src/lib/contract';
+import { claimVault } from 'src/lib/contract';
 import { useContractStore } from 'src/stores/contract-store';
 import { defineComponent } from 'vue'
 import LoadingDialog from '../dialogs/LoadingDialog.vue';
 
 
 export default defineComponent({
-  name: 'ClaimFaucetCard',
+  name: 'ClaimVaultCard',
   data() {
     return {
       // state variables here
@@ -41,10 +41,10 @@ export default defineComponent({
       const dialog = this.$q.dialog({
         component: LoadingDialog,
         componentProps: {
-          message: 'Claiming from faucet',
+          message: 'Claiming from vault',
         }
       })
-      const result = await claimFaucet(
+      const result = await claimVault(
         this.contractParameters,
         this.recipientAddress,
         this.passcode
@@ -66,7 +66,8 @@ export default defineComponent({
         const url = `https://chipnet.bch.ninja/tx/${result.txid}`
         this.$q.dialog({
           title: 'Claim success!',
-          message: `<a href="${url}" target="_blank">View txid</a>`,
+          message: `TXID: ${result.txid}<br/><a href="${url}" target="_blank">View txid</a>`,
+          style: 'word-break: break-all;',
           html: true,
         })
       }

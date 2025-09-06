@@ -15,7 +15,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'FaucetContractFormCard',
+  name: 'PasswordVaultFormCard',
   data() {
     return {
       // state variables here

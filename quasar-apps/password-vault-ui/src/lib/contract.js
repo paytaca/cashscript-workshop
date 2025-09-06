@@ -1,6 +1,6 @@
 import { Contract, ElectrumNetworkProvider, SignatureTemplate, TransactionBuilder } from "cashscript";
 
-import FaucetContractArtifact from '../contracts/Faucet.json';
+import PasswordVaultArtifact from '../contracts/PasswordVault.json';
 import { addressToPkhash } from "./common.js";
 
 export function createContractInstance(payoutAmount, ownerAddress, passcode) {
@@ -12,11 +12,11 @@ export function createContractInstance(payoutAmount, ownerAddress, passcode) {
     passcode,
   ]
 
-  return new Contract(FaucetContractArtifact, contractParameters, { provider })
+  return new Contract(PasswordVaultArtifact, contractParameters, { provider })
 }
 
 
-export async function claimFaucet(parameters, recipientAddress, passcode) {
+export async function claimVault(parameters, recipientAddress, passcode) {
   const contract = createContractInstance(parameters.payoutAmount, parameters.ownerAddress, parameters.passcode)
 
   const payoutAmount = BigInt(parameters.payoutAmount);
@@ -32,7 +32,7 @@ export async function claimFaucet(parameters, recipientAddress, passcode) {
   }
 
   if (utxo == undefined || utxo == null) {
-    return 'Not enough balance from faucet'
+    return 'Not enough balance from vault'
   }
 
   const transactionBuilder = new TransactionBuilder({ provider: contract.provider })

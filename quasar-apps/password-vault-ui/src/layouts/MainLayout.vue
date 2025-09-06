@@ -5,7 +5,7 @@
       <q-toolbar>
         <q-btn flat @click="openDrawer = !openDrawer" round dense icon="menu" />
         <q-toolbar-title class="text-center text-bold">
-          BitcoinCash Faucet
+          Password Vault App
         </q-toolbar-title>
       </q-toolbar>
     </q-header>

@@ -1,6 +1,6 @@
 import { Contract, MockNetworkProvider } from "cashscript"
 import { addressToPkhash } from "../lib/common.js"
-import FaucetArtifact from './Faucet.json' with { type: 'json' }
+import PasswordVaultArtifact from './PasswordVault.json' with { type: 'json' }
 
 // set up network provider
 const provider = new MockNetworkProvider()
@@ -13,4 +13,4 @@ const contractArgs = [
 ]
 
 // instantiate contract
-export const faucetContract = new Contract(FaucetArtifact, contractArgs, { provider })
+export const passwordVaultContract = new Contract(PasswordVaultArtifact, contractArgs, { provider })

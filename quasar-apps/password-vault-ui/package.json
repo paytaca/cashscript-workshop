@@ -1,8 +1,8 @@
 {
-  "name": "faucet",
+  "name": "password-vault",
   "version": "0.0.1",
-  "description": "A simple app to demonstrate how the BCH faucet works",
-  "productName": "Faucet App",
+  "description": "A simple app to demonstrate cashscript smart contracts",
+  "productName": "Password Vault App",
   "author": "LukeHeimen <kdlanante@up.edu.ph>",
   "private": true,
   "type": "module",
