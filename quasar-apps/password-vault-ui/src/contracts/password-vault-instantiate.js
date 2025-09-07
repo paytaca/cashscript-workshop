@@ -1,15 +1,18 @@
-import { Contract, MockNetworkProvider } from "cashscript"
+import { Contract, ElectrumNetworkProvider } from "cashscript"
 import { addressToPkhash } from "../lib/common.js"
 import PasswordVaultArtifact from './PasswordVault.json' with { type: 'json' }
 
 // set up network provider
-const provider = new MockNetworkProvider()
+const provider = new ElectrumNetworkProvider('mainnet')
 
 // setup contract arguments based on contract parameters
 const contractArgs = [
-  /* payout      */ 1234n,
-  /* ownerPkhash */ addressToPkhash('bitcoincash:qze93uuw8vt8v358f7eupg3t4jtkpz8ltguhg62pde'),
-  /* passcode    */ '123456',
+  // payout
+  1234n,
+  // ownerPkhash
+  addressToPkhash('address'), // replace address with your Paytaca wallet address
+  // passcode
+  '123456',
 ]
 
 // instantiate contract
