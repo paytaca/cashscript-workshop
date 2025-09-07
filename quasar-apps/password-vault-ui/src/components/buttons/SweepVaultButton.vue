@@ -47,8 +47,8 @@ export default defineComponent({
 
       const result = await sweepFunds(
         this.contractParameters,
-        this.recipientAddress,
         this.wif,
+        this.recipientAddress,
       ).finally(() => {
         dialog.hide()
       })
@@ -57,7 +57,7 @@ export default defineComponent({
       this.wif = '';
       this.recipientAddress = '';
 
-      const url = `https://chipnet.bch.ninja/tx/${result.txid}`
+      const url = `https://explorer.bch.ninja/tx/${result.txid}`
       this.$q.dialog({
         title: 'Swept funds!',
         message: `TXID: ${result.txid}<br/><a href="${url}" target="_blank">View txid</a>`,

@@ -28,7 +28,7 @@ export async function getBalance(address) {
 }
 
 export async function getUtxos(address) {
-  const provider = new ElectrumNetworkProvider("chipnet")
+  const provider = new ElectrumNetworkProvider("mainnet")
   return provider.getUtxos(address)
 }
 

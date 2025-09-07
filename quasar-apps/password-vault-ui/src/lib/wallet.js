@@ -86,7 +86,7 @@ export class Wallet {
     const utxos = await getUtxos(address);
     const utxosWithoutToken = utxos.filter(utxo => !utxo.token);
 
-    const provider = new ElectrumNetworkProvider('chipnet');
+    const provider = new ElectrumNetworkProvider('mainnet');
     const txBuilder = new TransactionBuilder({ provider });
     txBuilder.addInputs(utxosWithoutToken, unlocker.unlockP2PKH());
     txBuilder.addOutput({
@@ -132,7 +132,7 @@ export class Wallet {
     })
     if (!nftUtxo) throw new Error('Missing NFT')
 
-    const provider = new ElectrumNetworkProvider('chipnet');
+    const provider = new ElectrumNetworkProvider('mainnet');
     const txBuilder = new TransactionBuilder({ provider });
     txBuilder.addInputs(utxosWithoutToken, unlocker.unlockP2PKH());
     txBuilder.addInputs(nftUtxo, unlocker.unlockP2PKH());

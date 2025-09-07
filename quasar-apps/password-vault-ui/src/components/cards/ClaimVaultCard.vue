@@ -63,7 +63,7 @@ export default defineComponent({
           ok: true,
         })
       } else {
-        const url = `https://chipnet.bch.ninja/tx/${result.txid}`
+        const url = `https://explorer.bch.ninja/tx/${result.txid}`
         this.$q.dialog({
           title: 'Claim success!',
           message: `TXID: ${result.txid}<br/><a href="${url}" target="_blank">View txid</a>`,

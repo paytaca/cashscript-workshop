@@ -92,7 +92,7 @@ export default defineComponent({
         {
           label: 'Apps',
           links: [
-            { label: 'To Do App', routeName: 'example-todo' },
+            { label: 'To Do App', routeName: 'example-app-todo' },
           ]
         }
       ]

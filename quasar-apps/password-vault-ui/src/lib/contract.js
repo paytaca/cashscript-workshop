@@ -4,7 +4,7 @@ import PasswordVaultArtifact from '../contracts/PasswordVault.json';
 import { addressToPkhash } from "./common.js";
 
 export function createContractInstance(payoutAmount, ownerAddress, passcode) {
-  const provider = new ElectrumNetworkProvider("chipnet")
+  const provider = new ElectrumNetworkProvider("mainnet")
 
   const contractParameters = [
     BigInt(payoutAmount),
