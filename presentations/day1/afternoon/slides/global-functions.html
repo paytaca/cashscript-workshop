@@ -53,11 +53,9 @@
             <div class="text-2xl"><a href="https://playground.cashscript.org" data-preview-link>Example</a></div>
             <pre><code class="language-javascript" data-trim>
                 pragma cashscript ^0.11.0;
-
-                contract MyContract() {
+                
+                contract RequireFunctionDemo() {
                     function spend(int amount) {
-                        require(true);
-                        
                         // Ex: Allow spending
                         // if amount is at
                         // least 1000 but 
@@ -140,7 +138,8 @@
             <div class="text-2xl"><a href="https://playground.cashscript.org" data-preview-link>Example</a></div>
             <pre><code class="language-javascript" data-line-numbers="5-6" data-trim>
                 pragma cashscript ^0.11.0;
-                contract MyContract() {
+
+                contract MinMaxDemo() {
                     function spend(int a, int b) {
                         int small = min(a, b);
                         int big = max(a, b);
@@ -340,69 +339,13 @@
 
 </section>
 
-<section>
+<!-- <section>
     <h3><div class="text-green-300">Global Functions</div></h3>
     <div>--Signature Checking Functions --</div>
     <div class="grid grid-cols-1 items-start mt-8">
         <div>
             <div class="text-2xl">Definition</div>
             <pre><code class="language-javascript" data-trim data-line-numbers="3">
-            bool checkSig(sig transactionSignature, pubkey publicKey);
-            bool checkMultisig(sig[] transactionSignatures, pubkey[] publicKeys);
-            bool checkDataSig(datasig signatureOfData, bytes data, pubkey publicKey);
-            </code></pre>
-        </div>
-        <!-- Right: Sample code -->
-        <div>
-            <div class="text-2xl"><a href="https://playground.cashscript.org" target="_blank" rel="noopener noreferrer">Example</a></div>
-            <pre><code class="language-javascript" data-line-numbers="4" data-trim>
-                pragma cashscript ^0.11.0;
-                contract CheckDataSigDemo(pubkey publicKey) {
-                    function spend(datasig signatureOfData) {
-                        require(checkDataSig(signatureOfData, bytes('approve'), publicKey));
-                    }
-                }
-            </code></pre>
-        </div>
-    </div>
-    <aside class="notes">
-        Alright, on this slide we’re looking at a contract that uses the <code>checkDataSig</code> function.  
-
-        Here’s what we need to make it work:  
-        - First, the <strong>public key</strong> of the person who’s allowed to spend from this contract.  
-        - Second, a <strong>signature</strong> of a message like "I, owner of the pubkey, approve this spend" to authorize the spend.  
-
-        Here’s what we’ll do step by step:  
-        1. Copy the private key (WIF) of a sample wallet from the CashScript Playground.  
-        2. Go to <a href="https://bitaps.com/signature" target="_blank">Bitaps Signature Tool</a> and create the signature for our message.  
-        3. Convert the string message into bytes in JavaScript:  
-        <pre>
-        const str = "I, owner of the pubkey, approve this spend";
-        const encoder = new TextEncoder();
-        const bytes = encoder.encode(str);
-        </pre>
-        4. Then convert the bytes to hex so it can be used in the contract:  
-        <pre>
-        const hexBytes = Array.from(bytes)
-        .map(b => b.toString(16).padStart(2, "0"))
-        .join("");
-        console.log(hexBytes);
-        </pre>
-
-        This way, the contract can check the signature against the public key.  
-        If it matches, the spend is allowed — if not, it fails.  
-
-        So essentially, we’re showing how <code>checkDataSig</code> acts as a lock-and-key: the function verifies
-    </aside>
-</section>
-<!-- 
-<section>
-    <h3><div class="text-green-300">Global Functions</div></h3>
-    <div>--Signature Checking Functions --</div>
-    <div class="grid grid-cols-1 items-start mt-8">
-        <div>
-            <div class="text-2xl">Definition</div>
-            <pre><code class="language-javascript" data-trim data-line-numbers="1">
             bool checkSig(sig transactionSignature, pubkey publicKey);
             bool checkMultisig(sig[] transactionSignatures, pubkey[] publicKeys);
             bool checkDataSig(datasig signatureOfData, bytes data, pubkey publicKey);
@@ -450,6 +393,32 @@
         So essentially, we’re showing how <code>checkDataSig</code> acts as a lock-and-key: the function verifies
     </aside>
 </section> -->
+
+<section>
+    <h3><div class="text-green-300">Global Functions</div></h3>
+    <div>--Signature Checking Functions --</div>
+    <div class="grid grid-cols-1 items-start mt-8">
+        <div>
+            <div class="text-2xl">Definition</div>
+            <pre><code class="language-javascript" data-trim data-line-numbers="1">
+            bool checkSig(sig transactionSignature, pubkey publicKey);
+            bool checkMultisig(sig[] transactionSignatures, pubkey[] publicKeys);
+            bool checkDataSig(datasig signatureOfData, bytes data, pubkey publicKey);
+            </code></pre>
+        </div>
+        <div>
+            <div class="text-2xl"><a href="https://playground.cashscript.org" target="_blank" rel="noopener noreferrer">Example</a></div>
+            <pre><code class="language-javascript" data-line-numbers="4" data-trim>
+                pragma cashscript ^0.11.0;
+                contract CheckSigDemo(pubkey publicKeyOfContractOwner) {
+                    function spend(sig signatureOfContractOwner) {
+                        require(checkSig(signatureOfContractOwner, publicKey));
+                    }
+                }
+            </code></pre>
+        </div>
+    </div>
+</section>
 
 <section>
     <h3><div class="text-green-300">Global Functions</div></h3>

@@ -2,7 +2,7 @@
     <h2><div class="text-green-300">Global Variables</div></h2>
     <div class="mb-4">-- Lock Creator Classes --</div>
     <div class="text-2xl">
-        These are helper classes that make it easier to construct locks (locking bytecode/scripts) on Bitcoin Cash outputs.
+        These are helper classes that make it easier to construct locks inside the contract (locking bytecode/scripts).
     </div>
     <aside class="notes">
         Every Bitcoin Cash output has a locking script — think of it as a lock that decides who can spend the coins.  
@@ -64,10 +64,11 @@
         </div>
         <div>
             <div class="text-2xl"><a href="https://playground.cashscript.org" data-preview-link>Example</a></div>
-            <pre><code class="language-javascript" data-trim data-line-numbers="10-13">
+            <pre><code class="language-javascript" data-trim data-line-numbers="5-6">
                 pragma cashscript ^0.11.0;
-                contract TransferToAnotherOwnerDemo(bytes20 publicKeyHash) {
+                contract LockingCreatorDemo(bytes20 publicKeyHash) {
                     function spend() {
+                        require(tx.outputs.length == 1);
                         bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(publicKeyHash);
                         require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
                     }
