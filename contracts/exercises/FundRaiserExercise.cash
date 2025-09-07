@@ -1,0 +1,41 @@
+pragma cashscript ^0.11.0;
+
+contract FundRaiserDemo(bytes20 platformProviderPubKeyHash, pubkey campaignCreatorPubKey, int campaignGoal, int campaignDeadline) {
+
+    function claimFunds(sig claimerSig) {
+        // Ensure tx version is 2, locktime which is use
+        require(tx.version == 2);
+        // 1. This contract must have atleast 5 utxos,
+        // this is like saying atleast 5 must have
+        // contributed to the contract. 
+        require(tx.inputs.length > 5);
+
+        // Campaign must be successful (goal reached)
+        if (tx.outputs[0].value < campaignGoal) {
+            require(tx.time >= campaignDeadline);
+        }
+
+        // Verify that the claimer of funds is the campaign creator
+        require(checkSig(claimerSig, campaignCreatorPubKey));
+        
+        // Creator gets the funds (minus platform fee)
+        // Platform fee calculation (5% example)
+        int platformFee = tx.outputs[0].value * 5 / 100;
+        int transactionFee = 1000;
+        int campaignFunds = tx.outputs[0].value - platformFee - transactionFee;
+        
+        // Ensure proper output structure
+        require(tx.outputs.length == 2);
+
+        // Output 0: Platform provider receives fee
+        bytes providerLockingBytecode = new LockingBytecodeP2PKH(platformProviderPubKeyHash);
+        require(tx.outputs[0].lockingBytecode == providerLockingBytecode);
+        require(tx.outputs[0].value == platformFee);
+        
+        // Output 1: Campaign funds sent to the campaign creator
+        bytes20 campaignCreatorPublicKeyHash = hash160(campaignCreatorPubKey);
+        bytes campaignCreatorLockingBytecode = new LockingBytecodeP2PKH(campaignCreatorPublicKeyHash);
+        require(tx.outputs[1].lockingBytecode == campaignCreatorLockingBytecode);
+        require(tx.outputs[1].value == campaignFunds);
+    }
+}
