@@ -27,13 +27,16 @@
             </section>
 
             <section data-auto-animate>
-                <h2>Before starting...</h2>
+                <h3>Before starting...</h3>
                 <span class="fragment">
-                    <h3>Clone <span class="text-purple-400 font-bold">CashScript Workshop</span> repo</h3>
+                    <p>Clone <span class="text-purple-400 font-bold">CashScript Workshop</span> repo</p>
                     <pre><code class="language-bash">git clone https://github.com/paytaca/cashscript-workshop.git</code></pre>
                 </span>
                 <span class="fragment">
-                    <h3>And install dependencies</h3>
+                    <p>Navigate to <span class="text-purple-400 italic">quasar-apps/password-vault-ui</span></p>
+                </span>
+                <span class="fragment">
+                    <p>And install dependencies</p>
                     <pre><code class="language-bash">npm install</code></pre>
                 </span>
             </section>
@@ -86,21 +89,23 @@ contract Password (string password) {
                         <ul class="space-y-2">
                             <li>displays/creates an artifact of the CashScript <code class="text-green-500">.cash</code> file</li>
                             <li>recommended method to compile artifact files</li>
+                            <li></li>
                         </ul>
                     </div>
                 </section>
 
                 <section data-auto-animate>
                     <h2>Compiler</h2>
-                    <pre><code class="language-bash">Options:
-  -V, --version          Output the version number.
-  -o, --output [path]    Specify a file to output the generated artifact.
-  -h, --hex              Compile the contract to hex format rather than a full artifact.
-  -A, --asm              Compile the contract to ASM format rather than a full artifact.
-  -c, --opcount          Display the number of opcodes in the compiled bytecode.
-  -s, --size             Display the size in bytes of the compiled bytecode.
-  -f, --format [format]  Specify the format of the output. (choices: "json", "ts", default: "json")
-  -?, --help             Display help</code></pre>
+                    <pre><code class="language-bash" data-trim>
+                        Options:
+                            -V, --version          Output the version number.
+                            -o, --output [path]    Specify a file to output the generated artifact.
+                            -h, --hex              Compile the contract to hex format rather than a full artifact.
+                            -A, --asm              Compile the contract to ASM format rather than a full artifact.
+                            -c, --opcount          Display the number of opcodes in the compiled bytecode.
+                            -s, --size             Display the size in bytes of the compiled bytecode.
+                            -f, --format [format]  Specify the format of the output. (choices: "json", "ts", default: "json")
+                            -?, --help             Display help</code></pre>
                     <a href="https://cashscript.org/docs/compiler/#cli-usage" data-preview-link>https://cashscript.org/docs/compiler/#cli-usage</a>
                 </section>
     
@@ -141,26 +146,29 @@ contract Password (string password) {
             </section>
 
             <section>
-                <h3>Activity: Create Faucet artifact file using CLI</h3>
+                <h3>Activity: Create PasswordVault</h3>
+                <h3>artifact file using CLI</h3>
                 <ol class="space-y-2 text-3xl">
                     <li>Open CLI and navigate to:</li>
-                    <code class="text-purple-400 font-bold">quasar-apps/bch-faucet-ui/src/contracts</code>
-                    <li>Run <pre style="width: 100% !important;"><code class="language-bash">   cashc ./Faucet.cash</code></pre></li>
-                    <li class="fragment">Run <pre style="width: 100% !important;"><code class="language-bash">   cashc ./Faucet.cash --output ./faucet.json</code></pre></li>
+                    <code class="text-purple-400 italic">quasar-apps/password-vault-ui/src/contracts</code>
+                    <li>Run <pre style="width: 100% !important;"><code class="language-bash">   cashc ./PasswordVault.cash</code></pre></li>
+                    <li class="fragment">Run <pre style="width: 100% !important;"><code class="language-bash">   cashc ./PasswordVault.cash --output ./PasswordVault.json</code></pre></li>
                 </ol>
             </section>
 
             <section>
                 <section data-auto-animate>
                     <h2>Contract Instantiation</h2>
-                    <pre><code class="language-javascript" data-line-numbers="1-8">new Contract(
-    artifact: Artifact,
-    constructorArgs: ConstructorArgument[],
-    options? : {
-        provider: NetworkProvider,
-        addressType: 'p2sh20' | 'p2sh32',
-    }
-)</code></pre>
+                    <pre><code class="language-javascript" data-line-numbers="1-8" data-trim>
+                        new Contract(
+                            artifact: Artifact,
+                            constructorArgs: ConstructorArgument[],
+                            options? : {
+                                provider: NetworkProvider,
+                                addressType: 'p2sh20' | 'p2sh32',
+                            }
+                        )
+                    </code></pre>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
                         creates a new Contract from given parameters
                     </div>
@@ -168,14 +176,16 @@ contract Password (string password) {
     
                 <section data-auto-animate>
                     <h2>Contract Instantiation</h2>
-                    <pre><code class="language-javascript" data-line-numbers="2">new Contract(
-    artifact: Artifact,
-    constructorArgs: ConstructorArgument[],
-    options? : {
-        provider: NetworkProvider,
-        addressType: 'p2sh20' | 'p2sh32',
-    }
-)</code></pre>
+                    <pre><code class="language-javascript" data-line-numbers="2" data-trim>
+                        new Contract(
+                            artifact: Artifact,
+                            constructorArgs: ConstructorArgument[],
+                            options? : {
+                                provider: NetworkProvider,
+                                addressType: 'p2sh20' | 'p2sh32',
+                            }
+                        )
+                    </code></pre>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
                         an Artifact file either generated from CLI or compiled in JS
                     </div>
@@ -183,14 +193,16 @@ contract Password (string password) {
 
                 <section data-auto-animate>
                     <h2>Contract Instantiation</h2>
-                    <pre><code class="language-javascript" data-line-numbers="3">new Contract(
-    artifact: Artifact,
-    constructorArgs: ConstructorArgument[],
-    options? : {
-        provider: NetworkProvider,
-        addressType: 'p2sh20' | 'p2sh32',
-    }
-)</code></pre>
+                    <pre><code class="language-javascript" data-line-numbers="3" data-trim>
+                        new Contract(
+                            artifact: Artifact,
+                            constructorArgs: ConstructorArgument[],
+                            options? : {
+                                provider: NetworkProvider,
+                                addressType: 'p2sh20' | 'p2sh32',
+                            }
+                        )
+                    </code></pre>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
                         values to be used as parameters as stated in the contract
                     </div>
@@ -198,14 +210,44 @@ contract Password (string password) {
 
                 <section data-auto-animate>
                     <h2>Contract Instantiation</h2>
-                    <pre><code class="language-javascript" data-line-numbers="5">new Contract(
-    artifact: Artifact,
-    constructorArgs: ConstructorArgument[],
-    options? : {
-        provider: NetworkProvider,
-        addressType: 'p2sh20' | 'p2sh32',
-    }
-)</code></pre>
+                    <h3>Constructor Args</h3>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="col-span-1">
+                            <span class="text-yellow-300">JavaScript</span>
+                            <pre><code class="language-javascript" data-line-numbers="1-5" data-trim>
+                                const contractArgs = [
+                                    1234n, // or BigInt(1234)
+                                    'sample-pubkeyhash',
+                                    '123456',
+                                ]
+                            </code></pre>
+                        </div>
+                        <div class="col-span-1">
+                            <span class="text-green-500">CashScript</span>
+                            <pre><code class="language-javascript" data-line-numbers="1-5" data-trim>
+                                contract PasswordVault(
+                                    int payout,
+                                    bytes20 ownerPkhash,
+                                    bytes passcode
+                                ) {
+                            </code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>Contract Instantiation</h2>
+                    <pre><code class="language-javascript" data-line-numbers="5" data-trim>
+                        new Contract(
+                            artifact: Artifact,
+                            constructorArgs: ConstructorArgument[],
+                            options? : {
+                                provider: NetworkProvider,
+                                addressType: 'p2sh20' | 'p2sh32',
+                            }
+                        )
+                    </code></pre>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
                         network where the CashScript SDK will connect to
                     </div>
@@ -239,14 +281,16 @@ contract Password (string password) {
 
                 <section data-auto-animate>
                     <h2>Contract Instantiation</h2>
-                    <pre><code class="language-javascript" data-line-numbers="6">new Contract(
-    artifact: Artifact,
-    constructorArgs: ConstructorArgument[],
-    options? : {
-        provider: NetworkProvider,
-        addressType: 'p2sh20' | 'p2sh32',
-    }
-)</code></pre>
+                    <pre><code class="language-javascript" data-line-numbers="6" data-trim>
+                        new Contract(
+                            artifact: Artifact,
+                            constructorArgs: ConstructorArgument[],
+                            options? : {
+                                provider: NetworkProvider,
+                                addressType: 'p2sh20' | 'p2sh32',
+                            }
+                        )
+                    </code></pre>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
                         the resulting address type of the contract
                     </div>
@@ -254,13 +298,44 @@ contract Password (string password) {
             </section>
 
             <section>
-                <h3>Activity: Instantiate Faucet contract</h3>
-                <ol class="space-y-2 text-3xl">
-                    <li>Under the same directory, open <code class="text-yellow-300 font-bold">faucet-instantiate.js</code></li>
-                    <li>Adjust the values in the <code class="text-purple-400 font-bold">contractArgs</code> variable (or keep them)</li>
-                    <li>Console log <code class="text-purple-400 font-bold">contract</code> variable</li>
-                    <li>Open CLI and run <pre><code class="language-bash">node password.js</code></pre></li>
-                </ol>
+                <section>
+                    <h3>Activity: Instantiate PasswordVault contract</h3>
+                    <ol class="space-y-2 text-3xl">
+                        <li>
+                            <span>Under the same directory, open:</span>
+                            <p><code class="text-yellow-300 font-bold">password-vault-instantiate.js</code></p>
+                        </li>
+                        <li>Adjust the values in the <code class="text-purple-400 font-bold">contractArgs</code> variable</li>
+                        <li>Console log <code class="text-purple-400 font-bold">passwordVaultContract</code> variable</li>
+                        <li>Open CLI and run <pre><code class="language-bash">node password-vault-instantiate.js</code></pre></li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h3>Activity: Instantiate PasswordVault</h3>
+                    <h3>contract (Extra)</h3>
+                    <ol class="space-y-2 text-3xl">
+                        <li>
+                            In the console log, replace current variable with
+                            <p><code class="text-purple-400 font-bold">passwordVaultContract.address()</code></p>
+                        </li>
+                        <li>
+                            Open CLI and run the same command again
+                            <pre><code class="language-bash">node password-vault-instantiate.js</code></pre>
+                        </li>
+                        <li class="fragment">
+                            Copy the address, open a browser, go to a BCH Explorer website
+                            (e.g. <a href="https://explorer.bch.ninja" data-preview-link>https://explorer.bch.ninja</a>),
+                            paste the address in the search bar, then hit Enter
+                        </li>
+                        <li class="fragment">
+                            Using your Paytaca app, scan the QR code and send 5000 satoshis
+                        </li>
+                        <li class="fragment">
+                            After sending, refresh the BCH Explorer page
+                        </li>
+                    </ol>
+                </section>
             </section>
 
             <section>
@@ -300,17 +375,21 @@ contract Password (string password) {
                     <h2>Transaction Builder</h2>
                     <ul class="space-y-2">
                         <li><code>addInput()</code></li>
-                        <pre style="width: 100% !important;"><code class="language-javascript">transactionBuilder.addInput(
-    utxo: Utxo,
-    unlocker: Unlocker,
-    options?: InputOptions
-): this</code></pre>
+                        <pre style="width: 100% !important;"><code class="language-javascript" data-line-numbers="1-5" data-trim>
+                            transactionBuilder.addInput(
+                                utxo: Utxo,
+                                unlocker: Unlocker,
+                                options?: InputOptions
+                            ): this
+                        </code></pre>
                         <li><code>addInputs()</code></li>
-                        <pre style="width: 100% !important;"><code class="language-javascript">transactionBuilder.addInputs(
-    utxos: Utxo[],
-    unlocker: Unlocker,
-    options?: InputOptions
-): this</code></pre>
+                        <pre style="width: 100% !important;"><code class="language-javascript" data-line-numbers="1-5" data-trim>
+                            transactionBuilder.addInputs(
+                                utxos: Utxo[],
+                                unlocker: Unlocker,
+                                options?: InputOptions
+                            ): this
+                        </code></pre>
                     </ul>
                 </section>
     
@@ -318,70 +397,89 @@ contract Password (string password) {
                     <h2>Transaction Builder</h2>
                     <ul class="space-y-2">
                         <li><code>addOutput()</code></li>
-                        <pre style="width: 100% !important;"><code class="language-javascript">transactionBuilder.addOutput(output: Output): this</code></pre>
+                        <pre style="width: 100% !important;"><code class="language-javascript" data-line-numbers="1-3" data-trim>
+                            transactionBuilder.addOutput(
+                                output: Output
+                            ): this
+                        </code></pre>
                         <li><code>addOutputs()</code></li>
-                        <pre style="width: 100% !important;"><code class="language-javascript">transactionBuilder.addOutputs(outputs: Output[]): this</code></pre>
+                        <pre style="width: 100% !important;"><code class="language-javascript" data-line-numbers="1-3" data-trim>
+                            transactionBuilder.addOutputs(
+                                outputs: Output[]
+                            ): this
+                        </code></pre>
                     </ul>
                 </section>
     
                 <section data-auto-animate>
                     <h2>Transaction Builder</h2>
-                    <pre><code class="language-javascript">interface Output {
-    to: string | Uint8Array; // address
-    amount: bigint; // e.g. 12_345n (= 0.00012345 BCH)
-    token?: {
-        amount: bigint;
-        category: string;
-        nft?: {
-            capability: 'none' | 'mutable' | 'minting';
-            commitment: string;
-        }
-    }
-}</code></pre>
+                    <pre><code class="language-javascript" data-line-numbers="1-12" data-trim>
+                        interface Output {
+                            to: string | Uint8Array; // address
+                            amount: bigint; // e.g. 12_345n (= 0.00012345 BCH)
+                            token?: {
+                                amount: bigint;
+                                category: string;
+                                nft?: {
+                                    capability: 'none' | 'mutable' | 'minting';
+                                    commitment: string;
+                                }
+                            }
+                        }
+                    </code></pre>
                 </section>
             </section>
 
             <section>
                 <h3>Example: <code>faucet-transact.js</code></h3>
-                <pre><code class="language-javascript">// set up network provider
-const provider = new MockNetworkProvider()
+                <pre><code class="language-javascript" data-line-numbers="1-31" data-trim>
+                    // set up network provider
+                    const provider = new ElectrumNetworkProvider('mainnet')
 
-// instantiate Transaction Builder
-const transactionBuilder = new TransactionBuilder({ provider })
+                    // instantiate Transaction Builder
+                    const transactionBuilder = new TransactionBuilder({ provider })
 
-// get the utxos of the contract
-const utxos = await faucetContract.getUtxos()
+                    // get the utxos of the contract
+                    const inputs = await passwordVaultContract.getUtxos()
 
-// declare the output
-const outputs = [
-  {
-    to: 'bchtest:qzxu7zvdgquka95v83m6u8ywzrsdk4vah5wrmerdu0',
-    amount: 5_000n
-  },
-  // change address (back to contract)
-  {
-    to: faucetContract.address,
-    amount: 10_000n - 5_000n - 1100n
-  }
-]
+                    // declare the output
+                    const outputs = [
+                        {
+                            to: 'bitcoincash:qze93uuw8vt8v358f7eupg3t4jtkpz8ltguhg62pde',
+                            amount: 3_000n
+                        },
+                        // change address (back to contract)
+                        {
+                            to: passwordVaultContract.address,
+                            amount: 5_000n - 3_000n - 300n
+                        }
+                    ]
 
-// build the transaction 
-const tx = transactionBuilder
-  .addInputs(utxos, faucetContract.unlock.claim('123456'))
-  .addOutputs(outputs)</code></pre>
+                    // build the transaction 
+                    const transaction = transactionBuilder
+                        .addInputs(
+                            // utxos
+                            inputs,
+                            // unlocker
+                            passwordVaultContract.unlock.claim('123456')
+                        )
+                        .addOutputs(outputs)
+                </code></pre>
             </section>
 
             <section>
                 <section data-auto-animate>
                     <h3>Completing the Transaction</h3>
                     <code>send()</code>
-                    <pre><code class="language-javascript" data-line-numbers="7">await transactionBuilder
-    .addInputs(
-        utxos,
-        faucetContract.unlock.claim('123456')
-    )
-    .addOutputs(outputs)
-    .send()</code></pre>
+                    <pre><code class="language-javascript" data-line-numbers="7" data-trim>
+                        await transactionBuilder
+                            .addInputs(
+                                inputs,
+                                passwordVaultContract.unlock.claim('123456')
+                            )
+                            .addOutputs(outputs)
+                            .send()
+                    </code></pre>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
                         <ul class="space-y-2">
                             <li>sends the transaction to the BCH network and returns the transaction details</li>
@@ -393,17 +491,20 @@ const tx = transactionBuilder
                 <section data-auto-animate>
                     <h3>Completing the Transaction</h3>
                     <code>build()</code>
-                    <pre><code class="language-javascript" data-line-numbers="7">transactionBuilder
-    .addInputs(
-        utxos,
-        faucetContract.unlock.claim('123456')
-    )
-    .addOutputs(outputs)
-    .build()</code></pre>
+                    <pre><code class="language-javascript" data-line-numbers="7" data-trim>
+                        transactionBuilder
+                            .addInputs(
+                                inputs,
+                                passwordVaultContract.unlock.claim('123456')
+                            )
+                            .addOutputs(outputs)
+                            .build()
+                    </code></pre>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
                         <ul class="space-y-2">
-                            <li>builds the transaction and returns the signed transaction hex string (does not yet send)</li>
+                            <li>builds the transaction and returns the signed transaction hex string</li>
                             <li>can be imported into other applications or libraries for further use</li>
+                            <li>can be used in transaction hex decoders to view transaction details</li>
                         </ul>
                     </div>
                 </section>
@@ -412,18 +513,47 @@ const tx = transactionBuilder
             <section>
                 <h3>Activity: Build a transaction</h3>
                 <ol class="space-y-2 text-3xl">
-                    <li>Under the same directory, open <code class="text-yellow-300 font-bold">password-transact.js</code></li>
-                    <li>Add <code class="text-purple-400 font-bold">.build()</code> to the transaction being built</li>
-                    <li>Console log the variable <code class="text-purple-400 font-bold">tx</code></li>
-                    <li>Open CLI and run <pre><code class="language-bash">node password-transact.js</code></pre></li>
+                    <li>Under the same directory, open <code class="text-yellow-300 font-bold">password-vault-transact.js</code></li>
+                    <li>
+                        In the <code class="text-purple-400 font-bold">outputs</code> variable, replace
+                        the <code class="text-purple-400 font-bold">'address'</code> in the first
+                        <code class="text-purple-400 font-bold">to</code> with your Paytaca wallet address
+                    </li>
+                    <li class="fragment">Add <code class="text-purple-400 font-bold">.build()</code> to the transaction being built</li>
                     <span class="fragment">
+                        <li>Console log the variable <code class="text-purple-400 font-bold">transaction</code></li>
+                        <li>Open CLI and run <pre><code class="language-bash">node password-vault-transact.js</code></pre></li>
+                    </span>
+                    <li class="fragment">
+                        Copy the hex, go to the <a href="https://explorer.bch.ninja" data-preview-link>BCH Explorer website</a>,
+                        click on the Decoder tab, paste the hex string, then hit enter
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h3>Activity: Send a transaction</h3>
+                <ol class="space-y-2 text-3xl">
+                    <span>
                         <li>
                             Go back to the file and replace <code class="text-purple-400 font-bold">.build()</code>
                             with <code class="text-purple-400 font-bold">.send()</code> and add
                             <code class="text-purple-400 font-bold">await</code> before
                             <code class="text-purple-400 font-bold">transactionBuilder</code>
                         </li>
-                        <li>Run the command above again</li>
+                        <li>Run the command below again: <pre><code class="language-bash">node password-vault-transact.js</code></pre></li>
+                        <span class="fragment">
+                            <li>
+                                In the <code class="text-purple-400 font-bold">outputs</code> variable, replace
+                                <code class="text-purple-400 font-bold">3_000n</code> with <code class="text-purple-400 font-bold">1_234n</code>
+                            </li>
+                            <li>Run the command above again</li>
+                        </span>
+                        <li class="fragment">
+                            Copy the <code class="text-purple-400 font-bold">txid</code>,
+                            go back to the <a href="https://explorer.bch.ninja" data-preview-link>BCH Explorer website</a>,
+                            paste the <code class="text-purple-400 font-bold">txid</code> in the search bar, then hit Enter 
+                        </li>
                     </span>
                 </ol>
             </section>
