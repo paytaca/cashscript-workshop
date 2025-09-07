@@ -1,0 +1,8 @@
+pragma cashscript ^0.11.0;
+contract LockingCreatorDemo(bytes20 publicKeyHash) {
+    function spend() {
+        require(tx.outputs.length == 1);
+        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(publicKeyHash);
+        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
+    }
+}
