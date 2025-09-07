@@ -1,0 +1,13 @@
+pragma cashscript ^0.11.0;
+
+contract Sha256Demo() {
+    function spend(bytes password) {
+        bytes32 secret = sha256("mysecret");
+        // Only the one 
+        // who knows the
+        // sha256 hash of 
+        // the word "mysecret"
+        // can spend.
+        require(secret == password);
+    }
+}

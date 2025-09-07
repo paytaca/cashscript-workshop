@@ -1,0 +1,10 @@
+pragma cashscript ^0.11.0;
+
+contract MinMaxDemo() {
+    function spend(int a, int b) {
+        int small = min(a, b);
+        int big = max(a, b);
+        require(small > 1);
+        require(big < 10);
+    }
+}
