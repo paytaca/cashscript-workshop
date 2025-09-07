@@ -125,6 +125,54 @@ bytes4 zeroBytes = bytes4(0); // 0x00000000
 <section>
     <h2><div class="text-green-300">Casting Table</div></h2>
     <div class="flex justify-center">
-        <img src="../../../images/typecasting.png" class="w-100 h-100" alt="Type Casting Table">
+        <table class="min-w-full">
+            <tr class="bg-gray-800 text-2xl">
+                <th class="text-yellow-300 text-2xl">Type</th>
+                <th class="text-yellow-300 text-2xl">Implicitly castable to</th>
+                <th class="text-yellow-300 text-2xl">Explicitly castable to</th>
+            </tr>
+            
+            <tr class="bg-gray-800 text-2xl">
+                <td class="text-green-300">int</td>
+                <td></td>
+                <td>bytes, bool</td>
+            </tr>
+
+            <tr class="bg-gray-800 text-2xl">
+                <td class="text-green-300">bool</td>
+                <td></td>
+                <td>int</td>
+            </tr>
+
+            <tr class="bg-gray-800 text-2xl">
+                <td class="text-green-300">string</td>
+                <td></td>
+                <td>bytes</td>
+            </tr>
+
+            <tr class="bg-gray-800 text-2xl">
+                <td class="text-green-300">bytes</td>
+                <td></td>
+                <td>sig, pubkey, int</td>
+            </tr>
+
+            <tr class="bg-gray-800 text-2xl">
+                <td class="text-green-300">pubkey</td>
+                <td>bytes</td>
+                <td>bytes</td>
+            </tr>
+
+            <tr class="bg-gray-800 text-2xl">
+                <td class="text-green-300">sig</td>
+                <td>bytes</td>
+                <td>bytes</td>
+            </tr>
+
+            <tr class="bg-gray-800 text-2xl">
+                <td class="text-green-300">datasig</td>
+                <td>bytes</td>
+                <td>bytes</td>
+            </tr>
+        </table>
     </div>
 </section>
