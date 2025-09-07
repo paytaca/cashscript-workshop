@@ -1,6 +1,6 @@
 pragma cashscript ^0.11.0;
 
-contract FundRaiserDemo(bytes20 platformProviderPubKeyHash, pubkey campaignCreatorPubKey, int campaignGoal, int campaignDeadline) {
+contract FundRaiserExercise(bytes20 platformProviderPubKeyHash, pubkey campaignCreatorPubKey, int campaignGoal, int campaignDeadline) {
 
     function claimFunds(sig claimerSig) {
         // Ensure tx version is 2, locktime which is use
