@@ -362,13 +362,46 @@ contract Password (string password) {
                                 <li class="fragment">output - dictates where the funds are sent</li>
                             </ul>
                         </li>
-                        <li class="fragment">
+                    </ul>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>Transaction Builder</h2>
+                    <ul class="space-y-2 text-4xl">
+                        <li>
                             unlockers
                             <ul class="space-y-2">
                                 <li>the functions in the contract that does checks and runs rules before funds are sent</li>
                             </ul>
                         </li>
                     </ul>
+                    <pre><code class="language-javascript" data-line-numbers="4,21" data-trim>
+                        pragma cashscript ^0.11.0;
+
+                        contract PasswordVault(int payout, bytes20 ownerPkhash, bytes passcode) {
+                            function claim(bytes unlockPasscode) {
+                                int constant TX_FEE = 300;
+                                int remainingSats = tx.inputs[0].value - TX_FEE - payout;
+
+                                require(tx.inputs.length == 1);
+                                require(tx.outputs.length <= 2);
+
+                                require(passcode == unlockPasscode);
+                                require(tx.outputs[0].value == payout);
+
+                                // if there is remaining satoshis, return back to contract 
+                                if (remainingSats > 546) {
+                                    require(tx.outputs[1].value == remainingSats);
+                                    require(tx.outputs[1].lockingBytecode == tx.inputs[this.activeInputIndex].lockingBytecode);
+                                }
+                            }
+
+                            function ownerUnlock(sig s, pubkey pk) {
+                                require(hash160(pk) == ownerPkhash);
+                                require(checkSig(s, pk));
+                            }
+                        }
+                    </code></pre>
                 </section>
     
                 <section data-auto-animate>
