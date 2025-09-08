@@ -1,0 +1,40 @@
+<section>
+  <h2><div class="text-green-300">What is Cashscript?</div></h2>
+  <div class="text-4xl"></div>
+  <div class="mt-6">
+    <ul class="text-xl mt-6 space-y-4">
+        <li>A highlevel programming language used specifically to write Bitcoin Cash contracts.</li>
+        <li>Created by <i class="text-green-300">Rosco Kalis on May 2019</i></li>
+    </ul>
+  </div>
+  <aside class="notes">
+    Cashscript is a highlevel programming language, and is used to write smart contracts in Bitcoin Cash 
+  </aside>
+</section>
+<section>
+  <h2><div class="text-green-300">What is Cashscript?</div></h2>
+  <div class="text-4xl"></div>
+  <div class="mt-6">
+    <div class="text-xl">It compiles to <strong>Bitcoin Script</strong></div>
+    <div class="flex items-center">
+        <pre><code data-trim>
+            pragma cashscript ^0.8.0;
+            contract HardcodedPassword() {
+                function spend(string provided) {
+                    require(provided == "open123");
+                }
+            }
+        </code></pre>
+        <div class="fragment">&#x2192;</div>
+        <pre class="fragment"><code data-trim>
+        6f70656e313233 OP_EQUAL
+        </code></pre>
+    </div>
+    
+
+
+  </div>
+  <aside class="notes">
+    Bitcoin Script is a lowlevel language... 
+  </aside>
+</section>

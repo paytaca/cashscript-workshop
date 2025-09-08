@@ -1,0 +1,8 @@
+pragma cashscript ^0.11.0;
+contract AbsoluteLockTimeDemo(bytes20 publicKeyHashOfRecipient, int futureBlock) {
+    function spend() {
+        require(tx.time >= futureBlock);
+        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(publicKeyHashOfRecipient);
+        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
+    }
+}

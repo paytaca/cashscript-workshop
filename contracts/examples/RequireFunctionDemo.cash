@@ -1,0 +1,12 @@
+pragma cashscript ^0.11.0;
+
+contract RequireFunctionDemo() {
+    function spend(int amount) {
+        // Ex: Allow spending
+        // if amount is at
+        // least 1000 but 
+        // not more than 2000
+        require(amount >= 1000);
+        require(amount <= 2000);
+    }
+}
