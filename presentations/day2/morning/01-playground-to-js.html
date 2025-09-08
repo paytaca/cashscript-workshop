@@ -73,6 +73,7 @@
                 <ul class="pt-4">
                     <li>Compile an artifact file from the contract</li>
                     <li>Instantiate the contract</li>
+                    <li>View contract properties</li>
                     <li>Build and send a transaction</li>
                 </ul>
             </section>
@@ -337,50 +338,99 @@
             </section>
 
             <section>
-                <section>
-                    <h3>Activity: Instantiate PasswordVault contract</h3>
-                    <ol class="space-y-2 text-4xl">
-                        <li>
-                            <span>Under the same directory, open:</span>
-                            <p><code class="text-yellow-400 font-bold">password-vault-instantiate.js</code></p>
-                        </li>
-                        <li>Adjust the values in the <code class="text-purple-400 font-bold">contractArgs</code> variable</li>
-                        <li>Console log <code class="text-purple-400 font-bold">passwordVaultContract</code> variable</li>
-                        <li>
-                            Open CLI and run
-                            <pre style="font-size: 0.7em !important;">
-                                <code class="language-bash">node password-vault-instantiate.js</code>
-                            </pre>
-                        </li>
-                    </ol>
+                <h3>Activity: Instantiate PasswordVault contract</h3>
+                <ol class="space-y-2 text-4xl">
+                    <li>
+                        <span>Under the same directory, open:</span>
+                        <p><code class="text-yellow-400 font-bold">password-vault-instantiate.js</code></p>
+                    </li>
+                    <li>Adjust the values in the <code class="text-purple-400 font-bold">contractArgs</code> variable</li>
+                    <li>Console log <code class="text-purple-400 font-bold">passwordVaultContract</code> variable</li>
+                    <li>
+                        Open CLI and run
+                        <pre style="font-size: 0.7em !important;">
+                            <code class="language-bash">node password-vault-instantiate.js</code>
+                        </pre>
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Contract Instantiation</h2>
+                <h3>Contract Properties</h3>
+                <pre style="font-size: 0.7em !important;">
+                    <code class="language-javascript" data-trim>contract.address: string</code>
+                </pre>
+                <pre style="font-size: 0.7em !important;">
+                    <code class="language-javascript" data-trim>contract.tokenAddress: string</code>
+                </pre>
+                <pre style="font-size: 0.7em !important;">
+                    <code class="language-javascript" data-trim>contract.bytecode: string</code>
+                </pre>
+                <pre style="font-size: 0.7em !important;">
+                    <code class="language-javascript" data-trim>contract.bytesize: number</code>
+                </pre>
+                <pre style="font-size: 0.7em !important;">
+                    <code class="language-javascript" data-trim>contract.opcount: number</code>
+                </pre>
+            </section>
+
+            <section>
+                <h3>Activity: View PasswordVault contract properties</h3>
+                <ol class="space-y-2 text-3xl">
+                    <li>
+                        Console log the address of the
+                        <code class="text-purple-400 font-bold">passwordVaultContract</code>
+                    </li>
+                    <li>
+                        Open CLI and run the same command again
+                        <pre style="font-size: 0.7em !important;">
+                            <code class="language-bash">node password-vault-instantiate.js</code>
+                        </pre>
+                    </li>
+                    <li class="fragment">
+                        Copy the address, open a browser, go to a BCH Explorer website
+                        (e.g. <a href="https://explorer.bch.ninja" data-preview-link>https://explorer.bch.ninja</a>),
+                        paste the address in the search bar, then hit Enter
+                    </li>
+                    <li class="fragment">
+                        Using your Paytaca app, scan the QR code and send 5000 satoshis
+                    </li>
+                    <li class="fragment">
+                        After sending, refresh the BCH Explorer page
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <section data-auto-animate>
+                    <h2>Contract Instantiation</h2>
+                    <h3>Contract Methods</h3>
+                    <pre style="font-size: 0.7em !important;">
+                        <code class="language-javascript" data-trim>await contract.getBalance();</code>
+                    </pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                        returns the total balance of the contract in satoshis
+                    </div>
                 </section>
 
-                <section>
-                    <h3>Activity: Instantiate PasswordVault</h3>
-                    <h3>contract (Extra)</h3>
-                    <ol class="space-y-2 text-3xl">
-                        <li>
-                            In the console log, replace current variable with
-                            <p><code class="text-purple-400 font-bold">passwordVaultContract.address()</code></p>
-                        </li>
-                        <li>
-                            Open CLI and run the same command again
-                            <pre style="font-size: 0.7em !important;">
-                                <code class="language-bash">node password-vault-instantiate.js</code>
-                            </pre>
-                        </li>
-                        <li class="fragment">
-                            Copy the address, open a browser, go to a BCH Explorer website
-                            (e.g. <a href="https://explorer.bch.ninja" data-preview-link>https://explorer.bch.ninja</a>),
-                            paste the address in the search bar, then hit Enter
-                        </li>
-                        <li class="fragment">
-                            Using your Paytaca app, scan the QR code and send 5000 satoshis
-                        </li>
-                        <li class="fragment">
-                            After sending, refresh the BCH Explorer page
-                        </li>
-                    </ol>
+                <section data-auto-animate>
+                    <h2>Contract Instantiation</h2>
+                    <h3>Contract Methods</h3>
+                    <pre style="font-size: 0.7em !important;">
+                        <code class="language-javascript" data-trim>await contract.getUtxos();</code>
+                    </pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                        returns all UTXOs that can be spent by the contract
+                    </div>
+                    <pre class="fragment"><code class="language-javascript" data-trim>
+                        interface Utxo {
+                            txid: string;
+                            vout: number;
+                            satoshis: bigint;
+                            token?: TokenDetails;
+                        }
+                    </code></pre>
                 </section>
             </section>
 
@@ -508,7 +558,7 @@
                         interface Output {
                             to: string | Uint8Array; // address
                             amount: bigint; // e.g. 12_345n (= 0.00012345 BCH)
-                            token?: { // optional
+                            token?: TokenDetails { // optional
                                 amount: bigint;
                                 category: string;
                                 nft?: { // optional
