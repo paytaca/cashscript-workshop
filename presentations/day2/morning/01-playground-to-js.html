@@ -16,11 +16,12 @@
                 <div>
                     <h1 class="flex items-center justify-center gap-3 mb-4">
                         <p>
-                            From <span class="text-green-500">Playground</span> to <span class="text-yellow-300">JavaScript</span>
+                            <span class="text-green-600">From Playground</span><br/>
+                            <span class="text-yellow-400">to JavaScript</span>
                         </p>
                     </h1>
                     <h3 class="text-2xl mb-2">Day 2 - Morning Session</h3>
-                    <p class="text-lg">
+                    <p class="text-4xl">
                         Moving out from CashScript Playground to JavaScript
                     </p>
                 </div>
@@ -44,7 +45,7 @@
             <section>
                 <section data-auto-animate>
                     <div>
-                        <pre><code class="language-javascript" data-line-numbers="1-7" data-trim>
+                        <pre style="font-size: 0.65em !important;"><code class="language-javascript" data-line-numbers="1-7" data-trim>
                             pragma cashscript ^0.11.0;
     
                             contract Password (string password) {
@@ -60,13 +61,13 @@
 
             <section>
                 <h2>
-                    <p>Moving <span class="text-green-500">CashScript</span> Outside</p>
+                    <p>Moving <span class="text-green-600">CashScript</span> Outside</p>
                 </h2>
             </section>
 
             <section data-auto-animate>
                 <h2>Goal</h2>
-                <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                     Send funds from the PasswordVault contract<br/> to a BCH address using JavaScript
                 </div>
                 <ul class="pt-4">
@@ -79,12 +80,14 @@
             <section>
                 <section data-auto-animate>
                     <h2>Compiler</h2>
-                    <pre class="fragment"><code class="language-bash">   npm install -g cashc</code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px] fragment">
+                    <pre class="fragment" style="font-size: 0.65em !important;">
+                        <code class="language-bash">   npm install -g cashc</code>
+                    </pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px] fragment">
                         <ul class="space-y-2">
                             <li>
-                                for compiling CashScript <code class="text-green-500 font-bold">.cash</code>
-                                files into <code class="text-yellow-300 font-bold">.json</code> /
+                                for compiling CashScript <code class="text-green-600 font-bold">.cash</code>
+                                files into <code class="text-yellow-400 font-bold">.json</code> /
                                 <code class="text-blue-400 font-bold">.ts</code> files
                             </li>
                             <li>then used to instantiate the contract using the CashScript SDK</li>
@@ -95,12 +98,14 @@
                 <section data-auto-animate>
                     <h2>Compiler</h2>
                     <p>Command Line Interface (CLI)</p>
-                    <pre><code class="language-bash">    cashc [source_file] [options]
+                    <pre style="font-size: 0.65em !important;">
+                        <code class="language-bash">    cashc [source_file] [options]
     cashc ./Contract.cash
-    cashc ./Contract.cash --output ./artifact.json</code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+    cashc ./Contract.cash --output ./artifact.json</code>
+                    </pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         <ul class="space-y-2">
-                            <li>displays/creates an artifact of the CashScript <code class="text-green-500">.cash</code> file</li>
+                            <li>displays/creates an artifact of the CashScript <code class="text-green-600">.cash</code> file</li>
                             <li>recommended method to compile artifact files</li>
                         </ul>
                     </div>
@@ -123,20 +128,22 @@
     
                 <section data-auto-animate>
                     <h2>Compiler</h2>
-                    <p>JavaScript Compilation (from <code class="text-yellow-300">cashc</code> package)</p>
+                    <p>JavaScript Compilation (from <code class="text-yellow-400">cashc</code> package)</p>
                     <ul class="space-y-2">
                         <li><p>
-                            compiles a <span class="text-green-500">contract</span> into an
-                            <span class="text-yellow-300">artifact</span> on the fly within <span class="text-yellow-300">JS</span>
+                            compiles a <span class="text-green-600">contract</span> into an
+                            <span class="text-yellow-400">artifact</span> on the fly within <span class="text-yellow-400">JS</span>
                         </p></li>
                     </ul>
                 </section>
     
                 <section data-auto-animate>
                     <h2>Compiler</h2>
-                    <p>JavaScript Compilation (from <code class="text-yellow-300">cashc</code> package)</p>
-                    <pre><code class="language-javascript">     compileFile(sourceFile: PathLike): Artifact</code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                    <p>JavaScript Compilation (from <code class="text-yellow-400">cashc</code> package)</p>
+                    <pre style="font-size: 0.7em !important;">
+                        <code class="language-javascript">   compileFile(sourceFile: PathLike): Artifact</code>
+                    </pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         <ul class="space-y-2">
                             <li>compiles a contract from a source file</li>
                             <li>handy when using Node.js with the contract file locally available</li>
@@ -146,9 +153,11 @@
     
                 <section data-auto-animate>
                     <h2>Compiler</h2>
-                    <p>JavaScript Compilation (from <code class="text-yellow-300">cashc</code> package)</p>
-                    <pre><code class="language-javascript">     compileString(sourceCode: string): Artifact</code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                    <p>JavaScript Compilation (from <code class="text-yellow-400">cashc</code> package)</p>
+                    <pre style="font-size: 0.7em !important;">
+                        <code class="language-javascript">   compileString(sourceCode: string): Artifact</code>
+                    </pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         <ul class="space-y-2">
                             <li>compiles a contract from a source code string</li>
                             <li>useful for quick compilation and discarding, and when source code is not locally available</li>
@@ -163,8 +172,22 @@
                 <ol class="space-y-2 text-3xl">
                     <li>Open CLI and navigate to:</li>
                     <code class="text-purple-400 italic">quasar-apps/password-vault-ui/src/contracts</code>
-                    <li>Run <pre style="width: 100% !important;"><code class="language-bash">   cashc ./PasswordVault.cash</code></pre></li>
-                    <li class="fragment">Run <pre style="width: 100% !important;"><code class="language-bash">   cashc ./PasswordVault.cash --output ./PasswordVault.json</code></pre></li>
+                    <li>
+                        Run
+                        <pre style="width: 100% !important; font-size: 0.75em !important;">
+                            <code class="language-bash" data-trim>
+                            cashc ./PasswordVault.cash
+                            </code>
+                        </pre>
+                    </li>
+                    <li class="fragment">
+                        Run
+                        <pre style="width: 100% !important; font-size: 0.75em !important;">
+                            <code class="language-bash" data-trim>
+                            cashc ./PasswordVault.cash --output ./PasswordVault.json
+                            </code>
+                        </pre>
+                    </li>
                 </ol>
             </section>
 
@@ -181,7 +204,7 @@
                             }
                         )
                     </code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         creates a new Contract from given parameters
                     </div>
                 </section>
@@ -198,7 +221,7 @@
                             }
                         )
                     </code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         an Artifact file either generated from CLI or compiled in JS
                     </div>
                 </section>
@@ -215,7 +238,7 @@
                             }
                         )
                     </code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         values to be used as parameters as stated in the contract
                     </div>
                 </section>
@@ -226,24 +249,28 @@
 
                     <div class="grid grid-cols-2 gap-4">
                         <div class="col-span-1">
-                            <span class="text-yellow-300">JavaScript</span>
-                            <pre><code class="language-javascript" data-line-numbers="1-5" data-trim>
+                            <span class="text-yellow-400">JavaScript</span>
+                            <pre style="font-size: 0.65em !important;">
+                                <code class="language-javascript" data-line-numbers="1-5" data-trim>
                                 const contractArgs = [
-                                    1234n, // or BigInt(1234)
+                                    1234n,
                                     'sample-pubkeyhash',
                                     '123456',
                                 ]
-                            </code></pre>
+                                </code>
+                            </pre>
                         </div>
                         <div class="col-span-1">
-                            <span class="text-green-500">CashScript</span>
-                            <pre><code class="language-javascript" data-line-numbers="1-5" data-trim>
+                            <span class="text-green-600">CashScript</span>
+                            <pre style="font-size: 0.65em !important;">
+                                <code class="language-javascript" data-line-numbers="1-5" data-trim>
                                 contract PasswordVault(
                                     int payout,
                                     bytes20 ownerPkhash,
                                     bytes passcode
                                 ) {
-                            </code></pre>
+                                </code>
+                            </pre>
                         </div>
                     </div>
                 </section>
@@ -260,7 +287,7 @@
                             }
                         )
                     </code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         network where the CashScript SDK will connect to
                     </div>
                 </section>
@@ -269,7 +296,7 @@
                     <h2>Contract Instantiation</h2>
                     <h3>Network Providers</h3>
                     <pre><code class="language-javascript">new ElectrumNetworkProvider(network?: Network, options?: Options)</code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         <ul class="space-y-2 text-2xl">
                             <li>network: <code>'mainnet' | 'chipnet' | 'testnet3' | 'testnet4'</code></li>
                             <li>options: for specifying custom electrum client or hostname, and enable manual connection management</li>
@@ -281,7 +308,7 @@
                     <h2>Contract Instantiation</h2>
                     <h3>Network Providers</h3>
                     <pre><code class="language-javascript">new MockNetworkProvider(options?: { updateUtxoSet: boolean })</code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         <ul class="space-y-2 text-2xl">
                             <li>evaluate transactions locally without interacting with the BCH network</li>
                             <li>useful for testing (manual or automated)</li>
@@ -303,7 +330,7 @@
                             }
                         )
                     </code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         the resulting address type of the contract
                     </div>
                 </section>
@@ -312,14 +339,19 @@
             <section>
                 <section>
                     <h3>Activity: Instantiate PasswordVault contract</h3>
-                    <ol class="space-y-2 text-3xl">
+                    <ol class="space-y-2 text-4xl">
                         <li>
                             <span>Under the same directory, open:</span>
-                            <p><code class="text-yellow-300 font-bold">password-vault-instantiate.js</code></p>
+                            <p><code class="text-yellow-400 font-bold">password-vault-instantiate.js</code></p>
                         </li>
                         <li>Adjust the values in the <code class="text-purple-400 font-bold">contractArgs</code> variable</li>
                         <li>Console log <code class="text-purple-400 font-bold">passwordVaultContract</code> variable</li>
-                        <li>Open CLI and run <pre><code class="language-bash">node password-vault-instantiate.js</code></pre></li>
+                        <li>
+                            Open CLI and run
+                            <pre style="font-size: 0.7em !important;">
+                                <code class="language-bash">node password-vault-instantiate.js</code>
+                            </pre>
+                        </li>
                     </ol>
                 </section>
 
@@ -333,7 +365,9 @@
                         </li>
                         <li>
                             Open CLI and run the same command again
-                            <pre><code class="language-bash">node password-vault-instantiate.js</code></pre>
+                            <pre style="font-size: 0.7em !important;">
+                                <code class="language-bash">node password-vault-instantiate.js</code>
+                            </pre>
                         </li>
                         <li class="fragment">
                             Copy the address, open a browser, go to a BCH Explorer website
@@ -353,8 +387,12 @@
             <section>
                 <section data-auto-animate>
                     <h2>Transaction Builder</h2>
-                    <pre><code class="language-javascript">new TransactionBuilder(options: { provider: NetworkProvider })</code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                    <pre style="font-size: 0.65em !important;"><code class="language-javascript" data-trim>
+                        new TransactionBuilder(
+                            options: { provider: NetworkProvider }
+                        )
+                    </code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         <ul class="space-y-2">
                             <li>tool for constructing transactions that will determine how the funds inside the contract is spent</li>
                         </ul>
@@ -366,11 +404,11 @@
                     <ul class="space-y-2 text-4xl">
                         <li>
                             <span>
-                                basic transactions include adding <span class="text-yellow-300 font-bold">input(s)</span>
-                                and <span class="text-yellow-300 font-bold">output(s)</span>
+                                basic transactions include adding <span class="text-yellow-400 font-bold">input(s)</span>
+                                and <span class="text-yellow-400 font-bold">output(s)</span>
                             </span>
                             <ul class="space-y-2">
-                                <li class="fragment">input - the current UTXOs of the contract + <span class="text-yellow-300 font-bold">unlocker</span></li>
+                                <li class="fragment">input - the current UTXOs of the contract + <span class="text-yellow-400 font-bold">unlocker</span></li>
                                 <li class="fragment">output - dictates where the funds are sent</li>
                             </ul>
                         </li>
@@ -420,21 +458,25 @@
                     <h2>Transaction Builder</h2>
                     <ul class="space-y-2">
                         <li><code>addInput()</code></li>
-                        <pre style="width: 100% !important;"><code class="language-javascript" data-line-numbers="1-5" data-trim>
+                        <pre style="width: 100% !important; font-size: 0.7em !important;">
+                            <code class="language-javascript" data-line-numbers="1-5" data-trim>
                             transactionBuilder.addInput(
                                 utxo: Utxo,
                                 unlocker: Unlocker,
                                 options?: InputOptions
                             ): this
-                        </code></pre>
+                            </code>
+                        </pre>
                         <li><code>addInputs()</code></li>
-                        <pre style="width: 100% !important;"><code class="language-javascript" data-line-numbers="1-5" data-trim>
+                        <pre style="width: 100% !important; font-size: 0.7em !important;">
+                            <code class="language-javascript" data-line-numbers="1-5" data-trim>
                             transactionBuilder.addInputs(
                                 utxos: Utxo[],
                                 unlocker: Unlocker,
                                 options?: InputOptions
                             ): this
-                        </code></pre>
+                            </code>
+                        </pre>
                     </ul>
                 </section>
     
@@ -442,17 +484,21 @@
                     <h2>Transaction Builder</h2>
                     <ul class="space-y-2">
                         <li><code>addOutput()</code></li>
-                        <pre style="width: 100% !important;"><code class="language-javascript" data-line-numbers="1-3" data-trim>
+                        <pre style="width: 100% !important; font-size: 0.7em !important;">
+                            <code class="language-javascript" data-line-numbers="1-3" data-trim>
                             transactionBuilder.addOutput(
                                 output: Output
                             ): this
-                        </code></pre>
+                            </code>
+                        </pre>
                         <li><code>addOutputs()</code></li>
-                        <pre style="width: 100% !important;"><code class="language-javascript" data-line-numbers="1-3" data-trim>
+                        <pre style="width: 100% !important; font-size: 0.7em !important;">
+                            <code class="language-javascript" data-line-numbers="1-3" data-trim>
                             transactionBuilder.addOutputs(
                                 outputs: Output[]
                             ): this
-                        </code></pre>
+                            </code>
+                        </pre>
                     </ul>
                 </section>
     
@@ -462,10 +508,10 @@
                         interface Output {
                             to: string | Uint8Array; // address
                             amount: bigint; // e.g. 12_345n (= 0.00012345 BCH)
-                            token?: {
+                            token?: { // optional
                                 amount: bigint;
                                 category: string;
-                                nft?: {
+                                nft?: { // optional
                                     capability: 'none' | 'mutable' | 'minting';
                                     commitment: string;
                                 }
@@ -516,7 +562,8 @@
                 <section data-auto-animate>
                     <h3>Completing the Transaction</h3>
                     <code>send()</code>
-                    <pre><code class="language-javascript" data-line-numbers="7" data-trim>
+                    <pre style="font-size: 0.65em !important;">
+                        <code class="language-javascript" data-line-numbers="7" data-trim>
                         await transactionBuilder
                             .addInputs(
                                 inputs,
@@ -524,8 +571,9 @@
                             )
                             .addOutputs(outputs)
                             .send()
-                    </code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        </code>
+                    </pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         <ul class="space-y-2">
                             <li>sends the transaction to the BCH network and returns the transaction details</li>
                             <li>incomplete transactions and failed rules will incur errors</li>
@@ -536,7 +584,8 @@
                 <section data-auto-animate>
                     <h3>Completing the Transaction</h3>
                     <code>build()</code>
-                    <pre><code class="language-javascript" data-line-numbers="7" data-trim>
+                    <pre style="font-size: 0.65em !important;">
+                        <code class="language-javascript" data-line-numbers="7" data-trim>
                         transactionBuilder
                             .addInputs(
                                 inputs,
@@ -544,7 +593,8 @@
                             )
                             .addOutputs(outputs)
                             .build()
-                    </code></pre>
+                        </code>
+                    </pre>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
                         <ul class="space-y-2">
                             <li>builds the transaction and returns the signed transaction hex string</li>
@@ -558,7 +608,7 @@
             <section>
                 <h3>Activity: Build a transaction</h3>
                 <ol class="space-y-2 text-3xl">
-                    <li>Under the same directory, open <code class="text-yellow-300 font-bold">password-vault-transact.js</code></li>
+                    <li>Under the same directory, open <code class="text-yellow-400 font-bold">password-vault-transact.js</code></li>
                     <li>
                         In the <code class="text-purple-400 font-bold">outputs</code> variable, replace
                         the <code class="text-purple-400 font-bold">'address'</code> in the first
@@ -567,7 +617,12 @@
                     <li class="fragment">Add <code class="text-purple-400 font-bold">.build()</code> to the transaction being built</li>
                     <span class="fragment">
                         <li>Console log the variable <code class="text-purple-400 font-bold">transaction</code></li>
-                        <li>Open CLI and run <pre><code class="language-bash">node password-vault-transact.js</code></pre></li>
+                        <li>
+                            Open CLI and run
+                            <pre style="font-size: 0.8em !important;">
+                                <code class="language-bash">node password-vault-transact.js</code>
+                            </pre>
+                        </li>
                     </span>
                     <li class="fragment">
                         Copy the hex, go to the <a href="https://explorer.bch.ninja" data-preview-link>BCH Explorer website</a>,
@@ -586,7 +641,12 @@
                             <code class="text-purple-400 font-bold">await</code> before
                             <code class="text-purple-400 font-bold">transactionBuilder</code>
                         </li>
-                        <li>Run the command below again: <pre><code class="language-bash">node password-vault-transact.js</code></pre></li>
+                        <li>
+                            Run the command below again:
+                            <pre style="font-size: 0.8em !important;">
+                                <code class="language-bash">node password-vault-transact.js</code>
+                            </pre>
+                        </li>
                         <span class="fragment">
                             <li>
                                 In the <code class="text-purple-400 font-bold">outputs</code> variable, replace
@@ -605,7 +665,7 @@
 
             <section>
                 <h2>More information</h2>
-                <h3>Check out the <span class="text-green-500">CashScript</span> docs website</h3>
+                <h3>Check out the <span class="text-green-600">CashScript</span> docs website</h3>
                 <a href="https://cashscript.org/docs/basics/about" data-preview-link>
                     https://cashscript.org/docs/basics/about
                 </a>
