@@ -1797,12 +1797,12 @@
                 });
 
                 function renderMermaidSlides() {
-                    document.querySelectorAll('.mermaid').forEach((el) => {
-                        if (!el.hasAttribute('data-processed')) {
-                            mermaid.init(undefined, el);
-                            el.setAttribute('data-processed', true);
-                        }
-                    });
+                    const nodes = [];
+                    document.querySelectorAll('.mermaid').forEach(el => {
+                        if (!el.hasAttribute('data-processed')) nodes.push(el)
+                    })
+
+                    mermaid.run({ nodes });
                 }
             }
         };
