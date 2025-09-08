@@ -49,7 +49,10 @@ export default defineComponent({
         this.contractParameters,
         this.wif,
         this.recipientAddress,
-      ).finally(() => {
+      ).catch(error => {
+        console.error(error);
+        return String(error);
+      }).finally(() => {
         dialog.hide()
       })
 
@@ -57,13 +60,22 @@ export default defineComponent({
       this.wif = '';
       this.recipientAddress = '';
 
-      const url = `https://explorer.bch.ninja/tx/${result.txid}`
-      this.$q.dialog({
-        title: 'Swept funds!',
-        message: `TXID: ${result.txid}<br/><a href="${url}" target="_blank">View txid</a>`,
-        style: 'word-break: break-all;',
-        html: true,
-      })
+      if (typeof result === 'string') {
+        this.$q.dialog({
+          title: 'Claim failed',
+          message: result,
+          style: 'white-space: pre-wrap;',
+          ok: true,
+        })
+      } else {
+        const url = `https://explorer.bch.ninja/tx/${result.txid}`
+        this.$q.dialog({
+          title: 'Swept funds!',
+          message: `TXID: ${result.txid}<br/><a href="${url}" target="_blank">View txid</a>`,
+          style: 'word-break: break-all;',
+          html: true,
+        })
+      }
     }
   }
 })

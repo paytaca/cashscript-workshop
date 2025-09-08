@@ -461,9 +461,9 @@
                             name: 'IndexPage',
                             data() {
                                 return {
-                                    payoutAmount: 0,
-                                    ownerAddress: '',
-                                    passcode: '',
+                                    payoutAmount: 1000, // satoshis
+                                    ownerAddress: 'bitcoincash:qq...',
+                                    passcode: 'unique-passcode',
                                 }
                             }
                         })
@@ -641,11 +641,11 @@
                 <div id="contract-instantiation-diagram-1" class="mermaid p-2 bg-white rounded-lg">
                     sequenceDiagram
                     App->>Component: User click a button
-                    Component->>JS: Component runs external function
-                    JS->>Cashscript: Process necessary contract details
-                    Cashscript->>JS: Contract creation with cashscript
-                    JS->>Component: Save contract details to component state
-                    Component->>App: Display contract details
+                    Component-->>JS: Component runs external function
+                    JS-->>Cashscript: Process necessary contract details
+                    Cashscript-->>JS: Contract creation with cashscript
+                    JS-->>Component: Save contract details to component state
+                    Component-->>App: Display contract details
                 </div>
             </section>
 
@@ -962,11 +962,11 @@
                     <h3>Activity: Using components</h3>
                     <div>
                         Display contract address as QRcode using the component:
-                        <i class="text-blue-300">/src/components/buttons/SendToPoolButton.vue</i>
+                        <i class="text-blue-300">/src/components/buttons/DisplayAddressButton.vue</i>
                     </div>
                     <ol>
                         <li class="fragment">
-                            Add component <i class="text-blue-300">SendToPoolButton</i>
+                            Add component <i class="text-blue-300">DisplayAddressButton</i>
                             <ol type="a">
                                 <li>Import from <i class="text-blue-300">/src/components/buttons</i></li>
                                 <li>Register component in <i class="text-blue-300">IndexPage</i></li>
@@ -984,7 +984,7 @@
                     <div>Import from <i class="text-blue-300">/src/components/buttons</i></div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="2">
                         <script>
-                        import SendToPoolButton from '../components/buttons/SendToPoolButton.vue'
+                        import DisplayAddressButton from '../components/buttons/DisplayAddressButton.vue'
                         // ...
                         </script>
                     </code></pre>
@@ -996,7 +996,7 @@
                         export default defineComponent({
                             name: 'IndexPage'
                             components: {
-                                SendToPoolButton,
+                                DisplayAddressButton,
                             }
                             // ...
                         })
@@ -1008,7 +1008,7 @@
                     <pre><code data-trim class="language-html" data-line-numbers="3">
                         <template>
                             <div>
-                                &ltSendToPoolButton :address="contractAddress"/>
+                                &ltDisplayAddressButton :address="contractAddress"/>
                             </div>
                         </template>
                     </code></pre>
@@ -1020,7 +1020,7 @@
                     <h3>Form Input Bindings</h3>
                     <div>
                         The <strong class="text-blue-300">v-model</strong> allows
-                        two-way data binding, for form input elements,
+                        two-way data binding for form input elements,
                         automatically syncing the input's value and the variables value
                     </div>
                     <pre><code data-trim class="language-html" data-line-numbers="">
@@ -1263,7 +1263,7 @@
                         })
                     </code></pre>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
-                        <span class="text-yellow-300">$emit(...)</span> first parameter is the event name
+                        <span class="text-yellow-300">$emit(eventName, ...)</span> first parameter is the event name
                     </div>
                 </section>
                 <section data-auto-animate>
@@ -1274,7 +1274,7 @@
                     </code></pre>
 
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
-                        <span class="text-yellow-300">$emit(...)</span> parameter after the event name
+                        Parameters after the event name
                         are passed as arguments
                     </div>
                 </section>
@@ -1386,11 +1386,11 @@
                     sequenceDiagram
                     App->>FormComponent: User inputs contract parameters
                     App->>FormComponent: User click a button
-                    FormComponent->>IndexPage: Emits an event containing new contract parameters
-                    IndexPage->>IndexPage: Saves new contract parameters
-                    IndexPage->>Cashscript: Recreate new contract instance
-                    Cashscript->>IndexPage: Save contract details to component state
-                    IndexPage->>App: Display contract details
+                    FormComponent-->>IndexPage: Emits an event containing new contract parameters
+                    IndexPage-->>IndexPage: Saves new contract parameters
+                    IndexPage-->>Cashscript: Recreate new contract instance
+                    Cashscript-->>IndexPage: Save contract details to component state
+                    IndexPage-->>App: Display contract details
                 </pre>
             </section>
 
@@ -1775,6 +1775,56 @@
             <section>
                 <h2>Back to Main</h2>
                 <p><a href="../../index.html">← Workshop Overview</a></p>
+            </section>
+
+            <section data-visibility="uncounted">
+                <h3>Creating quasar project</h3>
+                <ol class="text-3xl">
+                    <li>Run command <i class="text-blue-300">npm init quasar@latest</i></li>
+                    <li class="fragment">Set configuration
+                        <ul>
+                            <li class="fragment">
+                                Select: <i class="text-blue-300">App with Quasar CLI</i>
+                            </li>
+                            <li class="fragment">
+                                Set project folder name  (e.g. "my-project")
+                            </li>
+                            <li class="fragment">
+                                Select script type: Javascript (or Typescript)
+                            </li>
+                            <li class="fragment">
+                                Select <i class="text-blue-300">Quasar CLI with Webpack</i>
+                            </li>
+                            <li class="fragment">
+                                Set package name (e.g. "my-project")
+                            </li>
+                            <li class="fragment">
+                                Set project name (e.g. "My Project")
+                            </li>
+                            <li class="fragment">
+                                Set project description
+                            </li>
+                            <li class="fragment">
+                                Select Vue component style: <i class="text-blue-300">Options API</i>
+                            </li>
+                            <li class="fragment">
+                                Select CSS preprocessor
+                            </li>
+                            <li class="fragment">
+                                Select features in project: Linting (ESLint), State Management (Pinia), axios
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="fragment">
+                        Move to project folder <i class="text-blue-300">cd my-project</i>
+                    </li>
+                    <li class="fragment">
+                        Install dependencies <i class="text-blue-300">npm install</i>
+                    </li>
+                    <li class="fragment">
+                        Run server <i class="text-blue-300">quasar dev</i>
+                    </li>
+                </ol>
             </section>
         </div>
     </div>
