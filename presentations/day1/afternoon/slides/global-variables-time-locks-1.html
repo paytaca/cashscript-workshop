@@ -75,11 +75,13 @@
     <div>
         <div>
             <div class="text-2xl">Definition</div>
-            <pre><code data-trim data-line-numbers="1-2">
-                // Validates the locktime field of the transaction
-                tx.time 
-                // Validates the sequenceNumber field of input
-                this.age
+            <pre><code data-trim data-line-numbers="1">
+                // Validates the transaction 'locktime' field 
+                Variable: tx.time
+                Usage: require(tx.time >= <int>);
+                // Validates the 'sequenceNumber' field of input
+                Variable: this.age
+                Usage: require(this.age >= <int>);
             </code></pre>    
         </div>
         <div>
@@ -99,6 +101,7 @@
         </div>
     </div>
     <aside class="notes">
+        
         locktime:
             Specifies the earliest block height or Unix timestamp a transaction can be confirmed
             Example: tx.locktime = 800000 → the transaction cannot be mined until block 800,000.

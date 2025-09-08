@@ -3,17 +3,17 @@
         <div class="text-green-300">Global Functions</div>
     </h3>
     <div class="grid mt-6 gap-y-4 justify-center">
-        <div>
+        <div >
             Built-in functions that you can use in your contract.
         </div>
         <div class="grid grid-cols-2 gap-4 mt-8">
-            <div>
+            <div class="text-2xl">
                 <div>Javascript</div>
                 <pre><code data-trim>
                     Math.max(1,2)
                 </code></pre>
             </div>
-            <div>
+            <div class="text-2xl">
                 <div>Cashscript</div>
                 <pre><code data-trim>
                     max(1,2)
@@ -103,7 +103,7 @@
         </code></pre>
         <pre><code class="language-javascript" data-trim>
         // Returns true if and only if x >= low && x < high.
-        int within(int x, int low, int high)
+        bool within(int x, int lower, int higher)
         </code></pre>
     </div>
     <aside class="notes">
@@ -143,8 +143,8 @@
                     function spend(int a, int b) {
                         int small = min(a, b);
                         int big = max(a, b);
-                        require(small > 1);
-                        require(big < 10);
+                        require(small > 10);
+                        require(big < 20);
                     }
                 }
             </code></pre>
@@ -154,8 +154,10 @@
 
 <section>
     <h3><div class="text-green-300">Global Functions</div></h3>
-    <div class="text-4xl">Hashing Functions</div>
-    <div class="text-2xl text-justify">Takes an input, applies mathematical formula to the input, returns a fixed size output.</div>
+    <div class="text-4xl">-- Hashing Functions --</div>
+    <div class="text-xl text-justify indent-16">
+        A hashing function transforms any input into a fixed-size output, where even tiny changes in input produce completely different results    
+    </div>
     <div>
         <pre><code class="language-javascript" data-trim>
         // Returns the RIPEMD-160 hash of x, 20 bytes → 40 hex characters
@@ -201,8 +203,7 @@
 </section>
 <section>
     <h3><div class="text-green-300">Global Functions</div></h3>
-    <div class="text-4xl">Hashing Functions</div>
-    <div class="text-2xl text-justify">Takes an input, applies mathematical formula to the input, returns a fixed size output. <a href="https://emn178.github.io/online-tools/sha256.html" data-preview-link>Online hasing tools</a></div>
+    <div class="text-4xl">-- Hashing Functions --</div>
     <div>
 
         <pre><code class="language-javascript" data-trim>
@@ -210,9 +211,9 @@
         bytes32 sha256(any x);
         </code></pre>
 
-        <div class="mermaid">
-            <pre class="justify-items-center">
-                flowchart LR
+        <div class="flex justify-center h-screen">
+            <div class="mermaid" style="transform: scale(1.1); transform-origin: top left; width: 80%; height: 80%;">
+                flowchart TD
                     A["Input = 'hello world'"]
                     B@{ shape: rect, label: "🔧⚙️\nSHA-256\nHash Function" }
                     C["Output = 'b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9'"]
@@ -225,8 +226,8 @@
                     style C fill:#e0fbf2,stroke:#1f9266,stroke-width:2px,color:#222
 
                     %% White, thick arrows
-                    linkStyle 0,1 stroke:white,stroke-width:6px
-            </pre>
+                    linkStyle 0,1 stroke:orange,stroke-width:2px
+            </div>
         </div>
     </div>
     <aside class="notes">
@@ -242,7 +243,7 @@
 
 <section>
     <h3><div class="text-green-300">Global Functions</div></h3>
-    <div class="text-4xl">Hashing Functions</div>
+    <div class="text-4xl">-- Hashing Functions --</div>
 
     <div class="grid grid-cols-2 items-start mt-8">
         <div>
@@ -287,6 +288,64 @@
 
 </section>
 
+
+<section>
+    <h3><div class="text-green-300">Global Functions</div></h3>
+    <div>--Signature Checking Functions --</div>
+    <div class="text-2xl text-center">Digital Signature</div>
+    <div class="mermaid">
+        flowchart LR
+
+            subgraph PrivateKeyPublicKeyPair[PrivateKey/PublicKey Pair]
+                Prv[Private Key] 
+                Pub[Public Key]
+            end
+
+            subgraph PersonA[Person A]
+                PrivateKeyPublicKeyPair
+                DataToBeSigned['any data']
+            end
+
+            subgraph DigitalSigCreatorTool[🔧⚙️ A signature maker tool]
+                
+            end
+
+            subgraph ReceivedFromPersonA[Received from Person A]
+                PubKeyOfPersonA[Public Key Of Person A]
+                SignatureFromPersonA[Signature from Person A]
+                DataToBeSignedByPersonA['any data']
+            end
+
+            subgraph PersonBVerification[ ]
+                A1[sigVerificationResult] --> A2{Ok?}
+                A2 -- Yes --> A3[Signature Matches ✅]
+                A2 -- No --> A4[Invalid Signature ❌]
+            end
+
+            subgraph PersonB[Anybody]
+                ReceivedFromPersonA
+                PersonBVerification
+            end
+
+            subgraph DigitalSigVerifierTool[🔧⚙️ A signature verifier tool]
+            end
+
+            Pub --> PubKeyOfPersonA
+            DataToBeSigned --> DigitalSigCreatorTool[DigitalSigCreatorTool of Person A]
+            PersonA --> DigitalSigCreatorTool
+            DigitalSigCreatorTool --> Signature
+            Signature --> SignatureFromPersonA
+            DataToBeSigned --> DataToBeSignedByPersonA
+
+            ReceivedFromPersonA--> DigitalSigVerifierTool
+            DigitalSigVerifierTool --> A1
+
+            
+            %% make all link strokes white
+            linkStyle default stroke:orange,stroke-width:2px
+    </div>
+
+</section>
 
 <section>
     <h3><div class="text-green-300">Global Functions</div></h3>
@@ -412,7 +471,7 @@
                 pragma cashscript ^0.11.0;
                 contract CheckSigDemo(pubkey publicKeyOfContractOwner) {
                     function spend(sig signatureOfContractOwner) {
-                        require(checkSig(signatureOfContractOwner, publicKey));
+                        require(checkSig(signatureOfContractOwner, publicKeyOfContractOwner));
                     }
                 }
             </code></pre>
