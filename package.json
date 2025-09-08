@@ -11,9 +11,11 @@
     "setup:quasar": "npm install -g @quasar/cli",
     "test": "npm run test:contracts",
     "test:contracts": "cd contracts && npm test",
-    "build": "npm run build:contracts && npm run build:quasar",
+    "build": "npm run build:css && npm run build:contracts && npm run build:quasar",
+    "build:css": "npx tailwindcss -i ./presentations/css/tailwind.css -o ./presentations/css/style.css",
     "build:contracts": "cd contracts && npm run build",
     "build:quasar": "cd quasar-apps && npm run build",
+    "watch:css": "npx tailwindcss -i ./presentations/css/tailwind.css -o ./presentations/css/style.css --watch",
     "clean": "rm -rf node_modules && rm -rf contracts/node_modules && rm -rf quasar-apps/*/node_modules",
     "workshop:start": "echo 'Starting Cashscript Workshop...' && npm run present",
     "workshop:help": "echo 'Available commands:' && echo '  npm run present     - Start presentation server' && echo '  npm run dev         - Start development server with live reload' && echo '  npm run setup       - Install all dependencies' && echo '  npm run test        - Run contract tests' && echo '  npm run build       - Build all projects'"
@@ -39,15 +41,18 @@
   },
   "homepage": "https://github.com/your-org/cashscript-workshop#readme",
   "devDependencies": {
-    "http-server": "^14.1.1"
+    "autoprefixer": "^10.4.21",
+    "http-server": "^14.1.1",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17"
   },
   "dependencies": {
-    "reveal.js": "^5.2.1",
+    "@bitauth/libauth": "^3.0.0",
     "@psf/bch-js": "^6.8.1",
+    "bitcore-lib": "^10.10.7",
     "cashc": "^0.11.0",
     "cashscript": "^0.11.0",
-    "@bitauth/libauth": "^3.0.0",
-    "bitcore-lib": "^10.10.7"
+    "reveal.js": "^5.2.1"
   },
   "engines": {
     "node": ">=16.0.0",
