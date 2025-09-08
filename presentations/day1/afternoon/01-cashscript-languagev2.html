@@ -68,6 +68,9 @@
                 <p><a href="../../index.html">← Workshop Overview</a></p>
             </section>
         </div>
+        <a class="explorer" href="https://explorer.bch.ninja/" target="_blank">
+        🔗 Explorer
+        </a>
     </div>
 
     <script src="/node_modules/reveal.js/dist/reveal.js"></script>
@@ -117,7 +120,32 @@
         }
              
         });
+
+        Reveal.on('ready', () => {
+            // wait until chalkboard buttons are rendered
+            const toolbar = document.querySelector('.reveal .toolbar'); // chalkboard uses this
+            if (toolbar) {
+                const linkBtn = document.createElement('a');
+                linkBtn.innerHTML = '🔗';
+                linkBtn.href = 'https://explorer.bch.ninja';
+                linkBtn.target = '_blank';
+                linkBtn.style.marginLeft = '10px';
+                toolbar.appendChild(linkBtn);
+            }
+        });
     </script>
+    <style>
+        .reveal .explorer {
+            position: absolute;
+            bottom: 22px;
+            left: 147px; /* adjust so it sits near the chalkboard button */
+            z-index: 30;
+            font-size: 25px;
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 6px;
+        }
+    </style>
 
 </body>
 </html> 
