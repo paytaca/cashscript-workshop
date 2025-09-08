@@ -1,0 +1,178 @@
+<section>
+    <h2><div class="text-green-300">Contract Structure</div></h2>
+    <p><div class="text-4xl">What Does It Look Like?</div></p>
+</section>
+
+<section>
+    <h3><div class="text-green-300">This is a contract</div></h3>
+    <div>
+        <pre><code class="language-javascript" data-line-numbers="1-9">pragma cashscript ^0.11.0;
+
+contract MyContract (string password) {
+
+    function spend (string inputPassword) {
+        require(inputPassword == password);
+    }
+
+}
+</code></pre>
+    </div>
+</section>
+
+<section>
+    <h3><div class="text-green-300">Pragma</div></h3>
+    <div>
+        <pre><code class="language-javascript" data-line-numbers="1">pragma cashscript ^0.11.0;
+
+contract MyContract (string password) {
+
+    function spend (string inputPassword) {
+        require(inputPassword == password);
+    }
+
+}</code></pre>
+    </div>
+    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+        <ul class="space-y-1 text-2xl">
+            <li><code class="text-green-300">pragma</code> - import keyword for cashscript</li>
+            <li><code class="text-green-300">cashscript</code> - the CashScript package</li>
+            <li><code class="text-green-300">^0.11.0</code> - CashScript contract version</li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h3><div class="text-green-300">Constructor</div></h3>
+    <div>
+        <pre><code class="language-javascript" data-line-numbers="3">pragma cashscript ^0.11.0;
+
+contract MyContract (string password) {
+
+    function spend (string inputPassword) {
+        require(inputPassword == password);
+    }
+
+}</code></pre>
+    </div>
+    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+        The constructor arguments are the main data compiled into the contract. These are provided when creating the contract
+    </div>
+</section>
+
+<section>
+    <h3><div class="text-green-300">Functions</divdiv></h3>
+    <div>
+        <pre><code class="language-javascript" data-line-numbers="5-7">pragma cashscript ^0.11.0;
+
+contract MyContract (string password) {
+
+    function spend (string inputPassword) {
+        require(inputPassword == password);
+    }
+
+}</code></pre>
+    </div>
+
+    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+        The function arguments are provided when attempting to spend from the contract
+    </div>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Contract Statements</div></h2>
+    <p><div class="text-4xl">What Do I Code Inside?</div></p>
+</section>
+
+<section>
+    <h3><div class="text-green-300">Rules/Constraints</div></h3>
+    <div>
+        <pre><code class="language-javascript" data-line-numbers="6">pragma cashscript ^0.11.0;
+
+contract MyContract (string password) {
+
+    function spend (string inputPassword) {
+        require(inputPassword == password);
+    }
+
+}</code></pre>
+    </div>
+    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+        <div class="text-2xl">Rules mainly determine if you can spend the funds or not</div>
+    </div>
+</section>
+
+<section>
+    <h3><div class="text-green-300">Variables</div></h3>
+    <pre><code class="language-javascript" data-line-numbers="6-10">pragma cashscript ^0.11.0;
+
+contract MyContract (string password) {
+
+    function spend (string inputPassword) {
+        int myNumber = 3000;
+        string constant myString = 'Bitcoin Cash';
+
+        int i = 0;
+        i = i + 1;
+        
+        require(inputPassword == password);
+    }
+
+}</pre></code>
+
+    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+        <ul class="space-y-1">
+            <li>CashScript disallows unused variables</li>
+            <li>Final statement of a function should be a require</li>
+        </ul>
+    </div>
+</section>
+
+
+<section>
+    <h3><div class="text-green-300">Comments</div></h3>
+    <pre><code class="language-javascript" data-line-numbers="6-12">pragma cashscript ^0.11.0;
+
+contract MyContract (string password) {
+
+    function spend (string inputPassword) {
+        // int myNumber = 3000;
+        // string constant myString = 'Bitcoin Cash';
+        
+        /*
+            This is a
+            multi-line comment.
+        */
+
+        int i = 0;
+        i = i + 1;
+        
+        require(inputPassword == password);
+    }
+
+}</pre></code>
+</section>
+
+
+<section>
+    <h3><div class="text-green-300">Control Structures</div></h3>
+    <pre><code class="language-javascript" data-line-numbers="9-15">pragma cashscript ^0.11.0;
+
+contract MyContract (string password) {
+
+    function spend (string inputPassword) {
+        int i = 0;
+        i = i + 1;
+
+        if (i == 0) {
+            require(inputPassword == password + '0');
+        } else if (i == 1) {
+            require(inputPassword == password + '1');
+        } else {
+            require(inputPassword == password + 'other');
+        }
+        
+        require(inputPassword == password);
+    }
+
+}</pre></code>
+</section>
