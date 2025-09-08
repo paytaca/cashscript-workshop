@@ -1,0 +1,245 @@
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div>-- Introspection Variables --</div>
+    <div class="text-2xl">
+        <p data-trim>
+            In CashScript, Introspection Variables are special read-only variables that let a contract inspect and reason about the spending transaction itself.
+            They expose details about the transaction itself. Ability to "look inside" the spending transaction from code is called introspection.
+        </p>
+    </div>
+</section>
+<section>
+    <h2><div class="text-green-300">Global Functions</div></h2>
+    <div>-- Introspection Variables --</div>
+    <div>
+        <pre><code class="language-javascript" data-trim>
+        int tx.version
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        int this.activeInputIndex
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        bytes this.activeBytecode
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        int tx.locktime
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        int tx.inputs.length
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        int tx.inputs[i].value
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        int tx.inputs[i].outpointIndex
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        int tx.inputs[i].sequenceNumber
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        bytes tx.inputs[i].tokenCategory
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        bytes tx.inputs[i].nftCommitment
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        int tx.inputs[i].tokenAmount
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        int tx.outputs.length
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        int tx.outputs[i].value
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        bytes tx.outputs[i].lockingBytecode
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        bytes tx.output[i].nftCommitment
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        bytes tx.output[i].tokenAmount
+        </code></pre>
+    </div>
+    <aside class="notes">
+        <ul>
+            <li>
+                These variables give your contract access to certain properties of the transaction without needing them as explicit parameters.
+            </li>
+            <li>This allows you to write rules that depend on the context of the spend or the contents of the transaction.</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div>-- Introspection Variables --</div>
+    <div class="grid grid-cols-1 items-start mt-8">
+        <div>
+            <div class="text-2xl">Definition</div>
+            <pre><code class="language-javascript" data-trim>
+            // The total number of inputs of the transaction 
+            int tx.inputs.length
+            // The total number of outputs of the transaction
+            int tx.outputs.length
+            // The BCH amount (in satoshis) of the specific output
+            int tx.outputs[i].value
+            </code></pre>
+        </div>
+        <div>
+            <div class="text-2xl"><a href="https://playground.cashscript.org" data-preview-link>Example</a></div>
+            <pre><code class="language-javascript" data-trim>
+                pragma cashscript ^0.11.0;
+                contract IntrospectionVariablesDemo(bytes20 publicKeyHash) {
+                    function spend() {
+                        require(tx.inputs.length == 2);
+                        require(tx.outputs.length == 1);
+                        int totalAmountBeingSpent = tx.inputs[0].value + tx.inputs[1].value;
+                        int networkFee = 1000;
+                        int totalAmountToBeReceived = totalAmountBeingSpent - 1000;
+                        require(tx.outputs[0].value == totalAmountToBeReceived);
+                        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(publicKeyHash);
+                        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
+                    }
+                }
+            </code></pre>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div>-- Introspection Variables --</div>
+    <div class="grid grid-cols-1 items-start mt-8">
+        <div>
+            <div class="text-2xl">Definition</div>
+            <pre><code class="language-javascript" data-trim>
+            // The total number of inputs of the transaction 
+            int tx.inputs.length
+            // The total number of outputs of the transaction
+            int tx.outputs.length
+            </code></pre>
+        </div>
+        <div>
+            <div class="text-2xl"><a href="https://playground.cashscript.org" data-preview-link>Example</a></div>
+            <pre><code class="language-javascript" data-trim data-line-numbers="4-6">
+                pragma cashscript ^0.11.0;
+                contract IntrospectionVariablesDemo(bytes20 publicKeyHash) {
+                    function spend() {
+                        // Checks that number of inputs is 2 and only 1 output
+                        require(tx.inputs.length == 2);
+                        require(tx.outputs.length == 1);
+                        int networkFee = 1000;
+                        int totalAmountToBeReceived = totalAmountBeingSpent - 1000;
+                        require(tx.outputs[0].value == totalAmountToBeReceived);
+                        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(publicKeyHash);
+                        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
+                    }
+                }
+            </code></pre>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div>-- Introspection Variables --</div>
+    <div class="grid grid-cols-1 items-start mt-8">
+        <div>
+            <div class="text-2xl">Definition</div>
+            <pre><code class="language-javascript" data-trim>
+            // The value (BCH amount in satoshis) of a particular input
+            // The amount that is amount to spent
+            int tx.inputs[i].value
+            </code></pre>
+        </div>
+        <div>
+            <div class="text-2xl"><a href="https://playground.cashscript.org" data-preview-link>Example</a></div>
+            <pre><code class="language-javascript" data-trim data-line-numbers="6-10">
+                pragma cashscript ^0.11.0;
+                contract IntrospectionVariablesDemo(bytes20 publicKeyHash) {
+                    function spend() {
+                        require(tx.inputs.length == 2);
+                        require(tx.outputs.length == 1);
+                        // Computes the total amount being spent  
+                        // and the total amount that the recipient must received
+                        int totalAmountBeingSpent = tx.inputs[0].value + tx.inputs[1].value;
+                        int networkFee = 1000;
+                        int totalAmountToBeReceived = totalAmountBeingSpent - 1000;
+                        require(tx.outputs[0].value == totalAmountToBeReceived);
+                        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(publicKeyHash);
+                        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
+                    }
+                }
+            </code></pre>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div>-- Introspection Variables --</div>
+    <div class="grid grid-cols-1 items-start mt-8">
+        <div>
+            <div class="text-2xl">Definition</div>
+            <pre><code class="language-javascript" data-trim>
+            // The BCH amount (in satoshis) of the specific output
+            int tx.outputs[i].value
+            </code></pre>
+        </div>
+        <div>
+            <div class="text-2xl"><a href="https://playground.cashscript.org" data-preview-link>Example</a></div>
+            <pre><code class="language-javascript" data-trim data-line-numbers="9-11">
+                pragma cashscript ^0.11.0;
+                contract IntrospectionVariablesDemo(bytes20 publicKeyHash) {
+                    function spend() {
+                        require(tx.inputs.length == 2);
+                        require(tx.outputs.length == 1);
+                        int totalAmountBeingSpent = tx.inputs[0].value + tx.inputs[1].value;
+                        int networkFee = 1000;
+                        int totalAmountToBeReceived = totalAmountBeingSpent - 1000;
+                        // Make's sure that the output carries the total amount 
+                        // that recipient is supposed to receive
+                        require(tx.outputs[0].value == totalAmountToBeReceived);
+                        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(publicKeyHash);
+                        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
+                    }
+                }
+            </code></pre>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div>-- Introspection Variables --</div>
+    <div class="grid grid-cols-1 items-start mt-8">
+        <div>
+            <div class="text-2xl">Definition</div>
+            <pre><code class="language-javascript" data-trim>
+            // Whose the new owner of the value that a particular output has
+            int tx.outputs[i].lockingBytecode
+            </code></pre>
+        </div>
+        <div>
+            <div class="text-2xl"><a href="https://playground.cashscript.org" data-preview-link>Example</a></div>
+            <pre><code class="language-javascript" data-trim data-line-numbers="10-13">
+                pragma cashscript ^0.11.0;
+                contract IntrospectionVariablesDemo(bytes20 publicKeyHash) {
+                    function spend() {
+                        require(tx.inputs.length == 2);
+                        require(tx.outputs.length == 1);
+                        int totalAmountBeingSpent = tx.inputs[0].value + tx.inputs[1].value;
+                        int networkFee = 1000;
+                        int totalAmountToBeReceived = totalAmountBeingSpent - 1000;
+                        require(tx.outputs[0].value == totalAmountToBeReceived);
+                        // Make's sure that the owner of the publicKeyHash 
+                        // is the only one that will receive the money (BCH)
+                        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(publicKeyHash);
+                        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
+                    }
+                }
+            </code></pre>
+        </div>
+    </div>
+</section>

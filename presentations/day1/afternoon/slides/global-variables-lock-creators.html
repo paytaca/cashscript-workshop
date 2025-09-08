@@ -1,0 +1,80 @@
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div class="mb-4">-- Lock Creator Classes --</div>
+    <div class="text-2xl">
+        These are helper classes that make it easier to construct locks inside the contract (locking bytecode/scripts).
+    </div>
+    <aside class="notes">
+        Every Bitcoin Cash output has a locking script — think of it as a lock that decides who can spend the coins.  
+
+        Some common types you’ll see in CashScript are:  
+        - **P2PKH** — locks coins to a public key, simplest and most common.  
+        - **P2SH20** — locks coins to a 20-byte script hash, useful for multisig or abstracted contracts.  
+        - **P2SH32** — locks coins to a larger script hash, allowing more complex logic.  
+        - **NullData (OP_RETURN)** — locks coins in an unspendable output, used for storing data on-chain.  
+
+        So essentially, each locking bytecode type is a different kind of “lock,” designed to handle specific needs and levels of complexity on-chain.
+    </aside>
+
+</section>
+<section>
+    <h2><div class="text-green-300">Global Functions</div></h2>
+    <div>-- Lock Creator Classes --</div>
+    <div>
+        <pre><code class="language-javascript" data-trim>
+        // Creates a locking bytecode/locking script for publicKeyHash 
+        // This is used to lock BCH to someones public key
+        new LockingBytecodeP2PKH(bytes20 publicKeyHash): bytes25
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        // Creates a locking bytecode/locking script for scriptHash
+        // This is used to lock BCH to a contract
+        new LockingBytecodeP2SH20(bytes20 scriptHash): bytes23
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        // Creates a locking bytecode/locking script for scriptHash
+        // This is used to lock BCH to a contract with a longer scriptHash
+        // The locking bytecode/locking script will be longer than P2SH20
+        new LockingBytecodeP2SH32(bytes32 scriptHash): bytes35
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        // Creates an unspendable locking bytecode
+        // This produces a locking bytecode that starts with a special
+        // instruction called 'OP_RETURN', if blockchain sees the 
+        // output locked with this is can't be spent in the future
+        new LockingBytecodeNullData(bytes[] chunks): bytes
+        </code></pre>
+        </code></pre>
+    </div>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div>-- Lock Creator Classes --</div>
+    <div class="grid grid-cols-1 items-start mt-8">
+        <div>
+            <div class="text-2xl">Cashscript:</div>
+            <pre><code class="language-javascript" data-trim>
+                // Creates a locking bytecode/locking script for publicKeyHash 
+                // This is used to lock BCH to someone's public key
+                new LockingBytecodeP2PKH(bytes20 publicKeyHash): bytes25
+            </code></pre>
+            <div class="text-2xl">Bitcoin Script:</div> 
+            <pre><code class="language-bash">OP_DUP OP_HASH160 &lt;publicKeyHash&gt; OP_EQUALVERIFY OP_CHECKSIG</code></pre>
+        </div>
+        <div>
+            <div class="text-2xl"><a href="https://playground.cashscript.org" data-preview-link>Example</a></div>
+            <pre><code class="language-javascript" data-trim data-line-numbers="5-6">
+                pragma cashscript ^0.11.0;
+                contract LockingCreatorDemo(bytes20 publicKeyHash) {
+                    function spend() {
+                        require(tx.outputs.length == 1);
+                        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(publicKeyHash);
+                        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
+                    }
+                }
+            </code></pre>
+        </div>
+    </div>
+</section>
+
