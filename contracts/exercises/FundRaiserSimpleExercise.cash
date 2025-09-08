@@ -19,15 +19,10 @@ contract FundRaiserSimpleExercise(pubkey campaignCreatorPubKey, int campaignGoal
         // personal wallet doesn't have any balance.
 
         int transactionFee = 1000;
-        int campaignFunds = tx.outputs[0].value - transactionFee;
+        int campaignFunds = campaignGoal - transactionFee;
         
-        // 4. Here we are making sure that we hit the campaignGoal.
-        // i.e. the amount we are claiming is greater or equal the 
-        // campaign goal
-        require(campaignFunds + transactionFee >= campaignGoal);
-
-        // 5. Here we are making sure that all claimable funds
-        // is claimed.
+        // 4. Here we are making sure that we hit the campaignGoal - transaction fee.
+        // This also makes sure that we are claiming all the funds less transaction fee
         require(tx.outputs[0].value == campaignFunds);
         
         // 6. This ensures that the transaction has only 1 output
