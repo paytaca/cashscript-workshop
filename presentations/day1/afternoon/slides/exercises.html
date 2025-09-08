@@ -1,0 +1,48 @@
+<section>
+    <h2><div class="text-green-300">Exercise</div></h2>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Exercise</div></h2>
+    <div>Fund Raiser Contract </div>
+    <code lang data-trim>
+        pragma cashscript ^0.11.0;
+        
+        contract FundRaiserSimpleExercise(pubkey campaignCreatorPubKey, int campaignGoal) {
+
+            function claimFunds(sig claimerSig) {
+
+                // 1. Verify that the claimer of funds is the campaign creator
+                // i.e The Wallet that owns the campaignCreatorPubKey
+                require(checkSig(claimerSig, campaignCreatorPubKey));
+
+                // 2. This contract must have and must spend atleast 5 utxos,
+                // This is like saying atleast 5 must have
+                // contributed to the contract.
+                require(tx.inputs.length >= 5);
+
+                // 3. Here we calculate the total amount that the campaign creator
+                // can claim. We deduct a transaction fee. So the campaign
+                // creator can claim the campaign funds even if his/her
+                // personal wallet doesn't have any balance.
+
+                int transactionFee = 1000;
+                int campaignFunds = campaignGoal - transactionFee;
+                
+                // 4. Here we are making sure that we hit the campaignGoal - transaction fee.
+                // This also makes sure that we are claiming all the funds less transaction fee
+                require(tx.outputs[0].value == campaignFunds);
+                
+                // 6. This ensures that the transaction has only 1 output
+                require(tx.outputs.length == 1);
+
+                // 7. Here we are making sure that the funds is sent to the 
+                // campaignCreator, to avoid accidentally sending funds to 
+                // other address.
+                bytes20 campaignCreatorPublicKeyHash = hash160(campaignCreatorPubKey);
+                bytes campaignCreatorLockingBytecode = new LockingBytecodeP2PKH(campaignCreatorPublicKeyHash);
+                require(tx.outputs[0].lockingBytecode == campaignCreatorLockingBytecode);
+            }
+        }
+    </code>
+</section>
