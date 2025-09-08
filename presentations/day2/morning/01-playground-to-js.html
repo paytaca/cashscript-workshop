@@ -44,13 +44,14 @@
             <section>
                 <section data-auto-animate>
                     <div>
-                        <pre><code class="language-javascript" data-line-numbers="1-7">pragma cashscript ^0.11.0;
+                        <pre><code class="language-javascript" data-line-numbers="1-7" data-trim>
+                            pragma cashscript ^0.11.0;
     
-contract Password (string password) {
-    function spend (string inputPassword) {
-        require(inputPassword == password);
-    }
-}
+                            contract Password (string password) {
+                                function spend (string inputPassword) {
+                                    require(inputPassword == password);
+                                }
+                            }
                         </code></pre>
                         <h3 class="fragment fade-up">What's next?</h3>
                     </div>
@@ -61,6 +62,18 @@ contract Password (string password) {
                 <h2>
                     <p>Moving <span class="text-green-500">CashScript</span> Outside</p>
                 </h2>
+            </section>
+
+            <section data-auto-animate>
+                <h2>Goal</h2>
+                <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                    Send funds from the PasswordVault contract<br/> to a BCH address using JavaScript
+                </div>
+                <ul class="pt-4">
+                    <li>Compile an artifact file from the contract</li>
+                    <li>Instantiate the contract</li>
+                    <li>Build and send a transaction</li>
+                </ul>
             </section>
 
             <section>
