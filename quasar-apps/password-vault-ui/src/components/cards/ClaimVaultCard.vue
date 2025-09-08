@@ -48,7 +48,10 @@ export default defineComponent({
         this.contractParameters,
         this.recipientAddress,
         this.passcode
-      ).finally(() => {
+      ).catch(error => {
+        console.error(error);
+        return String(error);
+      }).finally(() => {
         dialog.hide();
       })
 
@@ -60,6 +63,7 @@ export default defineComponent({
         this.$q.dialog({
           title: 'Claim failed',
           message: result,
+          style: 'white-space: pre-wrap;',
           ok: true,
         })
       } else {
