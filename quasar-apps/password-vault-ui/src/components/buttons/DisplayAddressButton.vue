@@ -13,7 +13,7 @@ import { defineComponent } from 'vue'
 import AddressQrDialog from 'src/components/dialogs/AddressQrDialog.vue'
 
 export default defineComponent({
-  name: 'SendToPoolButton',
+  name: 'DisplayAddressButton',
 
   props: {
     address: { type: String, required: true, default: '' }
