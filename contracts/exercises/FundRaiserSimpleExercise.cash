@@ -11,7 +11,7 @@ contract FundRaiserSimpleExercise(pubkey campaignCreatorPubKey, int campaignGoal
         // 2. This contract must have and must spend atleast 5 utxos,
         // This is like saying atleast 5 must have
         // contributed to the contract.
-        require(tx.inputs.length > 5);
+        require(tx.inputs.length >= 5);
 
         // 3. Here we calculate the total amount that the campaign creator
         // can claim. We deduct a transaction fee. So the campaign
