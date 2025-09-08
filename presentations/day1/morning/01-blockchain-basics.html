@@ -6,101 +6,214 @@
     <title>Blockchain Basics - Day 1</title>
     <link rel="stylesheet" href="/node_modules/reveal.js/dist/reveal.css">
     <link rel="stylesheet" href="/node_modules/reveal.js/dist/theme/league.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/presentations/css/style.css">
 </head>
 <body>
     <div class="reveal">
         <div class="slides">
             <section>
                 <div class="text-center">
-                    <h1 class="text-5xl font-bold mb-6">Blockchain Basics</h1>
+                    <h1 class="text-5xl font-bold mb-6">Introduction</h1>
                     <h3 class="text-3xl mb-4">Day 1 - Morning Session</h3>
-                    <p class="text-xl text-gray-300">Understanding the foundation of blockchain technology</p>
+                    <p class="text-2xl text-gray-300">Understanding the foundation of blockchain technology</p>
                 </div>
             </section>
 
             <section>
-                <h2 class="text-4xl mb-6">What is Blockchain?</h2>
-                <ul class="text-xl space-y-4 text-left">
-                    <li class="flex items-center gap-3">
-                        <span class="w-3 h-3 bg-blue-500 rounded-full"></span>
-                        Distributed ledger technology
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <span class="w-3 h-3 bg-blue-500 rounded-full"></span>
-                        Immutable record of transactions
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <span class="w-3 h-3 bg-blue-500 rounded-full"></span>
-                        Decentralized network
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <span class="w-3 h-3 bg-blue-500 rounded-full"></span>
-                        Cryptographic security
-                    </li>
-                </ul>
+                <h2 class="text-4xl mb-6">Physical Cash</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-gray-800 p-8 rounded-lg">
+                        <ul class="text-2xl space-y-4">
+                            <li class="flex items-center gap-4">
+                                <span>✅ Tangible form</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <span>✅ Direct peer-to-peer</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <span>✅ Privacy</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <span>❌ Limited by geography</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <span>❌ Cannot be sent through digital networks</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </section>
 
             <section>
-                <h2 class="text-4xl mb-6">Key Components</h2>
-                <ul class="text-xl space-y-4 text-left">
-                    <li class="flex items-center gap-3">
-                        <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-                        Blocks - contain transactions
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-                        Chain - linked blocks
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-                        Nodes - network participants
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-                        Consensus - agreement mechanism
-                    </li>
-                </ul>
+                <h2 class="text-4xl mb-6">Traditional Digital Cash</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-gray-800 p-8 rounded-lg">
+                        <ul class="text-2xl space-y-4">
+                            <li class="flex items-center gap-4">
+                                <span>✅ Digital form</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <span>✅ Global reach</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <span>✅ Convenient</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <span>❌ Requires intermediaries</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <span>❌ Trackable</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <span>❌ Regulated</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </section>
 
             <section>
-                <h2 class="text-4xl mb-6">How It Works</h2>
-                <ol class="text-xl space-y-4 text-left">
+                <h2 class="text-4xl mb-6">Digital Peer-to-Peer Cash</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-gray-800 p-8 rounded-lg">
+                        <ul class="text-2xl space-y-4">
+                            <li class="flex items-center gap-4">
+                                <span>✅ Digital form</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <span>✅ Direct peer-to-peer</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <span>✅ No intermediaries</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <span>✅ Global reach</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <span>✅ Censorship resistant</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <span>✅ Programmable money</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <span>✅ 24/7 availability</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <span>✅ Lower fees</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-4xl mb-6">Stages in the Evolution of Cash</h2>
+                <ol class="text-3xl space-y-4 text-left">
                     <li class="flex items-center gap-3">
-                        <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</span>
-                        Transaction created
+                        <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold">CASH 1.0</span>
+                        - Physical Cash
                     </li>
                     <li class="flex items-center gap-3">
-                        <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">2</span>
-                        Validated by network
+                        <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold">CASH 2.0</span>
+                        - Custodial Digital Cash
                     </li>
                     <li class="flex items-center gap-3">
-                        <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">3</span>
-                        Added to block
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">4</span>
-                        Block added to chain
+                        <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold">CASH 3.0</span>
+                        - Peer-to-Peer Digital Cash
                     </li>
                 </ol>
             </section>
 
             <section>
-                <h2 class="text-4xl mb-6">Types of Blockchains</h2>
-                <ul class="text-xl space-y-4 text-left">
+                <h2 class="text-4xl mb-6">Transition to CASH 3.0</h2>
+                <ul class="text-3xl space-y-4 text-left">
                     <li class="flex items-center gap-3">
                         <span class="w-3 h-3 bg-yellow-500 rounded-full"></span>
-                        Public - Bitcoin, Ethereum
+                        Started when pseudonymous programmer Satoshi Nakamoto published a whitepaper in October 31, 2008
                     </li>
                     <li class="flex items-center gap-3">
                         <span class="w-3 h-3 bg-yellow-500 rounded-full"></span>
-                        Private - Enterprise solutions
+                        The whitepaper was entitled "Bitcoin: A Peer-to-Peer Electronic Cash System"
                     </li>
                     <li class="flex items-center gap-3">
                         <span class="w-3 h-3 bg-yellow-500 rounded-full"></span>
-                        Consortium - Multiple organizations
+                        The Bitcoin blockchain went live on January 3, 2009
                     </li>
                 </ul>
+            </section>
+
+            <section>
+                <h2 class="text-4xl mb-6">Main components of blockchain</h2>
+                <ol class="text-4xl space-y-4 text-left">
+                    <li class="flex items-center gap-3">
+                        Digital signatures
+                    </li>
+                    <li class="flex items-center gap-3">
+                        Proof-of-Work
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2 class="text-4xl mb-6">What is a Digital Signature?</h2>
+                <ul class="text-3xl space-y-4 text-left">
+                    <li class="flex items-center gap-3">
+                        <span class="w-4 h-4 bg-blue-500 rounded-full"></span>
+                        Proving ownership
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="w-4 h-4 bg-blue-500 rounded-full"></span>
+                        Allowing public verification
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="w-4 h-4 bg-blue-500 rounded-full"></span>
+                        Guaranteeing integrity
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-4xl mb-6">How to Create a Digital Signature?</h2>
+                <ol class="text-3xl space-y-4 text-left">
+                    <li class="flex items-center gap-3">
+                        <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</span>
+                        Generate a private key
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">2</span>
+                        Derive a public key from the private key
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">3</span>
+                        Sign any message with the private key
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">4</span>
+                        Verify the signature with the public key
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2 class="text-4xl mb-6">Hash Functions</h2>
+                <ol class="text-3xl space-y-4 text-left">
+                    <li class="flex items-center gap-3">
+                        Signing hashes is usually done instead of signing raw messages
+                    </li>
+                </ol>
+                <p class="text-2xl">Example:</p>
+                <p class="text-sm font-mono">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac ligula convallis, mollis velit in, rhoncus nisl. Fusce sit amet egestas tortor, in interdum neque. Sed accumsan condimentum tellus, eu mattis urna tincidunt at. Donec ut velit viverra, placerat est vel, gravida ex. Nulla lectus mi, faucibus nec euismod lacinia, imperdiet ut magna. Morbi ac libero pellentesque, convallis tellus et, iaculis turpis. Curabitur ante ex, gravida ac quam eget, feugiat fringilla eros. Mauris sit amet arcu ut tellus mattis posuere.
+                </p>
+                <p class="text-2xl">Hashes to:</p>
+                <p class="text-sm font-mono">
+                    03831d3aab852878b0b3155475c36ec1c1647aed44ff21693b5e644f9b0abaf5
+                </p>
+                <p class="text-2xl">
+                    <a href="https://emn178.github.io/online-tools/sha256.html" target="_blank" class="text-blue-400 hover:text-blue-300 underline">
+                        Online Hashing Tools
+                    </a>
+                </p>
             </section>
 
             <section>
