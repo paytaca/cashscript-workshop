@@ -1,0 +1,6 @@
+pragma cashscript ^0.11.0;
+contract CheckDataSigDemo(pubkey publicKey) {
+    function spend(datasig signatureOfData) {
+        require(checkDataSig(signatureOfData, bytes('approve'), publicKey));
+    }
+}

@@ -1,0 +1,119 @@
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div class="mb-4">-- Global Time Lock Variables --</div>
+    <div>
+        <div class="text-2xl">
+            <ul>
+                <li>Helps in enforcing <strong class="text-orange-300">block-height</strong> based or <strong class="text-orange-300">time-based</strong> constraint.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div class="mb-4">-- Global Time Lock Variables --</div>
+    <div class="grid justify-center">
+        <div class="mermaid" style="transform: scale(1.1); transform-origin: top left; width: 100%; height: 100%;">
+            flowchart TD
+                A[Transaction Created] --> B{Does transaction have Locktime?}
+                B -- No --> C[Transaction is valid immediately ✅]
+                B -- Yes --> D{Has current chain height / time<br> reached Locktime value?}
+                D -- No --> E[Transaction is invalid ❌<br>Wait until condition is met]
+                D -- Yes --> F[Transaction is valid ✅]
+
+                %% style nodes
+                style B fill:#ffe396,stroke:#634700,stroke-width:3px
+                style D fill:#ffe396,stroke:#634700,stroke-width:3px
+                style C fill:#e8fccb,stroke:#1a7c1a
+                style F fill:#e8fccb,stroke:#1a7c1a
+                style E fill:#ffbccb,stroke:#b40029
+        </div>
+    </div>   
+</section>
+
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div class="mb-4">-- Global Time Lock Variables --</div>
+    <div>
+        <div class="text-xl">Anatomy of a transaction</div>
+        <pre><code style="font-size: smaller;" data-trim data-line-numbers="5, 8-10">
+            transaction = {
+                inputs: [{
+                    outpointIndex: number;
+                    outpointTransactionHash: ByteStringRepresentation;
+                    sequenceNumber: number;
+                    unlockingBytecode: Bytecode;
+                }];
+                // If locktime < 500,000,000 → interpreted as a block height
+                // If locktime ≥ 500,000,000 → interpreted as a UNIX timestamp (seconds since 1970-01-01)
+                locktime: number;
+                outputs: [{
+                    lockingBytecode: Bytecode;
+                    token?: {
+                        amount: NumericRepresentation;
+                        category: ByteStringRepresentation;
+                        nft?: {
+                            capability: `${NonFungibleTokenCapability}`;
+                            commitment: ByteStringRepresentation;
+                        };
+                    };
+                    valueSatoshis: NumericRepresentation;
+                }];
+                version: number;
+            }
+        </code></pre>
+    </div>
+    <aside class="notes">
+        Locktime and sequenceNumber are 2 fields in a transaction that can be used 
+        to achieve time based constraint.
+    </aside>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div class="mb-4">-- Global Time Lock Variables --</div>
+    <div>
+        <div>
+            <div class="text-2xl">Definition</div>
+            <pre><code data-trim data-line-numbers="1">
+                // Validates the transaction 'locktime' field 
+                Variable: tx.time
+                Usage: require(tx.time >= <int>);
+                // Validates the 'sequenceNumber' field of input
+                Variable: this.age
+                Usage: require(this.age >= <int>);
+            </code></pre>    
+        </div>
+        <div>
+            <div class="text-2xl">
+                <a href="https://playground.cashscript.org" data-preview-link>Example</a>
+            </div>
+            <pre><code class="language-javascript" data-line-numbers="4" data-trim>
+                pragma cashscript ^0.11.0;
+                contract AbsoluteLockTimeDemo(bytes20 publicKeyHashOfRecipient, int futureBlock) {
+                    function spend() {
+                        require(tx.time >= futureBlock);
+                        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(publicKeyHashOfRecipient);
+                        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
+                    }
+                }
+            </code></pre>
+        </div>
+    </div>
+    <aside class="notes">
+        
+        locktime:
+            Specifies the earliest block height or Unix timestamp a transaction can be confirmed
+            Example: tx.locktime = 800000 → the transaction cannot be mined until block 800,000.
+            Analogy: Absolute locktime → “Can only spend after Jan 1, 2025.”
+            If locktime < 500,000,000 → interpreted as a block height
+            If locktime ≥ 500,000,000 → interpreted as a UNIX timestamp (seconds since 1970-01-01)
+            9,495 years to reach blocktime 500,000,000
+        sequenceNumber:
+            Controls when a specific input can be spent relative to the UTXO’s confirmation
+            Supports time-based or block-based relative delays.
+            Example: sequenceNumber = 10 (block-based) → can spend this input 10 blocks after the UTXO is confirmed
+            Relative locktime → “Can spend 10 blocks after I receive the coins.”
+    </aside>
+</section>
+

@@ -1,0 +1,106 @@
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div class="mb-4">-- Gloal Time Lock Variables --</div>
+    <div class="text-2xl">
+        CashScript provides global variables that let contracts check the blockchain’s current time or block height to enforce time-based spending conditions
+    </div>
+    <aside class="notes">
+        CashScript provides global variables that let contracts check the blockchain’s current time or block height to enforce time-based spending conditions:
+
+        tx.locktime
+
+        The absolute locktime of the transaction.
+
+        Can be a block height or Unix timestamp.
+
+        Useful for contracts that can only be spent after a certain time or block.
+
+        tx.version (not strictly a time lock, but often relevant)
+
+        Indicates transaction rules; some contracts check version to ensure CSV rules apply.
+
+        tx.nSequence (introspected per input)
+
+        Enables relative locktime (CSV).
+
+        Can enforce conditions like: “This input can only be spent X blocks or seconds after it was confirmed.”
+    </aside>
+
+</section>
+<section>
+    <h2><div class="text-green-300">Global Functions</div></h2>
+    <div class="text-2xl">-- Gloal Time Lock Variables --</div>
+    <div>
+        <pre><code class="language-javascript" data-trim>
+        // Specifies the earliest block height or Unix timestamp a transaction can be confirmed
+        Variable: tx.time
+        Usage: require(tx.time >= <expression>);
+        </code></pre>
+        <pre><code class="language-javascript" data-trim>
+        Variable: this.age
+        Usage: require(this.age >= <expression>);
+        </code></pre>
+    </div>
+    <aside class="notes">
+        Feature	Field	Meaning
+        Absolute locktime tx.locktime	The earliest block or timestamp a transaction can be included in a block.
+        Relative locktime tx.inputs[i].nSequence	The minimum age or number of blocks after the UTXO was confirmed before this input can be spent.
+
+        nSequence does not directly depend on tx.locktime.
+
+        They are separate mechanisms: one is global, one is per-input.
+    </aside>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div class="text-2xl">-- Gloal Time Lock Variables --</div>
+    <div class="grid grid-cols-1 items-start mt-8">
+        <div>
+            <pre><code class="language-javascript" data-trim>
+            // Specifies the earliest block height or Unix timestamp a transaction can be confirmed
+            Variable: tx.time
+            Usage: require(tx.time >= <expression>);
+            </code></pre>
+        </div>
+        <div>
+            <div class="text-2xl"><a href="https://playground.cashscript.org" data-preview-link>Example</a></div>
+            <pre><code class="language-javascript" data-trim data-line-numbers="10-13">
+                pragma cashscript ^0.11.0;
+                contract TransactionLockTimeDemo(int requiredBlockHeight) {
+                    function spend() {
+                        require(tx.time == requiredBlockHeight);
+                    }
+                }
+            </code></pre>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div class="text-2xl">-- Gloal Time Lock Variables --</div>
+    <div class="grid grid-cols-1 items-start mt-8">
+        <div>
+            <pre><code class="language-javascript" data-trim>
+            // Specifies the age of the BCH coin being spent
+            Variable: tx.age
+            Usage: require(tx.age >= <expression>);
+            </code></pre>
+        </div>
+        <div>
+            <div class="text-2xl"><a href="https://playground.cashscript.org" data-preview-link>Example</a></div>
+            <pre><code class="language-javascript" data-trim data-line-numbers="10-13">
+                pragma cashscript ^0.11.0;
+                contract InputRelativeLockTimeDemo(int requiredInputBlockHeightAge) {
+                    function spend() {
+                        require(tx.age == requiredInputBlockHeightAge);
+                    }
+                }
+            </code></pre>
+        </div>
+    </div>
+</section>
+
+
