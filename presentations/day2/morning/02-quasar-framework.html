@@ -73,6 +73,73 @@
             </section>
 
             <section>
+                <section>
+                    <h3>Architecture of Blockchain Apps</h3>
+                    <div id="blockchain-app-arch" class="mermaid p-2 bg-white rounded-lg">
+                        sequenceDiagram
+                        participant User as 👤 User
+                        participant App as 📱 App
+                        participant Frontend as 💻 Javascript
+                        participant Indexer as 📊 Indexer
+                        participant Chain as ⛓️ Blockchain
+    
+                        loop Happens in parallel
+                            Indexer->> Chain: Scan new blocks
+                            Chain-->> Indexer: Transactions
+                            Indexer->> Indexer: Store in DB
+                        end
+                        User->>App: Interact (e.g. view balance, send tx)
+                        App->>Frontend: Handle request
+                        Frontend->>Indexer: Call API (balances, tx history, etc.)
+                        Indexer->>Frontend: Return processed data
+                        Frontend->>App: Display data to user
+                    </div>
+                </section>
+                <section>
+                    <h3>Architecture of Blockchain Apps</h3>
+                    <div class="py-2 px-8 rounded-lg bg-white/10 mt-2 text-left">
+                        <div class="text-2xl">👤 User</div>
+                        <div class="text-xl">
+                            The person clicking buttons or sending a transaction
+                        </div>
+                    </div>  
+                    <div class="py-2 px-8 rounded-lg bg-white/10 mt-2 text-left">
+                        <div class="text-2xl">📱 App</div>
+                        <div class="text-xl">
+                            The actual application (UI) that the user interacts with.
+                        </div>
+                    </div>  
+                    <div class="py-2 px-8 rounded-lg bg-white/10 mt-2 text-left">
+                        <div class="text-2xl">💻 Javascript</div>
+                        <div class="text-xl">
+                            The code inside the app that talks to servers and
+                            shows results on screen
+                        </div>
+                    </div>  
+                    <div class="py-2 px-8 rounded-lg bg-white/10 mt-2 text-left">
+                        <div class="text-2xl">📊 Indexer</div>
+                        <div class="text-xl">
+                            Servers that transforms blockchain data into something apps
+                            can use like balances & transaction histories.
+                            <span> (e.g. Network providers in cashscript)</span>
+                        </div>
+                    </div>  
+                    <div class="py-2 px-8 rounded-lg bg-white/10 mt-2 text-left">
+                        <div class="text-2xl">⛓️ Blockchain</div>
+                        <div class="text-xl">
+                            The network that stores all transactions
+                            securely and permanently.
+                        </div>
+                    </div>  
+                </section>
+                <section>
+                    <h3>Javascript to App</h3>
+                    <span class="fragment">Previously we have created the Javascript layer.</span>
+                    <span class="fragment">In this section, we will create the App layer</span>
+                </section>
+            </section>
+
+            <section>
                 <h3>What is quasar</h3>
                 <p>Quasar is an MIT licensed open-source Vue.js based framework,
                     which allows you as a web developer to quickly create responsive
@@ -180,6 +247,12 @@
                     │   └── App.vue      # Root component
                     └── dist/            # Build output
                 </code></pre>
+                <div class="p-2 rounded-lg bg-white/10">
+                    How to create a quasar project:
+                    <a href="https://quasar.dev/start/quick-start" data-preview-link>
+                        https://quasar.dev/start/quick-start
+                    </a>
+                </div>
             </section>
             <section>
                 <h3>Vue App Structure</h3>
