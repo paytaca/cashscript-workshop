@@ -8,11 +8,11 @@ const provider = new ElectrumNetworkProvider('mainnet')
 // setup contract arguments based on contract parameters
 const contractArgs = [
   // payout
-  1234n,
+  1234n, // do not replace
   // ownerPkhash
   addressToPkhash('address'), // replace address with your Paytaca wallet address
   // passcode
-  '123456',
+  '123456', // replace with your password or keep the default one
 ]
 
 // instantiate contract

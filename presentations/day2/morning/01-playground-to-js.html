@@ -30,11 +30,14 @@
             <section data-auto-animate>
                 <h3>Before starting...</h3>
                 <span class="fragment">
-                    <p>Clone <span class="text-purple-400 font-bold">CashScript Workshop</span> repo</p>
-                    <pre><code class="language-bash">git clone https://github.com/paytaca/cashscript-workshop.git</code></pre>
+                    <!-- <p>Clone <span class="text-orange-400 font-bold">CashScript Workshop</span> repo</p>
+                    <pre><code class="language-bash">git clone https://github.com/paytaca/cashscript-workshop.git</code></pre> -->
+                    <p>Download <span class="text-orange-400 font-bold">CashScript Workshop</span> repo files</p>
+                    <pre><code class="language-bash">bit.ly/quasar-app</code></pre>
                 </span>
                 <span class="fragment">
-                    <p>Navigate to <span class="text-purple-400 italic">quasar-apps/password-vault-ui</span></p>
+                    <!-- <p>Navigate to <span class="text-orange-400 italic">quasar-apps/password-vault-ui</span></p> -->
+                     <p>Navigate to <span class="text-orange-400 italic">password-vault-ui</span></p>
                 </span>
                 <span class="fragment">
                     <p>And install dependencies</p>
@@ -87,7 +90,7 @@
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px] fragment">
                         <ul class="space-y-2">
                             <li>
-                                for compiling CashScript <code class="text-green-600 font-bold">.cash</code>
+                                for compiling CashScript <code class="text-green-400 font-bold">.cash</code>
                                 files into <code class="text-yellow-400 font-bold">.json</code> /
                                 <code class="text-blue-400 font-bold">.ts</code> files
                             </li>
@@ -106,7 +109,7 @@
                     </pre>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         <ul class="space-y-2">
-                            <li>displays/creates an artifact of the CashScript <code class="text-green-600">.cash</code> file</li>
+                            <li>displays/creates an artifact of the CashScript <code class="text-green-400">.cash</code> file</li>
                             <li>recommended method to compile artifact files</li>
                         </ul>
                     </div>
@@ -172,7 +175,8 @@
                 <h3>artifact file using CLI</h3>
                 <ol class="space-y-2 text-3xl">
                     <li>Open CLI and navigate to:</li>
-                    <code class="text-purple-400 italic">quasar-apps/password-vault-ui/src/contracts</code>
+                    <!-- <code class="text-orange-400 italic">quasar-apps/password-vault-ui/src/contracts</code> -->
+                     <code class="text-orange-400 italic">password-vault-ui/src/contracts</code>
                     <li>
                         Run
                         <pre style="width: 100% !important; font-size: 0.75em !important;">
@@ -344,8 +348,8 @@
                         <span>Under the same directory, open:</span>
                         <p><code class="text-yellow-400 font-bold">password-vault-instantiate.js</code></p>
                     </li>
-                    <li>Adjust the values in the <code class="text-purple-400 font-bold">contractArgs</code> variable</li>
-                    <li>Console log <code class="text-purple-400 font-bold">passwordVaultContract</code> variable</li>
+                    <li>Adjust the values in the <code class="text-orange-400 font-bold">contractArgs</code> variable</li>
+                    <li>Console log <code class="text-orange-400 font-bold">passwordVaultContract</code> variable</li>
                     <li>
                         Open CLI and run
                         <pre style="font-size: 0.7em !important;">
@@ -380,7 +384,7 @@
                 <ol class="space-y-2 text-3xl">
                     <li>
                         Console log the address of the
-                        <code class="text-purple-400 font-bold">passwordVaultContract</code>
+                        <code class="text-orange-400 font-bold">passwordVaultContract</code>
                     </li>
                     <li>
                         Open CLI and run the same command again
@@ -572,7 +576,7 @@
             </section>
 
             <section>
-                <h3>Example: <code>faucet-transact.js</code></h3>
+                <h3>Example: <code>password-vault-transact.js</code></h3>
                 <pre><code class="language-javascript" data-line-numbers="1-31" data-trim>
                     // set up network provider
                     const provider = new ElectrumNetworkProvider('mainnet')
@@ -660,13 +664,13 @@
                 <ol class="space-y-2 text-3xl">
                     <li>Under the same directory, open <code class="text-yellow-400 font-bold">password-vault-transact.js</code></li>
                     <li>
-                        In the <code class="text-purple-400 font-bold">outputs</code> variable, replace
-                        the <code class="text-purple-400 font-bold">'address'</code> in the first
-                        <code class="text-purple-400 font-bold">to</code> with your Paytaca wallet address
+                        In the <code class="text-orange-400 font-bold">outputs</code> variable, replace
+                        the <code class="text-orange-400 font-bold">'address'</code> in the first
+                        <code class="text-orange-400 font-bold">to</code> with your Paytaca wallet address
                     </li>
-                    <li class="fragment">Add <code class="text-purple-400 font-bold">.build()</code> to the transaction being built</li>
+                    <li class="fragment">Add <code class="text-orange-400 font-bold">.build()</code> to the transaction being built</li>
                     <span class="fragment">
-                        <li>Console log the variable <code class="text-purple-400 font-bold">transaction</code></li>
+                        <li>Console log the variable <code class="text-orange-400 font-bold">transaction</code></li>
                         <li>
                             Open CLI and run
                             <pre style="font-size: 0.8em !important;">
@@ -686,10 +690,10 @@
                 <ol class="space-y-2 text-3xl">
                     <span>
                         <li>
-                            Go back to the file and replace <code class="text-purple-400 font-bold">.build()</code>
-                            with <code class="text-purple-400 font-bold">.send()</code> and add
-                            <code class="text-purple-400 font-bold">await</code> before
-                            <code class="text-purple-400 font-bold">transactionBuilder</code>
+                            Go back to the file and replace <code class="text-orange-400 font-bold">.build()</code>
+                            with <code class="text-orange-400 font-bold">.send()</code> and add
+                            <code class="text-orange-400 font-bold">await</code> before
+                            <code class="text-orange-400 font-bold">transactionBuilder</code>
                         </li>
                         <li>
                             Run the command below again:
@@ -699,15 +703,15 @@
                         </li>
                         <span class="fragment">
                             <li>
-                                In the <code class="text-purple-400 font-bold">outputs</code> variable, replace
-                                <code class="text-purple-400 font-bold">3_000n</code> with <code class="text-purple-400 font-bold">1_234n</code>
+                                In the <code class="text-orange-400 font-bold">outputs</code> variable, replace
+                                <code class="text-orange-400 font-bold">3_000n</code> with <code class="text-orange-400 font-bold">1_234n</code>
                             </li>
                             <li>Run the command above again</li>
                         </span>
                         <li class="fragment">
-                            Copy the <code class="text-purple-400 font-bold">txid</code>,
+                            Copy the <code class="text-orange-400 font-bold">txid</code>,
                             go back to the <a href="https://explorer.bch.ninja" data-preview-link>BCH Explorer website</a>,
-                            paste the <code class="text-purple-400 font-bold">txid</code> in the search bar, then hit Enter 
+                            paste the <code class="text-orange-400 font-bold">txid</code> in the search bar, then hit Enter 
                         </li>
                     </span>
                 </ol>

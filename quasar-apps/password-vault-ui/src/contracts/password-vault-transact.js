@@ -10,6 +10,9 @@ const transactionBuilder = new TransactionBuilder({ provider })
 // get the utxos of the contract
 const inputs = await passwordVaultContract.getUtxos()
 
+// get balance of 0th (1st utxo)
+const balance = inputs[0].satoshis
+
 // declare the output
 const outputs = [
     {
@@ -19,15 +22,15 @@ const outputs = [
     // change address (back to contract)
     {
         to: passwordVaultContract.address,
-        amount: 5_000n - 3_000n - 300n
+        amount: balance - 3_000n - 300n
     }
 ]
 
 // build the transaction 
 const transaction = transactionBuilder
-    .addInputs(
+    .addInput(
         // utxos
-        inputs,
+        inputs[0],
         // unlocker
         passwordVaultContract.unlock.claim('123456')
     )
