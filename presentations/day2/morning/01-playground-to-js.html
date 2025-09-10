@@ -27,22 +27,46 @@
                 </div>
             </section>
 
-            <section data-auto-animate>
-                <h3>Before starting...</h3>
-                <span class="fragment">
-                    <!-- <p>Clone <span class="text-orange-400 font-bold">CashScript Workshop</span> repo</p>
-                    <pre><code class="language-bash">git clone https://github.com/paytaca/cashscript-workshop.git</code></pre> -->
-                    <p>Download <span class="text-orange-400 font-bold">CashScript Workshop</span> repo files</p>
-                    <pre><code class="language-bash">bit.ly/quasar-app</code></pre>
-                </span>
-                <span class="fragment">
-                    <!-- <p>Navigate to <span class="text-orange-400 italic">quasar-apps/password-vault-ui</span></p> -->
-                     <p>Navigate to <span class="text-orange-400 italic">password-vault-ui</span></p>
-                </span>
-                <span class="fragment">
-                    <p>And install dependencies</p>
-                    <pre><code class="language-bash">npm install</code></pre>
-                </span>
+            <section>
+                <section>
+                    <h3>Before starting...</h3>
+                    <span class="fragment">
+                        <p>Clone <span class="text-orange-400 font-bold">CashScript Workshop</span> repo</p>
+                        <pre><code class="language-bash">git clone https://github.com/paytaca/cashscript-workshop.git</code></pre>
+                        <!-- <p>Download <span class="text-orange-400 font-bold">CashScript Workshop</span> repo files</p>
+                        <pre><code class="language-bash">bit.ly/quasar-app</code></pre> -->
+                    </span>
+                    <span class="fragment">
+                        <p>Navigate to <span class="text-orange-400 italic">quasar-apps/password-vault-ui</span></p>
+                         <!-- <p>Navigate to <span class="text-orange-400 italic">password-vault-ui</span></p> -->
+                    </span>
+                    <span class="fragment">
+                        <p>And install dependencies</p>
+                        <pre><code class="language-bash">npm install</code></pre>
+                    </span>
+                </section>
+
+                <section>
+                    <h3>Windows 11 script error problem?</h3>
+                    <ol class="pt-4">
+                        <li>Open Powershell as Administrator</li>
+                        <li>
+                            Run the commands below. Do it one-by-one
+                            <pre><code class="powershell" data-trim data-line-numbers="1-3">
+                                Set-ExecutionPolicy RemoteSigned
+                                Set-ExecutionPolicy Restricted
+                                Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+                            </code></pre>
+                        </li>
+                        <li>
+                            Try installing dependencies in password-vault-ui again
+                            <pre><code class="language-bash">npm install</code></pre>
+                        </li>
+                    </ol>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                        <a href="https://stackoverflow.com/a/4038991" data-preview-link="">https://stackoverflow.com/a/4038991</a>
+                    </div>
+                </section>
             </section>
 
             <section>
@@ -175,8 +199,8 @@
                 <h3>artifact file using CLI</h3>
                 <ol class="space-y-2 text-3xl">
                     <li>Open CLI and navigate to:</li>
-                    <!-- <code class="text-orange-400 italic">quasar-apps/password-vault-ui/src/contracts</code> -->
-                     <code class="text-orange-400 italic">password-vault-ui/src/contracts</code>
+                    <code class="text-orange-400 italic">quasar-apps/password-vault-ui/src/contracts</code>
+                     <!-- <code class="text-orange-400 italic">password-vault-ui/src/contracts</code> -->
                     <li>
                         Run
                         <pre style="width: 100% !important; font-size: 0.75em !important;">
