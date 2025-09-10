@@ -600,40 +600,65 @@
             </section>
 
             <section>
-                <h3>Example: <code>password-vault-transact.js</code></h3>
-                <pre><code class="language-javascript" data-line-numbers="1-31" data-trim>
-                    // set up network provider
-                    const provider = new ElectrumNetworkProvider('mainnet')
+                <section data-auto-animate>
+                    <h3>Example</h3>
+                    <p><code>password-vault-transact.js</code></p>
+                    <pre><code class="language-javascript" data-line-numbers="1-31" data-trim>
+                        // set up network provider
+                        const provider = new ElectrumNetworkProvider('mainnet')
 
-                    // instantiate Transaction Builder
-                    const transactionBuilder = new TransactionBuilder({ provider })
+                        // instantiate Transaction Builder
+                        const transactionBuilder = new TransactionBuilder({ provider })
+                    </code></pre>
+                </section>
 
-                    // get the utxos of the contract
-                    const inputs = await passwordVaultContract.getUtxos()
+                <section data-auto-animate>
+                    <h3>Example</h3>
+                    <p><code>password-vault-transact.js</code></p>
+                    <pre><code class="language-javascript" data-line-numbers="1-31" data-trim>
+                        // get the utxos of the contract
+                        const inputs = await passwordVaultContract.getUtxos()
 
-                    // declare the output
-                    const outputs = [
-                        {
-                            to: 'bitcoincash:qze93uuw8vt8v358f7eupg3t4jtkpz8ltguhg62pde',
-                            amount: 3_000n
-                        },
-                        // change address (back to contract)
-                        {
-                            to: passwordVaultContract.address,
-                            amount: 5_000n - 3_000n - 300n
-                        }
-                    ]
+                        // get balance of 0th (1st) utxo
+                        const balance = inputs[0].satoshis
+                    </code></pre>
+                </section>
 
-                    // build the transaction 
-                    const transaction = transactionBuilder
-                        .addInputs(
-                            // utxos
-                            inputs,
-                            // unlocker
-                            passwordVaultContract.unlock.claim('123456')
-                        )
-                        .addOutputs(outputs)
-                </code></pre>
+                <section data-auto-animate>
+                    <h3>Example</h3>
+                    <p><code>password-vault-transact.js</code></p>
+                    <pre><code class="language-javascript" data-line-numbers="1-31" data-trim>
+                        // declare the output
+                        const toSendAmount = 3_000n
+                        const outputs = [
+                            {
+                                to: 'address', // replace address with your Paytaca wallet address
+                                amount: toSendAmount
+                            },
+                            // change address (back to contract)
+                            {
+                                to: passwordVaultContract.address,
+                                amount: balance - toSendAmount - 300n
+                            }
+                        ]
+                    </code></pre>
+                </section>
+
+                <section data-auto-animate>
+                    <h3>Example</h3>
+                    <p><code>password-vault-transact.js</code></p>
+                    <pre><code class="language-javascript" data-line-numbers="1-31" data-trim>
+                        // build the transaction 
+                        const transaction = transactionBuilder
+                            .addInput(
+                                // utxo
+                                inputs[0],
+                                // unlocker
+                                passwordVaultContract.unlock.claim('123456')
+                            )
+                            .addOutputs(outputs)
+                    </code></pre>
+                </section>
             </section>
 
             <section>
@@ -643,8 +668,8 @@
                     <pre style="font-size: 0.65em !important;">
                         <code class="language-javascript" data-line-numbers="7" data-trim>
                         await transactionBuilder
-                            .addInputs(
-                                inputs,
+                            .addInput(
+                                inputs[0],
                                 passwordVaultContract.unlock.claim('123456')
                             )
                             .addOutputs(outputs)
@@ -665,8 +690,8 @@
                     <pre style="font-size: 0.65em !important;">
                         <code class="language-javascript" data-line-numbers="7" data-trim>
                         transactionBuilder
-                            .addInputs(
-                                inputs,
+                            .addInput(
+                                inputs[0],
                                 passwordVaultContract.unlock.claim('123456')
                             )
                             .addOutputs(outputs)
@@ -727,7 +752,7 @@
                         </li>
                         <span class="fragment">
                             <li>
-                                In the <code class="text-orange-400 font-bold">outputs</code> variable, replace
+                                In the <code class="text-orange-400 font-bold">toSendAmount</code> variable, replace
                                 <code class="text-orange-400 font-bold">3_000n</code> with <code class="text-orange-400 font-bold">1_234n</code>
                             </li>
                             <li>Run the command above again</li>

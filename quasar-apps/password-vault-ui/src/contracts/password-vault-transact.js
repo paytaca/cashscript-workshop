@@ -10,26 +10,27 @@ const transactionBuilder = new TransactionBuilder({ provider })
 // get the utxos of the contract
 const inputs = await passwordVaultContract.getUtxos()
 
-// get balance of 0th (1st utxo)
+// get balance of 0th (1st) utxo
 const balance = inputs[0].satoshis
 
 // declare the output
+const toSendAmount = 3_000n
 const outputs = [
     {
         to: 'address', // replace address with your Paytaca wallet address
-        amount: 3_000n
+        amount: toSendAmount
     },
     // change address (back to contract)
     {
         to: passwordVaultContract.address,
-        amount: balance - 3_000n - 300n
+        amount: balance - toSendAmount - 300n
     }
 ]
 
 // build the transaction 
 const transaction = transactionBuilder
     .addInput(
-        // utxos
+        // utxo
         inputs[0],
         // unlocker
         passwordVaultContract.unlock.claim('123456')
