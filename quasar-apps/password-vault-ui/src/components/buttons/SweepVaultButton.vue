@@ -3,14 +3,16 @@
     <q-btn label="Sweep" rounded color="blue" icon="cleaning_services" @click="showDialog = true"/>
     <q-dialog v-model="showDialog" persitent>
       <q-card style="min-width: min(300px, 50vw);">
-        <q-card-section>
-          <q-input v-model="wif" label="Owner WIF"/>
-          <q-input v-model="recipientAddress" placeholder="bitcoincash:pz..." label="Recipient"/>
-        </q-card-section>
-        <q-card-actions align="evenly">
-          <q-btn label="Cancel" no-caps outline color="grey" v-close-popup/>
-          <q-btn label="Sweep" no-caps color="blue" @click="sweep"/>
-        </q-card-actions>
+        <q-form @submit="sweep">
+          <q-card-section>
+            <q-input v-model="wif" label="Owner WIF"/>
+            <q-input v-model="recipientAddress" placeholder="bitcoincash:pz..." label="Recipient"/>
+          </q-card-section>
+          <q-card-actions align="evenly">
+            <q-btn label="Cancel" no-caps outline color="grey" v-close-popup/>
+            <q-btn label="Sweep" no-caps color="blue" type="submit"/>
+          </q-card-actions>
+        </q-form>
       </q-card>
     </q-dialog>
   </div>

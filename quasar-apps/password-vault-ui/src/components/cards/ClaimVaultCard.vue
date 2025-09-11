@@ -1,16 +1,18 @@
 <template>
   <q-card>
-    <q-card-section>
-      <div class="text-h6">Claim</div>
-      <!-- fields go here -->
-      <q-input label="Recipient Address" v-model="recipientAddress" />
-      <q-input label="Passcode" v-model="passcode" />
-    </q-card-section>
-
-    <q-card-actions>
-      <!-- buttons go here -->
-      <q-btn label="Claim" color="blue" class="full-width" @click="claim" />
-    </q-card-actions>
+    <q-form @submit="claim">
+      <q-card-section>
+        <div class="text-h6">Claim</div>
+        <!-- fields go here -->
+        <q-input label="Recipient Address" v-model="recipientAddress" />
+        <q-input label="Passcode" v-model="passcode" />
+      </q-card-section>
+  
+      <q-card-actions>
+        <!-- buttons go here -->
+        <q-btn label="Claim" color="blue" class="full-width" type="submit" />
+      </q-card-actions>
+    </q-form>
   </q-card>
 </template>
 

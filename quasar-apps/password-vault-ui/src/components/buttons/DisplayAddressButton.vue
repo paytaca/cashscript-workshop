@@ -2,8 +2,9 @@
   <q-btn
     rounded
     color="blue"
-    label="Send Money to Pool"
-    @click="displayAddressQrDialog"
+    label="Display QR code"
+    icon="qr_code"
+    @click="displayQrCode"
   />
 </template>
 
@@ -16,15 +17,17 @@ export default defineComponent({
   name: 'DisplayAddressButton',
 
   props: {
-    address: { type: String, required: true, default: '' }
+    address: String,
+    qrSize: { type: Number, required: false, }
   },
 
   methods: {
-    displayAddressQrDialog() {
+    displayQrCode() {
       this.$q.dialog({
         component: AddressQrDialog,
         componentProps: {
-          address: this.address
+          address: this.address,
+          size: this.qrSize,
         }
       })
     }

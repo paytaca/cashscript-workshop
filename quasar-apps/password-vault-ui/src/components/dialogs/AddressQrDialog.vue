@@ -1,18 +1,13 @@
 <template>
-  <q-dialog
-    persistent
-    ref="dialogRef"
-  >
+  <q-dialog persistent ref="dialogRef">
     <q-card class="q-pa-md">
       <div class="row flex-center">
         <span class="col-12 text-center text-bold">
           {{ address }}
         </span>
 
-        <qr-code
-          :text="address"
-          :size="300"
-        />
+        <qr-code v-if="address" :text="address" :size="size" />
+        <div v-else class="q-pa-lg"> No address provided </div>
       </div>
 
       <div class="flex flex-center">
@@ -36,7 +31,8 @@ export default defineComponent({
   name: 'AddressQrDialog',
 
   props: {
-    address: { type: String, required: true, default: '' }
+    address: { type: String, required: true, default: '' },
+    size: { type: Number, required: true, default: 300 },
   },
 
   components: {

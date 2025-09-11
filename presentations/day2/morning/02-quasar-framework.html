@@ -209,24 +209,23 @@
                 <h5>Activity: Setup development</h5>
                 <ol style="min-width:50vw;">
                     <li>
-                        <div>Download project:</div>
-                        <div>
-                            <i class="text-yellow-300">https://bit.ly/quasar-app</i>
-                            or
-                            <i class="text-yellow-300">bit.ly/quasar-app2</i>
-                        </div>
+                        <div>Open command line</div>
                     </li>
                     <li>
-                        <div>Change directory:</div>
+                        <div>Change directory to <i>password-vault-ui</i> folder:</div>
                         <div><i class="text-yellow-300">cd password-vault-ui</i></div>
                     </li>
                     <li>
-                        <div>Install packages:</div>
-                        <div><i class="text-yellow-300">npm install</i></div>
+                        <div>Install quasar cli:</div>
+                        <div><i class="text-yellow-300">npm install -g @quasar/cli</i></div>
                     </li>
                     <li>
                         <div>Run dev server:</div>
-                        <div><i class="text-yellow-300">npx quasar dev</i></div>
+                        <div><i class="text-yellow-300">quasar dev</i></div>
+                    </li>
+                    <li>
+                        <div>Open server in browser:</div>
+                        <div><i class="text-blue-300">http://localhost:9000</i></div>
                     </li>
                 </ol>
             </section>
@@ -284,8 +283,8 @@
                     <pre><code data-trim class="language-html">
                         <template>
                             <div>
-                                <div>Count is: {{ count }}</div>
-                                <button @click="count++">Click me</button>
+                                <h5>Contract address: {{ contractAddress }}</h5>
+                                <button> Create contract </button>
                             </div>
                         </template>
                     </code></pre>
@@ -301,10 +300,11 @@
                         import { defineComponent } from 'vue'
 
                         export default defineComponent({
-                            name: 'CounterButton',
+                            name: 'IndexPage',
                             data() {
                                 return {
-                                    count: 0
+                                    contractAddress: 'bitcoincash:p...',
+                                    passcode: 'my-passcode',
                                 }
                             }
                         })
@@ -317,42 +317,12 @@
                         Holds the CSS (or preprocessor like SCSS/SASS) for your component.
                     </div>
                     <pre><code data-trim class="language-css">
-                        <style scoped>
-                        button {
-                            font-weight: bold;
+                        &ltstyle scoped>
+                        h5 {
+                            margin-top: 4px;
+                            margin-bottom: 4px;
                         }
-                        </style>
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3>Activity: Edit IndexPage.vue</h3>
-                    <ol>
-                        <li>Open <i class="text-blue-300">IndexPage.vue</i> in <i class="text-blue-300">/src/pages/</i> folder</li>
-                        <li>Display a message in the <span class="text-blue-500">template</span> section</li>
-                        <li>Setup component logic in <span class="text-blue-500">script</span> section</li>
-                    </ol>
-                </section>
-                <section>
-                    <pre><code data-trim class="language-html">
-                        <template>
-                            <div>
-                                <h1> Hello World! </h1>
-                                <div> Welcome to Index Page </div>
-                            </div>
-                        </template>
-                    </code></pre>
-                    <pre><code data-trim class="language-javascript">
-                        <script>
-                        import { defineComponent } from 'vue'
-                        export default defineComponent({
-                            name: 'IndexPage',
-                            data() {
-                                return { }
-                            }
-                        })
-                        </script>
+                        &lt/style>
                     </code></pre>
                 </section>
             </section>
@@ -393,14 +363,15 @@
                 <section data-auto-animate>
                     <h3>Declarative Rendering</h3>
                     <div>Declare the component's state variables in <strong class="text-yellow-200">data()</strong></div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="5-9">
+                    <pre><code data-trim class="language-javascript" data-line-numbers="5-10">
                         <script>
                         import { defineComponent } from 'vue'
                         export default defineComponent({
                             name: 'IndexPage',
                             data() {
                                 return {
-                                    count: 0,
+                                    contractAddress: 'bitcoincash:p...',
+                                    passcode: 'my-passcode',
                                 }
                             }
                         })
@@ -413,11 +384,13 @@
                         Use double curly braces <strong class="text-yellow-400">{{ }}</strong> to
                         display variables and expressions in html components
                     </div>
-                    <pre><code data-trim class="language-html" data-line-numbers="3-4">
+                    <pre><code data-trim class="language-html" data-line-numbers="5">
                         <template>
                             <div>
-                                <button>Count: {{ count }}</button>
-                                <h1>{{ count * 3 }}</h1>
+                                <h5>
+                                    Contract address:
+                                    {{ contractAddress }}
+                                </h5>
                             </div>
                         </template>
                     </code></pre>
@@ -428,68 +401,41 @@
                         Use data binding to pass variables or expressions as html attributes
                         using <strong class="text-blue-300">v-bind</strong>
                     </div>
-                    <pre><code data-trim class="language-html" data-line-numbers="3-5">
+                    <pre><code data-trim class="language-html" data-line-numbers="3-4">
                         <template>
                             <div>
-                                <div v-bind:id="count"></div>
-                                <div :id="count"></div>
-                                <div :id="count * 3"></div>
+                                <div v-bind:id="myDivId"></div>
+                                <div :id="myDivId.toUpperCase()"></div>
                             </div>
                         </template>
                     </code></pre>
                 </section>
             </section>
-            <section>
-                <section data-auto-animate>
-                    <h3>Activity: Display contract parameters</h3>
-                    <ol>
-                        <li>
-                            Add the PasswordVault contract's parameters
-                            in <strong class="text-yellow-200">data()</strong>
-                        </li>
-                        <li class="fragment">
-                            Display their values in template
-                        </li>
-                    </ol>
-                </section>
-                <section data-auto-animate>
-                    <h3>Activity: Display contract parameters</h3>
-                    <div>
-                        Add the PasswordVault contract's parameters
-                        in <strong class="text-yellow-200">data()</strong>
-                    </div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="5-11">
-                        <script>
-                        import { defineComponent } from 'vue'
-                        export default defineComponent({
-                            name: 'IndexPage',
-                            data() {
-                                return {
-                                    payoutAmount: 1000, // satoshis
-                                    ownerAddress: 'bitcoincash:qq...',
-                                    passcode: 'unique-passcode',
-                                }
+
+            <section data-auto-animate>
+                <h3>Activity: Set state variables</h3>
+                <div>
+                    Set the initial values of state variables in
+                    <i class="text-yellow-200">IndexPage.vue</i>
+                </div>
+                <pre><code data-trim class="language-javascript" data-line-numbers="5-12">
+                    <script>
+                    import { defineComponent } from 'vue'
+                    export default defineComponent({
+                        name: 'IndexPage',
+                        data() {
+                            // Copy values used in 'contracts/password-vault-instantiate.js'
+                            return {
+                                payoutAmount: 1234n, // satoshis
+                                ownerAddress: 'bitcoincash:q...',
+                                passcode: 'unique-passcode',
                             }
-                        })
-                        </script>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Activity: Display contract parameters</h3>
-                    <div>
-                        Display their values in template
-                    </div>
-                    <pre><code data-trim class="language-html" data-line-numbers="3-5">
-                        <template>
-                            <div>
-                                <div>Payout amount: {{ payoutAmount }}</div>
-                                <div>Owner address: {{ ownerAddress }}</div>
-                                <div>Passcode: {{ passcode }}</div>
-                            </div>
-                        </template>
-                    </code></pre>
-                </section>
+                        }
+                    })
+                    </script>
+                </code></pre>
             </section>
+
             <section>
                 <section data-auto-animate>
                     <h3>Handling events</h3>
@@ -500,15 +446,13 @@
                     </div>
 
                     <pre><code data-trim class="language-html">
-                        <button v-on:click="increment">Click me</button>
+                        <button v-on:click="createContract">Create contract</button>
 
-                        <button v-on:click="count++">Click me</button>
+                        <button v-on:click="createContract()">Click me</button>
 
-                        <button @click="increment">Click me</button>
+                        <button @click="createContract">Create contract</button>
 
-                        <button @click="count++">Click me</button>
-        
-                        <button @click="increment()">Click me</button>
+                        <button @click="createContract()">Click me</button>
                     </code></pre>
 
                     <div class="p-2 rounded-lg bg-white/10">
@@ -522,14 +466,15 @@
                         <strong class="text-blue-300">methods</strong>
                     </div>
 
-                    <pre><code data-trim class="language-javascript" data-line-numbers="3-7">
+                    <pre><code data-trim class="language-javascript" data-line-numbers="3-8">
                         export default defineComponent({
-                            // ...
+                            name: 'IndexPage',
+                            // data() function
                             methods: {
-                                increment() {
-                                    this.count += 1;
-                                }
-                            }
+                                createContract() {
+                                    // function code here
+                                },
+                            },
                         })
                     </code></pre>
                 </section>
@@ -540,117 +485,37 @@
                         <strong class="text-blue-500">this</strong> object
                     </div>
 
-                    <pre><code data-trim class="language-javascript" data-line-numbers="5-6">
+                    <pre><code data-trim class="language-javascript" data-line-numbers="7-8">
                         export default defineComponent({
-                            // ...
+                            name: 'IndexPage',
+                            // data() function
                             methods: {
-                                increment() {
-                                    this.count += 1;
+                                createContract() {
+                                    const passwordVaultContract = createContractInstance(this.payoutAmount, this.ownerAddress, this.passcode)
+                                    this.contractAddress = passwordVaultContract.address;
                                     this.anotherMethod();
-                                }
-                            }
+                                },
+                            },
                         })
                     </code></pre>
                 </section>
             </section>
 
-            <section>
-                <section data-auto-animate>
-                    <h3>Activity: Using Events</h3>
-                    <div>Create contract instance on button click</div>
-                    <ol>
-                        <li class="fragment">
-                            Add a button in that runs a function on click
-                        </li>
-                        <li class="fragment">
-                            The function will create a smart contract instance using an external function
-                            <ul>
-                                <li class="fragment">
-                                    From <i class="text-blue-300">src/lib/contract.js</i>
-                                    , import
-                                    <i class="text-blue-300">
-                                        createContractInstance(payoutAmount, ownerAddress, passcode)
-                                    </i>
-                                </li>
-                                <li class="fragment">
-                                    Use the state variables from the previous activity as parameters
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="fragment">
-                            Add the compiled contract's address as a state variable and display it's value.
-                        </li>
-                    </ol>
-                </section>
-                <section data-auto-animate>
-                    <h3>Activity: Using Events</h3>
-                    <div>Add a button in that runs a function on click</div>
-                    <pre><code data-trim class="language-html" data-line-numbers="3">
-                        <template>
-                            // ...
-                            <button @click="createPasswordVaultInstance">Create</button>
-                        </template>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Activity: Using Events</h3>
-                    <div>
-                        From
-                        <i class="text-blue-300">src/lib/contract.js</i>,
-                        import
-                        <i class="text-blue-300">createContractInstance(payoutAmount, ownerAddress, passcode)</i>
-                    </div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="2">
-                        <script>
-                        import { createContractInstance } from 'src/lib/contract.js'
-                        // defineComponent({ ...
-                        </script>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Activity: Using Events</h3>
-                    <div>Use the state variables from the previous activity as parameters</div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="4-12">
-                        <script>
-                        import { createContractInstance } from 'src/lib/contract.js'
-                        // defineComponent({ ...
-                            methods: {
-                                createPasswordVaultInstance() {
-                                    const contract = createContractInstance(
-                                        this.payoutAmount,
-                                        this.ownerAddress,
-                                        this.passcode,
-                                    )
-                                }
-                            }
-                        </script>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Activity: Using Events</h3>
-                    <div>Add the compiled contract's address as a state variable and display the result.</div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="5">
-                        createPasswordVaultInstance() {
-                            const contract = createContractInstance(
-                                // ...
-                            )
-                            this.contractAddress = contract.address
-                        }
-                    </code></pre>
-                </section>
-            </section>
-
             <section data-auto-animate>
-                <h3>Contract instantiation</h3>
-                <div id="contract-instantiation-diagram-1" class="mermaid p-2 bg-white rounded-lg">
-                    sequenceDiagram
-                    App->>Component: User click a button
-                    Component-->>JS: Component runs external function
-                    JS-->>Cashscript: Process necessary contract details
-                    Cashscript-->>JS: Contract creation with cashscript
-                    JS-->>Component: Save contract details to component state
-                    Component-->>App: Display contract details
+                <h3>Activity: Using Events</h3>
+                <div>
+                    Add an event listener to button in
+                    <i class="text-yellow-200">IndexPage</i>'s
+                    template
                 </div>
+                <pre><code data-trim class="language-html" data-line-numbers="3">
+                    <template>
+                        // ...
+                        <button @click="createContract" class="my-btn">
+                            Create contract
+                        </button>
+                    </template>
+                </code></pre>
             </section>
 
             <section>
@@ -709,13 +574,18 @@
                         </ul>
                     </div>
                     <pre><code data-trim class="language-html" data-line-numbers="">
-                        <p v-if="count == 0">Count is now zero</p>
-                        <p v-else-if="count > 0">Count is positive</p>
-                        <p v-else-if="count < 0">Count is negative</p>
-                        <p v-else><!-- Default --></p>
+                        <p v-if="contractAddress.length === 0">
+                            Address is empty
+                        </p>
+                        <p v-else-if="contractAddress == null">
+                            Address is null
+                        </p>
+                        &ltp v-else>
+                            Address is not empty
+                        &lt/p>
 
-                        <p v-show="count == 0">
-                            This will only show when count is 0
+                        <p v-show="contractAddress.length > 0">
+                            Contract address: {{ contractAddress }}
                         </p>
                     </code></pre>
                 </section>
@@ -729,22 +599,17 @@
                     </div>
                     <pre><code data-trim class="language-html" data-line-numbers="">
                         <template>
-                            {{ count }}
-                            {{ reverseCount }}
-                            {{ repeatCharacter }}
+                            {{ payoutAmount }}
+                            {{ paymentAmountBch }}
                         </template>
                     </code></pre>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="2-13">
+                    <pre><code data-trim class="language-javascript" data-line-numbers="2-6">
                         export default defineComponent({
                             computed: {
-                                reverseCount() {
-                                    return this.count * -1
+                                paymentAmountBch: function() {
+                                    return Number(this.payoutAmount) / 100_000_000;
                                 },
-                                repeatCharacter() {
-                                    if (this.count < 0) return 'Count is negative'
-                                    return 'A'.repeat(this.count)
-                                },
-                            }
+                            },
                         })
                         
                     </code></pre>
@@ -757,13 +622,15 @@
                     <pre><code data-trim class="language-javascript" data-line-numbers="2-11">
                         export default defineComponent({
                             watch: {
-                                count(newValue, oldValue) {
+                                passcode(newValue, oldValue) {
                                     console.log(
                                         'Count changed!',
                                         'Before:', oldValue,
                                         'After:', newValue
                                     );
-                                    this.displayCount(); // 'this' keyword is accessible
+
+                                    // 'this' keyword is accessible
+                                    this.createContract(); 
                                 },
                             }
                         })
@@ -785,7 +652,7 @@
                             // except `beforeCreate()`
                             created() {
                                 window.alert('Created');
-                                console.log('Count', this.count);
+                                console.log(this.contractAddress);
                             },
 
                             beforeMount() {
@@ -830,17 +697,17 @@
                     <pre><code data-trim class="language-python" data-line-numbers="3,7,10-12">
                         <template>
                             <div> 
-                                &ltCounterButton/>
+                                &ltDisplayAddressButton/>
                             </div>
                         </template>
                         <script>
-                        import CounterButton from '../components/CounterButton.vue'
+                        import DisplayAddressButton from 'src/components/buttons/DisplayAddressButton.vue'
                         export default defineComponent({
-                            // ...
+                            name: 'IndexPage',
                             components: {
-                                CounterButton,
-                            }
-                            // ...
+                                DisplayAddressButton,
+                            },
+                            // data() function
                         })
                         </script>
 
@@ -851,7 +718,7 @@
                     <div>1. Import the component</div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="2">
                         <script>
-                        import CounterButton from '../components/CounterButton.vue'
+                        import DisplayAddressButton from 'src/components/buttons/DisplayAddressButton.vue'
                         // ...
                         </script>
                     </code></pre>
@@ -861,11 +728,11 @@
                     <div>2. Register the component to the parent component</div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="3-5">
                         export default defineComponent({
-                            // ...
+                            name: 'IndexPage',
                             components: {
-                                CounterButton,
-                            }
-                            // ...
+                                DisplayAddressButton,
+                            },
+                            // data() function
                         })
                     </code></pre>
                 </section>
@@ -875,7 +742,7 @@
                     <pre><code data-trim class="language-html" data-line-numbers="3">
                         <template>
                             <div>
-                                &ltCounterButton/>
+                                &ltDisplayAddressButton/>
                             </div>
                         </template>
                     </code></pre>
@@ -889,20 +756,19 @@
                         A child component can accept input from the parent via props.
                     </div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="3-6">
-                    // CounterButton.vue
                     export default {
+                        name: 'DisplayAddressButton',
                         props: {
-                            text: String,
-                            size: String,
+                            address: String,
                         }
                     }
                     </code></pre>
     
                     <pre><code data-trim class="language-html" data-line-numbers="4">
-                    // ParentComponent.vue
+                    // IndexPage.vue
                     <template>
                         <div>
-                            &ltCounterButton :text="buttonText" :size="400"/>
+                            &ltDisplayAddressButton :address="contractAddress" />
                         </div>
                     </template>
                     </code></pre>
@@ -912,13 +778,13 @@
                     <div>Declare the props in child components</div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="3-10">
                         export default {
-                            name: 'CounterButton',
+                            name: 'DisplayAddressButton',
                             props: {
-                                size: Number,
-                                text: {
-                                    type: String,
-                                    required: true,
-                                    default: 'Count is:',
+                                address: String,
+                                qrSize: {
+                                    type: Number,
+                                    required: false,
+                                    default: 300,
                                 },
                             }
                         }
@@ -944,16 +810,17 @@
                     <div>
                         Props are <strong class="text-yellow-400">ready-only</strong>
                     </div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="5-9">
+                    <pre><code data-trim class="language-javascript" data-line-numbers="6-10">
                         export default defineComponent({
-                            props: { text: String }
+                            name: 'DisplayAddressButton',
+                            props: { address: String },
                             methods: {
-                                fooBar() {
+                                displayQrCode() {
                                     // This is ok!
-                                    console.log(this.text);
+                                    console.log(this.address);
 
                                     // This is not ok!
-                                    this.text = 'Updated text';
+                                    this.address = 'Updated text';
                                 }
                             }
                         })
@@ -961,62 +828,19 @@
                 </section>
             </section>
 
-            <section>
-                <section data-auto-animate>
-                    <h3>Activity: Using components</h3>
-                    <div>
-                        Display contract address as QRcode using the component:
-                        <i class="text-blue-300">/src/components/buttons/DisplayAddressButton.vue</i>
-                    </div>
-                    <ol>
-                        <li class="fragment">
-                            Add component <i class="text-blue-300">DisplayAddressButton</i>
-                            <ol type="a">
-                                <li>Import from <i class="text-blue-300">/src/components/buttons</i></li>
-                                <li>Register component in <i class="text-blue-300">IndexPage</i></li>
-                                <li>Use component in template</li>
-                            </ol>
-                        </li>
-                        <li class="fragment">
-                            Pass a prop address using the contract address from
-                            the previous activity
-                        </li>
-                    </ol>
-                </section>
-                <section data-auto-animate>
-                    <h3>Activity: Using components</h3>
-                    <div>Import from <i class="text-blue-300">/src/components/buttons</i></div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="2">
-                        <script>
-                        import DisplayAddressButton from '../components/buttons/DisplayAddressButton.vue'
-                        // ...
-                        </script>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Activity: Using components</h3>
-                    <div>2. Register component in <i class="text-blue-300">IndexPage</i></div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="3-5">
-                        export default defineComponent({
-                            name: 'IndexPage'
-                            components: {
-                                DisplayAddressButton,
-                            }
-                            // ...
-                        })
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Activity: Using components</h3>
-                    <div>Use component in template and pass the contract's address as prop</div>
-                    <pre><code data-trim class="language-html" data-line-numbers="3">
-                        <template>
-                            <div>
-                                &ltDisplayAddressButton :address="contractAddress"/>
-                            </div>
-                        </template>
-                    </code></pre>
-                </section>
+            <section data-auto-animate>
+                <h3>Activity: Using components</h3>
+                <div>
+                    Pass <i class="text-blue-200">contractAddress</i> as prop to
+                    <i class="text-blue-300">DisplayAddressButton.vue</i>
+                </div>
+                <pre><code data-trim class="language-html" data-line-numbers="3">
+                    <template>
+                        <div>
+                            &ltDisplayAddressButton :address="contractAddress"/>
+                        </div>
+                    </template>
+                </code></pre>
             </section>
 
             <section>
@@ -1052,29 +876,6 @@
                         <input type="radio" v-model="pick" :value="first" />
                         <input type="radio" v-model="pick" :value="second" />
                     </code></pre>
-                </section>
-
-                <section data-auto-animate>
-                    <h3>Form Input Bindings</h3>
-                    <div>
-                        It is a shortcut for
-                        <span class="text-blue-300">v-bind</span> and
-                        <span class="text-blue-300">v-on</span>.
-                        Binding it to appropriate attributes and event
-                    </div>
-                    <pre><code data-trim class="language-html" data-line-numbers="">
-                        &ltinput v-model="message"&#47;&gt
-
-                        &ltinput
-                            :value="message"
-                            v-on:input="event => message = event.target.value"
-                        &#47;&gt
-                    </code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
-                        For instance, <span class="text-blue-300">type="checkbox"</span>
-                        binds to <span class="text-blue-300">checked</span>
-                        attribute
-                    </div>
                 </section>
 
                 <section data-auto-animate>
@@ -1132,93 +933,23 @@
                 </section>
             </section>
 
-            <section>
-                <section data-auto-animate>
-                    <h3>Activity: Create a form</h3>
-                    <div>
-                        Edit
-                        <i class="text-blue-300">PasswordVaultFormCard.vue</i>
-                        in
-                        <i class="text-blue-300">src/components/src/cards/</i>
-                        to create a form for PasswordVault contract parameters.
-                    </div>
-                    <ol>
-                        <li class="fragment">
-                            Add necessary input elements for each contract parameter.
-                        </li>
-                        <li class="fragment">
-                            Add state variables and bind values using
-                            <span class="text-blue-300">v-model</span>
-                            and appropriate modifiers.
-                        </li>
-                        <li class="fragment">
-                            Add <i class="text-blue-300">PasswordVaultFormCard</i>
-                            component in <i class="text-blue-300">IndexPage</i>
-                        </li>
-                    </ol>
-                </section>
+            <section data-auto-animate>
+                <h3>Activity: Form input binding</h3>
+                <div>
+                    <i class="text-blue-300">PasswordVaultFormCard.vue</i>
+                    in
+                    <i class="text-blue-300">src/components/src/cards/</i>
+                    and add
+                    <i class="text-blue-300">v-model</i>
+                    to the input fields
+                </div>
+                <pre><code data-trim class="language-html">
+                    &ltq-input v-model.number="formPayoutAmount" label="Payout Amount"/>
 
-                <section data-auto-animate>
-                    <h3>Activity: Create a form</h3>
-                    <div>
-                        Add necessary input elements for each contract parameter.
-                    </div>
-                    <pre><code data-trim class="language-html">
-                        <input placeholder="Payout Amount" type="number"/>
+                    &ltq-input v-model.trim="formOwnerAddress" label="Owner address"/>
 
-                        <input placeholder="Owner address"/>
-
-                        <input placeholder="Passcode"/>
-                    </code></pre>
-                </section>
-
-                <section data-auto-animate>
-                    <h3>Activity: Create a form</h3>
-                    <div>
-                        Add state variables and bind values using
-                        <span class="text-blue-300">v-model</span>
-                        and appropriate modifiers.
-                    </div>
-                    <pre><code data-trim class="language-html">
-                        <input v-model.number="payoutAmount" placeholder="Payout Amount"/>
-                        <input v-model.trim="ownerAddress" placeholder="Owner address"/>
-                        <input v-model="passcode" placeholder="Passcode"/>
-                    </code></pre>
-
-                    <pre><code data-trim class="language-javascript" data-line-numbers="">
-                        data() {
-                            return {
-                                payoutAmount: 0,
-                                ownerAddress: '',
-                                passcode: '',
-                            }
-                        }
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Activity: Create a form</h3> 
-                    <div>
-                        Add <i class="text-blue-300">PasswordVaultFormCard</i>
-                        component in <i class="text-blue-300">IndexPage</i>
-                    </div>
-
-                    <pre><code data-trim class="language-html">
-                        <template>
-                            &ltPasswordVaultFormCard&#47;&gt
-                        </template>
-                    </code></pre>
-
-                    <pre><code data-trim class="language-javascript">
-                        import PasswordVaultFormCard from '../components/cards/PasswordVaultFormCard.vue'
-                        export default defineComponent({
-                            name: 'IndexPage',
-
-                            components: {
-                                PasswordVaultFormCard,
-                            }
-                        })
-                    </code></pre>
-                </section>
+                    &ltq-input v-model="formPasscode" label="Passcode"/>
+                </code></pre>
             </section>
 
             <section>
@@ -1235,49 +966,55 @@
                 </section>
                 <section>
                     <h3>Component events</h3>
-                    <!-- TODO: replace with diagram instead, move code to next slide instead? -->
                     <pre><code data-trim class="language-html" data-line-numbers="2,5,6">
                         <!-- ChildComponent.vue -->
-                        <button @click="$emit('selfDestruct')">Click me</button>
+                        <button @click="$emit('contractSubmit')">Click me</button>
 
                         <!-- ParentComponent.vue -->
-                        &ltChildComponent @self-destruct="selfDestructHandler"/>
-                        &ltChildComponent @selfDestruct="selfDestructHandler"/>
+                        &ltChildComponent @contract-submit="onCreateContract"/>
+                        &ltChildComponent @contractSubmit="onCreateContract"/>
                     </code></pre>
                 </section>
                 <section data-auto-animate>
                     <h3>Component events</h3>
                     <div>
-                        The child component can emit events using
+                        Emit events from child component using
                         <span class="text-blue-300">$emit</span>
-                        function
                     </div>
                     <pre><code data-trim class="language-html" data-line-numbers="2">
                         <template>
-                            <button @click="$emit('selfDestruct')">Click me</button>
+                            <button @click="$emit('contractSubmit')">Click me</button>
                         </template>
                     </code></pre>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="4">
+                    <pre><code data-trim class="language-javascript" data-line-numbers="5">
                         export default defineComponent({
+                            // name: 'PasswordVaultFormCard', data() { .. } ..
                             methods: {
                                 onButtonClick() {
-                                    this.$emit('selfDestruct')
+                                    this.$emit('contractSubmit')
                                 }
                             }
                         })
                     </code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
-                        <span class="text-yellow-300">$emit(eventName, ...)</span> first parameter is the event name
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg">
+                        First parameter is the event name, preferrably in
+                        <i class="text-yellow-200">camelCase</i>
                     </div>
                 </section>
                 <section data-auto-animate>
                     <h3>Component event arguments</h3>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="2">
-                        // ChildComponent.vue
-                        this.$emit('selfDestruct', arg1, ... , argN)
+                    <pre><code data-trim class="language-javascript" data-line-numbers="5">
+                        export default defineComponent({
+                            // name: 'PasswordVaultFormCard', data() { .. } ..
+                            methods: {
+                                submitForm() {
+                                    this.$emit('contractSubmit', arg1, arg2, argN)
+                                }
+                            }
+                        })
                     </code></pre>
 
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg">
                         Parameters after the event name
                         are passed as arguments
                     </div>
@@ -1289,100 +1026,40 @@
                         <i class="text-blue-300">v-on</i> or <i class="text-blue-300">@</i>
                     </div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="1">
-                        &ltChildComponent @self-destruct="selfDestructHandler"/>
+                        &ltPasswordVaultFormCard @contract-submit="onCreateContract"/>
                     </code></pre>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="3-5">
-                        // ParentComponent.vue
+                    <pre><code data-trim class="language-javascript" data-line-numbers="4-6">
+                        name: 'IndexPage',
+                        // data() { ... }
                         methods: {
-                            selfDestructHandler(arg1, ..., argN) {
+                            onCreateContract(arg1, arg2 argN) {
                                 // ... 
-                            }
-                        }
+                            },
+                        },
                     </code></pre>
                 </section>
             </section>
 
-            <section>
-                <section data-auto-animate>
-                    <h3>Activity: Component Events</h3>
-                    <div>
-                        Emit an event in <i class="text-blue-300">PasswordVaultFormCard</i>,
-                        add save the form's values in <i class="text-blue-300">IndexPage</i>'s
-                        state variables
-                    </div>
-                    <ol>
-                        <li class="fragment">
-                            In <i class="text-blue-300">PasswordVaultFormCard</i>, add a submit
-                            button that will emit an event submitted when clicked.
-                        </li>
-                        <li class="fragment">
-                            Include the form's state variables as event argument
-                        </li>
-                        <li class="fragment">
-                            In <i class="text-blue-300">IndexPage</i>, capture the submitted event.
-                        </li>
-                        <li class="fragment">
-                            In <i class="text-blue-300">IndexPage</i>,
-                            use the event's arguments to update the state variables
-                            and recreate the contract address.
-                        </li>
-                    </ol>
-                </section>
-                <section data-auto-animate>
-                    <h3>Activity: Component Events</h3>
-                    <div>
-                        Add a submit button that will emit an event submitted when clicked.
-                    </div>
-                    <pre><code data-trim class="language-html" data-line-numbers="">
-                        <button @click="submitForm">Create Contract</button>
-                    </code></pre>
-
-                    <pre><code data-trim class="language-javascript" data-line-numbers="3">
-                        methods: {
-                            submitForm() {
-                                this.$emit('createContract')
-                            }
+            <section data-auto-animate>
+                <h3>Activity: Component Events</h3>
+                <div>
+                    In <i class="text-blue-300">PasswordVaultFormCard</i>'s
+                    <i class="text-yellow-200">submitForm</i> method,
+                    emit an event and pass the form field's values as arguments
+                </div>
+                <pre><code data-trim class="language-javascript" data-line-numbers="3-7">
+                    methods: {
+                        submitForm() {
+                            this.$emit(
+                                'createContract',
+                                this.formPayoutAmount,
+                                this.formOwnerAddress,
+                                this.formPasscode,
+                            )
                         }
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Activity: Component Events</h3>
-                    <div>
-                        Include the form's state variables as event argument
-                    </div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="3-7">
-                        methods: {
-                            submitForm() {
-                                this.$emit(
-                                    'createContract',
-                                    this.payoutAmount,
-                                    this.ownerAddress,
-                                    this.passcode
-                                )
-                            }
-                        }
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Activity: Component Events</h3>
-                    <div>
-                        In <i class="text-blue-300">IndexPage</i>,
-                        use the event's arguments to update the state variables
-                        and recreate the contract address.
-                    </div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="2-7">
-                        methods: {
-                            onCreateContract(payoutAmount, ownerAddress, passcode) {
-                                this.payoutAmount = payoutAmount;
-                                this.ownerAddress = ownerAddress;
-                                this.passcode = passcode;
-                                this.createPasswordVaultInstance();
-                            }
-                        }
-                    </code></pre>
-                </section>
+                    }
+                </code></pre>
             </section>
-
 
             <section data-auto-animate>
                 <h3>Contract instantiation</h3>

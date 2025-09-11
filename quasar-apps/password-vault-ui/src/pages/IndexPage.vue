@@ -1,14 +1,75 @@
 <template>
-  <div class="q-pa-lg q-gutter-md index-page-container">
-    <!-- insert here -->
+  <div class="q-pa-lg index-page-container">
+    <div class="contract-card">
+      <h5 class="ellipsis">
+        Contract address: {{ contractAddress }}
+      </h5>
+
+      <div>Payout Amount: {{ paymentAmountBch }} BCH</div>
+      <div>Owner address: {{ ownerAddress }}</div>
+      <div>Passcode: {{ passcode }}</div>
+
+      <!-- Add event listener here -->
+      <button class="my-btn">
+        Create contract
+      </button>
+
+      <!-- Add component props here -->
+      <DisplayAddressButton />
+    </div>
+
+    <PasswordVaultFormCard @createContract="onFormCardSubmit"/>
   </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
+import { createContractInstance } from 'src/lib/contract.js'
+import DisplayAddressButton from 'src/components/buttons/DisplayAddressButton.vue'
+import PasswordVaultFormCard from 'src/components/cards/PasswordVaultFormCard.vue';
 
 export default defineComponent({
   name: 'IndexPage',
+  components: {
+    DisplayAddressButton,
+    PasswordVaultFormCard,
+  },
+  data() {
+    return {
+      // Copy values used in 'contracts/password-vault-instantiate.js'
+      payoutAmount: 0n,
+      ownerAddress: '', // bitcoincash:q + <41 characters>
+      passcode: '',
+
+      contractAddress: '',
+    }
+  },
+
+  computed: {
+    paymentAmountBch: function() {
+      // convert this.payoutAmount that is in satoshis to BCH
+      // NOTE: 100_000_000 satoshis = 1 BCH
+      return Number(this.payoutAmount) / 100_000_000;
+    },
+  },
+
+  methods: {
+    createContract(){
+      const passwordVaultContract = createContractInstance(this.payoutAmount, this.ownerAddress, this.passcode)
+      this.contractAddress = passwordVaultContract.address;
+    },
+    onFormCardSubmit(payoutAmount, ownerAddress, passcode) {
+      this.payoutAmount = payoutAmount;
+      this.ownerAddress = ownerAddress;
+      this.passcode = passcode;
+      this.createContract();
+    },
+  },
+
+  mounted() {
+    // Auto create contract here
+
+  }
 });
 </script>
 <style scoped>
@@ -16,5 +77,31 @@ export default defineComponent({
   max-width: min(600px, 85vw);
   margin-left: auto;
   margin-right: auto;
+}
+
+h5 {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+button {
+  margin-right: 8px;
+  margin-bottom: 4px;
+}
+
+button.my-btn {
+  background: #2196f3 !important;
+  color: white;
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+button.my-btn:active {
+  background-color: #1d7cc9 !important;
+}
+
+div.contract-card {
+  margin-bottom: 40px;
 }
 </style>
