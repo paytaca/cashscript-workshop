@@ -684,6 +684,28 @@
             </section>
 
             <section>
+                <h3>Activity: Autorun create contract</h3>
+                <div>
+                    Call the function
+                    <i class="text-blue-300">this.createContract()</i>
+                    in the
+                    <i class="text-blue-300">mounted()</i>
+                    lifecycle hook
+                </div>
+                <pre><code data-trim class="language-javascript" data-line-numbers="6-8">
+                    export default defineComponent({
+                        name: 'IndexPage',
+                        // data() function
+                        // computed: ...
+                        // methods: ...
+                        mounted() {
+                            this.createContract();
+                        }
+                    })
+                </code></pre>
+            </section>
+
+            <section>
                 <h3>Components</h3>
                 <ul>
                     <li>We've been using a single component only</li>
@@ -1208,19 +1230,18 @@
                         import { defineStore } from 'pinia'
 
                         export const useContractStore = defineStore('contract', {
-                            state: () => ({
-                                // State variables
-                                address: '',
-                                balance: 0,
-                            }),
+                            state: function() {
+                                return {
+                                    address: '',
+                                    balance: 0,
+                                }
+                            },
                             getters: {
-                                // Getter functions, computed state variables
-                                formattedBalance() {
-                                    return `${this.balance} BCH`
+                                bchBalance() {
+                                    return this.balance / 100_000_000;
                                 }
                             },
                             actions: {
-                                // Store methods
                                 updateAddress(newAddress) {
                                     this.address = newAddress;
                                 },
@@ -1236,16 +1257,10 @@
 
                         export default defineComponent({
                             computed: {
-                                // Pass the useContractStore and not call it!
                                 ...mapState(useContractStore, {
-                                    // 
-                                    contractBalance: 'balance',
                                     contractAddress: 'address',
-
-                                    // You can use a function as well to derive the value.
-                                    // The function parameter is a store object
-                                    ownerAddress: (contractStore) => {
-                                        return contractStore.parameters.ownerAddress
+                                    contractBalance: function(contractStore) {
+                                        return contractStore.balance;
                                     }
                                 })
                             },
@@ -1264,107 +1279,47 @@
 
             <section>
                 <section data-auto-animate>
-
-                    <h3>Activity: Use contract store</h3>
-                    <div>
-                        Update <i class="text-blue-300">IndexPage</i> and
-                        <i class="text-blue-300">PasswordVaultFormCard</i> to use
-                        <i class="text-yellow-200">useContractStore</i> in
-                        <i class="text-blue-300">/src/store/contract-store.js</i>
-                    </div>
+                    <h3>Activity: Use pinia store</h3>
                     <ol>
-                        <li class="fragment">
-                            In <i class="text-blue-300">IndexPage</i>,
-                            update contract parameter variables to use contract store
-                        </li>
-                        <li class="fragment">
-                            In <i class="text-blue-300">PasswordVaultFormCard</i>
-                            <ol>
-                                <li class="fragment">
-                                    Update initial value of form fields to
-                                    use values from contract store.
-                                </li>
-                                <li class="fragment">
-                                    Use contract store's action
-                                    <i class="text-yellow-200">saveContract</i>
-                                    to update store state variables instead of using
-                                    <i class="text-yellow-200">$emit</i>
-                                </li>
-                            </ol>
-                        </li>
+                        <li>Save contract data to store</li>
+                        <li>Access contract data from store</li>
                     </ol>
                 </section>
-                <section data-auto-animate>
-                    <h3>Activity: Use contract store</h3>
+                <section>
+                    <h3>Activity: Use pinia store</h3>
                     <div>
-                        In <i class="text-blue-300">IndexPage</i>,
-                        update contract parameter variables to use contract store.
+                        Save contract data to store in <i class="text-blue-200">IndexPage</i>
                     </div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="1,2,8-19">
-                        import { useContractStore } from '../stores/contract-store';
-                        import { mapState } from 'pinia';
-
+                    <pre><code data-trim class="language-javascript" data-line-numbers="7-10">
                         export default defineComponent({
                             name: 'IndexPage',
-                            // ..
-                            computed: {
-                                ...mapState(useContractStore, {
-                                    contractAddress: 'address',
-                                    payoutAmountBch: 'payoutAmountBch',
-
-                                    ownerAddress: contractStore => {
-                                        return contractStore.parameters.ownerAddress
-                                    },
-
-                                    passcode: contractStore => {
-                                        return contractStore.parameters.passcode
-                                    },
-                                }),
-                            }
-                        })
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Activity: Use contract store</h3>
-                    <div>
-                        Update initial value of form fields to use values from contract store.
-                    </div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="1,6-9">
-                        import { useContractStore } from 'src/stores/contract-store'
-                        export default defineComponent({
-                            name: 'PasswordVaultFormCard',
-                            // ...
-                            mounted() {
-                                const contractStore = useContractStore();
-                                this.payoutAmount = contractStore.parameters.payoutAmount;
-                                this.ownerAddress = contractStore.parameters.ownerAddress;
-                                this.passcode = contractStore.parameters.passcode;
-                            }
-                        })
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Activity: Use contract store</h3>
-                    <div>
-                        Use contract store's action
-                        <i class="text-yellow-200">saveContract</i>
-                        to update store state variables instead of using
-                        <i class="text-yellow-200">$emit</i>
-                    </div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="1,7-12">
-                        import { useContractStore } from 'src/stores/contract-store'
-                        export default defineComponent({
-                            name: 'PasswordVaultFormCard',
-                            // ...
+                            // data() { ... }
+                            // computed: { ... }
                             methods: {
-                                submitForm() {
+                                onFormCardSubmit(payoutAmount, ownerAddress, passcode) {
                                     const contractStore = useContractStore();
                                     contractStore.saveContract(
-                                        this.payoutAmount,
-                                        this.ownerAddress,
-                                        this.passcode,
+                                        payoutAmount, ownerAddress, passcode,
                                     );
-                                }
+                                },
+                            }
+                        })
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Activity: Use pinia store</h3>
+                    <div>Access contract data from store</div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="3,6-9">
+                        export default defineComponent({
+                            name: 'IndexPage',
+                            // remove data() { ... }
+                            computed: {
+                                ...mapState(useContractStore, {
+                                    contractAddress: 'contractAddress',
+                                    payoutAmount: 'payoutAmount',
+                                    ownerAddress: 'ownerAddress',
+                                    passcode: 'passcode',
+                                }),
                             }
                         })
                     </code></pre>
@@ -1372,73 +1327,11 @@
             </section>
 
             <section>
-                <section>
-                    <h3>Next steps</h3>
-                    <div>We got most UI functions we need, let's add the missing functionalties</div>
-                    <ol>
-                        <li class="fragment">Display PasswordVault contract's balance</li>
-                        <li class="fragment">Claiming BCH from the vault</li>
-                        <li class="fragment">Sweeping unused BCH from the vault</li>
-                            <ul class="fragment">
-                                <li>Open the transaction from the explorer</li>
-                            </ul>
-                    </ol>
-                </section>
-                <section>
-                    <h3>Display PasswordVault contract's balance</h3>
-                    <pre><code data-trim class="language-html" data-line-numbers="2">
-                        <template>
-                            <div> Balance: {{ contractBalanceBch }} BCH </div>
-                        </template>
-                    </code></pre>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="5">
-                        export default defineComponent({
-                            name: 'IndexPage',
-                            computed: {
-                                ...mapState(useContractStore, {
-                                    contractBalanceBch: 'bchBalance',
-                                    // ...
-                                })
-                            }
-                        })
-                    </code></pre>
-                </section>
-                <section>
-                    <h3>Activity: Adding claim BCH form</h3>
-                    <pre><code data-trim class="language-html" data-line-numbers="2">
-                        <template>
-                            &ltClaimVaultCard&#47;&gt
-                        </template>
-                    </code></pre>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="1,5">
-                        import ClaimVaultCard from 'src/components/cards/ClaimVaultCard.vue';
-
-                        export default defineComponent({
-                            components: {
-                                ClaimVaultCard,
-                                // ...
-                            }
-                        })
-                    </code></pre>
-                </section>
-                <section>
-                    <h3>Activity: Sweeping unused BCH from vault</h3>
-                    <pre><code data-trim class="language-html" data-line-numbers="2">
-                        <template>
-                            &ltSweepVaultButton&#47;&gt
-                        </template>
-                    </code></pre>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="1,5">
-                        import SweepVaultButton from 'src/components/cards/SweepVaultButton.vue';
-
-                        export default defineComponent({
-                            components: {
-                                SweepVaultButton,
-                                // ...
-                            }
-                        })
-                    </code></pre>
-                </section>
+                <h3>Activity: Display contract balance</h3>
+                <ol>
+                    <li>Use the contract store to display the balance</li>
+                    <li>Add a button to refresh balance</li>
+                </ol>
             </section>
 
             <section data-auto-animate>

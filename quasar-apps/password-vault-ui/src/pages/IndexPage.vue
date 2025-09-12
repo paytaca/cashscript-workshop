@@ -47,9 +47,9 @@ export default defineComponent({
   data() {
     return {
       // Copy values used in 'contracts/password-vault-instantiate.js'
-      payoutAmount: 1234n,
-      ownerAddress: 'bitcoincash:qq4sh33hxw2v23g2hwmcp369tany3x73wugtc9p69g', // bitcoincash:q + <41 characters>
-      passcode: '12345',
+      payoutAmount: 0n,
+      ownerAddress: '', // bitcoincash:q + <41 characters>
+      passcode: '',
 
       contractAddress: '',
     }
@@ -58,7 +58,6 @@ export default defineComponent({
   computed: {
     ...mapState(useContractStore, {
       // Add mappable state here,
-
     }),
     paymentAmountBch: function() {
       // convert this.payoutAmount that is in satoshis to BCH

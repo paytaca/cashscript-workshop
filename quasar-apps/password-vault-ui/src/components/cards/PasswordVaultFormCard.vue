@@ -23,9 +23,8 @@ export default defineComponent({
   name: 'PasswordVaultFormCard',
   data() {
     return {
-      // state variables here
       formPayoutAmount: 0,
-      formPwnerAddress: '',
+      formOwnerAddress: '',
       formPasscode: '',
     }
   },
@@ -37,9 +36,9 @@ export default defineComponent({
   },
   mounted() {
     const contractStore = useContractStore();
-    this.payoutAmount = contractStore.payoutAmount;
-    this.ownerAddress = contractStore.ownerAddress;
-    this.passcode = contractStore.passcode;
+    this.formPayoutAmount = contractStore.payoutAmount;
+    this.formOwnerAddress = contractStore.ownerAddress;
+    this.formPasscode = contractStore.passcode;
   }
 })
 </script>
