@@ -16,9 +16,12 @@
 
       <!-- Add component props here -->
       <DisplayAddressButton />
+
+      <SweepVaultButton />
     </div>
 
     <PasswordVaultFormCard @createContract="onFormCardSubmit"/>
+    <ClaimVaultCard />
   </div>
 </template>
 
@@ -27,25 +30,36 @@ import { defineComponent } from 'vue'
 import { createContractInstance } from 'src/lib/contract.js'
 import DisplayAddressButton from 'src/components/buttons/DisplayAddressButton.vue'
 import PasswordVaultFormCard from 'src/components/cards/PasswordVaultFormCard.vue';
+import SweepVaultButton from 'src/components/buttons/SweepVaultButton.vue';
+import ClaimVaultCard from 'src/components/cards/ClaimVaultCard.vue';
+
+import { mapState } from 'pinia'
+import { useContractStore } from 'src/stores/contract-store';
 
 export default defineComponent({
   name: 'IndexPage',
   components: {
     DisplayAddressButton,
     PasswordVaultFormCard,
+    SweepVaultButton,
+    ClaimVaultCard,
   },
   data() {
     return {
       // Copy values used in 'contracts/password-vault-instantiate.js'
-      payoutAmount: 0n,
-      ownerAddress: '', // bitcoincash:q + <41 characters>
-      passcode: '',
+      payoutAmount: 1234n,
+      ownerAddress: 'bitcoincash:qq4sh33hxw2v23g2hwmcp369tany3x73wugtc9p69g', // bitcoincash:q + <41 characters>
+      passcode: '12345',
 
       contractAddress: '',
     }
   },
 
   computed: {
+    ...mapState(useContractStore, {
+      // Add mappable state here,
+
+    }),
     paymentAmountBch: function() {
       // convert this.payoutAmount that is in satoshis to BCH
       // NOTE: 100_000_000 satoshis = 1 BCH
@@ -54,21 +68,21 @@ export default defineComponent({
   },
 
   methods: {
-    createContract(){
-      const passwordVaultContract = createContractInstance(this.payoutAmount, this.ownerAddress, this.passcode)
-      this.contractAddress = passwordVaultContract.address;
-    },
     onFormCardSubmit(payoutAmount, ownerAddress, passcode) {
       this.payoutAmount = payoutAmount;
       this.ownerAddress = ownerAddress;
       this.passcode = passcode;
       this.createContract();
     },
+    createContract(){
+      const passwordVaultContract = createContractInstance(this.payoutAmount, this.ownerAddress, this.passcode)
+      this.contractAddress = passwordVaultContract.address;
+    },
   },
 
   mounted() {
     // Auto create contract here
-
+    
   }
 });
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <q-card>
+  <q-card class="q-mb-lg">
     <q-form @submit="claim">
       <q-card-section>
         <div class="text-h6">Claim</div>
@@ -35,7 +35,9 @@ export default defineComponent({
   },
   computed: {
     ...mapState(useContractStore, {
-      contractParameters: 'parameters',
+      payoutAmount: 'payoutAmount',
+      ownerAddress: 'ownerAddress',
+      passcode: 'passcode',
     })
   },
   methods: {
@@ -46,8 +48,14 @@ export default defineComponent({
           message: 'Claiming from vault',
         }
       })
+
+      const contractParameters = {
+        payoutAmount: this.payoutAmount,
+        ownerAddress: this.ownerAddress,
+        passcode: this.passcode,
+      }
       const result = await claimVault(
-        this.contractParameters,
+        contractParameters,
         this.recipientAddress,
         this.passcode
       ).catch(error => {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <span>
     <q-btn label="Sweep" rounded color="blue" icon="cleaning_services" @click="showDialog = true"/>
     <q-dialog v-model="showDialog" persitent>
       <q-card style="min-width: min(300px, 50vw);">
@@ -15,7 +15,7 @@
         </q-form>
       </q-card>
     </q-dialog>
-  </div>
+  </span>
 </template>
 <script>
 import { defineComponent } from 'vue';
@@ -37,7 +37,9 @@ export default defineComponent({
   },
   computed: {
     ...mapState(useContractStore, {
-      contractParameters: 'parameters',
+      payoutAmount: 'payoutAmount',
+      ownerAddress: 'ownerAddress',
+      passcode: 'passcode',
     })
   },
   methods: {
@@ -47,8 +49,13 @@ export default defineComponent({
         componentProps: { message: 'Sweeping funds' },
       })
 
+      const contractParameters = {
+        payoutAmount: this.payoutAmount,
+        ownerAddress: this.ownerAddress,
+        passcode: this.passcode,
+      }
       const result = await sweepFunds(
-        this.contractParameters,
+        contractParameters,
         this.wif,
         this.recipientAddress,
       ).catch(error => {

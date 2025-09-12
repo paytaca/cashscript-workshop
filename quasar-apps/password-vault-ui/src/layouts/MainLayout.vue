@@ -15,7 +15,7 @@
       :width="200"
       :breakpoint="700"
       elevated
-      overlay
+      persistent
     >
       <q-item to="/" clickable v-ripple>
         <q-item-section>

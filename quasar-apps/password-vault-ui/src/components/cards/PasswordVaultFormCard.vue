@@ -1,5 +1,5 @@
 <template>
-  <q-card>
+  <q-card class="q-mb-lg">
     <q-form @submit="submitForm">
       <q-card-section class="q-gutter-y-md">
         <div class="text-h6">Parameters</div>
@@ -37,9 +37,9 @@ export default defineComponent({
   },
   mounted() {
     const contractStore = useContractStore();
-    this.payoutAmount = contractStore.parameters.payoutAmount;
-    this.ownerAddress = contractStore.parameters.ownerAddress;
-    this.passcode = contractStore.parameters.passcode;
+    this.payoutAmount = contractStore.payoutAmount;
+    this.ownerAddress = contractStore.ownerAddress;
+    this.passcode = contractStore.passcode;
   }
 })
 </script>
