@@ -17,7 +17,7 @@
       elevated
       persistent
     >
-      <q-item to="/" clickable v-ripple>
+      <q-item to="/" clickable v-ripple exact>
         <q-item-section>
           <q-item-label>Home</q-item-label>
         </q-item-section>
@@ -44,6 +44,11 @@
 
         </q-expansion-item>
       </q-expansion-item>
+      <q-item to="/links" clickable v-ripple exact>
+        <q-item-section>
+          <q-item-label>External links</q-item-label>
+        </q-item-section>
+      </q-item>
     </q-drawer>
 
     <q-page-container>
