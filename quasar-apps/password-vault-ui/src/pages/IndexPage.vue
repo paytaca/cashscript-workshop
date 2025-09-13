@@ -9,12 +9,12 @@
       <div>Owner address: {{ ownerAddress }}</div>
       <div>Passcode: {{ passcode }}</div>
 
-      <!-- Add event listener here -->
+      <!-- Activity: Add event listener -->
       <button class="my-btn">
         Create contract
       </button>
 
-      <!-- Add component props here -->
+      <!-- Activity: Add component props -->
       <DisplayAddressButton />
 
       <SweepVaultButton />
@@ -80,7 +80,7 @@ export default defineComponent({
   },
 
   mounted() {
-    // Auto create contract here
+    // Activity: Autorun create contract
     
   }
 });

@@ -3,6 +3,7 @@
     <q-form @submit="submitForm">
       <q-card-section class="q-gutter-y-md">
         <div class="text-h6">Parameters</div>
+        <!-- Activity: Add v-model for each field -->
         <q-input label="Payout Amount (satoshis)" outlined dense/>
         <q-input label="Owner Address" outlined dense/>
         <q-input label="Passcode" outlined dense/>
@@ -30,7 +31,7 @@ export default defineComponent({
   },
   methods: {
     submitForm() {
-      // Pass event name and arguments
+      // Activity: Pass event name and arguments
       this.$emit('');
     }
   },

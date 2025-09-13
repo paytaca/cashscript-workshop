@@ -32,7 +32,7 @@ export const useContractStore = defineStore('contract', {
       })
     },
     async refreshBalance() {
-      const balance = await getBalance(this.address);
+      const balance = await getBalance(this.contractAddress);
       this.balance = parseInt(balance);
     }
   },
