@@ -1,0 +1,13 @@
+pragma cashscript ^0.11.0;
+
+
+contract Exercise2 () {
+
+    /*
+        make a contract where the user can only spend funds if:
+
+        1. the transaction inputs is exactly 1
+        2. the transaction outputs is at least 2
+     */
+
+}

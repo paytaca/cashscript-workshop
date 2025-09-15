@@ -1,0 +1,12 @@
+pragma cashscript ^0.11.0;
+
+
+contract Exercise3 () {
+
+    /*
+        make a contract where the user can only spend funds if:
+
+        1. the sha-256 of a string from the constructor is the same as the spending input string hash
+     */
+
+}
