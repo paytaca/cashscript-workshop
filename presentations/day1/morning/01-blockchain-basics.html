@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/node_modules/reveal.js/dist/reveal.css">
     <link rel="stylesheet" href="/node_modules/reveal.js/dist/theme/league.css">
     <link rel="stylesheet" href="/presentations/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 </head>
 <body>
     <div class="reveal">
@@ -143,15 +144,35 @@
             </section>
 
             <section>
-                <h2 class="text-4xl mb-6">Main components of blockchain</h2>
-                <ol class="text-4xl space-y-4 text-left">
-                    <li class="flex items-center gap-3">
-                        Digital signatures
-                    </li>
-                    <li class="flex items-center gap-3">
-                        Proof-of-Work
-                    </li>
-                </ol>
+                <h2 class="text-4xl mb-6">What is Blockchain?</h2>
+                <div class="max-w-6xl mx-auto">
+                    <div class="bg-gray-800 p-8 rounded-lg">
+                        <p class="text-2xl text-center">
+                            Blockchain is a tamper-resistant distributed ledger that allows multiple parties to record, verify, and exchange data or value without needing a central authority.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-4xl mb-6">Two Main Components of Blockchain</h2>
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-blue-900 p-6 rounded-lg">
+                            <h4 class="text-2xl font-bold text-blue-200 mb-4 text-center">🔐 Digital Signatures</h4>
+                            <p class="text-lg text-blue-200 text-center">
+                                For proving ownership of funds
+                            </p>
+                        </div>
+                        
+                        <div class="bg-green-900 p-6 rounded-lg">
+                            <h4 class="text-2xl font-bold text-green-200 mb-4 text-center">⛏️ Proof-of-Work</h4>
+                            <p class="text-lg text-green-200 text-center">
+                                The mechanism to prevent double spending
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <section>
@@ -314,6 +335,118 @@
                 </div>
             </section>
 
+            <section>
+                <h2 class="text-4xl mb-6">Consensus Rules Miners Must Follow</h2>
+                <div class="max-w-6xl mx-auto">
+                    <p class="text-xl mb-8 text-center">
+                        Miners must follow specific rules to create blocks that the network will accept
+                    </p>
+                    
+                    <div class="flex flex-col gap-4">
+                        <!-- Top Row -->
+                        <div class="flex gap-4">
+                            <!-- Row 1, Column 1: Block Structure & Header Rules -->
+                            <div class="bg-blue-900 p-4 rounded-lg flex-1">
+                                <h4 class="text-lg font-bold text-blue-200 mb-2 text-center">🔒 Block Structure & Header Rules</h4>
+                                <ul class="text-xs space-y-1 text-left">
+                                    <li class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                        Reference previous block hash
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                        Header hash below target
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                        Valid Merkle root
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                        Block size limits
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                        Timestamp within range
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Row 1, Column 2: Monetary & Reward Rules -->
+                            <div class="bg-green-900 p-4 rounded-lg flex-1">
+                                <h4 class="text-lg font-bold text-green-200 mb-2 text-center">💰 Monetary & Reward Rules</h4>
+                                <ul class="text-xs space-y-1 text-left">
+                                    <li class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                        Exactly one coinbase transaction
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                        Block reward ≤ subsidy + fees
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                        Subsidy halves every 210k blocks
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                        100 block maturity period
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom Row -->
+                        <div class="flex gap-4">
+                            <!-- Row 2, Column 1: Transaction Validation Rules -->
+                            <div class="bg-orange-900 p-4 rounded-lg flex-1">
+                                <h4 class="text-lg font-bold text-orange-200 mb-2 text-center">🧾 Transaction Validation Rules</h4>
+                                <ul class="text-xs space-y-1 text-left">
+                                    <li class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                                        All inputs reference UTXOs
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                                        Valid unlocking scripts
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                                        No double-spending
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                                        Outputs ≤ inputs
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                                        No negative values
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Row 2, Column 2: Chain Selection Rule -->
+                            <div class="bg-indigo-900 p-4 rounded-lg flex-1">
+                                <h4 class="text-lg font-bold text-indigo-200 mb-2 text-center">⛓️ Chain Selection Rule</h4>
+                                <ul class="text-xs space-y-1 text-left">
+                                    <li class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-indigo-500 rounded-full"></span>
+                                        Extend chain with most PoW
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-indigo-500 rounded-full"></span>
+                                        Not just block count
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-indigo-500 rounded-full"></span>
+                                        Accumulated work matters
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <section>
                 <h2 class="text-4xl mb-6">How Bitcoin Units are Born</h2>
@@ -504,7 +637,7 @@
                                 <p class="text-xs text-gray-300">10,000 satoshis</p>
                             </div>
                             
-                            <div class="text-2xl text-gray-400">←</div>
+                            <div class="text-2xl text-gray-400">→</div>
                             
                             <!-- Virtual Vault -->
                             <div class="flex flex-col items-center space-y-2">
@@ -550,99 +683,70 @@
             </section>
 
             <section>
-                <h2 class="text-4xl mb-6">Anatomy of a Transaction</h2>
-                <div class="max-w-6xl mx-auto">
-                    <p class="text-2xl mb-8 text-center">
-                        To unlock funds from an address, you create a transaction with inputs and outputs
+                <h2 class="text-4xl mb-6">UTXO Combination & Transfer Flow</h2>
+                <div class="max-w-7xl mx-auto">
+                    <p class="text-xl mb-8 text-center">
+                        UTXOs from one address can be combined and sent to another address, whose UTXOs can then be combined and sent further
                     </p>
                     
-                    <div class="bg-gray-800 p-8 rounded-lg">
-                        <div class="flex flex-col md:flex-row gap-8">
-                            <!-- Inputs -->
-                            <div class="flex-1 bg-red-900 p-6 rounded-lg">
-                                <h3 class="text-2xl font-bold text-red-200 mb-4 text-center">📥 Inputs</h3>
-                                <ul class="text-lg space-y-3 text-left">
-                                    <li class="flex items-center gap-3">
-                                        <span class="w-3 h-3 bg-red-500 rounded-full"></span>
-                                        Reference to previous transaction output
-                                    </li>
-                                    <li class="flex items-center gap-3">
-                                        <span class="w-3 h-3 bg-red-500 rounded-full"></span>
-                                        Unlocking script (signature + public key)
-                                    </li>
-                                    <li class="flex items-center gap-3">
-                                        <span class="w-3 h-3 bg-red-500 rounded-full"></span>
-                                        Proves ownership of the funds
-                                    </li>
-                                </ul>
-                            </div>
-                            
-                            <!-- Outputs -->
-                            <div class="flex-1 bg-green-900 p-6 rounded-lg">
-                                <h3 class="text-2xl font-bold text-green-200 mb-4 text-center">📤 Outputs</h3>
-                                <ul class="text-lg space-y-3 text-left">
-                                    <li class="flex items-center gap-3">
-                                        <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-                                        Amount to send (in satoshis)
-                                    </li>
-                                    <li class="flex items-center gap-3">
-                                        <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-                                        Locking script (address/conditions)
-                                    </li>
-                                    <li class="flex items-center gap-3">
-                                        <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-                                        Creates new UTXO for recipient
-                                    </li>
-                                </ul>
-                            </div>
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <!-- Mermaid diagram showing UTXO flow -->
+                        <div class="mermaid">
+                            graph LR
+                                A["Address A<br/>Virtual Vault<br/>1,000,000 sats<br/>500,000 sats<br/>2,000,000 sats"] --> T1["Transaction 1<br/>Combines 3 UTXOs<br/>Total: 3,500,000 sats"]
+                                
+                                T1 --> B["Address B<br/>Virtual Vault<br/>3,000,000 sats"]
+                                T1 --> C["Address C<br/>Virtual Vault<br/>500,000 sats"]
+                                
+                                B --> T2["Transaction 2<br/>Address B combines<br/>UTXO with others"]
+                                C --> T2
+                                
+                                T2 --> D["Address D<br/>Virtual Vault<br/>2,500,000 sats"]
+                                T2 --> E["Address E<br/>Virtual Vault<br/>500,000 sats"]
+                                
+                                classDef address fill:#3b82f6,stroke:#1e40af,stroke-width:2px,color:#fff
+                                classDef transaction fill:#eab308,stroke:#ca8a04,stroke-width:2px,color:#000
+                                
+                                class A,B,C,D,E address
+                                class T1,T2 transaction
                         </div>
+                        
+                        
                     </div>
                 </div>
             </section>
 
             <section>
-                <h2 class="text-4xl mb-6">Transaction Flow</h2>
-                <div class="max-w-6xl mx-auto">
-                    <p class="text-2xl mb-8 text-center">
-                        Unlock previous UTXOs from an address and create new UTXOs locked into another address
+                <h2 class="text-4xl mb-6">Anatomy of a Transaction</h2>
+                <div class="max-w-7xl mx-auto">
+                    <p class="text-xl mb-8 text-center">
+                        A transaction takes money from inputs and sends it to outputs
                     </p>
                     
-                    <div class="bg-gray-800 p-8 rounded-lg">
-                        <div class="bg-blue-900 p-8 rounded-lg">
-                            <div class="flex items-center justify-center space-x-12">
-                                <div class="text-center">
-                                    <div class="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center mb-4">
-                                        <span class="text-white text-3xl">🔓</span>
-                                    </div>
-                                    <p class="text-xl font-bold">Unlock</p>
-                                    <p class="text-lg text-gray-300">Previous UTXO</p>
-                                    <p class="text-sm text-gray-400 mt-2">Spend existing funds</p>
-                                </div>
-                                <div class="text-5xl text-blue-200">→</div>
-                                <div class="text-center">
-                                    <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mb-4">
-                                        <span class="text-white text-3xl">⚡</span>
-                                    </div>
-                                    <p class="text-xl font-bold">Transfer</p>
-                                    <p class="text-lg text-gray-300">Value</p>
-                                    <p class="text-sm text-gray-400 mt-2">Move Bitcoin</p>
-                                </div>
-                                <div class="text-5xl text-blue-200">→</div>
-                                <div class="text-center">
-                                    <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mb-4">
-                                        <span class="text-white text-3xl">🔒</span>
-                                    </div>
-                                    <p class="text-xl font-bold">Lock</p>
-                                    <p class="text-lg text-gray-300">New UTXO</p>
-                                    <p class="text-sm text-gray-400 mt-2">Create spendable output</p>
-                                </div>
-                            </div>
-                            
-                            <div class="mt-8 text-center">
-                                <p class="text-lg text-blue-200">
-                                    <span class="font-bold">Key Point:</span> This process ensures that every Bitcoin can only be spent once
-                                </p>
-                            </div>
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <!-- Mermaid diagram showing transaction anatomy -->
+                        <div class="mermaid">
+                            graph LR
+                                subgraph "Transaction"
+                                    subgraph "OUTPUTS"
+                                        O1["3,000,000 sats<br/>To Address B<br />Locking script"]
+                                        O2["499,000 sats<br/>To Address C<br />Locking script"]
+                                    end
+                                    FEE["Miner Fee<br/>1,000 sats"]
+                                    subgraph "INPUTS"
+                                        I1["1,000,000 sats<br/>From Address A<br />Unlocking script + Locking script"]
+                                        I2["500,000 sats<br/>From Address A<br />Unlocking script + Locking script"]
+                                        I3["2,000,000 sats<br/>From Address B<br />Unlocking script + Locking script"]
+                                    end
+                                end
+                                
+                                classDef input fill:#dc2626,stroke:#991b1b,stroke-width:2px,color:#fff
+                                classDef output fill:#16a34a,stroke:#15803d,stroke-width:2px,color:#fff
+                                classDef fee fill:#eab308,stroke:#ca8a04,stroke-width:2px,color:#000
+                                
+                                class O1,O2 output
+                                class I1,I2,I3 input
+                                class FEE fee
                         </div>
                     </div>
                 </div>
@@ -776,9 +880,26 @@
 
     <script src="/node_modules/reveal.js/dist/reveal.js"></script>
     <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#3b82f6',
+                primaryTextColor: '#ffffff',
+                primaryBorderColor: '#1e40af',
+                lineColor: '#6b7280',
+                secondaryColor: '#eab308',
+                tertiaryColor: '#f3f4f6'
+            }
+        });
+
         Reveal.initialize({
             hash: true,
             transition: 'fade'
+        }).then(() => {
+            // Initialize Mermaid after Reveal.js is ready
+            mermaid.init();
         });
     </script>
 </body>
