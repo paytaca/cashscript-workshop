@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A comprehensive 2-day workshop covering Bitcoin Cash smart contracts using Cashscript, from fundamentals to practical implementation with Quasar Framework",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "present": "npx http-server . -p 8080 -o presentations/index.html --cors -a localhost -P http://localhost:8080?",
     "dev": "npx http-server . -p 8080 -o presentations/index.html --cors -a localhost -P http://localhost:8080? -c-1",
@@ -50,8 +51,9 @@
     "@bitauth/libauth": "^3.0.0",
     "@psf/bch-js": "^6.8.1",
     "bitcore-lib": "^10.10.7",
-    "cashc": "^0.11.0",
+    "cashc": "^0.11.5",
     "cashscript": "^0.11.0",
+    "mermaid": "^11.11.0",
     "reveal.js": "^5.2.1"
   },
   "engines": {
