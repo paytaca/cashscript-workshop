@@ -34,11 +34,11 @@
         <pre><code class="language-javascript" data-trim>
         // Specifies the earliest block height or Unix timestamp a transaction can be confirmed
         Variable: tx.time
-        Usage: require(tx.time >= <expression>);
+        Usage: require(tx.time >= <block height or unix timestamp>);
         </code></pre>
         <pre><code class="language-javascript" data-trim>
         Variable: this.age
-        Usage: require(this.age >= <expression>);
+        Usage: require(this.age >= <number of blocks or number of seconds>);
         </code></pre>
     </div>
     <aside class="notes">

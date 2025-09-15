@@ -10,6 +10,37 @@
     </div>
 </section>
 <section>
+  <h2><div class="text-green-300">Global Time Lock Variables</div></h2>
+  <div class="mb-4">-- Global Time Lock Variables --</div>
+  <div class="mt-6 text-2xl space-y-6">
+    <div>
+      <strong class="text-orange-300">Absolute Locktime</strong>
+      <p class="mt-2 text-base">
+        Think of this like a fixed calendar date, or fixed block number.
+      </p>
+      <p class="mt-1 italic">
+        Example: “This money cannot be spent until <strong>December 1, 2025</strong> or block height 950,000”
+      </p>
+      <p class="mt-1 text-sm text-gray-400">
+        It’s enforced by checking the transaction’s <code>locktime</code> against the blockchain’s current block height or timestamp.
+      </p>
+    </div>
+
+    <div>
+      <strong class="text-orange-300">Relative Locktime</strong>
+      <p class="mt-2 text-base">
+        This is based on how long the coins have been unspent.
+      </p>
+      <p class="mt-1 italic">
+        Example: “You must wait <strong>10 blocks</strong> (about 100 minutes) after receiving these coins before you can spend them.”
+      </p>
+      <p class="mt-1 text-sm text-gray-400">
+        It uses the input’s <code>nSequence</code> field and is enforced per UTXO, not by a fixed date.
+      </p>
+    </div>
+  </div>
+</section>
+<section>
     <h2><div class="text-green-300">Global Variables</div></h2>
     <div class="mb-4">-- Global Time Lock Variables --</div>
     <div class="grid justify-center">
