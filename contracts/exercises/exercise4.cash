@@ -1,0 +1,12 @@
+pragma cashscript ^0.11.0;
+
+
+contract Exercise4 () {
+
+    /*
+        make a contract where the user can only spend funds if:
+
+        1. the owner's signature (spending parameter) matches with the constructor's public key
+     */
+
+}
