@@ -97,20 +97,6 @@ cashscript-workshop/
 │       ├── nft-marketplace/ # NFT trading contracts
 │       └── dao-governance/  # DAO governance contracts
 │
-├── scripts/                  # Implementation and utility scripts
-│   ├── setup/               # Environment setup scripts
-│   │   ├── install-deps.sh  # Install all dependencies
-│   │   ├── setup-wallet.sh  # Setup test wallet
-│   │   └── configure-env.sh # Configure environment variables
-│   ├── examples/            # Code examples and demos
-│   │   ├── contract-deploy.js
-│   │   ├── wallet-connect.js
-│   │   └── contract-interact.js
-│   └── tools/               # Development and testing tools
-│       ├── contract-validator.js
-│       ├── test-runner.js
-│       └── deployment-helper.js
-│
 ├── quasar-apps/             # Quasar Framework application examples
 │   ├── basic-wallet/        # Simple wallet application
 │   │   ├── src/
@@ -124,42 +110,6 @@ cashscript-workshop/
 │       ├── src/
 │       ├── package.json
 │       └── README.md
-│
-├── media/                    # Images, diagrams, and other assets
-│   ├── images/              # Workshop images and diagrams
-│   │   ├── blockchain-diagram.png
-│   │   ├── utxo-model.png
-│   │   ├── cashscript-flow.png
-│   │   └── quasar-architecture.png
-│   ├── videos/              # Demo videos and tutorials
-│   └── diagrams/            # Vector diagrams and schemas
-│
-├── exercises/                # Hands-on exercises and challenges
-│   ├── day1/                # Day 1 exercises
-│   │   ├── exercise-1-basic-contract.md
-│   │   ├── exercise-2-payment-contract.md
-│   │   └── exercise-3-time-lock.md
-│   ├── day2/                # Day 2 exercises
-│   │   ├── exercise-1-quasar-setup.md
-│   │   ├── exercise-2-contract-integration.md
-│   │   └── exercise-3-full-app.md
-│   └── solutions/           # Exercise solutions (instructor only)
-│
-├── docs/                     # Additional documentation
-│   ├── cashscript-reference.md
-│   ├── bitcoin-cash-basics.md
-│   ├── quasar-integration.md
-│   └── troubleshooting.md
-│
-├── config/                   # Configuration files
-│   ├── reveal-config.js     # RevealJS configuration
-│   ├── cashscript.config.js # Cashscript compiler config
-│   └── quasar.config.js     # Quasar build configuration
-│
-└── tests/                    # Test files and test data
-    ├── unit/                 # Unit tests for contracts
-    ├── integration/          # Integration tests
-    └── fixtures/             # Test data and mock objects
 ```
 
 ### Key Organizational Principles:
