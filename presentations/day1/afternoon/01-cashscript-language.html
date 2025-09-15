@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cashscript Language - Day 1</title>
+    <title>CashScript - Day 1</title>
     <link rel="stylesheet" href="/node_modules/reveal.js/dist/reveal.css">
     <link rel="stylesheet" href="/node_modules/reveal.js/dist/theme/league.css">
     <link rel="stylesheet" href="/node_modules/reveal.js/plugin/highlight/monokai.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/presentations/css/style.css">
 </head>
 <body>
     <div class="reveal">
@@ -15,223 +15,1349 @@
             <section>
                 <div>
                     <h1 class="flex items-center justify-center gap-3 mb-4">
-                        Cashscript Language
+                        <div class="text-green-300">CashScript Language</div>
                     </h1>
-                    <h3 class="text-2xl mb-2">Day 1 - Afternoon Session</h3>
-                    <p class="text-lg">Writing Bitcoin Cash smart contracts</p>
+                    <p class="text-4xl">Writing Bitcoin Cash Smart Contracts</p>
                 </div>
             </section>
 
             <section>
-                <h2 class="flex items-center gap-3">
-                    What is 
-                    <img src="../../images/logos/cashscript.svg" alt="Cashscript Logo" class="w-14 h-14 inline-block">Cashscript?
-                </h2>
-                <ul class="text-left space-y-2">
-                    <li>Smart contract language for Bitcoin Cash</li>
-                    <li>Based on Bitcoin Script</li>
-                    <li>Compiles to bytecode</li>
-                    <li>Type-safe and developer-friendly</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Basic Syntax - Contract Structure</h2>
-                <p>Let's analyze a complete contract step by step:</p>
-            </section>
-
-            <!-- Complete contract overview first -->
-            <section>
-                <h3>Complete Contract Overview</h3>
-                <div class="">
-                    <pre><code class="language-javascript" data-line-numbers="1-12">contract TransferWithTimeout(
-    bytes20 sender,
-    bytes20 recipient,
-    int timeout
-) {
-    function transfer(sig s, pubkey pk) {
-        require(checkSig(s, pk));
-        require(hash160(pk) == sender);
-        require(tx.time >= timeout);
-        
-        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
-    }
-}</code></pre>
-                </div>
-                <div class="mt-4 p-4 bg-white/10 rounded-lg">
-                    <p class="font-bold mb-2">This contract allows time-locked transfers with signature verification!</p>
-                </div>
-            </section>
-
-            <!-- Vertical slides for code breakdown -->
-            <section>
                 <section>
-                    <h3>1. Contract Declaration</h3>
-                    <div>
-                        <pre><code class="language-javascript" data-line-numbers="1-5">contract TransferWithTimeout(
-    bytes20 sender,
-    bytes20 recipient,
-    int timeout
-) {
-    function transfer(sig s, pubkey pk) {
-        require(checkSig(s, pk));
-        require(hash160(pk) == sender);
-        require(tx.time >= timeout);
-        
-        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
-    }
-}</code></pre>
-                    </div>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
-                        <ul class="space-y-1">
-                            <li><strong>contract</strong> - keyword to define a smart contract</li>
-                            <li><strong>TransferWithTimeout</strong> - contract name</li>
-                            <li><strong>Parameters</strong> - contract inputs (sender, recipient, timeout)</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>2. Function Definition</h3>
-                    <div>
-                        <pre><code class="language-javascript" data-line-numbers="6">contract TransferWithTimeout(
-    bytes20 sender,
-    bytes20 recipient,
-    int timeout
-) {
-    function transfer(sig s, pubkey pk) {
-        require(checkSig(s, pk));
-        require(hash160(pk) == sender);
-        require(tx.time >= timeout);
-        
-        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
-    }
-}</code></pre>
-                    </div>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
-                        <ul class="space-y-1">
-                            <li><strong>function</strong> - defines an executable function</li>
-                            <li><strong>transfer</strong> - function name</li>
-                            <li><strong>sig s</strong> - digital signature parameter</li>
-                            <li><strong>pubkey pk</strong> - public key parameter</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>3. Signature Validation</h3>
-                    <div>
-                        <pre><code class="language-javascript" data-line-numbers="7">contract TransferWithTimeout(
-    bytes20 sender,
-    bytes20 recipient,
-    int timeout
-) {
-    function transfer(sig s, pubkey pk) {
-        require(checkSig(s, pk));
-        require(hash160(pk) == sender);
-        require(tx.time >= timeout);
-        
-        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
-    }
-}</code></pre>
-                    </div>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
-                        <ul class="space-y-1">
-                            <li><strong>require()</strong> - validation function that must pass</li>
-                            <li><strong>checkSig(s, pk)</strong> - verifies the signature against public key</li>
-                            <li>This ensures only the owner can execute the function</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>4. Sender Verification</h3>
-                    <div>
-                        <pre><code class="language-javascript" data-line-numbers="8">contract TransferWithTimeout(
-    bytes20 sender,
-    bytes20 recipient,
-    int timeout
-) {
-    function transfer(sig s, pubkey pk) {
-        require(checkSig(s, pk));
-        require(hash160(pk) == sender);
-        require(tx.time >= timeout);
-        
-        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
-    }
-}</code></pre>
-                    </div>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
-                        <ul class="space-y-1">
-                            <li><strong>hash160(pk)</strong> - converts public key to address hash</li>
-                            <li><strong>== sender</strong> - compares with the contract's sender parameter</li>
-                            <li>Ensures the signer is the intended sender</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>5. Time Lock Check</h3>
-                    <div>
-                        <pre><code class="language-javascript" data-line-numbers="9">contract TransferWithTimeout(
-    bytes20 sender,
-    bytes20 recipient,
-    int timeout
-) {
-    function transfer(sig s, pubkey pk) {
-        require(checkSig(s, pk));
-        require(hash160(pk) == sender);
-        require(tx.time >= timeout);
-        
-        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
-    }
-}</code></pre>
-                    </div>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
-                        <ul class="space-y-1">
-                            <li><strong>tx.time</strong> - current block timestamp</li>
-                            <li><strong>>= timeout</strong> - must be after the timeout period</li>
-                            <li>Implements time-based restrictions</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>6. Output Creation</h3>
-                    <div>
-                        <pre><code class="language-javascript text-md" data-line-numbers="11">contract TransferWithTimeout(
-    bytes20 sender,
-                    bytes20 recipient,
-                    int timeout
-                ) {
-                    function transfer(sig s, pubkey pk) {
-                        require(checkSig(s, pk));
-                        require(hash160(pk) == sender);
-                        require(tx.time >= timeout);
-                        
-                        bytes34 senderOutput = new OutputP2PKH(recipient, tx.value);
-                    }
-                }</code></pre>
-                    </div>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
-                        <ul class="space-y-1">
-                            <li><strong>OutputP2PKH</strong> - creates a Pay-to-Public-Key-Hash output</li>
-                            <li><strong>recipient</strong> - destination address</li>
-                            <li><strong>tx.value</strong> - amount to transfer</li>
-                            <li>This is the actual transfer action</li>
-                        </ul>
-                    </div>
+                    <h2 class="flex items-center gap-3">
+                        <img src="../../images/logos/cashscript.svg" alt="CashScript Logo" class="w-20 h-20">
+                        <div class="text-green-300">What is CashScript?</div>
+                    </h2>
+                    <ul class="text-left space-y-2">
+                        <li>Smart contract language for Bitcoin Cash</li>
+                        <li>Created by <i class="text-green-300">Rosco Kalis</i></li>
+                        <li>May 2019</li>
+                    </ul>
                 </section>
             </section>
+            
+            <!-- 1. password contract -->
 
             <section>
-                <h2>Key Features</h2>
-                <ul class="space-y-2">
-                    <li>Functions and parameters</li>
-                    <li>Built-in validation</li>
-                    <li>Output creation</li>
-                    <li>Time-based conditions</li>
-                </ul>
+                <section>
+                    <h2><div class="text-green-300">Basic Syntax - Contract Structure</div></h2>
+                </section>
+
+                <!-- Complete contract overview first -->
+                <section>
+                    <h3><div class="text-green-300">Contract Overview</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1-9">pragma cashscript ^0.11.0;
+
+contract Password (string password) {
+
+    function spend (string inputPassword) {
+        require(inputPassword == password);
+    }
+
+}
+</code></pre>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg">
+                        <p class="text-2xl">A simple contract requiring a password to spend funds</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">1. Contract Version</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1">pragma cashscript ^0.11.0;
+
+contract Password (string password) {
+
+    function spend (string inputPassword) {
+        require(inputPassword == password);
+    }
+
+}</code></pre>
+                    </div>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">pragma</code> - import keyword for cashscript</li>
+                            <li><code class="text-green-300">cashscript</code> - the CashScript package</li>
+                            <li><code class="text-green-300">^0.11.0</code> - CashScript contract version</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">2. Contract Name & Constructor</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="3">pragma cashscript ^0.11.0;
+
+contract Password (string password) {
+
+    function spend (string inputPassword) {
+        require(inputPassword == password);
+    }
+
+}</code></pre>
+                    </div>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                        <ul class="space-y-1">
+                            <li><code class="text-green-300">contract</code> - keyword to create a contract</li>
+                            <li><code class="text-green-300">Password</code> - contract name</li>
+                            <li><code class="text-green-300">(string password)</code> - constructor with 1 parameter</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2><div class="text-green-300">Data Types</div></h2>
+                    <ul class="space-y-1">
+                        <li><code class="text-green-300">int</code> - Integer</li>
+                        <li><code class="text-green-300">string</code> - String</li>
+                        <li><code class="text-green-300">bytes</code> - Bytes </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2><div class="text-green-300">Special Bytes Length</div></h2>
+                    <ul class="space-y-1">
+                        <li><code class="text-green-300">pubkey</code> - Public Key <i>(33 bytes)</i></li>
+                        <li><code class="text-green-300">sig</code> - Transaction Signature <i>(65 bytes)</i></li>
+                        <li><code class="text-green-300">datasig</code> - Data Signature <i>(64 bytes)</i></li>
+                        <li><code class="text-green-300">bytes20</code> - pubkey hashes</li>
+                        <li><code class="text-green-300">bytes32</code> - token categories</li>
+                        <li><code class="text-green-300">bytes35</code> - locking bytecodes</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">3. Contract Function</divdiv></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="5">pragma cashscript ^0.11.0;
+
+contract Password (string password) {
+
+    function spend (string inputPassword) {
+        require(inputPassword == password);
+    }
+
+}</code></pre>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                        <ul class="space-y-1">
+                            <li><code class="text-green-300">function</code> - keyword to create a function</li>
+                            <li><code class="text-green-300">spend</code> - function name</li>
+                            <li><code class="text-green-300">(string inputPassword)</code> - function parameter</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">4. Contract Constraint</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="6">pragma cashscript ^0.11.0;
+
+contract Password (string password) {
+
+    function spend (string inputPassword) {
+        require(inputPassword == password);
+    }
+
+}</code></pre>
+                    </div>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <div class="text-2xl">Checks if user input password is the same with the set password before spending funds inside the contract</div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2><div class="text-green-300">Operators</div></h2>
+                    <ul class="space-y-1">
+                        <li>Arithmetic: <code class="language-javascript text-green-300">&nbsp;  +, -, *, /</code></li>
+                        <li>Boolean: <code class="language-javascript text-green-300">&nbsp; &&, ||, ==, <, >, >=, <=</code></li>
+                        <li>Conditional: <code class="language-javascript text-green-300">&nbsp; if, else, else if</code></li>
+                    </ul>
+                </section>
+            </section>
+            
+
+            <!-- 2. inputs/outputs contract -->
+
+            <section>
+                <section>
+                    <h2><div class="text-green-300">Inputs/Outputs Constraints</div></h2>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">Contract Overview</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1-12">pragma cashscript ^0.11.0;
+
+
+contract InputOutputs () {
+
+    function spend () {
+        require(tx.inputs.length == 1);  // inputs must be exactly 1
+        require(tx.outputs[0].value >= 2000);  // output 0 must be at least 2000 satoshis
+        require(tx.outputs.length == 2);  // there must be exactly 2 outputs
+    }
+
+}
+</code></pre>
+                    </div>
+
+                        <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">tx.inputs.length == 1</code> - inputs must be exactly 1</li>
+                            <li><code class="text-green-300">tx.outputs[0].value >= 2000</code> - output 0 must be at least 2000 satoshis</li>
+                            <li><code class="text-green-300">^tx.outputs.length == 2</code> - there must be exactly 2 outputs</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2><div class="text-green-300">Transaction Data</div></h2>
+                    <ul class="space-y-1">
+                        <li><code class="text-green-300">tx.inputs</code> - get all transaction inputs used for the transaction</li>
+                        <li><code class="text-green-300">tx.outputs</code> - get all transaction outputs used for the transaction</li>
+                    </ul>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">tx.inputs.length</code> - get total number of inputs</li>
+                            <li><code class="text-green-300">tx.outputs[0].value</code> - get amount of the 0th output</li>
+                        </ul>
+                    </div>
+                </section>
+            </section>
+
+            <!-- 3. p2pkh verification contract -->
+
+            <section>
+                <section>
+                    <h2><div class="text-green-300">Signature-Based Constraint</div></h2>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">Contract Overview</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1-17">pragma cashscript ^0.11.0;
+/*
+    A contract requiring a signature from the owner before spending.
+
+    This is how normal BCH transactions (non-contract transactions) are verified
+    during spending (you verify and pay to a pubkey hash, hence P2PKH)
+ */
+contract P2PKHVerification (bytes20 ownerPubkeyHash) {
+
+    function spend (sig s, pubkey pk) {
+        // check if owner pubkey hash is equivalent to the hashed input pubkey
+        require(hash160(pk) == ownerPubkeyHash);
+        // verify signature of owner using pubkey
+        require(checkSig(s, pk));
+    }
+
+}
+</code></pre>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ol class="space-y-1 text-2xl">
+                            <li>Validate if pubkey hash is same with the hashed pubkey in the parameter</li>
+                            <li>Check if signature is compatible with the pubkey</li>
+                        </ol>
+                    </div>
+                </section>
+            </section>
+
+            <!-- 4. p2pkh locking bytecode contract -->
+
+            <section>
+                <section>
+                    <h2><div class="text-green-300">Specific Wallet Spending</div></h2>
+                    <p class="text-4xl">Locking Bytecodes & Script Pubkeys</p>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">Contract Overview</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1-17">pragma cashscript ^0.11.0;
+/*
+    A contract where it can only send to a specific P2PKH wallet
+ */
+contract P2PKHLockingBytecode (bytes20 ownerPubkeyHash, bytes20 recipientPubkeyHash) {
+
+    function spend (sig s, pubkey pk) {
+        // check if owner pubkey hash is equivalent to the hashed input pubkey
+        require(hash160(pk) == ownerPubkeyHash);
+        // verify signature of owner using pubkey
+        require(checkSig(s, pk));
+        // checks if recipient is the correct recipient wallet
+        bytes23 recipient = new LockingBytecodeP2PKH(recipientPubkeyHash);
+        require(tx.outputs[0].lockingBytecode == recipient);
+    }
+
+}
+</code></pre>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        This contract spends to a specific address only
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">1. Transfer to Wallet Constraint</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="13-14">pragma cashscript ^0.11.0;
+/*
+    A contract where it can only send to a specific P2PKH wallet
+ */
+contract P2PKHLockingBytecode (bytes20 ownerPubkeyHash, bytes20 recipientPubkeyHash) {
+
+    function spend (sig s, pubkey pk) {
+        // check if owner pubkey hash is equivalent to the hashed input pubkey
+        require(hash160(pk) == ownerPubkeyHash);
+        // verify signature of owner using pubkey
+        require(checkSig(s, pk));
+        // checks if recipient is the correct recipient wallet
+        bytes23 recipient = new LockingBytecodeP2PKH(recipientPubkeyHash);
+        require(tx.outputs[0].lockingBytecode == recipient);
+    }
+
+}</code></pre>
+                    </div>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">line 13</code> - get the locking bytecode from the recipient pubkey hash</li>
+                            <li><code class="text-green-300">line 14</code> - require that the funds be sent to the recipient</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2><div class="text-green-300">P2PKH</div></h2>
+                    <p><i class="text-green-300">Pay-to-Public-Key-Hash</i> or paying to a public key hash of a P2PKH wallet</p>
+                </section>
+            </section>
+
+            <!-- 5. p2sh locking bytecode contract -->
+
+            <section>
+                <section>
+                    <h2><div class="text-green-300">Sending to Another Contract</div></h2>
+                    <div class="text-4xl">Locking Bytecodes & Script Hashes</div>
+                </section>
+                
+                <section>
+                    <h3><div class="text-green-300">Contract Overview</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1-16">pragma cashscript ^0.11.0;
+
+
+// this contract must only send to a specific contract
+contract P2SHLockingBytecode (bytes32 recipientContractScriptHash) {
+
+    function transfer () {
+        // should have only 1 output (to recipient contract)
+        require(tx.outputs.length == 1);
+        
+        // output must send to recipient contract
+        bytes35 recipientContract = new LockingBytecodeP2SH32(recipientContractScriptHash);
+        require(tx.outputs[0].lockingBytecode == recipientContract);
+    }
+
+}
+</code></pre>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg">
+                        <p class="text-2xl">A contract that can only send to another contract</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">1. Transfer Constraints</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="11-13">pragma cashscript ^0.11.0;
+
+
+// this contract must only send to a specific contract
+contract P2SHLockingBytecode (bytes32 recipientContractScriptHash) {
+
+    function transfer () {
+        // should have only 1 output (to recipient contract)
+        require(tx.outputs.length == 1);
+        
+        // output must send to recipient contract
+        bytes35 recipientContract = new LockingBytecodeP2SH32(recipientContractScriptHash);
+        require(tx.outputs[0].lockingBytecode == recipientContract);
+    }
+
+}</code></pre>
+                    </div>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">line 12</code> - converts a script hash to a locking bytecode</li>
+                            <li><code class="text-green-300">line 13</code> - checks if recipient is the dedicated contract</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2><div class="text-green-300">P2SH</div></h2>
+                    <p><i class="text-green-300">Pay-to-Script-Hash</i> or paying to a script's (contract's) hash</p>
+                </section>
+            </section>
+
+            <!-- 6. timeout verification -->
+
+            <section>
+                <section>
+                    <h2><div class="text-green-300">Contract w/ Time Constraints</div></h2>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">Contract Overview</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1-20">pragma cashscript ^0.11.0;
+
+// only transfer at a specific recipient but not before a specific time/date
+contract TransferWithTimeout(
+    bytes20 sender,
+    bytes20 recipient,
+    int timeout
+) {
+
+    function transfer(sig s, pubkey pk) {
+        require(checkSig(s, pk));  // must be signed by sender
+        require(hash160(pk) == sender);  // must be signed by sender
+        require(tx.time >= timeout);  // must be spent after a specific time/date
+        
+        // can only be spent to a specific recipient (P2PKH -- to another wallet)
+        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(recipient);
+        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
+    }
+
+}
+</code></pre>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg">
+                        <p class="text-2xl">The contract's fund can only be spent after a certain time/date</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">1. Sender Verification</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="11-12">pragma cashscript ^0.11.0;
+
+// only transfer at a specific recipient but not before a specific time/date
+contract TransferWithTimeout(
+    bytes20 sender,
+    bytes20 recipient,
+    int timeout
+) {
+
+    function transfer(sig s, pubkey pk) {
+        require(checkSig(s, pk));  // must be signed by sender
+        require(hash160(pk) == sender);  // must be signed by sender
+        require(tx.time >= timeout);  // must be spent after a specific time/date
+        
+        // can only be spent to a specific recipient (P2PKH -- to another wallet)
+        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(recipient);
+        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
+    }
+
+}</code></pre>
+                    </div>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">checkSig(s, pk)</code> - checks if the transaction is signed</li>
+                            <li><code class="text-green-300">hash160(pk)</code> - RIPEMD-160 hash of the public key (returns bytes20)</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">2. Time Constraint</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="13">pragma cashscript ^0.11.0;
+
+// only transfer at a specific recipient but not before a specific time/date
+contract TransferWithTimeout(
+    bytes20 sender,
+    bytes20 recipient,
+    int timeout
+) {
+
+    function transfer(sig s, pubkey pk) {
+        require(checkSig(s, pk));  // must be signed by sender
+        require(hash160(pk) == sender);  // must be signed by sender
+        require(tx.time >= timeout);  // must be spent after a specific time/date
+        
+        // can only be spent to a specific recipient (P2PKH -- to another wallet)
+        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(recipient);
+        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
+    }
+
+}
+</code></pre>
+                    </div>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        You can access the transaction data using the special object <code class="text-green-300">tx</code>.
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">3. Output Checking</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="16-17">pragma cashscript ^0.11.0;
+
+// only transfer at a specific recipient but not before a specific time/date
+contract TransferWithTimeout(
+    bytes20 sender,
+    bytes20 recipient,
+    int timeout
+) {
+
+    function transfer(sig s, pubkey pk) {
+        require(checkSig(s, pk));  // must be signed by sender
+        require(hash160(pk) == sender);  // must be signed by sender
+        require(tx.time >= timeout);  // must be spent after a specific time/date
+        
+        // can only be spent to a specific recipient (P2PKH -- to another wallet)
+        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(recipient);
+        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
+    }
+
+}
+</code></pre>
+                    </div>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">line 14</code> - converts a pubkey hash to a P2PKH locking bytecode</li>
+                            <li><code class="text-green-300">line 15</code> - checks if the 0th output funds are sent to the designated recipient</li>
+                        </ul>
+                    </div>
+                </section>
+            </section>
+            
+            <!-- 7. NFT -->
+
+            <section>
+                <section>
+                    <h2><div class="text-green-300">CashTokens</div></h2>
+                    <div class="text-4xl">Fungible Tokens & NFTs</div>
+                </section>
+                
+                <section>
+                    <h3><div class="text-green-300">Contract Overview</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="1-31">pragma cashscript ^0.11.0;
+
+/*
+    - contract where the funds can be spent only when the input password matches the
+    password stored in the NFT commitment
+
+    - password in the NFT can also be updated
+ */
+contract PasswordWithNFT (bytes32 category, pubkey ownerPubkey) {
+
+    function spend (string inputPassword) {
+        // input password should be same with the password from the NFT
+        bytes nftPassword = tx.inputs[0].nftCommitment;
+        require(nftPassword == bytes(inputPassword));
+    }
+
+    function update (sig ownerSignature) {
+        // only owner can change the password
+        require(checkSig(ownerSignature, ownerPubkey));
+
+        // old and new password should not be the same
+        bytes oldPassword = tx.inputs[0].nftCommitment;
+        bytes newPassword = tx.outputs[0].nftCommitment;
+        require(oldPassword != newPassword);
+
+        // nft in output and input must be the same category and is mutable
+        require(category + 0x01 == tx.inputs[0].tokenCategory);
+        require(category + 0x01 == tx.outputs[0].tokenCategory);
+    }
+
+}
+</code></pre>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg">
+                        <p class="text-2xl">A password-protected contract where the password is stored on the NFT</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">1. Password Verification</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="11-15">pragma cashscript ^0.11.0;
+
+/*
+    - contract where the funds can be spent only when the input password matches the
+    password stored in the NFT commitment
+
+    - password in the NFT can also be updated
+ */
+contract PasswordWithNFT (bytes32 category, pubkey ownerPubkey) {
+
+    function spend (string inputPassword) {
+        // input password should be same with the password from the NFT
+        bytes nftPassword = tx.inputs[0].nftCommitment;
+        require(nftPassword == bytes(inputPassword));
+    }
+
+    function update (sig ownerSignature) {
+        // only owner can change the password
+        require(checkSig(ownerSignature, ownerPubkey));
+
+        // old and new password should not be the same
+        bytes oldPassword = tx.inputs[0].nftCommitment;
+        bytes newPassword = tx.outputs[0].nftCommitment;
+        require(oldPassword != newPassword);
+
+        // nft in output and input must be the same category and is mutable
+        require(category + 0x01 == tx.inputs[0].tokenCategory);
+        require(category + 0x01 == tx.outputs[0].tokenCategory);
+    }
+
+}</code></pre>
+                    </div>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">tx.inputs[0].nftCommitment</code> - fetches the 0th input NFT commitment</li>
+                            <li><code class="text-green-300">require(nftPassword == bytes(inputPassword))</code> - password verification</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3><div class="text-green-300">2. Password Update</div></h3>
+                    <div>
+                        <pre><code class="language-javascript" data-line-numbers="17-29">pragma cashscript ^0.11.0;
+
+/*
+    - contract where the funds can be spent only when the input password matches the
+    password stored in the NFT commitment
+
+    - password in the NFT can also be updated
+ */
+contract PasswordWithNFT (bytes32 category, pubkey ownerPubkey) {
+
+    function spend (string inputPassword) {
+        // input password should be same with the password from the NFT
+        bytes nftPassword = tx.inputs[0].nftCommitment;
+        require(nftPassword == bytes(inputPassword));
+    }
+
+    function update (sig ownerSignature) {
+        // only owner can change the password
+        require(checkSig(ownerSignature, ownerPubkey));
+
+        // old and new password should not be the same
+        bytes oldPassword = tx.inputs[0].nftCommitment;
+        bytes newPassword = tx.outputs[0].nftCommitment;
+        require(oldPassword != newPassword);
+
+        // nft in output and input must be the same category and is mutable
+        require(category + 0x01 == tx.inputs[0].tokenCategory);
+        require(category + 0x01 == tx.outputs[0].tokenCategory);
+    }
+
+}
+</code></pre>
+                    </div>
+                    
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[30px]">
+                        <ul class="space-y-1 text-2xl">
+                            <li><code class="text-green-300">tx.inputs[0].tokenCategory</code> - fetches the 0th input token category</li>
+                            <li><code class="text-green-300">category + 0x01</code> - ensure that the NFT token is a <i class="text-green-300">mutable</i> token</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2><div class="text-green-300">Types of NFT</div></h2>
+                    <ul class="space-y-1">
+                        <li><code class="text-green-300">Immutable (0x00)</code> - commitment data <i class="text-green-300">cannot</i> be modified</li>
+                        <li><code class="text-green-300">Mutable (0x01)</code> - commitment data <i class="text-green-300">can</i> be modified</li>
+                        <li><code class="text-green-300">Minting (0x02)</code> - can produce more child NFTs <i class="text-green-300">(parent)</i></li>
+                    </ul>
+                </section>
+            </section>
+
+            <!-- ron start -->
+
+            <section>
+                <section>
+                    <h2>
+                        <div class="text-green-300">Global Functions</div>
+                    </h2>
+                    <div class="text-4xl">CashScript has several built-in functions for things like cryptographic and arithmetic applications, and it includes many common arithmetic and other operators that you would expect in a programming language.</div>
+                </section>
+
+                <section>
+                    <h2><div class="text-green-300">Global Functions</div></h2>
+                    <div class="text-4xl">Arithmetic Functions</div>
+                    <div>
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns the absolute value of argument a.
+                        int abs(int a)
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns the minimum value of arguments a and b.
+                        int min(int a, int b)
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns the maximum value of arguments a and b.
+                        int max(int a, int b)
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns true if and only if x >= low && x < high.
+                        int within(int x, int low, int high)
+                        </code></pre>
+                    </div>
+                </section>
+                <section>
+                    <h2><div class="text-green-300">Global Functions</div></h2>
+                    <div class="text-4xl">Hashing Functions</div>
+                    <div>
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns the RIPEMD-160 hash of argument x.
+                        bytes20 ripemd160(any x)
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns the SHA-1 hash of argument x.
+                        bytes20 sha1(int x)
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns the SHA-256 hash of argument x.
+                        bytes32 sha256(any x)
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns the RIPEMD-160 hash of the SHA-256 hash of argument x.
+                        bytes32 hash160(int x)
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        // Returns the double SHA-256 hash of argument x.
+                        bytes32 hash256(int x)
+                        </code></pre>
+
+                    </div>
+                </section>
+                <section>
+                    <h2><div class="text-green-300">Global Functions</div></h2>
+                    <div class="text-4xl">Signature Checking Functions</div>
+                    <div>
+                        <pre>
+                            <code class="language-javascript" data-trim>
+                                // Returns the RIPEMD-160 hash of argument x. 
+                                bool checkSig(sig s, pubkey pk)
+                            </code>
+                        </pre>
+                        <pre>
+                            <code class="language-javascript" data-trim>
+                                // Performs a multi-signature check using a
+                                // list of transaction signatures and public keys.
+                                bool checkMultiSig(sig[] sigs, pubkey[] pks)
+                            </code>
+                        </pre>
+                        <pre>
+                            <code class="language-javascript" data-trim>
+                                // Checks that sig s is a valid signature 
+                                // for message msg and matches with public key pk.
+                                bool checkDataSig(datasig s, bytes msg, pubkey pk) 
+                            </code>
+                        </pre>
+                    </div>
+                </section>
+                <section>
+                    <h2><div class="text-green-300">Global Functions</div></h2>
+                    <div class="flex flex-wrap gap-10 mt-1">
+                        <!-- Arithmetic Functions -->
+                        <div class="flex-1 min-w-[300px]">
+                        <div class="text-2xl">Arithmetic</div>
+                        <pre><code class="language-javascript" data-trim>int abs(int a)</code></pre>
+                        <pre><code class="language-javascript" data-trim>int min(int a, int b)</code></pre>
+                        <pre><code class="language-javascript" data-trim>int max(int a, int b)</code></pre>
+                        <pre><code class="language-javascript" data-trim>int within(int x, int low, int high)</code></pre>
+                        </div>
+
+                        <!-- Hashing Functions -->
+                        <div class="flex-1 min-w-[300px]">
+                        <div class="text-2xl">Hashing</div>
+                        <pre><code class="language-javascript" data-trim>bytes20 ripemd160(any x)</code></pre>
+                        <pre><code class="language-javascript" data-trim>bytes20 sha1(int x)</code></pre>
+                        <pre><code class="language-javascript" data-trim>bytes32 sha256(any x)</code></pre>
+                        <pre><code class="language-javascript" data-trim>bytes32 hash160(int x)</code></pre>
+                        <pre><code class="language-javascript" data-trim>bytes32 hash256(int x)</code></pre>
+                        </div>
+
+                        <!-- Signature Checking Functions -->
+                        <div class="flex-1 min-w-[300px]">
+                        <div class="text-2xl mb-1">Signature Checking</div>
+                        <pre><code class="language-javascript" data-trim>bool checkSig(sig s, pubkey pk)</code></pre>
+                        <pre><code class="language-javascript" data-trim>bool checkMultiSig(sig[] sigs, pubkey[] pks)</code></pre>
+                        <pre><code class="language-javascript" data-trim>bool checkDataSig(datasig s, bytes msg, pubkey pk)</code></pre>
+                        </div>
+
+                    </div>
+                    </section>
+
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Demo</div>
+                        <div class="mt-6">
+                            <ul class="text-xl mt-6 space-y-4">
+                            <li><strong>Imagine you have a secret number</strong> that you want to keep safe.</li>
+                            <li>Instead of storing it in one place, you split it into <strong>two shards</strong>: <code>a</code> and <code>b</code>.</li>
+                            <li><strong>Store the shards separately:</strong> each shard can be written down, stored digitally, or kept in different locations.</li>
+                            <li><strong>No single shard reveals the secret:</strong> individually, each shard is meaningless.</li>
+                            <li><strong>Reconstruction:</strong> Only by combining both shards can the contract verify the secret.</li>
+                            <li><strong>Order doesn’t matter:</strong> The contract uses <code>abs(a - b)</code>, so <code>a</code> and <code>b</code> can be provided in any order.</li>
+                            <li><strong>Constraints:</strong> 
+                            <ul class="ml-6 space-y-2">
+                                <li><code>min(a, b) >= 1</code></li>
+                                <li><code>max(a, b) > 100000</code></li>
+                            </ul>
+                            </li>
+                            <li><strong>Security:</strong> The absolute difference is committed via <code>secretNumberHash</code>, preventing tampering.</li>
+                            <li><strong>Authorization:</strong> Only the owner can spend the contract using a valid signature on <code>secretNumberHash</code>.</li>
+                        </ul>
+                        </div>
+                    </section>
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Example</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="2-10">
+                                    pragma cashscript ^0.8.0;
+                                    /**
+                                    * @params {pubkey} owner - 
+                                    * The public key of the owner of this contract.
+                                    *
+                                    * @params {bytes32} secretNumberHash - 
+                                    * The sha256 hash of the absolute difference 
+                                    * of num1 and num2 secret shards. 
+                                    */
+                                    contract SecretNumberShardsDemo(pubkey owner, bytes32 secretNumberHash) {
+
+                                        function unlockUsingSecretNumbers(int num1, int num2) {
+                                            // Compute min and max of the inputs
+                                            int small = min(num1, num2);
+                                            int big = max(num1, num2);
+
+                                            // Enforce constraints on min and max
+                                            require(small >= 1, "Min must be at least 1");
+                                            require(big > 10000, "Max must be greater than 10000");
+
+                                            // Compute absolute difference
+                                            int diff = abs(num1 - num2);
+
+                                            // Require that the hash of the difference matches the committed message hash
+                                            require(sha256(diff) == secretNumberHash, "Hash mismatch");
+                                        }
+
+                                        function unlockUsingPrivateKey (sig s) {
+                                            require(checkSig(s, owner), "Invalid signature");
+                                        }
+                                    }
+
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Example</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="12-16">
+                                    pragma cashscript ^0.8.0;
+                                    /**
+                                    * @params {pubkey} owner - 
+                                    * The public key of the owner of this contract.
+                                    *
+                                    * @params {bytes32} secretNumberHash - 
+                                    * The sha256 hash of the absolute difference 
+                                    * of num1 and num2 secret shards
+                                    */
+                                    contract SecretNumberShardsDemo(pubkey owner, bytes32 secretNumberHash) {
+
+                                        /**
+                                        * Incase you lost the secret numbers you can still
+                                        * recover funds using your wallet.
+                                        */
+                                        function unlockUsingSecretNumbers(int num1, int num2) {
+                                            // Compute min and max of the inputs
+                                            int small = min(num1, num2);
+                                            int big = max(num1, num2);
+
+                                            // Enforce constraints on min and max
+                                            require(small >= 1, "Min must be at least 1");
+                                            require(big > 10000, "Max must be greater than 10000");
+
+                                            // Compute absolute difference
+                                            int diff = abs(num1 - num2);
+
+                                            // Require that the hash of the difference matches the committed message hash
+                                            require(sha256(diff) == secretNumberHash, "Hash mismatch");
+                                        }
+
+                                        function unlockUsingPrivateKey (sig s) {
+                                            require(checkSig(s, owner), "Invalid signature");
+                                        }
+                                    }
+
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Example</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="28-32">
+                                    pragma cashscript ^0.8.0;
+                                    /**
+                                    * @params {pubkey} owner - 
+                                    * The public key of the owner of this contract.
+                                    *
+                                    * @params {bytes32} secretNumberHash - 
+                                    * The sha256 hash of the absolute difference 
+                                    * of num1 and num2 secret shards
+                                    */
+                                    contract SecretNumberShardsDemo(pubkey owner, bytes32 secretNumberHash) {
+
+                                        function unlockUsingSecretNumbers(int num1, int num2) {
+                                            // Compute min and max of the inputs
+                                            int small = min(num1, num2);
+                                            int big = max(num1, num2);
+
+                                            // Enforce constraints on min and max
+                                            require(small >= 1, "Min must be at least 1");
+                                            require(big > 10000, "Max must be greater than 10000");
+
+                                            // Compute absolute difference
+                                            int diff = abs(num1 - num2);
+
+                                            // Require that the hash of the difference matches the committed message hash
+                                            require(sha256(diff) == secretNumberHash, "Hash mismatch");
+                                        }
+
+                                        /**
+                                        * Incase you lost the secret numbers you can still
+                                        * recover funds using your wallet.
+                                        */
+                                        function unlockUsingPrivateKey (sig s) {
+                                            require(checkSig(s, owner), "Invalid signature");
+                                        }
+                                    }
+
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Example</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="7-8">
+                                    pragma cashscript ^0.8.0;
+
+                                    contract SecretNumberShardsDemo(pubkey owner, bytes32 secretNumberHash) {
+
+                                        function unlockUsingSecretNumbers(int num1, int num2) {
+                                            // Compute min and max of the inputs
+                                            int small = min(num1, num2);
+                                            int big = max(num1, num2);
+
+                                            // Enforce constraints on min and max
+                                            require(small >= 1, "Min must be at least 1");
+                                            require(big > 10000, "Max must be greater than 10000");
+
+                                            // Compute absolute difference
+                                            int diff = abs(num1 - num2);
+
+                                            // Require that the hash of the difference matches the committed message hash
+                                            require(sha256(diff) == secretNumberHash, "Hash mismatch");
+                                        }
+
+                                        function unlockUsingPrivateKey (sig s) {
+                                            require(checkSig(s, owner), "Invalid signature");
+                                        }
+                                    }
+
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Example</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="11-12">
+                                    pragma cashscript ^0.8.0;
+
+                                    contract SecretNumberShardsDemo(pubkey owner, bytes32 secretNumberHash) {
+
+                                        function unlockUsingSecretNumbers(int num1, int num2) {
+                                            // Compute min and max of the inputs
+                                            int small = min(num1, num2);
+                                            int big = max(num1, num2);
+
+                                            // Enforce constraints on min and max
+                                            require(small >= 1, "Min must be at least 1");
+                                            require(big > 10000, "Max must be greater than 10000");
+
+                                            // Compute absolute difference
+                                            int diff = abs(num1 - num2);
+
+                                            // Require that the hash of the difference matches the committed message hash
+                                            require(sha256(diff) == secretNumberHash, "Hash mismatch");
+                                        }
+
+                                        function unlockUsingPrivateKey (sig s) {
+                                            require(checkSig(s, owner), "Invalid signature");
+                                        }
+                                    }
+
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Example</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="15">
+                                    pragma cashscript ^0.8.0;
+
+                                    contract SecretNumberShardsDemo(pubkey owner, bytes32 secretNumberHash) {
+
+                                        function unlockUsingSecretNumbers(int num1, int num2) {
+                                            // Compute min and max of the inputs
+                                            int small = min(num1, num2);
+                                            int big = max(num1, num2);
+
+                                            // Enforce constraints on min and max
+                                            require(small >= 1, "Min must be at least 1");
+                                            require(big > 10000, "Max must be greater than 10000");
+
+                                            // Compute absolute difference
+                                            int diff = abs(num1 - num2);
+
+                                            // Require that the hash of the difference
+                                            // matches the committed message hash
+                                            require(sha256(diff) == secretNumberHash, "Hash mismatch");
+                                        }
+
+                                        function unlockUsingPrivateKey (sig s) {
+                                            require(checkSig(s, owner), "Invalid signature");
+                                        }
+                                    }
+
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Example</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="17-19">
+                                    pragma cashscript ^0.8.0;
+
+                                    contract SecretNumberShardsDemo(pubkey owner, bytes32 secretNumberHash) {
+
+                                        function unlockUsingSecretNumbers(int num1, int num2) {
+                                            // Compute min and max of the inputs
+                                            int small = min(num1, num2);
+                                            int big = max(num1, num2);
+
+                                            // Enforce constraints on min and max
+                                            require(small >= 1, "Min must be at least 1");
+                                            require(big > 10000, "Max must be greater than 10000");
+
+                                            // Compute absolute difference
+                                            int diff = abs(num1 - num2);
+
+                                            // Require that the hash of the difference
+                                            // matches the committed message hash
+                                            require(sha256(diff) == secretNumberHash, "Hash mismatch");
+                                        }
+
+                                        function unlockUsingPrivateKey (sig s) {
+                                            require(checkSig(s, owner), "Invalid signature");
+                                        }
+                                    }
+
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h2><div class="text-green-300">Global Functions</div></h2>
+                        <div class="text-4xl">Example</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="22-28">
+                                    pragma cashscript ^0.8.0;
+                                    
+                                    contract SecretNumberShardsDemo(pubkey owner, bytes32 secretNumberHash) {
+
+                                        function unlockUsingSecretNumbers(int num1, int num2) {
+                                            // Compute min and max of the inputs
+                                            int small = min(num1, num2);
+                                            int big = max(num1, num2);
+
+                                            // Enforce constraints on min and max
+                                            require(small >= 1, "Min must be at least 1");
+                                            require(big > 10000, "Max must be greater than 10000");
+
+                                            // Compute absolute difference
+                                            int diff = abs(num1 - num2);
+
+                                            // Require that the hash of the difference
+                                            // matches the committed secret hash
+                                            require(sha256(diff) == secretNumberHash, "Hash mismatch");
+                                        }
+
+                                        /**
+                                        * Incase you lost the secret numbers you can still
+                                        * recover funds using your wallet.
+                                        */
+                                        function unlockUsingPrivateKey (sig s) {
+                                            require(checkSig(s, owner), "Invalid signature");
+                                        }
+                                    }
+
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
+
+                
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        <div class="text-green-300">Global Variables</div>
+                    </h2>
+                    <div class="text-4xl">In CashScript, Global Variables are special built-in values that can be accessed from anywhere inside your contract.
+
+They are automatically provided by the CashScript compiler and represent properties of the current transaction, blockchain state, or contract execution environment.
+
+You don’t need to define them — they’re always available, similar to global constants in traditional programming languages.</div>
+                </section>
+                <section>
+                    <h2><div class="text-green-300">Global Variables</div></h2>
+                    <div class="text-4xl">Global Timelock Variables</div>
+                    <div>
+                        <p data-trim>A timelock is a rule that restricts when a Bitcoin Cash UTXO can be spent.
+                           It ensures that a transaction is only valid after a certain block height or timestamp.
+                           CashScript exposes global variables that allow you to inspect the transaction’s locktime
+                           and sequence numbers to implement these rules.
+                        </p>
+                    </div>
+                </section>
+                <section>
+                    <h2><div class="text-green-300">Global Variables</div></h2>
+                    <div class="text-4xl">Global Timelock Variables</div>
+                    <div>
+                        <pre><code class="language-javascript" data-trim>
+                        // Corresponds to the nLocktime field of a transaction
+                        // It's used to create absolute time lock. It can either
+                        // be a block number or timestamp
+                        tx.time
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        // Corresponds to the nSequence field of the current evaluated input.
+                        // The value of this.age can either represent a number of blocks, 
+                        // or a number of chunks, which are 512 seconds
+                        this.age
+                        </code></pre>
+                    </div>
+                </section>
+                <section>
+                    <h2><div class="text-green-300">Global Variables</div></h2>
+                    <div class="text-4xl">Introspection Variables</div>
+                    <div>
+                        <p data-trim>
+                            In CashScript, Introspection Variables are special global variables that let a contract inspect and reason about the spending transaction itself.
+                            They expose details about the transaction itself. Ability to "look inside" the spending transaction from code is called introspection.
+                        </p>
+                    </div>
+                </section>
+                <section>
+                    <h2><div class="text-green-300">Global Functions</div></h2>
+                    <div class="text-4xl">Introspection Variables</div>
+                    <div>
+                        <pre><code class="language-javascript" data-trim>
+                        int this.activeInputIndex
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        bytes this.activeBytecode
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        int tx.version
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        int tx.locktime
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        int tx.inputs.length
+                        </code></pre>
+
+                        <pre><code class="language-javascript" data-trim>
+                        int tx.inputs[i].value
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        int tx.inputs[i].outpointIndex
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        int tx.inputs[i].sequenceNumber
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        bytes tx.inputs[i].tokenCategory
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        bytes tx.inputs[i].nftCommitment
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        int tx.inputs[i].tokenAmount
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        int tx.outputs.length
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        bytes tx.outputs[i].lockingBytecode
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        bytes tx.output[i].nftCommitment
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        bytes tx.output[i].tokenAmount
+                        </code></pre>
+
+                    </div>
+                </section>
+
+                <section>
+                    <h2><div class="text-green-300">Global Variables</div></h2>
+                    <div class="text-4xl">Demo</div>
+                    <div class="mt-6">
+                        <ul class="text-xl mt-6 space-y-4">
+                        <li><strong>Imagine you want to start a project</strong> — maybe launching a new product, funding a community initiative, or creating something meaningful.</li>
+                        <li>You have the idea, the passion, and the skills — but you <strong>lack the funds</strong>.</li>
+                        <li>Traditionally, you’d rely on a crowdfunding platform. But that means <strong>trusting a middleman</strong> with the money and hoping they distribute it fairly.</li>
+                        <li><strong>What if we could create a contract</strong> that makes sure funds are <strong>automatically transferred</strong> to the campaign creator, with rules enforced directly by the blockchain?</li>
+                        <li><strong>What if the contract itself could:</strong>
+                            <ul class="ml-6 space-y-2">
+                            <li>Verify that at least 5 people contributed — ensuring real support from the community.</li>
+                            <li>Check that the fundraising goal is reached or the deadline has passed before allowing payouts.</li>
+                            <li>Enforce a small platform fee automatically, rewarding the provider without disputes.</li>
+                            <li>Send the remaining funds <strong>directly to the creator’s wallet</strong>, guaranteed by code, not trust.</li>
+                            </ul>
+                        </li>
+                        <li><strong>This is the Fundraiser contract:</strong> a trustless, transparent way to run crowdfunding on Bitcoin Cash, where everyone knows the rules are fair and unbreakable.</li>
+                        </ul>
+                    </div>
+                    </section>
+
+                    <section>
+                        <h2><div class="text-green-300">Global Variables</div></h2>
+                        <div class="text-4xl">Demo Contract</div>
+                        <div>
+                            <pre>
+                                <code class="language-javascript" data-trim data-line-numbers="2-15">
+                                    pragma cashscript ^0.11.0;
+                                    /**
+                                    * @param {bytes20} platformProviderPubKeyHash - 
+                                    * The public key hash of a platform provider.
+                                    * 
+                                    * @param {pubkey} campaignCreatorPubKey - 
+                                    * The public key of the person needing the funds
+                                    *
+                                    * @param {int} campaignGoal - 
+                                    * The target funds
+                                    * 
+                                    * @param {int} campaignDeadline - 
+                                    * The minimum blockheight before the funds can be sent to the campaign creator.
+                                    */
+                                    contract FundRaiserDemo(bytes20 platformProviderPubKeyHash, pubkey campaignCreatorPubKey, int campaignGoal, int campaignDeadline) {
+
+                                        function claimFunds(sig claimerSig) {
+                                            // Ensure tx version is 0, locktime which is use
+                                            require(tx.version == 2);
+                                            // 1. This contract must have atleast 5 utxos,
+                                            // this is like saying atleast 5 must have
+                                            // contributed to the contract. 
+                                            require(tx.inputs.length > 5);
+
+                                            // Campaign must be successful (goal reached)
+                                            if (tx.outputs[0].value < campaignGoal) {
+                                                require(tx.time >= campaignDeadline);
+                                            }
+                                            <!-- require(tx.outputs[0].value >= campaignGoal); -->
+
+                                            // Verify that the claimer of funds is the campaign creator
+                                            require(checkSig(claimerSig, campaignCreatorPubKey));
+                                            
+                                            // Creator gets the funds (minus platform fee)
+                                            // Platform fee calculation (5% example)
+                                            int platformFee = tx.outputs[0].value * 5 / 100;
+                                            int transactionFee = 1000;
+                                            int campaignFunds = tx.outputs[0].value - platformFee - transactionFee;
+                                            
+                                            // Ensure proper output structure
+                                            require(tx.outputs.length == 2);
+
+                                            // Output 0: Platform provider receives fee
+                                            bytes providerLockingBytecode = new LockingBytecodeP2PKH(platformProviderPubKeyHash);
+                                            require(tx.outputs[0].lockingBytecode == providerLockingBytecode);
+                                            require(tx.outputs[0].value == platformFee);
+                                            
+                                            // Output 1: Campaign funds sent to the campaign creator
+                                            bytes20 campaignCreatorPublicKeyHash = hash160(campaignCreatorPubKey);
+                                            bytes campaignCreatorLockingBytecode = new LockingBytecodeP2PKH(campaignCreatorPublicKeyHash);
+                                            require(tx.outputs[1].lockingBytecode == campaignCreatorLockingBytecode);
+                                            require(tx.outputs[1].value == campaignFunds);
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                        </div>
+                    </section>
+                
+            </section>
+            <!-- ron end -->
+
+            <section>
+                <h2><div class="text-green-300">Coding Demo</div></h2>
+                <p>Tama na salita, code na ta!</p>
             </section>
 
             <section>

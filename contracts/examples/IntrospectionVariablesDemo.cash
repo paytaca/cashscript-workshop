@@ -1,0 +1,11 @@
+pragma cashscript ^0.11.0;
+contract IntrospectionVariablesDemo() {
+    function spend() {
+        require(tx.inputs.length == 2);
+        require(tx.outputs.length == 1);
+        int totalAmountBeingSpent = tx.inputs[0].value + tx.inputs[1].value;
+        int networkFee = 1000;
+        int totalAmountToBeReceived = totalAmountBeingSpent - 1000;
+        require(tx.outputs[0].value == totalAmountToBeReceived);
+    }
+}

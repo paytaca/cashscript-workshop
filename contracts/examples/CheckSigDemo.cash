@@ -1,0 +1,6 @@
+pragma cashscript ^0.11.0;
+contract CheckSigDemo(pubkey publicKeyOfContractOwner) {
+    function spend(sig signatureOfContractOwner) {
+        require(checkSig(signatureOfContractOwner, publicKey));
+    }
+}
