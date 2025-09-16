@@ -199,14 +199,14 @@
                 <h3>Activity: Create PasswordVault</h3>
                 <h3>artifact file using CLI</h3>
                 <ol class="space-y-2 text-3xl">
-                    <li>Open CLI and navigate to:</li>
+                    <!-- <li>Open CLI and navigate to:</li> -->
                     <!-- <code class="text-orange-400 italic">quasar-apps/password-vault-ui/src/contracts</code> -->
-                     <code class="text-orange-400 italic">password-vault-ui/src/contracts</code>
+                     <!-- <code class="text-orange-400 italic">password-vault-ui/src/contracts</code> -->
                     <li>
-                        Run
+                        Open CLI and run
                         <pre style="width: 100% !important; font-size: 0.75em !important;">
                             <code class="language-bash" data-trim>
-                            npx cashc ./PasswordVault.cash
+                            npx cashc src/contracts/PasswordVault.cash
                             </code>
                         </pre>
                     </li>
@@ -214,7 +214,8 @@
                         Run
                         <pre style="width: 100% !important; font-size: 0.75em !important;">
                             <code class="language-bash" data-trim>
-                            npx cashc ./PasswordVault.cash --output ./PasswordVault.json
+                            npx cashc src/contracts/PasswordVault.cash
+                                --output src/contracts/PasswordVault.json
                             </code>
                         </pre>
                     </li>
@@ -370,15 +371,19 @@
                 <h3>Activity: Instantiate PasswordVault contract</h3>
                 <ol class="space-y-2 text-4xl">
                     <li>
-                        <span>Under the same directory, open:</span>
+                        <!-- <span>Under the same directory, open:</span> -->
+                        <span>
+                            Under <code class="text-orange-400 italic">src/contracts</code>, open:
+                        </span>
                         <p><code class="text-yellow-400 font-bold">password-vault-instantiate.js</code></p>
                     </li>
                     <li>Adjust the values in the <code class="text-orange-400 font-bold">contractArgs</code> variable</li>
                     <li>Console log <code class="text-orange-400 font-bold">passwordVaultContract</code> variable</li>
                     <li>
                         Open CLI and run
-                        <pre style="font-size: 0.7em !important;">
-                            <code class="language-bash">node password-vault-instantiate.js</code>
+                        <pre style="width: 100% !important; font-size: 0.7em !important;">
+                            <!-- <code class="language-bash">node password-vault-instantiate.js</code> -->
+                            <code class="language-bash">node src/contracts/password-vault-instantiate.js</code>
                         </pre>
                     </li>
                 </ol>
@@ -413,8 +418,9 @@
                     </li>
                     <li>
                         Open CLI and run the same command again
-                        <pre style="font-size: 0.7em !important;">
-                            <code class="language-bash">node password-vault-instantiate.js</code>
+                        <pre style="width: 100% !important; font-size: 0.7em !important;">
+                            <!-- <code class="language-bash">node password-vault-instantiate.js</code> -->
+                            <code class="language-bash">node src/contracts/password-vault-instantiate.js</code>
                         </pre>
                     </li>
                     <li class="fragment">
@@ -712,7 +718,14 @@
             <section>
                 <h3>Activity: Build a transaction</h3>
                 <ol class="space-y-2 text-3xl">
-                    <li>Under the same directory, open <code class="text-yellow-400 font-bold">password-vault-transact.js</code></li>
+                    
+                    <li>
+                        <!-- <span>Under the same directory, open</span> -->
+                        <span>
+                            Under <code class="text-orange-400 italic">src/contracts</code>, open
+                        </span>
+                        <code class="text-yellow-400 font-bold">password-vault-transact.js</code>
+                    </li>
                     <li>
                         In the <code class="text-orange-400 font-bold">outputs</code> variable, replace
                         the <code class="text-orange-400 font-bold">'address'</code> in the first
@@ -724,7 +737,8 @@
                         <li>
                             Open CLI and run
                             <pre style="font-size: 0.8em !important;">
-                                <code class="language-bash">node password-vault-transact.js</code>
+                                <!-- <code class="language-bash">node password-vault-transact.js</code> -->
+                                <code class="language-bash">node src/contracts/password-vault-transact.js</code>
                             </pre>
                         </li>
                     </span>
@@ -748,7 +762,8 @@
                         <li>
                             Run the command below again:
                             <pre style="font-size: 0.8em !important;">
-                                <code class="language-bash">node password-vault-transact.js</code>
+                                <!-- <code class="language-bash">node password-vault-transact.js</code> -->
+                                <code class="language-bash">node src/contracts/password-vault-transact.js</code>
                             </pre>
                         </li>
                         <span class="fragment">
