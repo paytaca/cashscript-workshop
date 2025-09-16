@@ -25,17 +25,20 @@
         // Creates a locking bytecode/locking script for publicKeyHash 
         // This is used to lock BCH to someones public key
         new LockingBytecodeP2PKH(bytes20 publicKeyHash): bytes25
+        OP_DUP OP_HASH160 <pubkeyhash> OP_EQUALVERIFY OP_CHECKSIG
         </code></pre>
         <pre><code class="language-javascript" data-trim>
         // Creates a locking bytecode/locking script for scriptHash
         // This is used to lock BCH to a contract
         new LockingBytecodeP2SH20(bytes20 scriptHash): bytes23
+        OP_HASH160 <scripthash> OP_EQUAL
         </code></pre>
         <pre><code class="language-javascript" data-trim>
         // Creates a locking bytecode/locking script for scriptHash
         // This is used to lock BCH to a contract with a longer scriptHash
         // The locking bytecode/locking script will be longer than P2SH20
         new LockingBytecodeP2SH32(bytes32 scriptHash): bytes35
+        OP_HASH256 <scripthash> OP_EQUAL
         </code></pre>
         <pre><code class="language-javascript" data-trim>
         // Creates an unspendable locking bytecode
@@ -43,6 +46,7 @@
         // instruction called 'OP_RETURN', if blockchain sees the 
         // output locked with this is can't be spent in the future
         new LockingBytecodeNullData(bytes[] chunks): bytes
+        OP_RETURN <data>
         </code></pre>
         </code></pre>
     </div>
