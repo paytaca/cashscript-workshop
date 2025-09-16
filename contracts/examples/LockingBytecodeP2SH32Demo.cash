@@ -1,0 +1,15 @@
+pragma cashscript ^0.11.0;
+
+// This is an experimental contract for a more "streaming" Mecenas experience
+// Completely untested, just a concept
+contract LockingBytecodeP2SH32Demo(
+) {
+    function spend() {
+        bytes newContract = bytes(this.activeBytecode);
+
+        // Create the locking bytecode for the new contract and check that
+        // the change output sends to that contract
+        bytes35 newContractLock = new LockingBytecodeP2SH32(sha256(newContract));
+        require(tx.outputs[1].lockingBytecode == newContractLock);
+    }
+}
