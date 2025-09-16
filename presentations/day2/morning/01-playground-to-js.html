@@ -31,17 +31,18 @@
                 <section>
                     <h3>Before starting...</h3>
                     <span class="fragment">
-                        <p>Clone <span class="text-orange-400 font-bold">CashScript Workshop</span> repo</p>
-                        <pre><code class="language-bash">git clone https://github.com/paytaca/cashscript-workshop.git</code></pre>
-                        <!-- <p>Download <span class="text-orange-400 font-bold">CashScript Workshop</span> repo files</p>
-                        <pre><code class="language-bash">bit.ly/quasar-app</code></pre> -->
+                        <!-- <p>Clone <span class="text-orange-400 font-bold">CashScript Workshop</span> repo</p>
+                        <pre><code class="language-bash">git clone https://github.com/paytaca/cashscript-workshop.git</code></pre> -->
+                        <p>Download <span class="text-orange-400 font-bold">CashScript Workshop</span> repo files</p>
+                        <pre><code class="language-bash">https://bit.ly/password-vault-ui</code></pre>
                     </span>
                     <span class="fragment">
-                        <p>Navigate to <span class="text-orange-400 italic">quasar-apps/password-vault-ui</span></p>
-                         <!-- <p>Navigate to <span class="text-orange-400 italic">password-vault-ui</span></p> -->
+                        <!-- <p>Navigate to <span class="text-orange-400 italic">quasar-apps/password-vault-ui</span></p> -->
+                         <p>Navigate to <span class="text-orange-400 italic">password-vault-ui</span></p>
                     </span>
                     <span class="fragment">
-                        <p>And install dependencies</p>
+                        <!-- <p>And install dependencies</p> -->
+                         <p>Open CLI and install dependencies</p>
                         <pre><code class="language-bash">npm install</code></pre>
                     </span>
                 </section>
@@ -199,13 +200,13 @@
                 <h3>artifact file using CLI</h3>
                 <ol class="space-y-2 text-3xl">
                     <li>Open CLI and navigate to:</li>
-                    <code class="text-orange-400 italic">quasar-apps/password-vault-ui/src/contracts</code>
-                     <!-- <code class="text-orange-400 italic">password-vault-ui/src/contracts</code> -->
+                    <!-- <code class="text-orange-400 italic">quasar-apps/password-vault-ui/src/contracts</code> -->
+                     <code class="text-orange-400 italic">password-vault-ui/src/contracts</code>
                     <li>
                         Run
                         <pre style="width: 100% !important; font-size: 0.75em !important;">
                             <code class="language-bash" data-trim>
-                            cashc ./PasswordVault.cash
+                            npx cashc ./PasswordVault.cash
                             </code>
                         </pre>
                     </li>
@@ -213,7 +214,7 @@
                         Run
                         <pre style="width: 100% !important; font-size: 0.75em !important;">
                             <code class="language-bash" data-trim>
-                            cashc ./PasswordVault.cash --output ./PasswordVault.json
+                            npx cashc ./PasswordVault.cash --output ./PasswordVault.json
                             </code>
                         </pre>
                     </li>
