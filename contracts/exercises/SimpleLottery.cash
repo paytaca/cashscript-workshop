@@ -4,10 +4,8 @@ pragma cashscript ^0.11.0;
 * You can unlock if you guess the lucky number.
 */
 contract SimpleLottery() {
-
     function play(int luckyNumber) {
-        // Generate random number from hash
-        bytes32 hash = sha256(bytes(62) + bytes(this.activeInputIndex));
+        bytes32 hash = sha256(bytes(27) + bytes(this.activeInputIndex));
         int randomNumber = int(hash.split(1)[0]) % 100;
         require(luckyNumber >= 1 && luckyNumber < 100);
         require(luckyNumber == randomNumber);
