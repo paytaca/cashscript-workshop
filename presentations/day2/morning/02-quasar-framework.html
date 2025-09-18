@@ -227,13 +227,13 @@
                         <div>Change directory to <i>password-vault-ui</i> folder:</div>
                         <div><i class="text-yellow-300">cd password-vault-ui</i></div>
                     </li>
-                    <li>
+                    <!-- <li>
                         <div>Install quasar cli:</div>
                         <div><i class="text-yellow-300">npm install -g @quasar/cli</i></div>
-                    </li>
+                    </li> -->
                     <li>
                         <div>Run dev server:</div>
-                        <div><i class="text-yellow-300">quasar dev</i></div>
+                        <div><i class="text-yellow-300">npx quasar dev</i></div>
                     </li>
                     <li>
                         <div>Open server in browser:</div>
@@ -842,7 +842,7 @@
                 <section data-auto-animate>
                     <h3>Component Props</h3>
                     <div>
-                        Props are <strong class="text-yellow-400">ready-only</strong>
+                        Props are <strong class="text-yellow-400">read-only</strong>
                     </div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="6-10">
                         export default defineComponent({
@@ -972,7 +972,7 @@
                 <div>
                     <i class="text-blue-300">PasswordVaultFormCard.vue</i>
                     in
-                    <i class="text-blue-300">src/components/src/cards/</i>
+                    <i class="text-blue-300">src/components/cards/</i>
                     and add
                     <i class="text-blue-300">v-model</i>
                     to the input fields
@@ -1341,9 +1341,17 @@
             <section>
                 <h3>Activity: Display contract balance</h3>
                 <ol>
-                    <li>Use the contract store to display the balance</li>
                     <li>Add a button to refresh balance</li>
+                    <li>Use the contract store to display the balance</li>
                 </ol>
+                <div class="px-4 bg-white/10 rounded-lg fragment">
+                    💡 Use
+                    <i class="text-yellow-200">balance</i>
+                    and
+                    <i class="text-yellow-200">refreshBalance()</i>
+                    in
+                    <i class="text-yellow-200">useContractStore()</i>
+                </div>
             </section>
 
             <section data-auto-animate>
