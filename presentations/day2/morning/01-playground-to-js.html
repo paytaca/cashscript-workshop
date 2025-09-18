@@ -88,8 +88,8 @@
             </section>
 
             <section>
-                <h2>
-                    <p>Moving <span class="text-green-600">CashScript</span> Outside</p>
+                <h2 class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                    <p>Moving <span class="text-green-500">CashScript</span> Outside</p>
                 </h2>
             </section>
 
@@ -151,8 +151,11 @@
                             -c, --opcount          Display the number of opcodes in the compiled bytecode.
                             -s, --size             Display the size in bytes of the compiled bytecode.
                             -f, --format [format]  Specify the format of the output. (choices: "json", "ts", default: "json")
-                            -?, --help             Display help</code></pre>
-                    <a href="https://cashscript.org/docs/compiler/#cli-usage" data-preview-link>https://cashscript.org/docs/compiler/#cli-usage</a>
+                            -?, --help             Display help
+                    </code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                        <a href="https://cashscript.org/docs/compiler/#cli-usage" data-preview-link>https://cashscript.org/docs/compiler/#cli-usage</a>
+                    </div>
                 </section>
     
                 <section data-auto-animate>
@@ -280,6 +283,18 @@
 
                     <div class="grid grid-cols-2 gap-4">
                         <div class="col-span-1">
+                            <span class="text-green-500">CashScript</span>
+                            <pre style="font-size: 0.65em !important;">
+                                <code class="language-javascript" data-line-numbers="1-5" data-trim>
+                                contract PasswordVault(
+                                    int payout,
+                                    bytes20 ownerPkhash,
+                                    bytes passcode
+                                ) {
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="col-span-1">
                             <span class="text-yellow-400">JavaScript</span>
                             <pre style="font-size: 0.65em !important;">
                                 <code class="language-javascript" data-line-numbers="1-5" data-trim>
@@ -288,18 +303,6 @@
                                     'sample-pubkeyhash',
                                     '123456',
                                 ]
-                                </code>
-                            </pre>
-                        </div>
-                        <div class="col-span-1">
-                            <span class="text-green-600">CashScript</span>
-                            <pre style="font-size: 0.65em !important;">
-                                <code class="language-javascript" data-line-numbers="1-5" data-trim>
-                                contract PasswordVault(
-                                    int payout,
-                                    bytes20 ownerPkhash,
-                                    bytes passcode
-                                ) {
                                 </code>
                             </pre>
                         </div>
@@ -351,6 +354,34 @@
 
                 <section data-auto-animate>
                     <h2>Contract Instantiation</h2>
+                    <h3>Network Providers</h3>
+                    <pre><code class="language-javascript">new MockNetworkProvider(options?: { updateUtxoSet: boolean })</code></pre>
+                    <div class="col-auto place-items-center">
+                        <span class="text-green-500">CashScript Playground</span>
+                        <img src="../../images/day2/playground-mocknet-utxo.png" alt="Playground Mocknet UTXO Sample">
+                    </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>Contract Instantiation</h2>
+                    <h3>Network Providers</h3>
+                    <pre><code class="language-javascript">new MockNetworkProvider(options?: { updateUtxoSet: boolean })</code></pre>
+                    <div class="col-auto place-items-center">
+                        <span class="text-yellow-400">JavaScript</span>
+                        <pre style="width: 100% !important; font-size: 0.65em !important;">
+                            <code class="language-javascript" data-line-numbers="1-5" data-trim>
+                                import { MockNetworkProvider, randomUtxo } from "cashscript"
+
+                                const provider = new MockNetworkProvider()
+                                const newUtxo = randomUtxo({ satoshis: 10_000n })
+                                provider.addUtxo(contractAddress, newUtxo)
+                            </code>
+                        </pre>
+                    </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>Contract Instantiation</h2>
                     <pre><code class="language-javascript" data-line-numbers="6" data-trim>
                         new Contract(
                             artifact: Artifact,
@@ -377,9 +408,18 @@
                         </span>
                         <p><code class="text-yellow-400 font-bold">password-vault-instantiate.js</code></p>
                     </li>
-                    <li>Adjust the values in the <code class="text-orange-400 font-bold">contractArgs</code> variable</li>
-                    <li>Console log <code class="text-orange-400 font-bold">passwordVaultContract</code> variable</li>
                     <li>
+                        Replace the <code class="text-orange-400 font-bold">'address'</code>
+                        string in the <code class="text-orange-400 font-bold">contractArgs</code> variable
+                        with your Paytaca wallet address
+                    </li>
+                    <li>
+                        Console log <code class="text-orange-400 font-bold">passwordVaultContract</code> variable
+                        <pre style="width: 100% !important; font-size: 0.7em !important;">
+                            <code class="language-javascript" data-line-numbers="1">console.log(passwordVaultContract)</code>
+                        </pre>
+                    </li>
+                    <li class="fragment">
                         Open CLI and run
                         <pre style="width: 100% !important; font-size: 0.7em !important;">
                             <!-- <code class="language-bash">node password-vault-instantiate.js</code> -->
@@ -415,6 +455,9 @@
                     <li>
                         Console log the address of the
                         <code class="text-orange-400 font-bold">passwordVaultContract</code>
+                        <pre style="width: 100% !important; font-size: 0.7em !important;">
+                            <code class="language-javascript" data-line-numbers="1">console.log(passwordVaultContract.address)</code>
+                        </pre>
                     </li>
                     <li>
                         Open CLI and run the same command again
@@ -429,7 +472,7 @@
                         paste the address in the search bar, then hit Enter
                     </li>
                     <li class="fragment">
-                        Using your Paytaca app, scan the QR code and send 5000 satoshis
+                        Using your Paytaca app, scan the QR code and send <span class="text-orange-400 font-bold">5000 satoshis</span>
                     </li>
                     <li class="fragment">
                         After sending, refresh the BCH Explorer page
@@ -492,7 +535,7 @@
                                 basic transactions include adding <span class="text-yellow-400 font-bold">input(s)</span>
                                 and <span class="text-yellow-400 font-bold">output(s)</span>
                             </span>
-                            <ul class="space-y-2">
+                            <ul class="space-y-5 pt-5">
                                 <li class="fragment">input - the current UTXOs of the contract + <span class="text-yellow-400 font-bold">unlocker</span></li>
                                 <li class="fragment">output - dictates where the funds are sent</li>
                             </ul>
@@ -506,7 +549,7 @@
                         <li>
                             unlockers
                             <ul class="space-y-2">
-                                <li>the functions in the contract that does checks and runs rules before funds are sent</li>
+                                <li>the functions in the contract that performs checks and runs rules before funds are sent</li>
                             </ul>
                         </li>
                     </ul>
@@ -671,28 +714,6 @@
             <section>
                 <section data-auto-animate>
                     <h3>Completing the Transaction</h3>
-                    <code>send()</code>
-                    <pre style="font-size: 0.65em !important;">
-                        <code class="language-javascript" data-line-numbers="7" data-trim>
-                        await transactionBuilder
-                            .addInput(
-                                inputs[0],
-                                passwordVaultContract.unlock.claim('123456')
-                            )
-                            .addOutputs(outputs)
-                            .send()
-                        </code>
-                    </pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
-                        <ul class="space-y-2">
-                            <li>sends the transaction to the BCH network and returns the transaction details</li>
-                            <li>incomplete transactions and failed rules will incur errors</li>
-                        </ul>
-                    </div>
-                </section>
-    
-                <section data-auto-animate>
-                    <h3>Completing the Transaction</h3>
                     <code>build()</code>
                     <pre style="font-size: 0.65em !important;">
                         <code class="language-javascript" data-line-numbers="7" data-trim>
@@ -712,6 +733,75 @@
                             <li>can be used in transaction hex decoders to view transaction details</li>
                         </ul>
                     </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h3>Completing the Transaction</h3>
+                    <code>build()</code>
+                    <pre style="font-size: 0.65em !important;">
+                        <code class="language-bash" data-trim>
+                            02000000018c2138c63e0d639328d0ef3f88a892a01
+                            888c561a7ad07f14356a17bb1948e49000000006403
+                            123456004c5d031234561480df50e4c20a9bc31f182
+                            a666c1f24ddfc4ea6c102d2045379009c63022c0100
+                            c67c947894c3519dc452a169537a557a8800cc7b9d7
+                            6022202a06351cc789d51cdc0c788686d755167537a
+                            519d5479a97b88727cac777768feffffff02d204000
+                            0000000001976a91480df50e4c20a9bc31f182a666c
+                            1f24ddfc4ea6c188ac8a0d00000000000023aa206e0
+                            22d5cd4fd9312b42cb6c23d4e81ff88de1c24467058
+                            da2619fe5c7e97d6338700000000
+                        </code>
+                    </pre>
+                </section>
+
+                <section data-auto-animate>
+                    <h3>Completing the Transaction</h3>
+                    <code>send()</code>
+                    <pre style="font-size: 0.65em !important;">
+                        <code class="language-javascript" data-line-numbers="7" data-trim>
+                        await transactionBuilder
+                            .addInput(
+                                inputs[0],
+                                passwordVaultContract.unlock.claim('123456')
+                            )
+                            .addOutputs(outputs)
+                            .send()
+                        </code>
+                    </pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                        <ul class="space-y-2">
+                            <li>sends the transaction to the BCH network and returns the transaction details</li>
+                            <li>incomplete transactions and failed rules will incur errors</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h3>Completing the Transaction</h3>
+                    <code>send()</code>
+                    <pre>
+                        <code class="language-javascript" data-trim>
+                            {
+                                inputs: [
+                                    {
+                                    outpointIndex: 0,
+                                    outpointTransactionHash: [Uint8Array],
+                                    sequenceNumber: 4294967294,
+                                    unlockingBytecode: [Uint8Array]
+                                    }
+                                ],
+                                locktime: 0,
+                                outputs: [
+                                    { lockingBytecode: [Uint8Array], valueSatoshis: 1234n },
+                                    { lockingBytecode: [Uint8Array], valueSatoshis: 3466n }
+                                ],
+                                version: 2,
+                                txid: '2165e90e894d0b2369f63a586ca599b8de5681bb8752bb74926dd741979f5b60',
+                                hex: '02000000018c2138c63e0d639328d0ef3f88a892a01888c561a7ad07f14356a17bb1948e49000000006403123456004c5d031234561480df50e4c20a9bc31f182a666c1f24ddfc4ea6c102d2045379009c63022c0100c67c947894c3519dc452a169537a557a8800cc7b9d76022202a06351cc789d51cdc0c788686d755167537a519d5479a97b88727cac777768feffffff02d2040000000000001976a91480df50e4c20a9bc31f182a666c1f24ddfc4ea6c188ac8a0d00000000000023aa206e022d5cd4fd9312b42cb6c23d4e81ff88de1c24467058da2619fe5c7e97d6338700000000'
+                            }
+                        </code>
+                    </pre>
                 </section>
             </section>
 
@@ -785,17 +875,19 @@
             <section>
                 <h2>More information</h2>
                 <h3>Check out the <span class="text-green-600">CashScript</span> docs website</h3>
-                <a href="https://cashscript.org/docs/basics/about" data-preview-link>
-                    https://cashscript.org/docs/basics/about
-                </a>
+                <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                    <a href="https://cashscript.org/docs/basics/about" data-preview-link>
+                        https://cashscript.org/docs/basics/about
+                    </a>
+                </div>
             </section>
 
             <section>
                 <h2>Back to Main</h2>
-                <p><a href="../../index.html">← Workshop Overview</a></p>
+                <p><a href="../../index.html" class="block p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-center">← Workshop Overview</a></p>
                 <h3>OR</h3>
                 <h2>Move to Next</h2>
-                <p><a href="./02-quasar-framework.html">Quasar Framework →</a></p>
+                <p><a href="./02-quasar-framework.html" class="block p-2 bg-blue-600 hover:bg-green-700 text-white rounded-lg transition-colors text-center">Quasar Framework →</a></p>
             </section>
         </div>
     </div>
