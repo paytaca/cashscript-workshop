@@ -1,6 +1,6 @@
 import { Contract, ElectrumNetworkProvider } from "cashscript"
 import { addressToPkhash } from "../lib/common.js"
-import PasswordVaultArtifact from './PasswordVault.json' with { type: 'json' }
+import PasswordVaultArtifact from './PasswordVault.json' assert { type: 'json' }
 
 // set up network provider
 const provider = new ElectrumNetworkProvider('mainnet')
