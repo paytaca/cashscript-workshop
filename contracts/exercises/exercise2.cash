@@ -8,6 +8,7 @@ contract Exercise2 () {
 
         1. the transaction inputs is exactly 1
         2. the transaction outputs is at least 2
+        3. the first output amount is at least 2500 satoshis
      */
 
 }

@@ -6,7 +6,8 @@ contract Exercise5 () {
     /*
         make a contract where the user can only spend funds if:
 
-        1. the recipient is a wallet with the public key of -- 03100600087d5d28d229b881e28c643c7e8db108af54c1d5d7a938a7100d49bf69
+        1. the recipient is your wallet
+        2. the spending amount should not exceed 100,000 satoshis
      */
 
 }

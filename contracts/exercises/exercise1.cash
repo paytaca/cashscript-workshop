@@ -6,8 +6,8 @@ contract Exercise1 () {
     /*
         make a contract where the user can only spend funds if:
 
-        1. the input number is greater than a number MAX and less than a number MIN
-        2. both numbers should be declared on the constructor
+        1. the function parameter number should be within range of the max and min
+        2. max and min should be declared on the constructor
      */
 
 }

@@ -6,7 +6,7 @@ contract Exercise4 () {
     /*
         make a contract where the user can only spend funds if:
 
-        1. the owner's signature (spending parameter) matches with the constructor's public key
+        1. hash of the owner's pubkey matches the public key hash spending parameter
      */
 
 }
