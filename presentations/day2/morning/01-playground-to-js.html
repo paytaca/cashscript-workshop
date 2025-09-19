@@ -821,9 +821,23 @@
                         the <code class="text-orange-400 font-bold">'address'</code> in the first
                         <code class="text-orange-400 font-bold">to</code> with your Paytaca wallet address
                     </li>
-                    <li class="fragment">Add <code class="text-orange-400 font-bold">.build()</code> to the transaction being built</li>
+                    <li class="fragment">
+                        Add <code class="text-orange-400 font-bold">.build()</code> to the transaction being built
+                        <pre style="font-size: 0.8em !important;">
+                            <code class="language-javascript" data-line-numbers="1" data-trim>
+                                transactionBuilder ... .build()
+                            </code>
+                        </pre>
+                    </li>
                     <span class="fragment">
-                        <li>Console log the variable <code class="text-orange-400 font-bold">transaction</code></li>
+                        <li>
+                            Console log the variable <code class="text-orange-400 font-bold">transaction</code>
+                            <pre style="font-size: 0.8em !important;">
+                                <code class="language-javascript" data-line-numbers="1" data-trim>
+                                    console.log(transaction)
+                                </code>
+                            </pre>
+                        </li>
                         <li>
                             Open CLI and run
                             <pre style="font-size: 0.8em !important;">
@@ -848,6 +862,11 @@
                             with <code class="text-orange-400 font-bold">.send()</code> and add
                             <code class="text-orange-400 font-bold">await</code> before
                             <code class="text-orange-400 font-bold">transactionBuilder</code>
+                            <pre style="font-size: 0.8em !important;">
+                                <code class="language-javascript" data-line-numbers="1" data-trim>
+                                    await transactionBuilder ... .send()
+                                </code>
+                            </pre>
                         </li>
                         <li>
                             Run the command below again:
