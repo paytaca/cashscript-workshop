@@ -19,14 +19,18 @@
 </template>
 <script>
 import { defineComponent } from 'vue';
-import { useContractStore } from 'src/stores/contract-store';
-import { mapState } from 'pinia';
-import { sweepFunds } from 'src/lib/contract';
+import { isValidAddress } from 'src/lib/common.js';
+import { sweepContractFunds } from 'src/lib/contract-owner-unlock.js';
 import LoadingDialog from '../dialogs/LoadingDialog.vue';
 
 
 export default defineComponent({
   name: 'SweepVaultButton',
+  props: {
+    payout: Number,
+    ownerAddress: String,
+    passcode: String,
+  },
   data() {
     return {
       showDialog: false,
@@ -35,26 +39,27 @@ export default defineComponent({
       recipientAddress: '',
     }
   },
-  computed: {
-    ...mapState(useContractStore, {
-      payoutAmount: 'payoutAmount',
-      ownerAddress: 'ownerAddress',
-      passcode: 'passcode',
-    })
-  },
   methods: {
     async sweep() {
+      if (!isValidAddress(this.recipientAddress)) {
+        this.$q.dialog({
+          title: 'Invalid recipient address',
+          message: 'Must be a valid BitcoinCash address'
+        })
+        return
+      }
+
       const dialog = this.$q.dialog({
         component: LoadingDialog,
         componentProps: { message: 'Sweeping funds' },
       })
 
       const contractParameters = {
-        payoutAmount: this.payoutAmount,
+        payout: this.payout,
         ownerAddress: this.ownerAddress,
         passcode: this.passcode,
       }
-      const result = await sweepFunds(
+      const result = await sweepContractFunds(
         contractParameters,
         this.wif,
         this.recipientAddress,

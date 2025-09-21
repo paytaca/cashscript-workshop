@@ -10,7 +10,7 @@ import {
   encodePrivateKeyWif,
 } from "@bitauth/libauth";
 import { TransactionBuilder, ElectrumNetworkProvider, SignatureTemplate } from 'cashscript';
-import { getOutputSize, getTxSizeWithoutInputs } from "cashscript/dist/utils";
+import { getTxSizeWithoutInputs } from "cashscript/dist/utils";
 import { getUtxos } from "./common";
 
 

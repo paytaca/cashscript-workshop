@@ -85,73 +85,6 @@
             </section>
 
             <section>
-                <section>
-                    <h3>Architecture of Blockchain Apps</h3>
-                    <div id="blockchain-app-arch" class="mermaid p-2 bg-white rounded-lg">
-                        sequenceDiagram
-                        participant User as 👤 User
-                        participant App as 📱 App
-                        participant Frontend as 💻 Javascript
-                        participant Indexer as 📊 Indexer
-                        participant Chain as ⛓️ Blockchain
-    
-                        loop Happens in parallel
-                            Indexer->> Chain: Scan new blocks
-                            Chain-->> Indexer: Transactions
-                            Indexer->> Indexer: Store in DB
-                        end
-                        User->>App: Interact (e.g. view balance, send tx)
-                        App->>Frontend: Handle request
-                        Frontend->>Indexer: Call API (balances, tx history, etc.)
-                        Indexer->>Frontend: Return processed data
-                        Frontend->>App: Display data to user
-                    </div>
-                </section>
-                <section>
-                    <h3>Architecture of Blockchain Apps</h3>
-                    <div class="py-2 px-8 rounded-lg bg-white/10 mt-2 text-left">
-                        <div class="text-2xl">👤 User</div>
-                        <div class="text-xl">
-                            The person clicking buttons or sending a transaction
-                        </div>
-                    </div>  
-                    <div class="py-2 px-8 rounded-lg bg-white/10 mt-2 text-left">
-                        <div class="text-2xl">📱 App</div>
-                        <div class="text-xl">
-                            The actual application (UI) that the user interacts with.
-                        </div>
-                    </div>  
-                    <div class="py-2 px-8 rounded-lg bg-white/10 mt-2 text-left">
-                        <div class="text-2xl">💻 Javascript</div>
-                        <div class="text-xl">
-                            The code inside the app that talks to servers and
-                            shows results on screen
-                        </div>
-                    </div>  
-                    <div class="py-2 px-8 rounded-lg bg-white/10 mt-2 text-left">
-                        <div class="text-2xl">📊 Indexer</div>
-                        <div class="text-xl">
-                            Servers that transforms blockchain data into something apps
-                            can use like balances & transaction histories.
-                            <span> (e.g. Network providers in cashscript)</span>
-                        </div>
-                    </div>  
-                    <div class="py-2 px-8 rounded-lg bg-white/10 mt-2 text-left">
-                        <div class="text-2xl">⛓️ Blockchain</div>
-                        <div class="text-xl">
-                            The network that stores all transactions
-                            securely and permanently.
-                        </div>
-                    </div>  
-                </section>
-                <section>
-                    <h3>Javascript to App</h3>
-                    <span class="fragment">Previously we have created the Javascript layer.</span>
-                    <span class="fragment">In this section, we will create the App layer</span>
-                </section>
-            </section>
-
-            <section>
                 <h3>What is quasar</h3>
                 <p>Quasar is an MIT licensed open-source Vue.js based framework,
                     which allows you as a web developer to quickly create responsive
@@ -396,12 +329,11 @@
                         Use double curly braces <strong class="text-yellow-400">{{ }}</strong> to
                         display variables and expressions in html components
                     </div>
-                    <pre><code data-trim class="language-html" data-line-numbers="5">
+                    <pre><code data-trim class="language-html" data-line-numbers="4">
                         <template>
                             <div>
                                 <h5>
-                                    Contract address:
-                                    {{ contractAddress }}
+                                    Contract address: {{ contractAddress }}
                                 </h5>
                             </div>
                         </template>
@@ -416,8 +348,8 @@
                     <pre><code data-trim class="language-html" data-line-numbers="3-4">
                         <template>
                             <div>
-                                <div v-bind:id="myDivId"></div>
-                                <div :id="myDivId.toUpperCase()"></div>
+                                <img v-bind:src="imageUrl" />
+                                <img :src="imageUrl" :size="300" />
                             </div>
                         </template>
                     </code></pre>
@@ -503,7 +435,7 @@
                             // data() function
                             methods: {
                                 createContract() {
-                                    const passwordVaultContract = createContractInstance(this.payoutAmount, this.ownerAddress, this.passcode)
+                                    const passwordVaultContract = createPasswordVaultContract(this.payoutAmount, this.ownerAddress, this.passcode)
                                     this.contractAddress = passwordVaultContract.address;
                                     this.anotherMethod();
                                 },
@@ -531,168 +463,267 @@
             </section>
 
             <section>
-                <section>
-                    <h3>More Vue JS Basics</h3>
+                <h3>More Vue JS Basics</h3>
+                <ul>
+                    <li>Rendering lists</li>
+                    <li>Conditional Rendering</li>
+                    <li>Computed Property</li>
+                    <li>Watchers</li>
+                    <li>Form Input Bindings</li>
+                    <li>Lifecycle Hooks</li>
+                </ul>
+
+                <div class="p-2 rounded-lg bg-white/10 mt-4">
+                    More on:
+                    <span class="text-blue-300">https://vuejs.org/guide</span>
+                </div>
+            </section>
+
+            <section>
+                <h3>List rendering</h3>
+                <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                    Using <strong class="text-blue-300">v-for</strong>,
+                    we can loop using arrays, objects, and integers.
+                </div>
+                <pre><code data-trim class="language-html" data-line-numbers="">
+                    <!-- Looping with arrays -->
+                    <li v-for="(fruit, index) in fruits" :key="index">
+                        Fruit #{{ index + 1 }} : {{ fruit }}
+                    </li>
+
+                    <!-- Looping with objects -->
+                    <li v-for="(value, key) in profile" :key="key">
+                        {{ key }} : {{ value }}
+                    </li>
+
+                    <!-- Looping with a number -->
+                    <li v-for="(index) in 10" :key="index">
+                        <!-- Starts at 1 -->
+                        Item {{ index }}
+                    </li>
+                </code></pre>
+            </section>
+
+            <section>
+                <h3>Conditional Rendering</h3>
+                <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
                     <ul>
-                        <li>Rendering lists</li>
-                        <li>Conditional Rendering</li>
-                        <li>Computed Property</li>
-                        <li>Watchers</li>
-                        <li>Lifecycle Hooks</li>
+                        <li>
+                            <strong class="text-blue-300">v-if</strong> and
+                            <strong class="text-blue-300">v-else-if</strong>
+                            accepts any valid javascript expression
+                        </li>
+                        <li>
+                            <strong class="text-blue-300">v-if</strong>
+                            removes the element from DOM
+                        </li>
+                        <li>
+                            <strong class="text-blue-300">v-show</strong>
+                            hides elements using CSS with
+                            <i>display: none;</i>
+                        </li>
                     </ul>
-                </section>
-                <section>
-                    <h3>List rendering</h3>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
-                        Using <strong class="text-blue-300">v-for</strong>,
-                        we can loop using arrays, objects, and integers.
+                </div>
+                <pre><code data-trim class="language-html" data-line-numbers="">
+                    <p v-if="contractAddress.length === 0">
+                        Address is empty
+                    </p>
+                    <p v-else-if="contractAddress == null">
+                        Address is null
+                    </p>
+                    &ltp v-else>
+                        Address is not empty
+                    &lt/p>
+
+                    <p v-show="contractAddress.length > 0">
+                        Contract address: {{ contractAddress }}
+                    </p>
+                </code></pre>
+            </section>
+
+            <section>
+                <h3>Computed properties</h3>
+                <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                    <ul>
+                        <li>State variables that are derived from other state variables</li>
+                        <li>Reactive, automatically updates value when dependencies change</li>
+                    </ul>
+                </div>
+                <pre><code data-trim class="language-html" data-line-numbers="">
+                    <template>
+                        {{ payoutAmount }}
+                        {{ paymentAmountBch }}
+                    </template>
+                </code></pre>
+                <pre><code data-trim class="language-javascript" data-line-numbers="2-6">
+                    export default defineComponent({
+                        computed: {
+                            paymentAmountBch: function() {
+                                return Number(this.payoutAmount) / 100_000_000;
+                            },
+                        },
+                    })
+                    
+                </code></pre>
+            </section>
+
+            <section>
+                <h3>Watchers</h3>
+                <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                    Functions that run when a state variable or computed property changes
+                </div>
+                <pre><code data-trim class="language-javascript" data-line-numbers="2-11">
+                    export default defineComponent({
+                        watch: {
+                            passcode(newValue, oldValue) {
+                                console.log(
+                                    'Count changed!',
+                                    'Before:', oldValue,
+                                    'After:', newValue
+                                );
+
+                                // 'this' keyword is accessible
+                                this.createContract(); 
+                            },
+                        }
+                    })
+                </code></pre>
+            </section>
+
+            <section>
+                <section data-auto-animate>
+                    <h3>Form Input Bindings</h3>
+                    <div>
+                        The <strong class="text-blue-300">v-model</strong> allows
+                        two-way data binding for form input elements,
+                        automatically syncing the input's value and the variables value
                     </div>
                     <pre><code data-trim class="language-html" data-line-numbers="">
-                        <!-- Looping with arrays -->
-                        <li v-for="(fruit, index) in fruits" :key="index">
-                            Fruit #{{ index + 1 }} : {{ fruit }}
-                        </li>
+                        <input v-model="message" />
 
-                        <!-- Looping with objects -->
-                        <li v-for="(value, key) in profile" :key="key">
-                            {{ key }} : {{ value }}
-                        </li>
+                        <input v-model="checked" type="checkbox" />
 
-                        <!-- Looping with a number -->
-                        <li v-for="(index) in 10" :key="index">
-                            <!-- Starts at 1 -->
-                            Item {{ index }}
-                        </li>
+                        <textarea v-model="message"></textarea>
                     </code></pre>
                 </section>
-                <section>
-                    <h3>Conditional Rendering</h3>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
-                        <ul>
-                            <li>
-                                <strong class="text-blue-300">v-if</strong> and
-                                <strong class="text-blue-300">v-else-if</strong>
-                                accepts any valid javascript expression
-                            </li>
-                            <li>
-                                <strong class="text-blue-300">v-if</strong>
-                                removes the element from DOM
-                            </li>
-                            <li>
-                                <strong class="text-blue-300">v-show</strong>
-                                hides elements using CSS with
-                                <i>display: none;</i>
-                            </li>
-                        </ul>
+                <section data-auto-animate>
+                    <h3>Form Input Bindings</h3>
+                    <div>
+                        It works on all form related elements
                     </div>
                     <pre><code data-trim class="language-html" data-line-numbers="">
-                        <p v-if="contractAddress.length === 0">
-                            Address is empty
-                        </p>
-                        <p v-else-if="contractAddress == null">
-                            Address is null
-                        </p>
-                        &ltp v-else>
-                            Address is not empty
-                        &lt/p>
+                        <input v-model="message" />
 
-                        <p v-show="contractAddress.length > 0">
-                            Contract address: {{ contractAddress }}
-                        </p>
+                        <input v-model="checked" type="checkbox" />
+
+                        <select v-model="selectedOption">
+                            <!-- options here -->
+                        </select>
+
+                        <input type="radio" v-model="pick" :value="first" />
+                        <input type="radio" v-model="pick" :value="second" />
                     </code></pre>
                 </section>
-                <section>
-                    <h3>Computed properties</h3>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
-                        <ul>
-                            <li>State variables that are derived from other state variables</li>
-                            <li>Reactive, automatically updates value when dependencies change</li>
-                        </ul>
+
+                <section data-auto-animate>
+                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
+                    <div>
+                        The vue directive have modifiers that adds
+                        extra behavior
                     </div>
-                    <pre><code data-trim class="language-html" data-line-numbers="">
-                        <template>
-                            {{ payoutAmount }}
-                            {{ paymentAmountBch }}
-                        </template>
-                    </code></pre>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="2-6">
-                        export default defineComponent({
-                            computed: {
-                                paymentAmountBch: function() {
-                                    return Number(this.payoutAmount) / 100_000_000;
-                                },
-                            },
-                        })
-                        
+                    <pre><code data-trim class="language-html">
+                        <input v-model.lazy="message"/>
+                        <input v-model.number="checked" type="numeric"/>
+                        <input v-model.trim="message"/>
+                        ...
+                        <input v-model.lazy.trim="message"/>
                     </code></pre>
                 </section>
-                <section>
-                    <h3>Watchers</h3>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
-                        Functions that run when a state variable or computed property changes
+                <section data-auto-animate>
+                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
+                    <div>
+                        <span class="text-blue-300">.lazy</span>
+                        updates the variable's value after losing focus
                     </div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="2-11">
-                        export default defineComponent({
-                            watch: {
-                                passcode(newValue, oldValue) {
-                                    console.log(
-                                        'Count changed!',
-                                        'Before:', oldValue,
-                                        'After:', newValue
-                                    );
-
-                                    // 'this' keyword is accessible
-                                    this.createContract(); 
-                                },
-                            }
-                        })
+                    <pre><code data-trim class="language-html">
+                        <input v-model.lazy="message"/>
                     </code></pre>
                 </section>
-                <section>
-                    <h3>Lifecycle Hooks</h3>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
-                        Functions that run based on the stages of the component's lifecyle
+                <section data-auto-animate>
+                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
+                    <div>
+                        <span class="text-blue-300">.number</span>
+                        typecast's the value as a number instead of string
                     </div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="2-36">
-                        export default defineComponent({
-                            /* Vue Component's Lifecycle hooks */
-                            beforeCreate() {
-                                window.alert('Before create!');
-                            },
-
-                            // 'this' object is accessible in lifecycle hooks,
-                            // except `beforeCreate()`
-                            created() {
-                                window.alert('Created');
-                                console.log(this.contractAddress);
-                            },
-
-                            beforeMount() {
-                                window.alert('Before mount');
-                            },
-
-                            mounted() {
-                                window.alert('Mounted');
-                            },
-
-                            beforeUpdate() {
-                                console.log('Before update')
-                            },
-
-                            updated() {
-                                console.log('Updated')
-                            },
-
-                            beforeUnmount() {
-                                window.alert('Before unmount')
-                            },
-
-                            unmounted() {
-                                window.alert('Unmounted')
-                            }
-                        })
+                    <pre><code data-trim class="language-html">
+                        <input v-model.number="amount" type="numeric"/>
                     </code></pre>
                 </section>
+                <section data-auto-animate>
+                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
+                    <div>
+                        <span class="text-blue-300">.trim</span>
+                        removes the whitespace at the start and end of the value
+                    </div>
+                    <pre><code data-trim class="language-html">
+                        <input v-model.trim="message"/>
+                    </code></pre>
+                </section>
+                <section data-auto-animate>
+                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
+                    <div>
+                        It is also possible to mix modifiers
+                    </div>
+                    <pre><code data-trim class="language-html">
+                        <input v-model.lazy.trim="message"/>
+                    </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <h3>Lifecycle Hooks</h3>
+                <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                    Functions that run based on the stages of the component's lifecyle
+                </div>
+                <pre><code data-trim class="language-javascript" data-line-numbers="2-36">
+                    export default defineComponent({
+                        /* Vue Component's Lifecycle hooks */
+                        beforeCreate() {
+                            window.alert('Before create!');
+                        },
+
+                        // 'this' object is accessible in lifecycle hooks,
+                        // except `beforeCreate()`
+                        created() {
+                            window.alert('Created');
+                            console.log(this.contractAddress);
+                        },
+
+                        beforeMount() {
+                            window.alert('Before mount');
+                        },
+
+                        mounted() {
+                            window.alert('Mounted');
+                        },
+
+                        beforeUpdate() {
+                            console.log('Before update')
+                        },
+
+                        updated() {
+                            console.log('Updated')
+                        },
+
+                        beforeUnmount() {
+                            window.alert('Before unmount')
+                        },
+
+                        unmounted() {
+                            window.alert('Unmounted')
+                        }
+                    })
+                </code></pre>
             </section>
 
             <section>
@@ -879,115 +910,6 @@
 
             <section>
                 <section data-auto-animate>
-                    <h3>Form Input Bindings</h3>
-                    <div>
-                        The <strong class="text-blue-300">v-model</strong> allows
-                        two-way data binding for form input elements,
-                        automatically syncing the input's value and the variables value
-                    </div>
-                    <pre><code data-trim class="language-html" data-line-numbers="">
-                        <input v-model="message" />
-
-                        <input v-model="checked" type="checkbox" />
-
-                        <textarea v-model="message"></textarea>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Form Input Bindings</h3>
-                    <div>
-                        It works on all form related elements
-                    </div>
-                    <pre><code data-trim class="language-html" data-line-numbers="">
-                        <input v-model="message" />
-
-                        <input v-model="checked" type="checkbox" />
-
-                        <select v-model="selectedOption">
-                            <!-- options here -->
-                        </select>
-
-                        <input type="radio" v-model="pick" :value="first" />
-                        <input type="radio" v-model="pick" :value="second" />
-                    </code></pre>
-                </section>
-
-                <section data-auto-animate>
-                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
-                    <div>
-                        The vue directive have modifiers that adds
-                        extra behavior
-                    </div>
-                    <pre><code data-trim class="language-html">
-                        <input v-model.lazy="message"/>
-                        <input v-model.number="checked" type="numeric"/>
-                        <input v-model.trim="message"/>
-                        ...
-                        <input v-model.lazy.trim="message"/>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
-                    <div>
-                        <span class="text-blue-300">.lazy</span>
-                        updates the variable's value after losing focus
-                    </div>
-                    <pre><code data-trim class="language-html">
-                        <input v-model.lazy="message"/>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
-                    <div>
-                        <span class="text-blue-300">.number</span>
-                        typecast's the value as a number instead of string
-                    </div>
-                    <pre><code data-trim class="language-html">
-                        <input v-model.number="amount" type="numeric"/>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
-                    <div>
-                        <span class="text-blue-300">.trim</span>
-                        removes the whitespace at the start and end of the value
-                    </div>
-                    <pre><code data-trim class="language-html">
-                        <input v-model.trim="message"/>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
-                    <div>
-                        It is also possible to mix modifiers
-                    </div>
-                    <pre><code data-trim class="language-html">
-                        <input v-model.lazy.trim="message"/>
-                    </code></pre>
-                </section>
-            </section>
-
-            <section data-auto-animate>
-                <h3>Activity: Form input binding</h3>
-                <div>
-                    <i class="text-blue-300">PasswordVaultFormCard.vue</i>
-                    in
-                    <i class="text-blue-300">src/components/cards/</i>
-                    and add
-                    <i class="text-blue-300">v-model</i>
-                    to the input fields
-                </div>
-                <pre><code data-trim class="language-html">
-                    &ltq-input v-model.number="formPayoutAmount" label="Payout Amount"/>
-
-                    &ltq-input v-model.trim="formOwnerAddress" label="Owner address"/>
-
-                    &ltq-input v-model="formPasscode" label="Passcode"/>
-                </code></pre>
-            </section>
-
-            <section>
-                <section data-auto-animate>
                     <h3>Component events</h3>
                     <div class="flex items-center">
                         <div class="text-left">
@@ -1002,11 +924,11 @@
                     <h3>Component events</h3>
                     <pre><code data-trim class="language-html" data-line-numbers="2,5,6">
                         <!-- ChildComponent.vue -->
-                        <button @click="$emit('contractSubmit')">Click me</button>
+                        <button @click="$emit('myEvent')">Click me</button>
 
                         <!-- ParentComponent.vue -->
-                        &ltChildComponent @contract-submit="onCreateContract"/>
-                        &ltChildComponent @contractSubmit="onCreateContract"/>
+                        &ltChildComponent @my-event="handleEvent"/>
+                        &ltChildComponent @myEvent="handleEvent"/>
                     </code></pre>
                 </section>
                 <section data-auto-animate>
@@ -1017,15 +939,16 @@
                     </div>
                     <pre><code data-trim class="language-html" data-line-numbers="2">
                         <template>
-                            <button @click="$emit('contractSubmit')">Click me</button>
+                            <button @click="$emit('submit')">Claim</button>
                         </template>
                     </code></pre>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="5">
+                    <pre><code data-trim class="language-javascript" data-line-numbers="6">
                         export default defineComponent({
-                            // name: 'PasswordVaultFormCard', data() { .. } ..
+                            // name: 'ClaimVaultCard',
+                            // data() { .. } 
                             methods: {
-                                onButtonClick() {
-                                    this.$emit('contractSubmit')
+                                submitForm() {
+                                    this.$emit('submit')
                                 }
                             }
                         })
@@ -1037,12 +960,13 @@
                 </section>
                 <section data-auto-animate>
                     <h3>Component event arguments</h3>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="5">
+                    <pre><code data-trim class="language-javascript" data-line-numbers="6">
                         export default defineComponent({
-                            // name: 'PasswordVaultFormCard', data() { .. } ..
+                            // name: 'ClaimVaultCard',
+                            // data() { .. } ..
                             methods: {
                                 submitForm() {
-                                    this.$emit('contractSubmit', arg1, arg2, argN)
+                                    this.$emit('submit', arg1, arg2, argN)
                                 }
                             }
                         })
@@ -1060,13 +984,13 @@
                         <i class="text-blue-300">v-on</i> or <i class="text-blue-300">@</i>
                     </div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="1">
-                        &ltPasswordVaultFormCard @contract-submit="onCreateContract"/>
+                        &ltClaimVaultCard @submit="vaultTransact"/>
                     </code></pre>
                     <pre><code data-trim class="language-javascript" data-line-numbers="4-6">
                         name: 'IndexPage',
                         // data() { ... }
                         methods: {
-                            onCreateContract(arg1, arg2 argN) {
+                            vaultTransact(arg1, arg2, argN) {
                                 // ... 
                             },
                         },
@@ -1075,38 +999,16 @@
             </section>
 
             <section data-auto-animate>
-                <h3>Activity: Component Events</h3>
+                <h3>Activity: Capture component Events</h3>
                 <div>
-                    In <i class="text-blue-300">PasswordVaultFormCard</i>'s
-                    <i class="text-yellow-200">submitForm</i> method,
-                    emit an event and pass the form field's values as arguments
+                    Capture the custom event
+                    <span class="text-yellow-300">submit</span>
+                    in
+                    <i class="text-blue-300">&ltClaimVaultCard/></i>
                 </div>
-                <pre><code data-trim class="language-javascript" data-line-numbers="3-7">
-                    methods: {
-                        submitForm() {
-                            this.$emit(
-                                'createContract',
-                                this.formPayoutAmount,
-                                this.formOwnerAddress,
-                                this.formPasscode,
-                            )
-                        }
-                    }
+                <pre><code data-trim class="language-javascript" data-line-numbers="2-8">
+                    &ltClaimVaultCard @submit="vaultTransact" />
                 </code></pre>
-            </section>
-
-            <section data-auto-animate>
-                <h3>Contract instantiation</h3>
-                <div id="contract-instantiation-diagram-2" class="mermaid p-2 bg-white rounded-lg">
-                    sequenceDiagram
-                    App->>FormComponent: User inputs contract parameters
-                    App->>FormComponent: User click a button
-                    FormComponent-->>IndexPage: Emits an event containing new contract parameters
-                    IndexPage-->>IndexPage: Saves new contract parameters
-                    IndexPage-->>Cashscript: Recreate new contract instance
-                    Cashscript-->>IndexPage: Save contract details to component state
-                    IndexPage-->>App: Display contract details
-                </pre>
             </section>
 
             <section>
@@ -1163,22 +1065,6 @@
             </section>
 
             <section>
-                <div>Components use props & events to pass around data.</div>
-                <div>
-                    <span class="fragment">
-                        With larger apps with numerous components,
-                    </span>
-                    <span class="fragment">this can get messy</span>
-                </div>
-                <div class="fragment">
-                    How can we address this?
-                </div>
-                <div class="fragment">
-                    A global storage. 
-                </div>
-            </section>
-
-            <section>
                 <section>
                     <div class="flex justify-center items-center text-center space-x-4">
                         <img src="../../images/logos/pinia.svg" class="h-48">
@@ -1227,30 +1113,30 @@
                         ├── src/
                         │   ├── stores/               # Pinia folder
                         │   │   ├── index.js          # Creation file
-                        |   |   └── example-store.js  # Pinia store example 
+                        |   |   └── wallet-store.js   # Pinia store example 
                         └── ...
                     </code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg">
                         Quasar framework has pinia setup by default.
                     </div>
                 </section>
                 <section>
                     <h3>Defining a store</h3>
                     <pre><code data-trim class="language-javascript" data-line-numbers="">
-                        // src/store/contract-store.js
+                        // src/store/wallet-store.js
 
-                        import { defineStore } from 'pinia'
+                        import { defineStore } from "pinia";
 
-                        export const useContractStore = defineStore('contract', {
+                        export const useWalletStore = defineStore('wallet', {
                             state: function() {
                                 return {
                                     address: '',
-                                    balance: 0,
+                                    satoshiBalance: 0,
                                 }
                             },
                             getters: {
                                 bchBalance() {
-                                    return this.balance / 100_000_000;
+                                    return this.satoshiBalance / 100_000_000;
                                 }
                             },
                             actions: {
@@ -1265,23 +1151,23 @@
                     <h3>Using the store</h3>
                     <pre><code data-trim class="language-javascript" data-line-numbers="">
                         import { mapState } from 'pinia';
-                        import { useContractStore } from 'src/store/contract-store.js';
+                        import { useWalletStore } from 'src/store/wallet-store.js';
 
                         export default defineComponent({
                             computed: {
-                                ...mapState(useContractStore, {
-                                    contractAddress: 'address',
-                                    contractBalance: function(contractStore) {
-                                        return contractStore.balance;
+                                ...mapState(useWalletStore, {
+                                    walletAddress: 'address',
+                                    walletBalance: function(walletStore) {
+                                        return walletStore.bchBalance;
                                     }
                                 })
                             },
                             methods: {
-                                updateContract(newAddress, newBalance) {
-                                    const contractStore = useContractStore();
+                                updateWalletStore(newAddress, newBalance) {
+                                    const walletStore = useWalletStore();
 
-                                    contractStore.updateAddress(newAddress);
-                                    contractStore.balance = newBalance;
+                                    walletStore.updateAddress(newAddress);
+                                    walletStore.balance = newBalance;
                                 }
                             }
                         })
@@ -1289,68 +1175,25 @@
                 </section>
             </section>
 
-            <section>
-                <section data-auto-animate>
-                    <h3>Activity: Use pinia store</h3>
-                    <ol>
-                        <li>Save contract data to store</li>
-                        <li>Access contract data from store</li>
-                    </ol>
-                </section>
-                <section>
-                    <h3>Activity: Use pinia store</h3>
-                    <div>
-                        Save contract data to store in <i class="text-blue-200">IndexPage</i>
-                    </div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="7-10">
-                        export default defineComponent({
-                            name: 'IndexPage',
-                            // data() { ... }
-                            // computed: { ... }
-                            methods: {
-                                onFormCardSubmit(payoutAmount, ownerAddress, passcode) {
-                                    const contractStore = useContractStore();
-                                    contractStore.saveContract(
-                                        payoutAmount, ownerAddress, passcode,
-                                    );
-                                },
-                            }
-                        })
-                    </code></pre>
-                </section>
-                <section>
-                    <h3>Activity: Use pinia store</h3>
-                    <div>Access contract data from store</div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="3,6-9">
-                        export default defineComponent({
-                            name: 'IndexPage',
-                            // remove data() { ... }
-                            computed: {
-                                ...mapState(useContractStore, {
-                                    contractAddress: 'contractAddress',
-                                    payoutAmount: 'payoutAmount',
-                                    ownerAddress: 'ownerAddress',
-                                    passcode: 'passcode',
-                                }),
-                            }
-                        })
-                    </code></pre>
-                </section>
-            </section>
 
             <section>
                 <h3>Activity: Display contract balance</h3>
                 <ol>
-                    <li>Add a button to refresh balance</li>
-                    <li>Use the contract store to display the balance</li>
+                    <li>
+                        Display <i class="text-blue-200">balance</i> state variable in template
+                    </li>
+                    <li>
+                        Create a method that will update the balance of
+                        <i class="text-blue-200">contractAddress</i>
+                    </li>
+                    <li>Add a button that will run the method when clicked</li>
                 </ol>
                 <div class="px-4 bg-white/10 rounded-lg fragment">
-                    💡 Use
-                    <i class="text-yellow-200">balance</i>
-                    and
-                    <i class="text-yellow-200">refreshBalance()</i>
-                    in
-                    <i class="text-yellow-200">useContractStore()</i>
+                    💡 Import and use
+                    <i class="text-yellow-200">getBalance(...)</i>
+                    function
+                    in 
+                    <i class="text-yellow-200">src/lib/common.js</i>
                 </div>
             </section>
 
@@ -1444,6 +1287,62 @@
                         Run server <i class="text-blue-300">quasar dev</i>
                     </li>
                 </ol>
+            </section>
+
+            <section>
+                <section>
+                    <h2>Group Work</h2>
+                </section>
+                <section>
+                    <h2>Fund Raiser</h2>
+                    <ul>
+                        <li>Multiple people can fund the contract</li>
+                        <li>Funds will be released to the owner, when the goal amount is reached</li>
+                        <!-- <li>Funds will be refunded back to anyone, if the deadline is reached, and the goal amount is NOT YET reached</li> -->
+                    </ul>
+                </section>
+                <section>
+                    <h2>Salary Distribution</h2>
+                    <ul>
+                        <li>Employer funds the contract with one transaction (or more)</li>
+                        <li>Contract distributes the funds to multiple employees automatically according to their set amounts</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Donor Splitter</h2>
+                    <ul>
+                        <li>Donors send to a single contract</li>
+                        <li>When the goal amount is reached, funds are split to multiple charities that were initially set</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Rock Paper Scissors Game</h2>
+                    <ul>
+                        <li>The owner O will set his/her choice (rock, paper, or scissors) , and fund the contract</li>
+                        <li>During play, the contender C will pick a choice</li>
+                        <li>If C wins, the funds goes to C</li>
+                        <li>If O wins, the funds goes to O</li>
+                        <li>If draw, the funds goes to O as well</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Any project idea</h2>
+                    <div>Any real world application of CashScript</div>
+                </section>
+                <section>
+                    <h2>Criteria</h2>
+                    <ul>
+                        <li>
+                            <i class="text-blue-200">50%</i> - Cashscript contract functionality
+                        </li>
+                        <li>
+                            <i class="text-blue-200">30%</i> - Javascript integration
+                        </li>
+                        <li>
+                            <i class="text-blue-200">20%</i> - User Interface
+                        </li>
+                    </ul>
+                </section>
             </section>
         </div>
     </div>
