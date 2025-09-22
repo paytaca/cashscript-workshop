@@ -245,7 +245,7 @@
                         import { defineComponent } from 'vue'
 
                         export default defineComponent({
-                            name: 'IndexPage',
+                            name: 'HomePage',
                             data() {
                                 return {
                                     contractAddress: 'bitcoincash:p...',
@@ -315,7 +315,7 @@
                         <script>
                         import { defineComponent } from 'vue'
                         export default defineComponent({
-                            name: 'IndexPage',
+                            name: 'HomePage',
                             data() {
                                 return {
                                     contractAddress: 'bitcoincash:p...',
@@ -363,13 +363,13 @@
                 <h3>Activity: Set state variables</h3>
                 <div>
                     Set the initial values of state variables in
-                    <i class="text-yellow-200">IndexPage.vue</i>
+                    <i class="text-yellow-200">HomePage.vue</i>
                 </div>
                 <pre><code data-trim class="language-javascript" data-line-numbers="5-12">
                     <script>
                     import { defineComponent } from 'vue'
                     export default defineComponent({
-                        name: 'IndexPage',
+                        name: 'HomePage',
                         data() {
                             // Copy values used in 'contracts/password-vault-instantiate.js'
                             return {
@@ -415,7 +415,7 @@
 
                     <pre><code data-trim class="language-javascript" data-line-numbers="3-8">
                         export default defineComponent({
-                            name: 'IndexPage',
+                            name: 'HomePage',
                             // data() function
                             methods: {
                                 createContract() {
@@ -434,7 +434,7 @@
 
                     <pre><code data-trim class="language-javascript" data-line-numbers="7-8">
                         export default defineComponent({
-                            name: 'IndexPage',
+                            name: 'HomePage',
                             // data() function
                             methods: {
                                 createContract() {
@@ -452,7 +452,7 @@
                 <h3>Activity: Using Events</h3>
                 <div>
                     Add an event listener to button in
-                    <i class="text-yellow-200">IndexPage</i>'s
+                    <i class="text-yellow-200">HomePage</i>'s
                     template
                 </div>
                 <pre><code data-trim class="language-html" data-line-numbers="3">
@@ -743,7 +743,7 @@
                 </div>
                 <pre><code data-trim class="language-javascript" data-line-numbers="6-8">
                     export default defineComponent({
-                        name: 'IndexPage',
+                        name: 'HomePage',
                         // data() function
                         // computed: ...
                         // methods: ...
@@ -774,7 +774,7 @@
                         <script>
                         import DisplayAddressButton from 'src/components/buttons/DisplayAddressButton.vue'
                         export default defineComponent({
-                            name: 'IndexPage',
+                            name: 'HomePage',
                             components: {
                                 DisplayAddressButton,
                             },
@@ -799,7 +799,7 @@
                     <div>2. Register the component to the parent component</div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="3-5">
                         export default defineComponent({
-                            name: 'IndexPage',
+                            name: 'HomePage',
                             components: {
                                 DisplayAddressButton,
                             },
@@ -836,7 +836,7 @@
                     </code></pre>
     
                     <pre><code data-trim class="language-html" data-line-numbers="4">
-                    // IndexPage.vue
+                    // HomePage.vue
                     <template>
                         <div>
                             &ltDisplayAddressButton :address="contractAddress" />
@@ -993,7 +993,7 @@
                         &ltClaimVaultCard @submit="vaultTransact"/>
                     </code></pre>
                     <pre><code data-trim class="language-javascript" data-line-numbers="4-6">
-                        name: 'IndexPage',
+                        name: 'HomePage',
                         // data() { ... }
                         methods: {
                             vaultTransact(arg1, arg2, argN) {
@@ -1085,6 +1085,27 @@
             </section>
 
             <section>
+                <h3>Scaling Your dApp</h3>
+                <div class="flex items-center space-x-4">
+                    <div class="flex-1 px-2 py-10 bg-white/10 rounded-lg flex-col justify-center">
+                        <div class="flex items-center justify-center text-4xl mb-2">
+                            <img src="../../images/logos/pinia.svg" style="height:1em;margin: 0px 0.25em;">
+                            Pinia
+                        </div>
+                        <div class="text-2xl">Global state management</div>
+                    </div>
+                    <div class="text-6xl">+</div>
+                    <div class="flex-1 px-2 py-10 bg-white/10 rounded-lg flex-col justify-center">
+                        <div class="flex items-center justify-center text-4xl mb-2">
+                            <img src="../../images/logos/vue.svg" style="height:1em;margin: 0px 0.25em;">
+                            Vue Router
+                        </div>
+                        <div class="text-2xl">Navigation management</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
                 <section>
                     <div class="flex justify-center items-center text-center space-x-4">
                         <img src="../../images/logos/pinia.svg" class="h-48">
@@ -1092,6 +1113,9 @@
                     </div>
                     <div>
                         Library for managing shared state in Vue.
+                    </div>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg">
+                        https://pinia.vuejs.org
                     </div>
                 </section>
                 <section>
@@ -1142,6 +1166,7 @@
                 </section>
                 <section>
                     <h3>Defining a store</h3>
+                    <div>Open <i class="text-blue-300">src/store/wallet-store.js</i></div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="">
                         // src/store/wallet-store.js
 
@@ -1167,13 +1192,17 @@
                         })
                     </code></pre>
                 </section>
+                
                 <section>
                     <h3>Using the store</h3>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="">
+                    <div>As a reactive state</div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="1,2,8-13">
                         import { mapState } from 'pinia';
                         import { useWalletStore } from 'src/store/wallet-store.js';
 
                         export default defineComponent({
+                            name: 'HomePage',
+                            data () { ... },
                             computed: {
                                 ...mapState(useWalletStore, {
                                     walletAddress: 'address',
@@ -1182,6 +1211,22 @@
                                     }
                                 })
                             },
+                            // methods: { ... }
+                        })
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Using the store</h3>
+                    <div>Updating the store's state</div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="9-14">
+                        import { mapState } from 'pinia';
+                        import { useWalletStore } from 'src/store/wallet-store.js';
+
+                        export default defineComponent({
+                            name: 'HomePage',
+                            data () { ... }
+                            computed: { ... },
                             methods: {
                                 updateWalletStore(newAddress, newBalance) {
                                     const walletStore = useWalletStore();
@@ -1192,6 +1237,68 @@
                             }
                         })
                     </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <div class="flex justify-center items-center text-center space-x-4">
+                        <img src="../../images/logos/vue.svg" style="height:2em;">
+                        <div class="text-6xl text-green-300">Vue Router</div>
+                    </div>
+                    <div>Routing management for Vue</div>
+                    <div class="p-4 bg-white/10 rounded-lg mt-4">
+                        https://router.vuejs.org/
+                    </div>
+                </section>
+                <section>
+                    <div class="flex justify-center">
+                        <img src="../../images/vue-router-diagram.svg" style="height:25rem;"/>
+                    </div>
+                    <div class="p-4 mt-4 bg-white/10 rounded-lg">
+                        <ul>
+                            <li>Connects URLs to Components</li>
+                            <li>Makes Single-Page Apps feel like Multi-Page</li>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <pre><code data-trim class="language-text" data-line-numbers="3-5">
+                        quasar-project/
+                        ├── src/
+                        │   ├── router/               # Router folder
+                        │   │   ├── index.js          # Setting up of Vue Router
+                        |   |   └── routes.js         # Define routes here
+                        └── ...
+                    </code></pre>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg">
+                        Vue Router is also setup in Quasar framework by default
+                    </div>
+                </section>
+                <section>
+                    <div class="flex justify-center items-center text-center space-x-4 mb-8">
+                        <img src="../../images/logos/vue.svg" style="height:1em;">
+                        <span class="text-green-300 text-6xl">Vue Router</span>
+                        <span class="text-6xl">components</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex-1 px-2 py-10 bg-white/10 rounded-lg flex-col justify-center">
+                            <div class="text-5xl mb-8">
+                                <i class="text-blue-300">&ltrouter-view/></i>
+                            </div>
+                            <div class="text-3xl">
+                                Placeholder where the component for the current URL is shown
+                            </div>
+                        </div>
+                        <div class="flex-1 px-2 py-10 bg-white/10 rounded-lg flex-col justify-center">
+                            <div class="text-5xl mb-8">
+                                <i class="text-blue-300">&ltrouter-link/></i>
+                            </div>
+                            <div class="text-3xl">
+                                Like a button that switches routes without reloading the page.
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </section>
 
