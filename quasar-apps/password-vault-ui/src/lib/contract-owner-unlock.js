@@ -28,10 +28,13 @@ export async function sweepContractFunds(parameters, ownerWif, recipientAddress)
   }
 
   // Send all satoshis to recipient, minus the transaction fee
-  const FIXED_TX_FEE = 500n;
+  const FEE_PER_UTXO = 250;
+  const BASE_TX_FEE = 50;
+  const FIXED_TX_FEE = BASE_TX_FEE + (FEE_PER_UTXO * utxos.length);
+
   transactionBuilder.addOutput({
     to: recipientAddress,
-    amount: amountReceived - FIXED_TX_FEE, 
+    amount: amountReceived - BigInt(FIXED_TX_FEE), 
   })
 
   // Sending the transaction to blockchain network
@@ -40,3 +43,5 @@ export async function sweepContractFunds(parameters, ownerWif, recipientAddress)
   // Returning the result of the transaction
   return result;
 }
+
+

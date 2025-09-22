@@ -22,6 +22,7 @@ import { defineComponent } from 'vue';
 import { isValidAddress } from 'src/lib/common.js';
 import { sweepContractFunds } from 'src/lib/contract-owner-unlock.js';
 import LoadingDialog from '../dialogs/LoadingDialog.vue';
+import TransactionDialog from '../dialogs/TransactionDialog.vue';
 
 
 export default defineComponent({
@@ -82,12 +83,9 @@ export default defineComponent({
           ok: true,
         })
       } else {
-        const url = `https://explorer.bch.ninja/tx/${result.txid}`
         this.$q.dialog({
-          title: 'Swept funds!',
-          message: `TXID: ${result.txid}<br/><a href="${url}" target="_blank">View txid</a>`,
-          style: 'word-break: break-all;',
-          html: true,
+          component: TransactionDialog,
+          componentProps: { txid: result.txid, transactionHex: result.hex },
         })
       }
     }

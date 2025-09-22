@@ -22,7 +22,7 @@
 
       <!-- Activity: Add component props -->
       <!-- See https://vuejs.org/guide/components/props.html#prop-passing-details -->
-      <DisplayAddressButton />
+      <DisplayAddressButton :address="contractAddress" />
 
       <SweepVaultButton :payout="payout" :ownerAddress="ownerAddress" :passcode="passcode"/>
     </div>
@@ -66,7 +66,7 @@ export default defineComponent({
   data() {
     return {
       // Copy values used in 'contracts/password-vault-instantiate.js'
-      payout: 1234,
+      payout: 4700,
       ownerAddress: 'bitcoincash:qq4sh33hxw2v23g2hwmcp369tany3x73wugtc9p69g', // bitcoincash:q + <41 characters>
       passcode: '123456',
 
@@ -120,7 +120,7 @@ export default defineComponent({
         // See: https://quasar.dev/quasar-plugins/dialog#invoking-custom-component
         this.$q.dialog({
           component: TransactionDialog,
-          componentProps: { txid: result.hex, transactionHex: result.hex },
+          componentProps: { txid: result.txid, transactionHex: result.hex },
         })
       } catch (error) {
         // Log the error

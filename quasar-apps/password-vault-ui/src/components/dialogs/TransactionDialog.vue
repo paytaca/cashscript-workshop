@@ -8,6 +8,15 @@
         <p class="text-h6 break-word">
           Transaction ID:<br/> {{ txid }}
         </p>
+
+        <q-btn
+          label="Open in explorer"
+          :href="explorerUrl"
+          target="_blank"
+          color="blue"
+          class="q-mb-md"
+        />
+  
         <q-card class="q-pa-sm q-mb-md">
           <div class="text-subtitle1 text-weight-medium">Inputs</div>
           <div v-for="(input, index) in decodedTransaction.inputs" :key="index" class="q-mb-md">
@@ -36,20 +45,20 @@
         <p class="break-word">
           Transaction ID:<br/> {{ txid }}
         </p>
+        <q-btn
+          label="Open in explorer"
+          :href="explorerUrl"
+          target="_blank"
+          color="blue"
+          class="q-mb-md"
+        />
       </div>
-
-      <q-btn
-        label="Open in explorer"
-        :href="explorerUrl"
-        target="_blank"
-        color="blue"
-      />
     </q-card>
   </q-dialog>
 </template>
 
 <script>
-import { decodeTransaction } from 'src/lib/common';
+import { decodeTransaction } from 'src/lib/common.js';
 import { defineComponent } from 'vue';
 
 export default defineComponent({

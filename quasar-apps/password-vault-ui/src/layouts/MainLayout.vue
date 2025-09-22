@@ -22,6 +22,11 @@
           <q-item-label>Home</q-item-label>
         </q-item-section>
       </q-item>
+      <q-item to="/wallet" clickable v-ripple exact>
+        <q-item-section>
+          <q-item-label>Wallet</q-item-label>
+        </q-item-section>
+      </q-item>
       <q-separator/>
       <q-expansion-item label="Examples">
         <q-expansion-item
