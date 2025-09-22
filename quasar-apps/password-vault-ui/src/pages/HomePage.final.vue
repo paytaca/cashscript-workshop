@@ -4,6 +4,10 @@
       <h5 class="ellipsis">
         Contract address: {{ contractAddress }}
       </h5>
+      <p class="text-subtitle1">
+        Balance: {{ balance }} BCH
+        <q-btn icon="refresh" @click="refreshBalance"/>
+      </p>
 
       <!-- https://vuejs.org/guide/essentials/template-syntax.html#text-interpolation -->
       <p>Payout: {{ payoutBch }} BCH</p>
@@ -12,19 +16,21 @@
 
       <!-- Activity: Add event listener -->
       <!-- https://vuejs.org/guide/essentials/event-handling -->
-      <button class="my-btn">
+      <button @click="createContract" class="my-btn">
         Create contract
       </button>
 
       <!-- Activity: Add component props -->
       <!-- See https://vuejs.org/guide/components/props.html#prop-passing-details -->
-      <DisplayAddressButton/>
+      <DisplayAddressButton :address="contractAddress" />
+
+      <SweepVaultButton :payout="payout" :ownerAddress="ownerAddress" :passcode="passcode"/>
     </div>
 
     <!-- This component emits a function 'submit' -->
     <!-- Capture the 'submit' event and call 'vaultTransact' function -->
     <!-- See https://vuejs.org/guide/components/events.html#component-events -->
-    <ClaimVaultCard />
+    <ClaimVaultCard @submit="vaultTransact" />
 
     <!-- Example of quasar's Dialog component -->
     <!-- See https://quasar.dev/vue-components/dialog/ -->
@@ -45,6 +51,7 @@ import { getBalance, isValidAddress } from 'src/lib/common';
 import DisplayAddressButton from 'src/components/buttons/DisplayAddressButton.vue';
 import ClaimVaultCard from 'src/components/ClaimVaultCard.vue';
 import TransactionDialog from 'src/components/dialogs/TransactionDialog.vue';
+import SweepVaultButton from 'src/components/buttons/SweepVaultButton.vue';
 
 export default defineComponent({
   name: 'HomePage',
@@ -52,17 +59,19 @@ export default defineComponent({
   components: {
     DisplayAddressButton,
     ClaimVaultCard,
+    SweepVaultButton,
   },
 
   // See https://vuejs.org/api/options-state.html#data
   data() {
     return {
       // Copy values used in 'contracts/password-vault-instantiate.js'
-      payout: 0,
-      ownerAddress: '', // bitcoincash:q + <41 characters>
-      passcode: '',
+      payout: 4700,
+      ownerAddress: 'bitcoincash:qq4sh33hxw2v23g2hwmcp369tany3x73wugtc9p69g', // bitcoincash:q + <41 characters>
+      passcode: '123456',
 
       contractAddress: '',
+      balance: 0,
 
       isTransacting: false,
     }
@@ -147,7 +156,7 @@ export default defineComponent({
   // See https://vuejs.org/api/options-lifecycle.html#mounted
   mounted() {
     // Activity: Autorun create contract
-
+    this.createContract();
   }
 });
 </script>
