@@ -14,7 +14,7 @@ const inputs = await passwordVaultContract.getUtxos()
 const balance = inputs[0].satoshis
 
 // declare the output
-const toSendAmount = 5_000n
+const toSendAmount = 3_000n
 const outputs = [
     {
         to: 'address', // replace address with your Paytaca wallet address
