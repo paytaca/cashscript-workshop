@@ -43,8 +43,8 @@
                 </div>
                 <ul>
                     <li class="fragment">Create contract instance through the app</li>
+                    <li class="fragment">Display contract info & balance</li>
                     <li class="fragment">Claim BCH from the contract</li>
-                    <li class="fragment">Retrieve the unused funds from our contract</li>
                 </ul>
             </section>
 
@@ -91,18 +91,18 @@
                     websites/apps
                 </p>
             </section>
-            <section>
+            <!-- <section>
                 <h3>Vue.js</h3>
                 <div>
                     Quasar is build on top of Vue.js, 
                     a JavaScript framework creating a declarative, component-based programming
                     model to efficiently develop complex user interfaces
                 </div>
-            </section>
+            </section> -->
             <section>
                 <h3>Why Quasar?</h3>
                 <ul>
-                    <li>Easily create interactive user interface with VueJS</li>
+                    <li>Easily create interactive user interface</li>
                     <li>Huge list web app components & utilities</li>
                     <li>Requires a single codebase for all platforms</li>
                 </ul>
@@ -117,35 +117,6 @@
                         <li>Mobile application</li>
                         <li>Desktop application</li>
                         <li>Browser extension</li>
-                    </ul>
-                </section>
-                <section>
-                    <h3>Web App</h3>
-                    <ul>
-                        <li>Single Page App (SPA)</li>
-                        <li>Progressive Web App (PWA)</li>
-                        <li>Server-side rendering (SSR)</li>
-                    </ul>
-                </section>
-                <section>
-                    <h3>Mobile App</h3>
-                    <div class="text-3xl">
-                        Capacitor JS builds web applications into native mobile apps
-                    </div>
-                    <ul>
-                        <li>Android</li>
-                        <li>iOS</li>
-                    </ul>
-                </section>
-                <section>
-                    <h3>Desktop App</h3>
-                    <div class="text-3xl">
-                        Electron JS builds web applications into desktop apps
-                    </div>
-                    <ul>
-                        <li>Windows</li>
-                        <li>Mac</li>
-                        <li>Linux</li>
                     </ul>
                 </section>
             </section>
@@ -247,6 +218,10 @@
                         <li>Script (Javascript)</li>
                         <li>Style (CSS)</li>
                     </ul>
+                    <div class="p-2 rounded-lg bg-white/10 mt-4">
+                        Open <i class="text-blue-300">HomePage.vue</i> in
+                        <i class="text-yellow-200">src/pages/</i> folder
+                    </div>
                 </section>
                 <section>
                     <h3>Template</h3>
@@ -267,19 +242,15 @@
                         where you define variables, functions, etc.
                     </div>
                     <pre><code data-trim class="language-javascript">
-                        <script>
-                        import { defineComponent } from 'vue'
+                        &lt;script setup>
+                        import { ref } from 'vue'
 
-                        export default defineComponent({
-                            name: 'HomePage',
-                            data() {
-                                return {
-                                    contractAddress: 'bitcoincash:p...',
-                                    passcode: 'my-passcode',
-                                }
-                            }
-                        })
-                        </script>
+                        const contractAddress = ref('bitcoincash:p...');
+
+                        function updateAddress(newAddress) {
+                            contractAddress.value = newAddress;
+                        }
+                        &lt;/script>
                     </code></pre>
                 </section>
                 <section>
@@ -336,20 +307,19 @@
                 </section>
                 <section data-auto-animate>
                     <h3>Declarative Rendering</h3>
-                    <div>Declare the component's state variables in <strong class="text-yellow-200">data()</strong></div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="5-10">
-                        <script>
-                        import { defineComponent } from 'vue'
-                        export default defineComponent({
-                            name: 'HomePage',
-                            data() {
-                                return {
-                                    contractAddress: 'bitcoincash:p...',
-                                    passcode: 'my-passcode',
-                                }
-                            }
-                        })
-                        </script>
+                    <div>Declare the component's variables using <strong class="text-yellow-200">ref()</strong></div>
+                    <pre><code data-trim class="language-javascript" data-line-numbers="">
+                        &lt;script setup>
+                        import { ref } from 'vue'
+
+                        const contractAddress = ref('bitcoincash:p...');
+
+                        console.log(contractAddress.value);
+
+                        function updateAddress(newAddress) {
+                            contractAddress.value = newAddress;
+                        }
+                        &lt;/script>
                     </code></pre>
                 </section>
                 <section data-auto-animate>
@@ -374,58 +344,34 @@
                         Use data binding to pass variables or expressions as html attributes
                         using <strong class="text-blue-300">v-bind</strong>
                     </div>
-                    <pre><code data-trim class="language-html" data-line-numbers="3-4">
+                    <pre><code data-trim class="language-html" data-line-numbers="3-4,10">
                         <template>
                             <div>
                                 <img v-bind:src="imageUrl" />
                                 <img :src="imageUrl" :size="300" />
                             </div>
                         </template>
+                        &lt;script setup>
+                        import { ref } from 'vue'
+
+                        const imageUrl = ref('https://example.com/image.png');
+                        &lt;/script>
                     </code></pre>
                 </section>
             </section>
 
-            <section data-auto-animate>
-                <h3>Activity: Set state variables</h3>
-                <div>
-                    Set the initial values of state variables in
-                    <i class="text-yellow-200">HomePage.vue</i>
-                </div>
-                <pre><code data-trim class="language-javascript" data-line-numbers="5-12">
-                    <script>
-                    import { defineComponent } from 'vue'
-                    export default defineComponent({
-                        name: 'HomePage',
-                        data() {
-                            // Copy values used in 'contracts/password-vault-instantiate.js'
-                            return {
-                                payoutAmount: 1234n, // satoshis
-                                ownerAddress: 'bitcoincash:q...',
-                                passcode: 'unique-passcode',
-                            }
-                        }
-                    })
-                    </script>
-                </code></pre>
-            </section>
-
             <section>
                 <section data-auto-animate>
-                    <h3>Handling events</h3>
+                    <h3>Event Handling</h3>
                     <div>
                         Listening to DOM events using
-                        <strong class="text-blue-300">v-on</strong> or
                         <strong class="text-blue-300">@</strong>. 
                     </div>
 
-                    <pre><code data-trim class="language-html">
-                        <button v-on:click="createContract">Create contract</button>
+                    <pre><code data-trim class="language-html" data-line-numbers="">
+                        <button @click="fetchBalance">Refresh balance</button>
 
-                        <button v-on:click="createContract()">Click me</button>
-
-                        <button @click="createContract">Create contract</button>
-
-                        <button @click="createContract()">Click me</button>
+                        <button @click="fetchBalance()">Click me</button>
                     </code></pre>
 
                     <div class="p-2 rounded-lg bg-white/10">
@@ -433,104 +379,163 @@
                     </div>
                 </section>
                 <section data-auto-animate>
-                    <h3>Handling events</h3>
+                    <h3>Event Handling</h3>
                     <div>
                         Functions referenced in template are declared in
-                        <strong class="text-blue-300">methods</strong>
+                        <strong class="text-blue-300">script</strong>
                     </div>
 
-                    <pre><code data-trim class="language-javascript" data-line-numbers="3-8">
-                        export default defineComponent({
-                            name: 'HomePage',
-                            // data() function
-                            methods: {
-                                createContract() {
-                                    // function code here
-                                },
-                            },
-                        })
+                    <pre><code data-trim class="language-javascript" data-line-numbers="5-7">
+                        &lt;script setup>
+                        import { ref } from 'vue'
+                        // ...
+
+                        function fetchBalance() {
+                            // function body
+                        }
+
+                        &lt;/script>
                     </code></pre>
                 </section>
                 <section data-auto-animate>
-                    <h3>Handling events</h3>
+                    <h3>Event Handling</h3>
                     <div>
-                        Inside the function, you can access state variables & other functions using
-                        <strong class="text-blue-500">this</strong> object
+                        Inside the function, you can access variables & other functions
                     </div>
 
-                    <pre><code data-trim class="language-javascript" data-line-numbers="7-8">
-                        export default defineComponent({
-                            name: 'HomePage',
-                            // data() function
-                            methods: {
-                                createContract() {
-                                    const passwordVaultContract = createPasswordVaultContract(this.payoutAmount, this.ownerAddress, this.passcode)
-                                    this.contractAddress = passwordVaultContract.address;
-                                    this.anotherMethod();
-                                },
-                            },
-                        })
+                    <pre><code data-trim class="language-javascript" data-line-numbers="">
+                        &lt;script setup>
+                        import { ref } from 'vue'
+                        const balance = ref();
+
+                        function fetchBalance() {
+                            // ... fetch balance logic
+                            balance.value = newBalance;
+                        }
+                        &lt;/script>
+                    </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <section data-auto-animate>
+                    <h3>Form Input Bindings</h3>
+                    <div>
+                        The <strong class="text-blue-300">v-model</strong> allows
+                        two-way data binding for form input elements,
+                        automatically syncing the input's value and the variables value
+                    </div>
+                    <pre><code data-trim class="language-html" data-line-numbers="">
+                        <template>
+                            <input v-model="message" />
+
+                            <textarea v-model="message"></textarea>
+                        </template>
+                        &lt;script setup>
+                        import { ref } from 'vue'
+
+                        const message = ref('');
+                        &lt;/script>
+                    </code></pre>
+                </section>
+                <section data-auto-animate>
+                    <h3>Form Input Bindings</h3>
+                    <div>
+                        It works on all form related elements
+                    </div>
+                    <pre><code data-trim class="language-html" data-line-numbers="">
+                        <input v-model="message" />
+
+                        <input v-model="checked" type="checkbox" />
+
+                        <select v-model="selectedOption">
+                            <!-- options here -->
+                        </select>
+
+                        <input type="radio" v-model="pick" :value="first" />
+                        <input type="radio" v-model="pick" :value="second" />
                     </code></pre>
                 </section>
             </section>
 
             <section data-auto-animate>
-                <h3>Activity: Using Events</h3>
-                <div>
-                    Add an event listener to button in
-                    <i class="text-yellow-200">HomePage</i>'s
-                    template
-                </div>
-                <pre><code data-trim class="language-html" data-line-numbers="3">
-                    <template>
-                        // ...
-                        <button @click="createContract" class="my-btn">
-                            Create contract
-                        </button>
-                    </template>
-                </code></pre>
+                <section>
+                    <h3>Activity: Contract Create</h3>
+                    <div>
+                        Create our Password Vault contract and display the contract details
+                    </div>
+                    <div class="p-2 rounded-lg bg-white/10 mt-4">
+                        Open <i class="text-blue-300">HomePage.vue</i> in
+                        <i class="text-yellow-200">src/pages/</i> folder
+                    </div>
+                </section>
+                <section>
+                    <h3>Activity: Contract Create</h3>
+                    <ol>
+                        <li>
+                            Declare variables for contract parameters & contract instance using
+                            <i class="text-yellow-300">ref()</i>
+                        </li>
+                        <li>Create input fields for each parameter </li>
+                        <li>Create a button for that will run a function</li>
+                        <li>
+                            The function will create the contract instance.
+                            <div class="p-2 rounded-lg bg-white/10 text-3xl">
+                                Similar to earlier activity in
+                                <i class="text-yellow-200">src/contracts/passvault-run.js</i>
+                            </div>
+                        </li>
+                        <li>
+                            Display the contract address
+                        </li>
+                    </ol>
+                    <div class="p-2 rounded-lg bg-white/10">
+                        We'll be using quasar components in creating the form elements
+                    </div>
+                </section>
             </section>
 
             <section>
-                <h3>More Vue JS Basics</h3>
-                <ul>
-                    <li>Rendering lists</li>
-                    <li>Conditional Rendering</li>
-                    <li>Computed Property</li>
-                    <li>Watchers</li>
-                    <li>Form Input Bindings</li>
-                    <li>Lifecycle Hooks</li>
-                </ul>
+                <section data-auto-animate>
+                    <h3>Quasar Components</h3>
+                    <div class="flex justify-center">
+                        <img src="../../images/quasar-form-full.png"/>
+                    </div>
+                    <div>
+                        <a href="https://quasar.dev/components" data-preview-link>
+                            https://quasar.dev/components
+                        </a>
+                    </div>
+                </section>
 
-                <div class="p-2 rounded-lg bg-white/10 mt-4">
-                    More on:
-                    <span class="text-blue-300">https://vuejs.org/guide</span>
-                </div>
-            </section>
+                <section data-auto-animate>
+                    <h3>Quasar Buttons</h3>
+                    <pre><code data-trim class="language-javascript">
+                        <template>
+                            &ltq-btn label="Click me"&#47;&gt
+                            &ltq-btn label="Red" :color="btnColor"&#47;&gt
+                            &ltq-btn no-caps :label="brownBtnLabel" color="brown-9"&#47;&gt
+                            &ltq-btn label="Blue" color="primary" :loading="isLoading"&#47;&gt
+                            &ltq-btn icon="delete" color="red"&#47;&gt
+                        </template>
+                    </code></pre>
+                    <img src="../../images/quasar-btn.png" class="mx-auto"/>
+                </section>
 
-            <section>
-                <h3>List rendering</h3>
-                <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
-                    Using <strong class="text-blue-300">v-for</strong>,
-                    we can loop using arrays, objects, and integers.
-                </div>
-                <pre><code data-trim class="language-html" data-line-numbers="">
-                    <!-- Looping with arrays -->
-                    <li v-for="(fruit, index) in fruits" :key="index">
-                        Fruit #{{ index + 1 }} : {{ fruit }}
-                    </li>
-
-                    <!-- Looping with objects -->
-                    <li v-for="(value, key) in profile" :key="key">
-                        {{ key }} : {{ value }}
-                    </li>
-
-                    <!-- Looping with a number -->
-                    <li v-for="(index) in 10" :key="index">
-                        <!-- Starts at 1 -->
-                        Item {{ index }}
-                    </li>
-                </code></pre>
+                <section data-auto-animate>
+                    <h3>Quasar Form Inputs</h3>
+                    <pre><code data-trim class="language-javascript">
+                        <template>
+                            &ltq-input v-model="name" label="Name" &#47;&gt
+                            &ltq-input v-model="name" label="Name" outlined &#47;&gt
+                            &ltq-file v-model="file" label="File Picker" &#47;&gt
+                            &ltq-select v-model="selected" label="Select" :options="['Google', 'Facebook', 'Instagram']"&#47;&gt
+                            &ltq-toggle v-model="isSwitchedOn" label="Switch"&#47;&gt
+                            &ltq-checkbox v-model="isChecked" label="Checkbox"&#47;&gt
+                        </template>
+                    </code></pre>
+                    <img src="../../images/quasar-form.png" class="h-30"/>
+                </section>
             </section>
 
             <section>
@@ -571,543 +576,159 @@
             </section>
 
             <section>
-                <h3>Computed properties</h3>
-                <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
-                    <ul>
-                        <li>State variables that are derived from other state variables</li>
-                        <li>Reactive, automatically updates value when dependencies change</li>
-                    </ul>
-                </div>
-                <pre><code data-trim class="language-html" data-line-numbers="">
-                    <template>
-                        {{ payoutAmount }}
-                        {{ paymentAmountBch }}
-                    </template>
-                </code></pre>
-                <pre><code data-trim class="language-javascript" data-line-numbers="2-6">
-                    export default defineComponent({
-                        computed: {
-                            paymentAmountBch: function() {
-                                return Number(this.payoutAmount) / 100_000_000;
-                            },
-                        },
-                    })
-                    
-                </code></pre>
-            </section>
-
-            <section>
-                <h3>Watchers</h3>
-                <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
-                    Functions that run when a state variable or computed property changes
-                </div>
-                <pre><code data-trim class="language-javascript" data-line-numbers="2-11">
-                    export default defineComponent({
-                        watch: {
-                            passcode(newValue, oldValue) {
-                                console.log(
-                                    'Count changed!',
-                                    'Before:', oldValue,
-                                    'After:', newValue
-                                );
-
-                                // 'this' keyword is accessible
-                                this.createContract(); 
-                            },
-                        }
-                    })
-                </code></pre>
-            </section>
-
-            <section>
-                <section data-auto-animate>
-                    <h3>Form Input Bindings</h3>
-                    <div>
-                        The <strong class="text-blue-300">v-model</strong> allows
-                        two-way data binding for form input elements,
-                        automatically syncing the input's value and the variables value
-                    </div>
-                    <pre><code data-trim class="language-html" data-line-numbers="">
-                        <input v-model="message" />
-
-                        <input v-model="checked" type="checkbox" />
-
-                        <textarea v-model="message"></textarea>
-                    </code></pre>
-                    <div class="p-2 rounded-lg bg-white/10 mt-4">
-                        See <i class="text-blue-300">src/components/ClaimVaultCard.vue</i>
-                    </div>
-                </section>
-                <section data-auto-animate>
-                    <h3>Form Input Bindings</h3>
-                    <div>
-                        It works on all form related elements
-                    </div>
-                    <pre><code data-trim class="language-html" data-line-numbers="">
-                        <input v-model="message" />
-
-                        <input v-model="checked" type="checkbox" />
-
-                        <select v-model="selectedOption">
-                            <!-- options here -->
-                        </select>
-
-                        <input type="radio" v-model="pick" :value="first" />
-                        <input type="radio" v-model="pick" :value="second" />
-                    </code></pre>
-                </section>
-
-                <section data-auto-animate>
-                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
-                    <div>
-                        The vue directive have modifiers that adds
-                        extra behavior
-                    </div>
-                    <pre><code data-trim class="language-html">
-                        <input v-model.lazy="message"/>
-                        <input v-model.number="checked" type="numeric"/>
-                        <input v-model.trim="message"/>
-                        ...
-                        <input v-model.lazy.trim="message"/>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
-                    <div>
-                        <span class="text-blue-300">.lazy</span>
-                        updates the variable's value after losing focus
-                    </div>
-                    <pre><code data-trim class="language-html">
-                        <input v-model.lazy="message"/>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
-                    <div>
-                        <span class="text-blue-300">.number</span>
-                        typecast's the value as a number instead of string
-                    </div>
-                    <pre><code data-trim class="language-html">
-                        <input v-model.number="amount" type="numeric"/>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
-                    <div>
-                        <span class="text-blue-300">.trim</span>
-                        removes the whitespace at the start and end of the value
-                    </div>
-                    <pre><code data-trim class="language-html">
-                        <input v-model.trim="message"/>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3><span class="text-blue-300">v-model</span> modifiers</h3>
-                    <div>
-                        It is also possible to mix modifiers
-                    </div>
-                    <pre><code data-trim class="language-html">
-                        <input v-model.lazy.trim="message"/>
-                    </code></pre>
-                </section>
-            </section>
-
-            <section>
                 <h3>Lifecycle Hooks</h3>
                 <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
                     Functions that run based on the stages of the component's lifecyle
                 </div>
                 <pre><code data-trim class="language-javascript" data-line-numbers="2-36">
-                    export default defineComponent({
-                        /* Vue Component's Lifecycle hooks */
-                        beforeCreate() {
-                            window.alert('Before create!');
-                        },
+                    &lt;script setup>
+                    import { onMounted, onUnmounted } from 'vue'
 
-                        // 'this' object is accessible in lifecycle hooks,
-                        // except `beforeCreate()`
-                        created() {
-                            window.alert('Created');
-                            console.log(this.contractAddress);
-                        },
-
-                        beforeMount() {
-                            window.alert('Before mount');
-                        },
-
-                        mounted() {
-                            window.alert('Mounted');
-                        },
-
-                        beforeUpdate() {
-                            console.log('Before update')
-                        },
-
-                        updated() {
-                            console.log('Updated')
-                        },
-
-                        beforeUnmount() {
-                            window.alert('Before unmount')
-                        },
-
-                        unmounted() {
-                            window.alert('Unmounted')
-                        }
+                    onMounted(function() {
+                        window.alert('Mounted!')
+                        createContract();
                     })
+
+                    onUnmounted(function() {
+                        window.alert('Unmounted!')
+                    })
+
+                    &lt;/script
                 </code></pre>
             </section>
 
             <section>
-                <h3>Activity: Autorun create contract</h3>
-                <div>
-                    Call the function
-                    <i class="text-blue-300">this.createContract()</i>
-                    in the
-                    <i class="text-blue-300">mounted()</i>
-                    lifecycle hook
-                </div>
-                <pre><code data-trim class="language-javascript" data-line-numbers="6-8">
-                    export default defineComponent({
-                        name: 'HomePage',
-                        // data() function
-                        // computed: ...
-                        // methods: ...
-                        mounted() {
-                            this.createContract();
-                        }
-                    })
-                </code></pre>
-            </section>
-
-            <section>
-                <h3>Components</h3>
+                <h3>More Vue JS Basics</h3>
                 <ul>
-                    <li>We've been using a single component only</li>
-                    <li>One key feature of Vue is to have nested components</li>
+                    <li>Rendering lists</li>
+                    <li>Computed Property</li>
+                    <li>Watchers</li>
+                    <li>
+                        Component Basics
+                        <ul>
+                            <li>Props</li>
+                            <li>Events</li>
+                        </ul>
+                    </li>
                 </ul>
-                <img src="../../images/ComponentsDiagram.svg" alt="Components diagram">
-            </section>
-            <section>
-                <section data-auto-animate>
-                    <h3>Using components</h3>
-                    <pre><code data-trim class="language-python" data-line-numbers="3,7,10-12">
-                        <template>
-                            <div> 
-                                &ltDisplayAddressButton/>
-                            </div>
-                        </template>
-                        <script>
-                        import DisplayAddressButton from 'src/components/buttons/DisplayAddressButton.vue'
-                        export default defineComponent({
-                            name: 'HomePage',
-                            components: {
-                                DisplayAddressButton,
-                            },
-                            // data() function
-                        })
-                        </script>
 
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Using components</h3>
-                    <div>1. Import the component</div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="2">
-                        <script>
-                        import DisplayAddressButton from 'src/components/buttons/DisplayAddressButton.vue'
-                        // ...
-                        </script>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Using components</h3>
-                    <div>2. Register the component to the parent component</div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="3-5">
-                        export default defineComponent({
-                            name: 'HomePage',
-                            components: {
-                                DisplayAddressButton,
-                            },
-                            // data() function
-                        })
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Using components</h3>
-                    <div>3. Then use the component in the template</div>
-                    <pre><code data-trim class="language-html" data-line-numbers="3">
-                        <template>
-                            <div>
-                                &ltDisplayAddressButton/>
-                            </div>
-                        </template>
-                    </code></pre>
-                </section>
-            </section>
-
-            <section>
-                <section data-auto-animate>
-                    <h3>Component Props</h3>
-                    <div>
-                        A child component can accept input from the parent via props.
-                    </div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="3-6">
-                    export default {
-                        name: 'DisplayAddressButton',
-                        props: {
-                            address: String,
-                        }
-                    }
-                    </code></pre>
-    
-                    <pre><code data-trim class="language-html" data-line-numbers="4">
-                    // HomePage.vue
-                    <template>
-                        <div>
-                            &ltDisplayAddressButton :address="contractAddress" />
-                        </div>
-                    </template>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Component Props</h3>
-                    <div>Declare the props in child components</div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="3-10">
-                        export default {
-                            name: 'DisplayAddressButton',
-                            props: {
-                                address: String,
-                                qrSize: {
-                                    type: Number,
-                                    required: false,
-                                    default: 300,
-                                },
-                            }
-                        }
-                    </code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
-                        Each prop can be a data type or object with additional options
-                    </div>
-                </section>
-
-                <section data-auto-animate>
-                    <h3>Component Props</h3>
-                    <div>We pass props to the child component using attribute binding</div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="3">
-                        <template>
-                            <div>
-                                &ltCounterButton :text="buttonText" :size="400"/>
-                            </div>
-                        </template>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Component Props</h3>
-                    <div>
-                        Props are <strong class="text-yellow-400">read-only</strong>
-                    </div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="6-10">
-                        export default defineComponent({
-                            name: 'DisplayAddressButton',
-                            props: { address: String },
-                            methods: {
-                                displayQrCode() {
-                                    // This is ok!
-                                    console.log(this.address);
-
-                                    // This is not ok!
-                                    this.address = 'Updated text';
-                                }
-                            }
-                        })
-                    </code></pre>
-                </section>
-            </section>
-
-            <section data-auto-animate>
-                <h3>Activity: Using components</h3>
-                <div>
-                    Pass <i class="text-blue-200">contractAddress</i> as prop to
-                    <i class="text-blue-300">DisplayAddressButton.vue</i>
+                <div class="p-2 rounded-lg bg-white/10 mt-4">
+                    More on:
+                    <span class="text-blue-300">https://vuejs.org/guide</span>
                 </div>
-                <pre><code data-trim class="language-html" data-line-numbers="3">
-                    <template>
-                        <div>
-                            &ltDisplayAddressButton :address="contractAddress"/>
-                        </div>
-                    </template>
-                </code></pre>
             </section>
 
             <section>
                 <section data-auto-animate>
-                    <h3>Component events</h3>
-                    <div class="flex items-center">
-                        <div class="text-left">
-                            <i class="text-blue-200">props</i> communicate from parent to child,
-
-                            <i class="text-blue-300">events</i> are used to communicate from child to parent.
-                        </div>
-                        <img src="../../images/component-prop-event.svg" style="height:28rem;"/>
-                    </div>
-                </section>
-                <section>
-                    <h3>Component events</h3>
-                    <pre><code data-trim class="language-html" data-line-numbers="2,5,6">
-                        <!-- ChildComponent.vue -->
-                        <button @click="$emit('myEvent')">Click me</button>
-
-                        <!-- ParentComponent.vue -->
-                        &ltChildComponent @my-event="handleEvent"/>
-                        &ltChildComponent @myEvent="handleEvent"/>
-                    </code></pre>
-                </section>
-                <section data-auto-animate>
-                    <h3>Component events</h3>
+                    <h3>Activity: Display balance</h3>
                     <div>
-                        Emit events from child component using
-                        <span class="text-blue-300">$emit</span>
+                        Create a button that fetch the contract's balance on click
                     </div>
-                    <pre><code data-trim class="language-html" data-line-numbers="2">
+                    <pre><code data-trim class="language-html" data-line-numbers="2-3">
                         <template>
-                            <button @click="$emit('submit')">Claim</button>
+                            <div>Balance: {{ balance }}</div>
+                            <button @click="fetchBalance">Fetch balance</button>
                         </template>
                     </code></pre>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="6">
-                        export default defineComponent({
-                            // name: 'ClaimVaultCard',
-                            // data() { .. } 
-                            methods: {
-                                submitForm() {
-                                    this.$emit('submit')
-                                }
-                            }
-                        })
-                    </code></pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg">
-                        First parameter is the event name, preferrably in
-                        <i class="text-yellow-200">camelCase</i>
-                    </div>
                 </section>
                 <section data-auto-animate>
-                    <h3>Component event arguments</h3>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="6">
-                        export default defineComponent({
-                            // name: 'ClaimVaultCard',
-                            // data() { .. } ..
-                            methods: {
-                                submitForm() {
-                                    this.$emit('submit', arg1, arg2, argN)
-                                }
-                            }
-                        })
-                    </code></pre>
-
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg">
-                        Parameters after the event name
-                        are passed as arguments
+                    <h3>Activity: Display balance</h3>
+                    <ol>
+                        <li>Display a variable <i class="text-blue-300">balance</i> and a button for fetching balance</li>
+                        <li>
+                            Create a function <i class="text-yellow-300">fetchBalance</i> that will:
+                            <ol>
+                                <li>Call contract's <i class="text-yellow-300">getBalance()</i></li>
+                                <li>Update the <i class="text-blue-300">balance</i> variable</li>
+                            </ol>
+                        </li>
+                        <li>Add loading dialog</li>
+                    </ol>
+                    <div class="p-2 rounded-lg bg-white/10">
+                        We'll be using quasar dialogs in implementing the loading feature
                     </div>
-                </section>
-                <section>
-                    <h3>Component events</h3>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-2xl">
-                        Parent component can listen to events from child component through
-                        <i class="text-blue-300">v-on</i> or <i class="text-blue-300">@</i>
-                    </div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="1">
-                        &ltClaimVaultCard @submit="vaultTransact"/>
-                    </code></pre>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="4-6">
-                        name: 'HomePage',
-                        // data() { ... }
-                        methods: {
-                            vaultTransact(arg1, arg2, argN) {
-                                // ... 
-                            },
-                        },
-                    </code></pre>
                 </section>
             </section>
 
-            <section data-auto-animate>
-                <h3>Activity: Capture component Events</h3>
-                <div>
-                    Capture the custom event
-                    <span class="text-yellow-300">submit</span>
-                    in
-                    <i class="text-blue-300">&ltClaimVaultCard/></i>
+            <section>
+                <h3>Quasar Dialogs</h3>
+                <div class="p-2 rounded-lg bg-white/10">
+                    <div class="text-blue-300">
+                        https://quasar.dev/vue-components/dialog
+                    </div>
                 </div>
-                <pre><code data-trim class="language-javascript" data-line-numbers="2-8">
-                    &ltClaimVaultCard @submit="vaultTransact" />
-                </code></pre>
+                <div class="flex justify-center">
+                    <pre><code data-trim class="language-javascript" data-line-numbers="2,9">
+                        &lt;template>
+                            <q-dialog v-model="isDialogShown">
+                                <q-card>
+                                    <q-card-section>
+                                        Fetching
+                                        <q-spinner/>
+                                    </q-card-section>
+                                </q-card>
+                            </q-dialog>
+                        &lt;/template>
+                    </code></pre>
+                </div>
             </section>
 
             <section>
-                <h2>Quasar Components</h2>
-            </section>
-            <section>
                 <section data-auto-animate>
-                    <h3>Quasar Components</h3>
-                    <ul>
-                        <li>Wide range of ready made components</li>
-                        <li>Highly customizable</li>
-                        <li>Material Design compliant</li>
-                        <li>Registered globally, no need for imports</li>
-                    </ul>
-                </section>
-                <section data-auto-animate>
-                    <h3>Quasar Buttons</h3>
-                    <pre><code data-trim class="language-javascript">
-                        <template>
-                            &ltq-btn label="Click me"&#47;&gt
-                            &ltq-btn label="Red" :color="btnColor"&#47;&gt
-                            &ltq-btn no-caps :label="brownBtnLabel" color="brown-9"&#47;&gt
-                            &ltq-btn label="Blue" color="primary" :loading="isLoading"&#47;&gt
-                            &ltq-btn icon="delete" color="red"&#47;&gt
-                        </template>
-                    </code></pre>
-                    <img src="../../images/quasar-btn.png" class="mx-auto"/>
-                </section>
-
-                <section data-auto-animate>
-                    <h3>Quasar Form Inputs</h3>
-                    <pre><code data-trim class="language-javascript">
-                        <template>
-                            &ltq-input v-model="name" label="Name" &#47;&gt
-                            &ltq-input v-model="name" label="Name" outlined &#47;&gt
-                            &ltq-file v-model="file" label="File Picker" &#47;&gt
-                            &ltq-select v-model="selected" label="Select" :options="['Google', 'Facebook', 'Instagram']"&#47;&gt
-                            &ltq-toggle v-model="isSwitchedOn" label="Switch"&#47;&gt
-                            &ltq-checkbox v-model="isChecked" label="Checkbox"&#47;&gt
-                        </template>
-                    </code></pre>
-                    <img src="../../images/quasar-form.png" class="h-30"/>
-                </section>
-
-                <section data-auto-animate>
-                    <h3>Quasar Components</h3>
+                    <h3>Activity: Display QR code</h3>
                     <div>
-                        Full list of components in documentation page
-                        <a href="https://quasar.dev/components" data-preview-link>
-                            https://quasar.dev/components
-                        </a>
+                        Display contract address as QR code for sending BCH
+                    </div>
+                    <div class="p-2 rounded-lg bg-white/10 mt-6">
+                        <div class="text-blue-300">
+                            node-qrcode
+                        </div>
+                        an NPM package for generating QR codes
                     </div>
                 </section>
+
+                <section data-auto-animate>
+                    <h3>Activity: Display QR code</h3>
+                    <ol>
+                        <li>
+                            Import library
+                            <pre><code data-trim class="language-javascript">
+                            import QRCode from 'qrcode'
+                            </code>
+                        </li>
+                        <li>
+                            Declare a variable to hold the QR code image data
+                        </li>
+                        <li>
+                            Create a function that will generate the QR code image data
+                        </li>
+                        <li>
+                            Call the function in <i class="text-blue-300">createContract()</i>
+                        </li>
+                        <li>
+                            Display the QR code image above the contract address
+                        </li>
+                    </ol>
+                </section>
             </section>
 
             <section>
-                <h3>Activity: Display contract balance</h3>
-                <ol>
+                <h3>Activity: Claim feature</h3>
+                <ul>
+                    <li>Create a form that with fields recipient address and passcode.</li>
+                    <li>On submit, create a transaction</li>
                     <li>
-                        Display <i class="text-blue-200">balance</i> state variable in template
+                        Use the <i class="text-blue-300">txid</i> from the transaction details
+                        to generate a link to the explorer:
+                        <pre><code data-trim class="language-html">
+                        &lt;q-btn
+                            label="View in explorer"
+                            :href="'https://explorer.bch.ninja/tx/' + claimTxid"
+                            target="_blank"
+                        />
+                        </code></pre>
                     </li>
-                    <li>
-                        Use the component method
-                        <i class="text-blue-200">refreshBalance()</i>
-                    </li>
-                    <li>Add a button that will run the method when clicked</li>
-                </ol>
+                </ul>
             </section>
 
             <section>
@@ -1192,76 +813,66 @@
                 </section>
                 <section>
                     <h3>Defining a store</h3>
-                    <div>Open <i class="text-blue-300">src/store/wallet-store.js</i></div>
+                    <div>Open <i class="text-blue-300">src/store/example-store.js</i></div>
                     <pre><code data-trim class="language-javascript" data-line-numbers="">
-                        // src/store/wallet-store.js
+                    // src/store/example-store.js
 
-                        import { defineStore } from "pinia";
+                    import { defineStore } from "pinia";
 
-                        export const useWalletStore = defineStore('wallet', {
-                            state: function() {
-                                return {
-                                    address: '',
-                                    satoshiBalance: 0,
-                                }
+                    export const useCounterStore = defineStore('counter', {
+                        state: () => ({
+                            counter: 0,
+                        }),
+                        getters: {
+                            doubleCount: (state) => state.counter * 2,
+                        },
+                        actions: {
+                            increment() {
+                            this.counter++
                             },
-                            getters: {
-                                bchBalance() {
-                                    return this.satoshiBalance / 100_000_000;
-                                }
-                            },
-                            actions: {
-                                updateAddress(newAddress) {
-                                    this.address = newAddress;
-                                },
-                            },
-                        })
+                        },
+                    })
                     </code></pre>
                 </section>
                 
                 <section>
                     <h3>Using the store</h3>
                     <div>As a reactive state</div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="1,2,8-13">
-                        import { mapState } from 'pinia';
-                        import { useWalletStore } from 'src/store/wallet-store.js';
+                    <pre><code data-trim class="language-javascript" data-line-numbers="2,5,7,10-11">
+                        <template>
+                            <div>Count: {{ counterStore.counter }} </div>
+                        </template>
+                        &lt;script setup>
+                        import { useCounterStore } from 'src/store/example-store.js';
 
-                        export default defineComponent({
-                            name: 'HomePage',
-                            data () { ... },
-                            computed: {
-                                ...mapState(useWalletStore, {
-                                    walletAddress: 'address',
-                                    walletBalance: function(walletStore) {
-                                        return walletStore.bchBalance;
-                                    }
-                                })
-                            },
-                            // methods: { ... }
-                        })
+                        const counterStore = useCounterStore();
+
+                        function displayStore() {
+                            console.log(counterStore.counter);
+                            console.log(counterStore.doubleCount);
+                        }
+                        &lt;/script>
                     </code></pre>
                 </section>
 
                 <section>
                     <h3>Using the store</h3>
                     <div>Updating the store's state</div>
-                    <pre><code data-trim class="language-javascript" data-line-numbers="9-14">
-                        import { mapState } from 'pinia';
-                        import { useWalletStore } from 'src/store/wallet-store.js';
+                    <pre><code data-trim class="language-javascript" data-line-numbers="3-4,7,11-13">
+                        <template>
+                            <div>Count: {{ counterStore.counter }} </div>
+                            <button @click="addFive">Add 5</button>
+                            <button @click="counterStore.increment()">Increment</button>
+                        </template>
+                        &lt;script setup>
+                        import { useCounterStore } from 'src/store/example-store.js';
 
-                        export default defineComponent({
-                            name: 'HomePage',
-                            data () { ... }
-                            computed: { ... },
-                            methods: {
-                                updateWalletStore(newAddress, newBalance) {
-                                    const walletStore = useWalletStore();
+                        const counterStore = useCounterStore();
 
-                                    walletStore.updateAddress(newAddress);
-                                    walletStore.balance = newBalance;
-                                }
-                            }
-                        })
+                        function addFive() {
+                            counterStore.counter = counterStore.counter + 5;
+                        }
+                        &lt;/script>
                     </code></pre>
                 </section>
             </section>

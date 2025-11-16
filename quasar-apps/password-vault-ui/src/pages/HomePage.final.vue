@@ -1,201 +1,167 @@
 <template>
-  <div class="q-pa-lg index-page-container">
-    <div class="contract-card">
-      <h5 class="ellipsis">
-        Contract address: {{ contractAddress }}
-      </h5>
-      <p class="text-subtitle1">
-        Balance: {{ balance }} BCH
-        <q-btn icon="refresh" @click="refreshBalance"/>
-      </p>
+  <div class="page-container">
+    <div class="my-card">
+      <div class="text-h5">Password Vault Contract</div>
 
-      <!-- https://vuejs.org/guide/essentials/template-syntax.html#text-interpolation -->
-      <p>Payout: {{ payoutBch }} BCH</p>
-      <p>Owner address: {{ ownerAddress }}</p>
-      <p>Passcode: {{ passcode }}</p>
-
-      <!-- Activity: Add event listener -->
-      <!-- https://vuejs.org/guide/essentials/event-handling -->
-      <button @click="createContract" class="my-btn">
-        Create contract
-      </button>
-
-      <!-- Activity: Add component props -->
-      <!-- See https://vuejs.org/guide/components/props.html#prop-passing-details -->
-      <DisplayAddressButton :address="contractAddress" />
-
-      <SweepVaultButton :payout="payout" :ownerAddress="ownerAddress" :passcode="passcode"/>
+      <q-input v-model="payout" label="Payout Satoshis"/>
+      <q-input v-model="ownerAddress" autogrow label="Owner Address"/>
+      <q-input v-model="passcode" label="Passcode"/>
+      <q-btn label="Create Contract" color="blue" @click="createContract"/>
     </div>
 
-    <!-- This component emits a function 'submit' -->
-    <!-- Capture the 'submit' event and call 'vaultTransact' function -->
-    <!-- See https://vuejs.org/guide/components/events.html#component-events -->
-    <ClaimVaultCard @submit="vaultTransact" />
+    <div v-if="contract" class="my-card">
+      <div class="text-h5">Contract Details</div>
+      <img :src="qrCodeImg"/>
+      <div>Contract address: {{ contract.address }}</div>
+      <div>Balance: {{ balance }}</div>
+      <q-btn label="Fetch balance" color="blue" @click="fetchBalance"/>
+      <q-dialog v-model="isFetchingBalance">
+        <q-card>
+          <q-card-section>
+            Fetching balance
+            <q-spinner/>
+          </q-card-section>
+        </q-card>
+      </q-dialog>
+    </div>
 
-    <!-- Example of quasar's Dialog component -->
-    <!-- See https://quasar.dev/vue-components/dialog/ -->
-    <q-dialog v-model="isTransacting" persistent>
-      <q-card class="q-pa-md" align="center">
-        <div class="text-h4 q-mb-md">Transacting with contract</div>
-        <q-spinner size="3rem"/>
-      </q-card>
-    </q-dialog>
+    <div class="my-card">
+      <div class="text-h5">Claim from Vault</div>
+      <div v-if="claimTxid">
+        Claim Transaction ID: {{ claimTxid }}
+        <q-btn label="View in explorer" :href="'https://explorer.bch.ninja/tx/' + claimTxid" target="_blank"/>
+      </div>
+      <div v-if="claimError">
+        Claim Error: {{ claimError }}
+      </div>
+      <q-input v-model="claimRecipient" autogrow label="Recipient Address"/>
+      <q-input v-model="claimPasscode" label="Passcode"/>
+      <q-btn label="Claim" color="blue" @click="claimFromVault"/>
+
+      <q-dialog v-model="isClaiming">
+        <q-card>
+          <q-card-section>
+            Claiming from vault
+            <q-spinner/>
+          </q-card-section>
+        </q-card>
+      </q-dialog>
+    </div>
   </div>
 </template>
+<script setup>
+import { ref, onMounted } from 'vue';
 
-<script>
-import { defineComponent } from 'vue'
-import { createPasswordVaultContract } from 'src/lib/contract-instantiate.js';
-import { claimPasswordVault } from 'src/lib/contract-claim.js';
-import { getBalance, isValidAddress } from 'src/lib/common';
-import DisplayAddressButton from 'src/components/buttons/DisplayAddressButton.vue';
-import ClaimVaultCard from 'src/components/ClaimVaultCard.vue';
-import TransactionDialog from 'src/components/dialogs/TransactionDialog.vue';
-import SweepVaultButton from 'src/components/buttons/SweepVaultButton.vue';
+import { Contract, ElectrumNetworkProvider, TransactionBuilder } from 'cashscript';
+import { addressToPkhash } from 'src/lib/common.js';
+import PasswordVaultArtifact from 'src/contracts/PasswordVault.json' with { type: 'json' };
 
-export default defineComponent({
-  name: 'HomePage',
+import QRCode from 'qrcode';
 
-  components: {
-    DisplayAddressButton,
-    ClaimVaultCard,
-    SweepVaultButton,
-  },
+const contract = ref();
+const payout = ref(0);
+const ownerAddress = ref('');
+const passcode = ref('');
 
-  // See https://vuejs.org/api/options-state.html#data
-  data() {
-    return {
-      // Copy values used in 'contracts/password-vault-instantiate.js'
-      payout: 4700,
-      ownerAddress: 'bitcoincash:qq4sh33hxw2v23g2hwmcp369tany3x73wugtc9p69g', // bitcoincash:q + <41 characters>
-      passcode: '123456',
+function createContract() {
+  const provider = new ElectrumNetworkProvider('mainnet');
+  const contractParameters = [
+    BigInt(payout.value),
+    addressToPkhash(ownerAddress.value),
+    passcode.value,
+  ];
 
-      contractAddress: '',
-      balance: 0,
+  const passwordVaultContract = new Contract(
+    PasswordVaultArtifact,
+    contractParameters,
+    { provider, addressType: 'p2sh32' },
+  );
+  contract.value = passwordVaultContract;
+  generateAddressQrCode();
+}
 
-      isTransacting: false,
-    }
-  },
+onMounted(function() {
+  payout.value = 4700;
+  ownerAddress.value = 'bitcoincash:qq4sh33hxw2v23g2hwmcp369tany3x73wugtc9p69g';
+  passcode.value = 'my-passcode';
+  createContract();
+})
 
-  // See https://vuejs.org/api/options-state.html#computed
-  computed: {
-    payoutBch: function() {
-      // convert this.payout that is in satoshis to BCH
-      // NOTE: 100_000_000 satoshis = 1 BCH
-      return Number(this.payout) / 100_000_000;
-    },
-  },
-
-  // See https://vuejs.org/api/options-state.html#methods
-  methods: {
-    createContract() {
-      // Creating a password vault contract from state variables
-      // See 'src/lib/contract-instantiate.js'
-      const passwordVaultContract = createPasswordVaultContract(
-        this.payout,
-        this.ownerAddress,
-        this.passcode
-      );
-
-      // Setting the contract address as state variable
-      this.contractAddress = passwordVaultContract.address;
-    },
-
-    async vaultTransact(recipientAddress, claimPasscode) {
-      // Try/catch/finally the whole process
-      try {
-        this.isTransacting = true;
-        // Preparing parameters for function below
-        const contractParameters = {
-          payout: this.payout,
-          ownerAddress: this.ownerAddress,
-          passcode: this.passcode,
-        }
-
-        // Claim from the password vault contract
-        // See 'src/lib/contract-claim.js'
-        const result = await claimPasswordVault(contractParameters, recipientAddress, claimPasscode);
-
-        // Display result with Quasar's built-in dialog builder
-        // See: https://quasar.dev/quasar-plugins/dialog#invoking-custom-component
-        this.$q.dialog({
-          component: TransactionDialog,
-          componentProps: { txid: result.txid, transactionHex: result.hex },
-        })
-      } catch (error) {
-        // Log the error
-        console.error(error);
-
-        // Display the error using Quasar's built-in dialog builder
-        // See: https://quasar.dev/quasar-plugins/dialog/
-        this.$q.dialog({
-          title: 'Transaction failed',
-          message: String(error),
-          persistent: true,
-        })
-      } finally {
-        this.isTransacting = false;
-      }
-    },
-
-    async refreshBalance() {
-      if (!isValidAddress(this.contractAddress)) {
-        return
-      }
-
-      const dialog = this.$q.dialog({ message: 'Updating balance', progress: true })
-      try {
-        const satoshis = await getBalance(this.contractAddress);
-        this.balance = Number(satoshis) / 100_000_000;
-      } finally {
-        dialog.hide();
-      }
-    }
-  },
-
-  // See https://vuejs.org/api/options-lifecycle.html#mounted
-  mounted() {
-    // Activity: Autorun create contract
-    this.createContract();
+const isFetchingBalance = ref(false);
+const balance = ref(null);
+async function fetchBalance() {
+  try {
+    isFetchingBalance.value = true;
+    balance.value = await contract.value.getBalance();
+  } finally {
+    isFetchingBalance.value = false;
   }
-});
-</script>
+}
 
+const qrCodeImg = ref();
+async function generateAddressQrCode() {
+  qrCodeImg.value = await QRCode.toDataURL(contract.value.address);
+}
+
+const claimRecipient = ref('');
+const claimPasscode = ref('');
+
+const isClaiming = ref(false);
+const claimTxid = ref('');
+const claimError = ref('');
+
+async function claimFromVault() {
+  try {
+    isClaiming.value = true;
+    const provider = new ElectrumNetworkProvider('mainnet');
+    const transactionBuilder = new TransactionBuilder({ provider });
+  
+    const utxos = await contract.value.getUtxos();
+    const utxo = utxos[0];
+  
+    const inputSatoshis = utxo.satoshis;
+    transactionBuilder.addInput(utxo, contract.value.unlock.claim(claimPasscode.value))
+  
+    const amountToSend = BigInt(payout.value);
+    transactionBuilder.addOutput({
+      to: claimRecipient.value,
+      amount: amountToSend,
+    })
+  
+    const remainingSatoshis = inputSatoshis - 300n - amountToSend;
+    if (remainingSatoshis > 546n) {
+      transactionBuilder.addOutput({
+        to: contract.value.address,
+        amount: remainingSatoshis,
+      })
+    }
+
+    const transactionDetails = await transactionBuilder.send();
+    claimTxid.value = transactionDetails.txid;
+    claimError.value = '';
+  } catch(error) {
+    claimError.value = String(error);
+  } finally {
+    isClaiming.value = false;
+  }
+}
+</script>
 <style scoped>
-.index-page-container {
-  max-width: min(600px, 85vw);
+.page-container {
+  max-width: min(600px, 95vw);
+  padding: 16px;
   margin-left: auto;
   margin-right: auto;
 }
 
-h5, h6 {
-  margin-top: 4px;
-  margin-bottom: 4px;
+.my-card {
+  padding: 16px;
+  margin-bottom: 32px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-button {
-  margin-right: 8px;
-  margin-bottom: 4px;
-}
-
-button.my-btn {
-  background: #2196f3 !important;
-  color: white;
-  border: 0;
-  padding: 9px 12px;
-  border-radius: 2rem;
-}
-
-
-button.my-btn:active {
-  background-color: #1d7cc9 !important;
-}
-
-div.contract-card {
-  margin-bottom: 40px;
-}
-
-p {
-  font-size: 18px;
+.my-card > *:not(:first-child) {
+  margin-top: 16px;
 }
 </style>
