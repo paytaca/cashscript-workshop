@@ -4,7 +4,10 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue';
+import QRCode from 'qrcode';
+import { Contract, ElectrumNetworkProvider, TransactionBuilder } from 'cashscript';
+import { addressToPkhash } from "src/lib/common.js"
+import { ref, onMounted } from 'vue';
 
 const message = ref('Hello World!');
 </script>

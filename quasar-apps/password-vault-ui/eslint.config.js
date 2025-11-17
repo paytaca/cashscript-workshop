@@ -53,6 +53,7 @@ export default [
 
     // add your custom rules here
     rules: {
+      'no-unused-vars': 'off', // Completely disables the rule
       'prefer-promise-reject-errors': 'off',
 
       // allow debugger during development only
