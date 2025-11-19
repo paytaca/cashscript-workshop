@@ -1,6 +1,8 @@
 <template>
   <div class="page-container">
-    <div class="text-h5">{{ message }}</div>
+    <div class="my-card">
+      <div class="text-h5">{{ message }}</div>
+    </div>
   </div>
 </template>
 <script setup>
@@ -17,5 +19,16 @@ const message = ref('Hello World!');
   padding: 16px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.my-card {
+  padding: 16px;
+  margin-bottom: 32px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.my-card > *:not(:first-child) {
+  margin-top: 16px;
 }
 </style>
