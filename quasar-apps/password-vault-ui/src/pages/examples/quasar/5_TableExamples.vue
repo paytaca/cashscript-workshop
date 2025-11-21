@@ -33,24 +33,20 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "TableCheatsheet",
-  data () {
-    return {
-      columns: [
-        { name: 'id', label: 'ID', field: 'id', align: 'left', sortable: true },
-        { name: 'name', label: 'Name', field: 'name', align: 'left', sortable: true },
-        { name: 'age', label: 'Age', field: 'age', align: 'right', sortable: true },
-      ],
-      rows: [
-        { id: 1, name: 'Alice', age: 21 },
-        { id: 2, name: 'Bob', age: 28 },
-        { id: 3, name: 'Charlie', age: 32 },
-        { id: 4, name: 'Diana', age: 19 },
-        { id: 5, name: 'Eve', age: 25 },
-      ]
-    }
-  }
-}
+<script setup>
+import { ref } from 'vue';
+
+const columns = ref([
+  { name: 'id', label: 'ID', field: 'id', align: 'left', sortable: true },
+  { name: 'name', label: 'Name', field: 'name', align: 'left', sortable: true },
+  { name: 'age', label: 'Age', field: 'age', align: 'right', sortable: true },
+]);
+
+const rows = ref([
+  { id: 1, name: 'Alice', age: 21 },
+  { id: 2, name: 'Bob', age: 28 },
+  { id: 3, name: 'Charlie', age: 32 },
+  { id: 4, name: 'Diana', age: 19 },
+  { id: 5, name: 'Eve', age: 25 },
+]);
 </script>

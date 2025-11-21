@@ -11,46 +11,32 @@
     <p>Count as letter: {{ repeatCharacter }}</p>
   </div>
 </template>
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { ref, computed, watch } from 'vue';
 
-export default defineComponent({
-  name: '4_ComputedProperty',
+const count = ref(0);
+const someLetter = ref('A');
 
-  data() {
-    return {
-      count: 0,
-      someLetter: 'A',
-    }
-  },
+const repeatCharacter = computed(() => {
+  if (count.value < 0) return 'Count is negative';
+  return someLetter.value.repeat(count.value);
+});
 
-  computed: {
-    repeatCharacter() {
-      if (this.count < 0) return 'Count is negative'
-      return this.someLetter.repeat(this.count)
-    }
-  },
+function displayCount() {
+  console.log('Count is:', count.value);
+}
 
-  methods: {
-    displayCount() {
-      console.log('Count is:', this.count);
-    }
-  },
+/* Watchers run a function when the property they watch changes */
+// Set the property you want to watch
+watch(count, (newValue, oldValue) => {
+  console.log('Count changed!', 'Before:', oldValue, 'After:', newValue);
+  displayCount();
+});
 
-  /* Watchers run a function when the property they watch changes */
-  watch: {
-    // Set the property name you want to watch
-    count(newValue, oldValue) {
-      console.log('Count changed!', 'Before:', oldValue, 'After:', newValue);
-      this.displayCount()
-    },
-
-    // Computed properties also work
-    repeatCharacter(newValue, oldValue) {
-      console.log('repeatCharacter changed', 'Before:', oldValue, 'After:', newValue);
-    }
-  }
-})
+// Computed properties also work
+watch(repeatCharacter, (newValue, oldValue) => {
+  console.log('repeatCharacter changed', 'Before:', oldValue, 'After:', newValue);
+});
 </script>
 <style>
 .container {

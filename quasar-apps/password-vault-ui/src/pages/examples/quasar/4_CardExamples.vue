@@ -41,10 +41,7 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "CardCheatsheet",
-};
+<script setup>
 </script>
 
 <style scoped>

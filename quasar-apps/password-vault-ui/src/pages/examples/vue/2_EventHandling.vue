@@ -29,27 +29,18 @@
     </div>
   </div>
 </template>
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { ref } from 'vue';
 
-export default defineComponent({
-  name: '2_EventHandling',
+const count = ref(0);
 
-  data() {
-    return {
-      count: 0,
-    }
-  },
+function incrementCount() {
+  count.value++;
+}
 
-  methods: {
-    incrementCount() {
-      this.count++;
-    },
-    decrementCount() {
-      this.count--;
-    },
-  }
-})
+function decrementCount() {
+  count.value--;
+}
 </script>
 <style>
 .container {

@@ -13,35 +13,25 @@
     <button @click="incrementCount">Click count: {{ count }}</button>
   </div>
 </template>
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { ref } from 'vue';
 
-export default defineComponent({
-  name: '1_DataBinding',
+/* 
+  State variables are declared here using ref()
+*/
+const elementId = ref('my-div');
+const divClass = ref('my-class');
+const message = ref('Hello Vue JS!');
+const count = ref(0);
 
-  data() {
-    /* 
-      State variables are declared here
-    */
-    return {
-      elementId: 'my-div',
-      divClass: 'my-class',
-      message: 'Hello Vue JS!',
-      count: 0,
-    }
-  },
-
-  /* 
-    Component methods/functions are declared here
-  */
-  methods: {
-    incrementCount() {
-      // Acces state variables using 'this' object
-      this.count++;
-      console.log('Count is updated', this.count);
-    },
-  }
-})
+/* 
+  Component methods/functions are declared here
+*/
+function incrementCount() {
+  // Access state variables using .value
+  count.value++;
+  console.log('Count is updated', count.value);
+}
 </script>
 <style>
 .my-class {

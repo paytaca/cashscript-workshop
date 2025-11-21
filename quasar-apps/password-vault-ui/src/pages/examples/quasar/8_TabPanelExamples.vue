@@ -36,13 +36,8 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "TabsCheatsheet",
-  data () {
-    return {
-      tab: "home"
-    }
-  }
-}
+<script setup>
+import { ref } from 'vue';
+
+const tab = ref('home');
 </script>

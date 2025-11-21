@@ -8,26 +8,16 @@
     </p>
   </div>
 </template>
-<script>
-import SelfDestructButton from '../../../components/buttons/SelfDestructButton.vue'
+<script setup>
+import SelfDestructButton from '../../../components/buttons/SelfDestructButton.vue';
+import { ref } from 'vue';
 
-export default {
-  name: "9_Components",
-  components: {
-    SelfDestructButton
-  },
-  data () {
-    return {
-      message: 'Click self destruct button',
-    }
-  },
-  methods: {
-    selfDestructHandler (countdownTimestamp) {
-      this.message = "💥 The button has self-destructed!" + 
-                    " Started at " + countdownTimestamp.start +
-                    " and ended at " + countdownTimestamp.end;
-    }
-  }
+const message = ref('Click self destruct button');
+
+function selfDestructHandler(countdownTimestamp) {
+  message.value = "💥 The button has self-destructed!" + 
+                  " Started at " + countdownTimestamp.start +
+                  " and ended at " + countdownTimestamp.end;
 }
 </script>
 <style>

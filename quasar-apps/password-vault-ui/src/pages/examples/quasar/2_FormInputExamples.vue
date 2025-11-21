@@ -61,36 +61,34 @@
     </div>
   </q-page>
 </template>
-<script>
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'FormInputExamples',
-  data() {
-    return {
-      inputState: { disable: false, dense: false, outlined: false, loading: false, readonly: false, clearable: false },
-      text: '',
-
-      selected: 'apple',
-      selectedMultiple: [],
-      options: ['apple', 'banana', 'orange', 'grapes', 'watermelon', 'pineapple', 'strawberry', 'coconut' ],
-      optionsObjects: [
-        { value: 'apple', label: '🍎 Apple' },
-        { value: 'banana', label: '🍌 Banana', disable: true },
-        { value: 'grapes', label: '🍇 Grapes' },
-        { value: 'orange', label: '🍊 Orange' },
-        { value: 'watermelon', label: '🍉 Watermelon' },
-        { value: 'pineapple', label: '🍍 Pineapple' },
-        { value: 'strawberry', label: '🍓 Strawberry' },
-        { value: 'coconut', label: '🥥 Coconut ' },
-      ],
-
-      fileInput: null,
-
-      selectedTime: '',
-      useRangeDate: false,
-      selectedDate: '',
-    }
-  }
+<script setup>
+import { ref } from 'vue'
+const inputState = ref({
+  disable: false,
+  dense: false,
+  outlined: false,
+  loading: false,
+  readonly: false,
+  clearable: false,
 })
+
+const selected = ref('apple')
+const selectedMultiple = ref([])
+const options = ref(['apple', 'banana', 'orange', 'grapes', 'watermelon', 'pineapple', 'strawberry', 'coconut' ])
+const optionsObjects = ref([
+  { value: 'apple', label: '🍎 Apple' },
+  { value: 'banana', label: '🍌 Banana', disable: true },
+  { value: 'grapes', label: '🍇 Grapes' },
+  { value: 'orange', label: '🍊 Orange' },
+  { value: 'watermelon', label: '🍉 Watermelon' },
+  { value: 'pineapple', label: '🍍 Pineapple' },
+  { value: 'strawberry', label: '🍓 Strawberry' },
+  { value: 'coconut', label: '🥥 Coconut ' },
+])
+
+const fileInput = ref()
+
+const selectedTime = ref('')
+const useRangeDate = ref(false)
+const selectedDate = ref('')
 </script>

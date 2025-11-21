@@ -14,63 +14,48 @@
     <button @click="goBack">Go back</button>
   </div>
 </template>
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { ref, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted } from 'vue';
 
-export default defineComponent({
-  name: '4_ComputedProperty',
-  data() {
-    return {
-      count: 0,
-    }
-  },
+const count = ref(0);
 
-  methods: {
-    reloadPage() {
-      location.reload();
-    },
-    goBack() {
-      history.back();
-    }
-  },
+function reloadPage() {
+  location.reload();
+}
 
+function goBack() {
+  history.back();
+}
 
-  /* Vue Component's Lifecycle hooks */
-  beforeCreate() {
-    window.alert('Before create!');
-  },
+/* Vue Component's Lifecycle hooks */
+// Note: beforeCreate and created are not needed in <script setup>
+// The setup code runs in the created phase
 
-  created() {
-    window.alert('Created');
+onBeforeMount(() => {
+  window.alert('Before mount');
+});
 
-    // This object is accessible in lifecycle hooks, except `beforeCreate()`
-    console.log('Count', this.count);
-  },
+onMounted(() => {
+  window.alert('Mounted');
+  // State variables are accessible in lifecycle hooks
+  console.log('Count', count.value);
+});
 
-  beforeMount() {
-    window.alert('Before mount');
-  },
+onBeforeUpdate(() => {
+  console.log('Before update');
+});
 
-  mounted() {
-    window.alert('Mounted');
-  },
+onUpdated(() => {
+  console.log('Updated');
+});
 
-  beforeUpdate() {
-    console.log('Before update')
-  },
+onBeforeUnmount(() => {
+  window.alert('Before unmount');
+});
 
-  updated() {
-    console.log('Updated')
-  },
-
-  beforeUnmount() {
-    window.alert('Before unmount')
-  },
-
-  unmounted() {
-    window.alert('Unmounted')
-  }
-})
+onUnmounted(() => {
+  window.alert('Unmounted');
+});
 </script>
 <style>
 .container {

@@ -95,27 +95,18 @@
     </div>
   </div>
 </template>
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { ref } from 'vue';
 
-export default defineComponent({
-  name: '4_ComputedProperty',
-  data() {
-    return {
-      text: '',
-      checkboxValue: true,
-      radioValue: '',
-      customCheckboxValue: '',
-      customSelect: '',
-    }
-  },
+const text = ref('');
+const checkboxValue = ref(true);
+const radioValue = ref('');
+const customCheckboxValue = ref('');
+const customSelect = ref('');
 
-  methods: {
-    onSubmit() {
-      alert('Submitted!')
-    }
-  }
-})
+function onSubmit() {
+  alert('Submitted!');
+}
 </script>
 <style>
 .container {

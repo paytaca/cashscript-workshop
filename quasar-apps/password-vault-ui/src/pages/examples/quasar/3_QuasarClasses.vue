@@ -125,69 +125,66 @@
     </div>
   </q-page>
 </template>
-<script>
-export default({
-  name: 'QuasarClasses',
-  data() {
-    return {
-      layout: {
-        flow: 'row',
-        flowOpts: ['row', 'col'],
+<script setup>
+import { ref, computed } from 'vue';
 
-        justify: 'center',
-        justifyOpts: ['center', 'start', 'end', 'between', 'around', 'evenly'],
+const layout = ref({
+  flow: 'row',
+  flowOpts: ['row', 'col'],
 
-        align: 'center',
-        alignOpts: ['center', 'start', 'end', 'stretch']
-      },
+  justify: 'center',
+  justifyOpts: ['center', 'start', 'end', 'between', 'around', 'evenly'],
 
-      selectedTextSize: 'text-h1',
-      textSizes: [
-        'text-h1', 'text-h2', 'text-h3', 'text-h4', 'text-h5', 'text-h6',
-        'text-subtitle1', 'text-subtitle2',
-        'text-body1', 'text-body2',
-        'text-caption',
-      ],
+  align: 'center',
+  alignOpts: ['center', 'start', 'end', 'stretch']
+});
 
-      colorType: 'bg',
-      colorTypes: [{ label: 'Text', value: 'text'}, { label: 'Background', value: 'bg' }],
-      selectedBrandColor: 'primary',
-      brandColors: [
-        'primary', 'secondary', 'accent', 'dark', 'positive',
-        'negative', 'info', 'warning', 'black', 'white',
-      ],
-      selectedColor: 'blue',
-      colors: [
-        'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue',
-        'cyan', 'teal', 'green', 'light-green', 'lime', 'yellow', 'amber',
-        'orange', 'deep-orange', 'brown', 'grey', 'blue-grey',
-      ],
+const selectedTextSize = ref('text-h1');
+const textSizes = ref([
+  'text-h1', 'text-h2', 'text-h3', 'text-h4', 'text-h5', 'text-h6',
+  'text-subtitle1', 'text-subtitle2',
+  'text-body1', 'text-body2',
+  'text-caption',
+]);
 
-      spacingSideOpts: [ 'a', 'x', 'y', 't', 'b', 'l', 'r' ],
-      spacingSizeOpts: [ 'none', 'xs', 'sm', 'md', 'lg', 'xl' ],
-      spacing: {
-        margin: { side: 'a', size: 'md' },
-        padding: { side: 'a', size: 'md' },
-      },
-    }
-  },
+const colorType = ref('bg');
+const colorTypes = ref([{ label: 'Text', value: 'text'}, { label: 'Background', value: 'bg' }]);
+const selectedBrandColor = ref('primary');
+const brandColors = ref([
+  'primary', 'secondary', 'accent', 'dark', 'positive',
+  'negative', 'info', 'warning', 'black', 'white',
+]);
+const selectedColor = ref('blue');
+const colors = ref([
+  'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue',
+  'cyan', 'teal', 'green', 'light-green', 'lime', 'yellow', 'amber',
+  'orange', 'deep-orange', 'brown', 'grey', 'blue-grey',
+]);
 
-  computed: {
-    layoutContainerClass() {
-      return this.layout.flow + ' items-' + this.layout.align + ' justify-' + this.layout.justify
-    },
-    colorBrandClass() {
-      return this.colorType + '-' + this.selectedBrandColor
-    },
-    colorClass() {
-      return this.colorType + '-' + this.selectedColor
-    },
-    spacingMarginClass() {
-      return 'q-m' + this.spacing.margin.side + '-' + this.spacing.margin.size;
-    },
-    spacingPaddingClass() {
-      return 'q-p' + this.spacing.padding.side + '-' + this.spacing.padding.size;
-    },
-  }
-})
+const spacingSideOpts = ref([ 'a', 'x', 'y', 't', 'b', 'l', 'r' ]);
+const spacingSizeOpts = ref([ 'none', 'xs', 'sm', 'md', 'lg', 'xl' ]);
+const spacing = ref({
+  margin: { side: 'a', size: 'md' },
+  padding: { side: 'a', size: 'md' },
+});
+
+const layoutContainerClass = computed(() => {
+  return layout.value.flow + ' items-' + layout.value.align + ' justify-' + layout.value.justify;
+});
+
+const colorBrandClass = computed(() => {
+  return colorType.value + '-' + selectedBrandColor.value;
+});
+
+const colorClass = computed(() => {
+  return colorType.value + '-' + selectedColor.value;
+});
+
+const spacingMarginClass = computed(() => {
+  return 'q-m' + spacing.value.margin.side + '-' + spacing.value.margin.size;
+});
+
+const spacingPaddingClass = computed(() => {
+  return 'q-p' + spacing.value.padding.side + '-' + spacing.value.padding.size;
+});
 </script>

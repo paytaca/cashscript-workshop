@@ -12,36 +12,28 @@
     <p>Count as letter: {{ repeatCharacter }}</p>
   </div>
 </template>
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { ref, computed } from 'vue';
 
-export default defineComponent({
-  name: '4_ComputedProperty',
+const count = ref(0);
+const someLetter = ref('A');
 
-  data() {
-    return {
-      count: 0,
-      someLetter: 'A',
-    }
-  },
+/*
+ * Computed properties are declared here using computed()
+ * NOTE: you should not update state variables here
+ */
+const countTimesFive = computed(() => {
+  return count.value * 5;
+});
 
-  /*
-   * Computed properties are declared here
-   * NOTE: you should not update state variables here
-   */
-  computed: {
-    countTimesFive() {
-      return this.count * 5
-    },
-    reverseCount() {
-      return this.count * -1
-    },
-    repeatCharacter() {
-      if (this.count < 0) return 'Count is negative'
-      return this.someLetter.repeat(this.count)
-    },
-  }
-})
+const reverseCount = computed(() => {
+  return count.value * -1;
+});
+
+const repeatCharacter = computed(() => {
+  if (count.value < 0) return 'Count is negative';
+  return someLetter.value.repeat(count.value);
+});
 </script>
 <style>
 .container {

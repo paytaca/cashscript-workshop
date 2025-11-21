@@ -15,17 +15,10 @@
     </p>
   </div>
 </template>
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { ref } from 'vue';
 
-export default defineComponent({
-  name: '3_ConditionalRendering',
-  data() {
-    return {
-      count: 0,
-    }
-  }
-})
+const count = ref(0);
 </script>
 <style>
 .container {

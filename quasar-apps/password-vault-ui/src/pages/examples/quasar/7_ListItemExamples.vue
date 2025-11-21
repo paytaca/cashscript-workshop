@@ -50,8 +50,5 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "ListCheatsheet",
-};
+<script setup>
 </script>

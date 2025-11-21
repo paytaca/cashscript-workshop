@@ -25,61 +25,53 @@
     </div>
   </q-page>
 </template>
-<script>
+<script setup>
 import { copyToClipboard } from 'quasar';
-import { defineComponent } from 'vue';
+import { useQuasar } from 'quasar';
 
+const $q = useQuasar();
 
-export default defineComponent({
-  name: 'ExternalLinksPage',
-  data() {
-    return {
-      links: [
-        {
-          label: 'Vue JS introduction',
-          color: 'teal-5',
-          url: 'https://vuejs.org/guide/introduction.html',
-        },
-        {
-          label: 'Vue JS tutorial',
-          color: 'teal-5',
-          url: 'https://vuejs.org/tutorial/#step-1',
-        },
-        {
-          label: 'Vue JS examples',
-          color: 'teal-5',
-          url: 'https://vuejs.org/examples/#hello-world',
-        },
-        {
-          label: 'Creating quasar project',
-          color: 'blue',
-          url: 'https://quasar.dev/start/quick-start',
-        },
-        {
-          label: 'Quasar components',
-          color: 'blue',
-          url: 'https://quasar.dev/components',
-        },
-        {
-          label: 'Pinia',
-          color: 'yellow-8',
-          url: 'https://pinia.vuejs.org/introduction.html',
-        },
-        {
-          label: 'Vue Router',
-          color: 'teal-7',
-          url: 'https://router.vuejs.org/guide/',
-        }
-      ]
-    }
+const links = [
+  {
+    label: 'Vue JS introduction',
+    color: 'teal-5',
+    url: 'https://vuejs.org/guide/introduction.html',
   },
-
-  methods: {
-    copyText(text) {
-      copyToClipboard(text).then(() => {
-        this.$q.notify({ message: 'Link copied!', type: 'positive' })
-      });
-    }
+  {
+    label: 'Vue JS tutorial',
+    color: 'teal-5',
+    url: 'https://vuejs.org/tutorial/#step-1',
+  },
+  {
+    label: 'Vue JS examples',
+    color: 'teal-5',
+    url: 'https://vuejs.org/examples/#hello-world',
+  },
+  {
+    label: 'Creating quasar project',
+    color: 'blue',
+    url: 'https://quasar.dev/start/quick-start',
+  },
+  {
+    label: 'Quasar components',
+    color: 'blue',
+    url: 'https://quasar.dev/components',
+  },
+  {
+    label: 'Pinia',
+    color: 'yellow-8',
+    url: 'https://pinia.vuejs.org/introduction.html',
+  },
+  {
+    label: 'Vue Router',
+    color: 'teal-7',
+    url: 'https://router.vuejs.org/guide/',
   }
-})
+];
+
+function copyText(text) {
+  copyToClipboard(text).then(() => {
+    $q.notify({ message: 'Link copied!', type: 'positive' });
+  });
+}
 </script>

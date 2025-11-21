@@ -37,63 +37,41 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "TodoApp",
+<script setup>
+import { computed, ref, watch } from 'vue'
 
-  // Reactive State
-  data() {
-    return {
-      title: "Todo App",
-      newTodo: "",
-      todos: [
-        { text: "Learn Vue basics", done: false },
-        { text: "Build a Todo app", done: true },
-      ],
-      lastAction: "None yet",
-    };
-  },
+const title = ref('TodoApp')
 
-  // Derived State
-  computed: {
-    completedCount() {
-      return this.todos.filter((t) => t.done).length;
-    },
-  },
+const todos = ref([
+  { text: "Learn Vue basics", done: false },
+  { text: "Build a Todo app", done: true },
+])
+const completedCount = computed(() => todos.value.filter(t => t.done).length)
+const newTodo = ref('')
+function addTodo() {
+  if (newTodo.value.trim() !== '') {
+    todos.value.push({ text: newTodo.value.trim(), done: false });
+    newTodo.value = '';
+    lastAction.value = "Added a todo";
+  }
+}
 
-  // Methods (actions)
-  methods: {
-    addTodo() {
-      if (this.newTodo.trim() !== "") {
-        this.todos.push({ text: this.newTodo.trim(), done: false });
-        this.newTodo = "";
-        this.lastAction = "Added a todo";
-      }
-    },
-    deleteTodo(index) {
-      this.todos.splice(index, 1);
-      this.lastAction = "Deleted a todo";
-    },
-    toggleDone(index) {
-      this.todos[index].done = !this.todos[index].done;
-      this.lastAction = this.todos[index].done
-        ? "Marked as done"
-        : "Marked as not done";
-    },
-  },
+function deleteTodo(index) {
+  todos.value.splice(index, 1);
+  lastAction.value = "Deleted a todo";
+}
 
-  // Watchers
-  watch: {
-    todos: {
-      handler(newVal) {
-        console.log("Todos changed:", newVal);
-      },
-      deep: true, // so it reacts to changes inside the array
-    },
-  },
-};
+function toggleDone(index) {
+  todos.value[index].done = !todos.value[index].done;
+  lastAction.value = todos.value[index].done ? "Marked as done" : "Marked as not done"
+}
+
+watch(todos, (newVal) => {
+  console.log("Todos changed:", newVal);
+}, { deep: true })
+
+const lastAction = ref('')
 </script>
-
 <style scoped>
 h1 {
   font-size: 1.5rem;

@@ -47,71 +47,71 @@
   </div>
 </template>
 
-<script>
-import LoadingDialog from 'src/components/dialogs/LoadingDialog.vue'
+<script setup>
+import LoadingDialog from 'src/components/dialogs/LoadingDialog.vue';
+import { ref } from 'vue';
+import { useQuasar } from 'quasar';
 
-export default {
-  name: "DialogCheatsheet",
-  data () {
-    return {
-      showSimple: false,
-      showForm: false,
-      form: {
-        name: '',
-        email: ''
-      }
+const $q = useQuasar();
+
+const showSimple = ref(false);
+const showForm = ref(false);
+const form = ref({
+  name: '',
+  email: ''
+});
+
+function submitForm() {
+  $q.notify({
+    type: 'positive',
+    message: `Submitted: ${form.value.name} (${form.value.email})`
+  });
+  showForm.value = false;
+}
+
+function showAlert() {
+  $q.dialog({
+    title: 'Alert',
+    message: 'This is an alert dialog created with $q.dialog().'
+  });
+}
+
+function showConfirm() {
+  $q.dialog({
+    title: 'Confirm',
+    message: 'Are you sure you want to continue?',
+    cancel: true,
+    persistent: true
+  }).onOk(() => {
+    $q.notify({ type: 'positive', message: 'Confirmed!' });
+  }).onCancel(() => {
+    $q.notify({ type: 'negative', message: 'Cancelled' });
+  });
+}
+
+function showPrompt() {
+  $q.dialog({
+    title: 'Prompt',
+    message: 'What is your name?',
+    prompt: {
+      model: '',
+      type: 'text'
+    },
+    cancel: true,
+    persistent: true
+  }).onOk(name => {
+    $q.notify({ type: 'info', message: `Hello, ${name}!` });
+  });
+}
+
+function showCustomDialog() {
+  const dialog = $q.dialog({
+    component: LoadingDialog,
+    componentProps: {
+      message: 'Custom loading dialog. Closing after 3 seconds',
     }
-  },
-  methods: {
-    submitForm () {
-      this.$q.notify({
-        type: 'positive',
-        message: `Submitted: ${this.form.name} (${this.form.email})`
-      })
-      this.showForm = false
-    },
-    showAlert () {
-      this.$q.dialog({
-        title: 'Alert',
-        message: 'This is an alert dialog created with $q.dialog().'
-      })
-    },
-    showConfirm () {
-      this.$q.dialog({
-        title: 'Confirm',
-        message: 'Are you sure you want to continue?',
-        cancel: true,
-        persistent: true
-      }).onOk(() => {
-        this.$q.notify({ type: 'positive', message: 'Confirmed!' })
-      }).onCancel(() => {
-        this.$q.notify({ type: 'negative', message: 'Cancelled' })
-      })
-    },
-    showPrompt () {
-      this.$q.dialog({
-        title: 'Prompt',
-        message: 'What is your name?',
-        prompt: {
-          model: '',
-          type: 'text'
-        },
-        cancel: true,
-        persistent: true
-      }).onOk(name => {
-        this.$q.notify({ type: 'info', message: `Hello, ${name}!` })
-      })
-    },
-    showCustomDialog() {
-      const dialog = this.$q.dialog({
-        component: LoadingDialog,
-        componentProps: {
-          message: 'Custom loading dialog. Closing after 3 seconds',
-        }
-      })
-      
-      setTimeout(() => dialog.hide(), 3000)
-    }
-  }
+  });
+  
+  setTimeout(() => dialog.hide(), 3000);
 }
 </script>

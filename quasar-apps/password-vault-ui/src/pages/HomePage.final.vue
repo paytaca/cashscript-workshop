@@ -50,13 +50,13 @@
   </div>
 </template>
 <script setup>
+import QRCode from 'qrcode';
 import { ref, onMounted } from 'vue';
 
 import { Contract, ElectrumNetworkProvider, TransactionBuilder } from 'cashscript';
+import { electrum } from "src/lib/electrum.js"
 import { addressToPkhash } from 'src/lib/common.js';
-import PasswordVaultArtifact from 'src/contracts/PasswordVault.json' with { type: 'json' };
-
-import QRCode from 'qrcode';
+import PasswordVaultArtifact from 'src/contracts/PasswordVault.json' assert { type: 'json' }
 
 const contract = ref();
 const payout = ref(0);

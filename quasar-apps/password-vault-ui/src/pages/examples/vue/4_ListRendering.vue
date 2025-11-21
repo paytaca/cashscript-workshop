@@ -24,23 +24,15 @@
     </ul>
   </div>
 </template>
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { ref } from 'vue';
 
-export default defineComponent({
-  name: '3_ConditionalRendering',
-
-  data() {
-    return {
-      fruits: ['🍎 Apple', '🍌 Banana', '🍇 Grapes', '🍊 Orange'],
-      profile: {
-        Name: 'Juan Pusong',
-        Age: 21,
-        Nationality: 'Filipino',
-      }
-    }
-  }
-})
+const fruits = ref(['🍎 Apple', '🍌 Banana', '🍇 Grapes', '🍊 Orange']);
+const profile = ref({
+  Name: 'Juan Pusong',
+  Age: 21,
+  Nationality: 'Filipino',
+});
 </script>
 <style>
 .container {

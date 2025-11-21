@@ -70,26 +70,18 @@
     </div>
   </q-page>
 </template>
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { ref } from 'vue';
 
-export default defineComponent({
-  name: 'ButtonExamples',
-  data() {
-    return {
-      loadingBtnProgress: 0,
+const loadingBtnProgress = ref(0)
+
+function loadingProgress() {
+  const interval = setInterval(() => {
+    loadingBtnProgress.value += 10;
+    if (loadingBtnProgress.value > 100) {
+      clearInterval(interval);
+      loadingBtnProgress.value = 0;
     }
-  },
-  methods: {
-    loadingProgress() {
-      const interval = setInterval(() => {
-        this.loadingBtnProgress += 10;
-        if (this.loadingBtnProgress > 100) {
-          clearInterval(interval);
-          this.loadingBtnProgress = 0;
-        }
-      }, 500);
-    }
-  }
-})
+  }, 500);
+}
 </script>
