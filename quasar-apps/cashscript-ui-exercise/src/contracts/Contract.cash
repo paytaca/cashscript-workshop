@@ -1,0 +1,8 @@
+pragma cashscript ^0.12.0;
+
+contract PasswordHash(int seed) {
+    function spend(int password) {
+        int hash = password + seed;
+        require(hash == 99999);
+    }
+}

@@ -1,0 +1,38 @@
+{
+  "contractName": "PasswordHash",
+  "constructorInputs": [
+    {
+      "name": "seed",
+      "type": "int"
+    }
+  ],
+  "abi": [
+    {
+      "name": "spend",
+      "inputs": [
+        {
+          "name": "password",
+          "type": "int"
+        }
+      ]
+    }
+  ],
+  "bytecode": "OP_ADD 9f8601 OP_NUMEQUAL",
+  "source": "pragma cashscript ^0.12.0;\n\ncontract PasswordHash(int seed) {\n    function spend(int password) {\n        int hash = password + seed;\n        require(hash == 99999);\n    }\n}\n",
+  "debug": {
+    "bytecode": "93039f86019c",
+    "sourceMap": "5:19:5:34:1;6:24:6:29:0;:8::31:1",
+    "logs": [],
+    "requires": [
+      {
+        "ip": 4,
+        "line": 6
+      }
+    ]
+  },
+  "compiler": {
+    "name": "cashc",
+    "version": "0.12.0"
+  },
+  "updatedAt": "2025-11-24T08:37:42.366Z"
+}
