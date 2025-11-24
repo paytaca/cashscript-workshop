@@ -426,6 +426,21 @@
             </section>
 
             <section>
+                <h3>Copy wallet address to computer</h3>
+                <ol>
+                    <li>
+                        To copy address from phone to computer, visit on your computer:
+                        <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                            https://copypaste.me
+                        </div>
+                    </li>
+                    <li>Scan the qrcode shown in the website</li>
+                    <li>Paste & send your address in the phone</li>
+                    <li>Copy the sent address in your computer</li>
+                </ol>
+            </section>
+
+            <section>
                 <h2>Contract Instantiation</h2>
                 <h3>Contract Properties</h3>
                 <pre style="font-size: 0.7em !important;">
@@ -507,6 +522,27 @@
                         }
                     </code></pre>
                 </section>
+            </section>
+
+            <section>
+                <h2>Displaying QRCode in command line</h2>
+                <div class="p-2 rounded-lg bg-white/10 mt-6">
+                    <div class="text-blue-300">
+                        node-qrcode
+                    </div>
+                    an NPM package for generating QR codes
+                </div>
+
+                <pre style="font-size: 0.65em !important;"><code class="language-javascript" data-trim>
+                import QRCode from 'qrcode'
+
+                const qrData = await QRCode.toString(
+                    contract.address,
+                    { type: 'terminal' }
+                )
+                console.log(qrData);
+
+                </code></pre>
             </section>
 
             <section>
