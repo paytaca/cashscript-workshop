@@ -329,6 +329,24 @@
                 <section data-auto-animate>
                     <h2>Contract Instantiation</h2>
                     <h3>Network Providers</h3>
+                    <pre><code class="language-javascript">new ElectrumNetworkProvider(network?: Network, options?: Options)</code></pre>
+                    <pre style="width: 100% !important; font-size: 0.65em !important;">
+                        <code class="language-javascript" data-line-numbers="1-8" data-trim>
+                            new ElectrumNetworkProvider(
+                                "mainnet",
+                                {
+                                    host: "electrum.paytaca.com", // your hostname
+                                    port: 443,                    // your exposed port
+                                    protocol: "ssl"               // "tcp" or "ssl"
+                                }
+                            );
+                        </code>
+                    </pre>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>Contract Instantiation</h2>
+                    <h3>Network Providers</h3>
                     <pre><code class="language-javascript">new MockNetworkProvider(options?: { updateUtxoSet: boolean })</code></pre>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         <ul class="space-y-2 text-2xl">
