@@ -1,0 +1,13 @@
+pragma cashscript ^0.11.0;
+ 
+
+contract Exercise6 () {
+
+    /*
+        Create a contract that pays out 1000 sats to any address
+        Enforce fee of 500 satoshis
+        Return remaining change to the
+        contract if the it's greater than or equal to 1000
+     */
+ 
+}

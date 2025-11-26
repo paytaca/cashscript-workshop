@@ -2,7 +2,7 @@
   <q-btn
     rounded
     color="blue"
-    label="Display QR code"
+    :label="text"
     icon="qr_code"
     @click="displayQrCode"
   />
@@ -18,7 +18,8 @@ export default defineComponent({
 
   props: {
     address: String,
-    qrSize: { type: Number, required: false, }
+    qrSize: { type: Number, required: false, },
+    text: { type: String, default: 'Display QR code' },
   },
 
   methods: {

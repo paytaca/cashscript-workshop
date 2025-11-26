@@ -1,0 +1,45 @@
+{
+  "name": "cashscript-ui-exercise",
+  "version": "0.0.1",
+  "description": "An exercise for UI & javascript integration for Cashscript Development",
+  "productName": "Cashscript UI Exercise",
+  "author": "khirvy019 <khirvy_19@yahoo.com>",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0",
+    "dev": "quasar dev",
+    "build": "quasar build",
+    "postinstall": "quasar prepare"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.16.4",
+    "cashc": "^0.12.0",
+    "cashscript": "^0.12.0",
+    "core-js": "^3.31.1",
+    "qrcode": "^1.5.4",
+    "quasar": "^2.16.0",
+    "vue": "^3.5.22",
+    "vue-router": "^4.0.12"
+  },
+  "devDependencies": {
+    "@quasar/app-webpack": "^4.1.0",
+    "autoprefixer": "^10.4.2"
+  },
+  "browserslist": [
+    "last 10 Chrome versions",
+    "last 10 Firefox versions",
+    "last 4 Edge versions",
+    "last 7 Safari versions",
+    "last 8 Android versions",
+    "last 8 ChromeAndroid versions",
+    "last 8 FirefoxAndroid versions",
+    "last 10 iOS versions",
+    "last 5 Opera versions"
+  ],
+  "engines": {
+    "node": "^28 || ^26 || ^24 || ^22 || ^20 || ^18",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
+}

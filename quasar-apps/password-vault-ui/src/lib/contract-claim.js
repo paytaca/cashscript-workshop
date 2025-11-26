@@ -20,7 +20,7 @@ export async function claimPasswordVault(parameters, recipientAddress, passcode)
   // Find a suitable UTXO to use, satoshis that is greater than toSendAmount plus transaction fee
   let utxo;
   for(var i = 0; i < utxos.length; i++) {
-    if (utxos[i].satoshis > toSendAmount + TX_FEE) {
+    if (utxos[i].satoshis >= toSendAmount + TX_FEE) {
       utxo = utxos[i];
       break
     }
@@ -31,30 +31,16 @@ export async function claimPasswordVault(parameters, recipientAddress, passcode)
     throw new Error('Not enough balance from vault')
   }
 
-  // Declare the outputs array
-  const outputs = [
-    {
-        to: recipientAddress,
-        amount: toSendAmount,
-    }
-  ]
+  // add input and output/s
+  transactionBuilder.addInput(utxo, contract.unlock.claim(passcode))
+  transactionBuilder.addOutput({ to: recipientAddress, amount: toSendAmount })
 
   // Calculate remaining satoshis after sending the payout and transaction fee
+  // And add a change output if remaining satoshis is greater than required satoshis (546 satoshis)
   const changeAmount = utxo.satoshis - toSendAmount - 300n
-
-  // Add a change output if remaining satoshis is greater than required satoshis (546 satoshis)
   if (changeAmount > 546n) {
-    outputs.push({
-      to: contract.address,
-      amount: changeAmount,
-    })
+    transactionBuilder.addOutput({ to: contract.address, amount: changeAmount })
   }
-
-
-  // build the transaction (add input and output/s)
-  transactionBuilder.addInput(utxo, contract.unlock.claim(passcode))
-  transactionBuilder.addOutput()
-
 
   // Sending the transaction to blockchain network
   const result = transactionBuilder.send();

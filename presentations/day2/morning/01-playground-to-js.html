@@ -30,17 +30,17 @@
             <section>
                 <section>
                     <h3>Before starting...</h3>
-                    <span class="fragment">
+                    <span>
                         <!-- <p>Clone <span class="text-orange-400 font-bold">CashScript Workshop</span> repo</p>
                         <pre><code class="language-bash">git clone https://github.com/paytaca/cashscript-workshop.git</code></pre> -->
                         <p>Download <span class="text-orange-400 font-bold">CashScript Workshop</span> repo files</p>
                         <pre><code class="language-bash">https://bit.ly/password-vault-ui</code></pre>
                     </span>
-                    <span class="fragment">
+                    <span>
                         <!-- <p>Navigate to <span class="text-orange-400 italic">quasar-apps/password-vault-ui</span></p> -->
                          <p>Navigate to <span class="text-orange-400 italic">password-vault-ui</span></p>
                     </span>
-                    <span class="fragment">
+                    <span>
                         <!-- <p>And install dependencies</p> -->
                          <p>Open CLI and install dependencies</p>
                         <pre><code class="language-bash">npm install</code></pre>
@@ -48,7 +48,7 @@
                 </section>
 
                 <section>
-                    <h3>Windows 11 script error problem?</h3>
+                    <h3>Script error problem?</h3>
                     <ol class="pt-4">
                         <li>Open Powershell as Administrator</li>
                         <li>
@@ -83,14 +83,11 @@
                             }
                         </code></pre>
                         <h3 class="fragment fade-up">What's next?</h3>
+                        <h3 class="fragment mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                            <p>Moving <span class="text-green-500">CashScript</span> Outside</p>
+                        </h3>
                     </div>
                 </section>
-            </section>
-
-            <section>
-                <h2 class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
-                    <p>Moving <span class="text-green-500">CashScript</span> Outside</p>
-                </h2>
             </section>
 
             <section data-auto-animate>
@@ -109,10 +106,10 @@
             <section>
                 <section data-auto-animate>
                     <h2>Compiler</h2>
-                    <pre class="fragment" style="font-size: 0.65em !important;">
+                    <pre style="font-size: 0.65em !important;">
                         <code class="language-bash">   npm install -g cashc</code>
                     </pre>
-                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px] fragment">
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         <ul class="space-y-2">
                             <li>
                                 for compiling CashScript <code class="text-green-400 font-bold">.cash</code>
@@ -199,22 +196,13 @@
             </section>
 
             <section>
-                <h3>Activity: Create PasswordVault</h3>
-                <h3>artifact file using CLI</h3>
-                <ol class="space-y-2 text-3xl">
+                <h2>Activity: Create PasswordVault artifact file using CLI</h2>
+                <ol class="space-y-2 text-4xl">
                     <!-- <li>Open CLI and navigate to:</li> -->
                     <!-- <code class="text-orange-400 italic">quasar-apps/password-vault-ui/src/contracts</code> -->
                      <!-- <code class="text-orange-400 italic">password-vault-ui/src/contracts</code> -->
                     <li>
                         Open CLI and run
-                        <pre style="width: 100% !important; font-size: 0.75em !important;">
-                            <code class="language-bash" data-trim>
-                            npx cashc src/contracts/PasswordVault.cash
-                            </code>
-                        </pre>
-                    </li>
-                    <li class="fragment">
-                        Run
                         <pre style="width: 100% !important; font-size: 0.75em !important;">
                             <code class="language-bash" data-trim>
                             npx cashc src/contracts/PasswordVault.cash
@@ -341,6 +329,24 @@
                 <section data-auto-animate>
                     <h2>Contract Instantiation</h2>
                     <h3>Network Providers</h3>
+                    <pre><code class="language-javascript">new ElectrumNetworkProvider(network?: Network, options?: Options)</code></pre>
+                    <pre style="width: 100% !important; font-size: 0.65em !important;">
+                        <code class="language-javascript" data-line-numbers="1-8" data-trim>
+                            new ElectrumNetworkProvider(
+                                "mainnet",
+                                {
+                                    host: "electrum.paytaca.com", // your hostname
+                                    port: 443,                    // your exposed port
+                                    protocol: "ssl"               // "tcp" or "ssl"
+                                }
+                            );
+                        </code>
+                    </pre>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>Contract Instantiation</h2>
+                    <h3>Network Providers</h3>
                     <pre><code class="language-javascript">new MockNetworkProvider(options?: { updateUtxoSet: boolean })</code></pre>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         <ul class="space-y-2 text-2xl">
@@ -399,10 +405,15 @@
             </section>
 
             <section>
-                <h3>Activity: Instantiate PasswordVault contract</h3>
+                <h2>Activity: Instantiate</br>PasswordVault contract</h2>
+                <p>
+                    Open VS Code (or your preferred IDE), open
+                    <p><code class="text-yellow-400 font-bold">src/contracts/passvault-run.js</code></p>
+                    and follow what is being typed on the screen.
+                </p>
+                <!--
                 <ol class="space-y-2 text-4xl">
                     <li>
-                        <!-- <span>Under the same directory, open:</span> -->
                         <span>
                             Under <code class="text-orange-400 italic">src/contracts</code>, open:
                         </span>
@@ -422,10 +433,25 @@
                     <li class="fragment">
                         Open CLI and run
                         <pre style="width: 100% !important; font-size: 0.7em !important;">
-                            <!-- <code class="language-bash">node password-vault-instantiate.js</code> -->
                             <code class="language-bash">node src/contracts/password-vault-instantiate.js</code>
                         </pre>
                     </li>
+                </ol>
+                -->
+            </section>
+
+            <section>
+                <h3>Copy wallet address to computer</h3>
+                <ol>
+                    <li>
+                        To copy address from phone to computer, visit on your computer:
+                        <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                            https://copypaste.me
+                        </div>
+                    </li>
+                    <li>Scan the qrcode shown in the website</li>
+                    <li>Paste & send your address in the phone</li>
+                    <li>Copy the sent address in your computer</li>
                 </ol>
             </section>
 
@@ -450,7 +476,9 @@
             </section>
 
             <section>
-                <h3>Activity: View PasswordVault contract properties</h3>
+                <h2>Activity: View PasswordVault contract properties</h2>
+                <p>Go to your IDE again and follow what is being typed on the screen.</p>
+                <!-- <h3>Activity: View PasswordVault contract properties</h3>
                 <ol class="space-y-2 text-3xl">
                     <li>
                         Console log the address of the
@@ -462,7 +490,6 @@
                     <li>
                         Open CLI and run the same command again
                         <pre style="width: 100% !important; font-size: 0.7em !important;">
-                            <!-- <code class="language-bash">node password-vault-instantiate.js</code> -->
                             <code class="language-bash">node src/contracts/password-vault-instantiate.js</code>
                         </pre>
                     </li>
@@ -477,7 +504,7 @@
                     <li class="fragment">
                         After sending, refresh the BCH Explorer page
                     </li>
-                </ol>
+                </ol> -->
             </section>
 
             <section>
@@ -510,6 +537,27 @@
                         }
                     </code></pre>
                 </section>
+            </section>
+
+            <section>
+                <h2>Displaying QRCode in command line</h2>
+                <div class="p-2 rounded-lg bg-white/10 mt-6">
+                    <div class="text-blue-300">
+                        node-qrcode
+                    </div>
+                    an NPM package for generating QR codes
+                </div>
+
+                <pre style="font-size: 0.65em !important;"><code class="language-javascript" data-trim>
+                import QRCode from 'qrcode'
+
+                const qrData = await QRCode.toString(
+                    contract.address,
+                    { type: 'terminal' }
+                )
+                console.log(qrData);
+
+                </code></pre>
             </section>
 
             <section>
@@ -649,7 +697,7 @@
                 </section>
             </section>
 
-            <section>
+            <!-- <section>
                 <section data-auto-animate>
                     <h3>Example</h3>
                     <p><code>password-vault-transact.js</code></p>
@@ -709,6 +757,11 @@
                             .addOutputs(outputs)
                     </code></pre>
                 </section>
+            </section> -->
+
+            <section>
+                <h2>Activity: Building a Transaction</h2>
+                <p>Go to your IDE again and follow what is being typed on the screen.</p>
             </section>
 
             <section>
@@ -806,11 +859,14 @@
             </section>
 
             <section>
+                <h2>Activity: Completing and</br>Sending a Transaction</h2>
+                <p>Go to your IDE again and follow what is being typed on the screen.</p>
+            </section>
+            <!-- <section>
                 <h3>Activity: Build a transaction</h3>
                 <ol class="space-y-2 text-3xl">
                     
                     <li>
-                        <!-- <span>Under the same directory, open</span> -->
                         <span>
                             Under <code class="text-orange-400 italic">src/contracts</code>, open
                         </span>
@@ -841,7 +897,6 @@
                         <li>
                             Open CLI and run
                             <pre style="font-size: 0.8em !important;">
-                                <!-- <code class="language-bash">node password-vault-transact.js</code> -->
                                 <code class="language-bash">node src/contracts/password-vault-transact.js</code>
                             </pre>
                         </li>
@@ -871,7 +926,6 @@
                         <li>
                             Run the command below again:
                             <pre style="font-size: 0.8em !important;">
-                                <!-- <code class="language-bash">node password-vault-transact.js</code> -->
                                 <code class="language-bash">node src/contracts/password-vault-transact.js</code>
                             </pre>
                         </li>
@@ -883,13 +937,16 @@
                             <li>Run the command above again</li>
                         </span>
                         <li class="fragment">
+                            Comment out the change address in the <code class="text-orange-400 font-bold">outputs</code> variable then run the command above again
+                        </li>
+                        <li class="fragment">
                             Copy the <code class="text-orange-400 font-bold">txid</code>,
                             go back to the <a href="https://explorer.bch.ninja" data-preview-link>BCH Explorer website</a>,
                             paste the <code class="text-orange-400 font-bold">txid</code> in the search bar, then hit Enter 
                         </li>
                     </span>
                 </ol>
-            </section>
+            </section> -->
 
             <section>
                 <h2>More information</h2>

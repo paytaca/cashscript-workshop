@@ -13,10 +13,17 @@ export function createPasswordVaultContract(payout, ownerAddress, passcode) {
     throw new Error(`Invalid owner address, must be a wallet address`)
   }
 
+  // 20 bytes of zero
+  let pkhash = '0000000000000000000000000000000000000000';
+
+  if (ownerAddress) {
+    pkhash = addressToPkhash(ownerAddress)
+  }
+
   // setup contract arguments based on contract parameters
   const contractParameters = [
     BigInt(payout),
-    addressToPkhash(ownerAddress),
+    pkhash,
     passcode,
   ]
 
