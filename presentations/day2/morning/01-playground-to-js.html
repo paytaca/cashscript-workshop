@@ -38,11 +38,11 @@
                     </span>
                     <span>
                         <!-- <p>Navigate to <span class="text-orange-400 italic">quasar-apps/password-vault-ui</span></p> -->
-                         <p>Navigate to <span class="text-orange-400 italic">password-vault-ui</span></p>
+                         <p>Extract downloaded ZIP file</p>
                     </span>
                     <span>
                         <!-- <p>And install dependencies</p> -->
-                         <p>Open CLI and install dependencies</p>
+                         <p>Open CLI (e.g. Command Prompt), redirect to extracted folder, and install dependencies</p>
                         <pre><code class="language-bash">npm install</code></pre>
                     </span>
                 </section>
@@ -324,6 +324,24 @@
                             <li>options: for specifying custom electrum client or hostname, and enable manual connection management</li>
                         </ul>
                     </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>Contract Instantiation</h2>
+                    <h3>Network Providers</h3>
+                    <pre><code class="language-javascript">new ElectrumNetworkProvider(network?: Network, options?: Options)</code></pre>
+                    <pre style="width: 100% !important; font-size: 0.65em !important;">
+                        <code class="language-javascript" data-line-numbers="1-8" data-trim>
+                            new ElectrumNetworkProvider(
+                                "mainnet",
+                                {
+                                    host: "electrum.paytaca.com", // your hostname
+                                    port: 443,                    // your exposed port
+                                    protocol: "ssl"               // "tcp" or "ssl"
+                                }
+                            );
+                        </code>
+                    </pre>
                 </section>
 
                 <section data-auto-animate>

@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build:css",
+  "outputDirectory": ".",
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/presentations/index.html"
+    },
+    {
+      "src": "/node_modules/(.*)",
+      "dest": "/node_modules/$1"
+    },
+    {
+      "src": "/presentations/(.*)",
+      "dest": "/presentations/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/presentations/$1"
+    }
+  ]
+}
