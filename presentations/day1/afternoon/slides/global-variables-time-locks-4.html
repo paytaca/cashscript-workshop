@@ -1,0 +1,234 @@
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div class="mb-4">-- Global Time Lock Variables --</div>
+    <div>
+        <div class="text-2xl">
+            <ul>
+                <li>Helps in enforcing <strong class="text-orange-300">block-height</strong> based or <strong class="text-orange-300">time-based</strong> constraint.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section>
+  <h2><div class="text-green-300">Global Variables</div></h2>
+  <h3 class="mb-4">-- Global Time Lock Variables --</h3>
+  <h4><strong class="text-orange-300">Absolute Locktime</strong></h4>
+  <div class="mt-6 text-3xl space-y-6">
+    <div>
+      <p class="mt-2 text-base">
+        Think of this like a fixed calendar date, or fixed block number.
+      </p>
+      <p class="mt-1 italic">
+        Example: “This money cannot be spent until <strong>December 1, 2025</strong> or block height 950,000”
+      </p>
+      <p class="mt-1 text-sm text-gray-400">
+        It’s enforced by checking the transaction’s <code>locktime</code> against the blockchain’s current block height or timestamp.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><div class="text-green-300">Global Variables</div></h2>
+  <h3 class="mb-4">-- Global Time Lock Variables --</h3>
+  <h4><strong class="text-orange-300">Relative Locktime</strong></h4>
+  <div class="mt-6 text-3xl space-y-6">
+    <div>
+      <p class="mt-2 text-base">
+        This is based on how long the coins have been unspent.
+      </p>
+      <p class="mt-1 italic">
+        Example: “You must wait <strong>10 blocks</strong> (about 100 minutes) after receiving these coins before you can spend them.”
+      </p>
+      <p class="mt-1 text-sm text-gray-400">
+        It uses the input’s <code>nSequence</code> field and is enforced per UTXO, not by a fixed date.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <h3 class="mb-4">-- Global Time Lock Variables --</h3>
+    <div>
+        <h4 class="text-xl">Anatomy of a transaction</h4>
+        <pre><code style="font-size: smaller;" data-trim data-line-numbers="5, 8-10">
+            transaction = {
+                inputs: [{
+                    outpointIndex: number;
+                    outpointTransactionHash: ByteStringRepresentation;
+                    sequenceNumber: number;
+                    unlockingBytecode: Bytecode;
+                }];
+                // If locktime < 500,000,000 → interpreted as a block height
+                // If locktime ≥ 500,000,000 → interpreted as a UNIX timestamp (seconds since 1970-01-01)
+                locktime: number;
+                outputs: [{
+                    lockingBytecode: Bytecode;
+                    token?: {
+                        amount: NumericRepresentation;
+                        category: ByteStringRepresentation;
+                        nft?: {
+                            capability: `${NonFungibleTokenCapability}`;
+                            commitment: ByteStringRepresentation;
+                        };
+                    };
+                    valueSatoshis: NumericRepresentation;
+                }];
+                version: number;
+            }
+        </code></pre>
+    </div>
+    <aside class="notes">
+        Locktime and sequenceNumber are 2 fields in a transaction that can be used 
+        to achieve time based constraint.
+    </aside>
+</section>
+
+<section>
+  <h2><div class="text-green-300">Global Variables</div></h2>
+  <h3 class="mb-4">-- Global Time Lock Variables --</h3>
+  <div class="grid grid-cols-2 gap-4">
+    <div class="col-span-1">
+      <span>
+        tx.time
+      </span>
+      <p>create an <i>absolute</i> time lock of the <i>transaction</i></p>
+    </div>
+    <div class="col-span-1">
+      <span>
+        this.age
+      </span>
+      <p>create a <i>relative</i> time lock on a <i>UTXO</i></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><div class="text-green-300">Global Variables</div></h2>
+  <h3 class="mb-4">-- Global Time Lock Variables --</h3>
+  <h4 class="mb-4">Usage in CashScript</h4>
+  <div class="grid grid-cols-2 gap-4">
+    <div class="col-span-1">
+      <span>
+        tx.time
+      </span>
+      <pre><code class="language-javascript" style="font-size: smaller;" data-trim data-line-numbers="1">
+        require(tx.time >= [expression]);
+      </code></pre>
+    </div>
+    <div class="col-span-1">
+      <span>
+        this.age
+      </span>
+      <pre><code class="language-javascript" style="font-size: smaller;" data-trim data-line-numbers="1">
+        require(this.age >= [expression]);
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><div class="text-green-300">Global Variables</div></h2>
+  <h3 class="mb-4">-- Global Time Lock Variables --</h3>
+  <h4 class="mb-4">Usage in CashScript: Accessing the value</h4>
+  <div class="grid grid-cols-2 gap-4">
+    <div class="col-span-1">
+      <span>
+        tx.time
+      </span>
+      <pre><code class="language-javascript" style="font-size: smaller;" data-trim data-line-numbers="1">
+        int txlocktime = tx.locktime;
+      </code></pre>
+    </div>
+    <div class="col-span-1">
+      <span>
+        this.age
+      </span>
+      <pre><code class="language-javascript" style="font-size: smaller;" data-trim data-line-numbers="1">
+        int utxoage = tx.inputs[i].sequenceNumber;
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><div class="text-green-300">Global Variables</div></h2>
+  <h3 class="mb-4">-- Global Time Lock Variables --</h3>
+  <h4 class="mb-4">Adding to transaction using JavaScript</h4>
+  <div class="grid grid-cols-2 gap-4">
+    <div class="col-span-1">
+      <span>
+        tx.time
+      </span>
+      <pre><code class="language-javascript" style="font-size: smaller;" data-trim data-line-numbers="1-4">
+        transactionBuilder
+          .addInput(...)
+          .addOutput(...)
+          .setLocktime(1769868370)
+      </code></pre>
+    </div>
+    <div class="col-span-1">
+      <span>
+        this.age
+      </span>
+      <pre><code class="language-javascript" style="font-size: smaller;" data-trim data-line-numbers="1-6">
+        transactionBuilder
+          .addInput(
+            utxo,
+            contract.unlock.spend(),
+            { sequenceNumber: 1769868370 }
+          )
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- <section>
+    <h2><div class="text-green-300">Global Variables</div></h2>
+    <div class="mb-4">-- Global Time Lock Variables --</div>
+    <div>
+        <div>
+            <div class="text-2xl">Definition</div>
+            <pre><code data-trim data-line-numbers="1">
+                // Validates the transaction 'locktime' field 
+                Variable: tx.time
+                Usage: require(tx.time >= <int>);
+                // Validates the 'sequenceNumber' field of input
+                Variable: this.age
+                Usage: require(this.age >= <int>);
+            </code></pre>    
+        </div>
+        <div>
+            <div class="text-2xl">
+                <a href="https://playground.cashscript.org" data-preview-link>Example</a>
+            </div>
+            <pre><code class="language-javascript" data-line-numbers="4" data-trim>
+                pragma cashscript ^0.11.0;
+                contract AbsoluteLockTimeDemo(bytes20 publicKeyHashOfRecipient, int futureBlock) {
+                    function spend() {
+                        require(tx.time >= futureBlock);
+                        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(publicKeyHashOfRecipient);
+                        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
+                    }
+                }
+            </code></pre>
+        </div>
+    </div>
+    <aside class="notes">
+        
+        locktime:
+            Specifies the earliest block height or Unix timestamp a transaction can be confirmed
+            Example: tx.locktime = 800000 → the transaction cannot be mined until block 800,000.
+            Analogy: Absolute locktime → “Can only spend after Jan 1, 2025.”
+            If locktime < 500,000,000 → interpreted as a block height
+            If locktime ≥ 500,000,000 → interpreted as a UNIX timestamp (seconds since 1970-01-01)
+            9,495 years to reach blocktime 500,000,000
+        sequenceNumber:
+            Controls when a specific input can be spent relative to the UTXO’s confirmation
+            Supports time-based or block-based relative delays.
+            Example: sequenceNumber = 10 (block-based) → can spend this input 10 blocks after the UTXO is confirmed
+            Relative locktime → “Can spend 10 blocks after I receive the coins.”
+    </aside>
+</section> -->
+
