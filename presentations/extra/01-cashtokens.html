@@ -13,7 +13,407 @@
     <div class="reveal">
         <div class="slides">
             <section>
-                yey
+                <h1 class="flex items-center justify-center gap-3 mb-4">
+                    CashTokens
+                </h1>
+                <h3 class="text-2xl mb-2">Extra Topic</h3>
+                <p class="text-4xl">
+                    Tokens on Bitcoin Cash
+                </p>
+            </section>
+
+            <section>
+                <section data-auto-animate>
+                    <h2>CashTokens</h2>
+                    <h3>What are CashTokens?</h3>
+                    <p class="fragment mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                        CashTokens (CT) are digital assets that can be created and used on the BCH network.
+                    </p>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens</h2>
+                    <h3>Kinds of CashTokens</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="col-span-1">
+                            <p class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                                Fungible Tokens (FT)
+                            </p>
+                            <p class="text-[35px]">
+                                Tokens where every unit is identical and interchangeable
+                            </p>
+                        </div>
+                        <div class="col-span-1">
+                            <p class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                                Non-Fungible Tokens (NFT)
+                            </p>
+                            <p class="text-[35px]">
+                                Unique digital assets that cannot be swapped 1-for-1 because each one has its own identity or data
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+                
+            <section>
+                <section data-auto-animate>
+                    <h2>CashTokens: FTs</h2>
+                    <h3>UTXO Structure</h3>
+                    <div>
+                        Interface
+                        <pre><code class="language-javascript" data-line-numbers="1-9" data-trim>
+                            interface Utxo {
+                                txid: string;
+                                vout: number;
+                                satoshis: bigint;
+                                token?: {
+                                    amount: bigint;
+                                    category: string;
+                                }
+                            }
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens: FTs</h2>
+                    <h3>UTXO Structure</h3>
+                    <div>
+                        Example with Data
+                        <pre><code class="language-javascript text-[20px]" data-line-numbers="1-9" data-trim>
+                            interface Utxo {
+                                txid: "2e9d2cf554126c5559cb192404a14f8ba3d9aede9680d03f367cd2269d64f81d";
+                                vout: 0;
+                                satoshis: 1000n;
+                                token: {
+                                    amount: 3000n;
+                                    category: "8473d94f604de351cdee3030f6c354d36b257861ad8e95bbc0a06fbab2a2f9cf";
+                                }
+                            }
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens: FTs</h2>
+                    <h3>Fields</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            amount: the amount of FT on the UTXO
+                        </li>
+                        <li>
+                            category: the token ID of the FT
+                        </li>
+                    </ul>
+                </section>
+            </section>
+
+            <section>
+                <section data-auto-animate>
+                    <h2>CashTokens: NFTs</h2>
+                    <h3>UTXO Structure</h3>
+                    <div>
+                        Interface
+                        <pre><code class="language-javascript" data-line-numbers="1-13" data-trim>
+                            interface Utxo {
+                                txid: string;
+                                vout: number;
+                                satoshis: bigint;
+                                token?: {
+                                    amount: bigint;
+                                    category: string;
+                                    nft?: {
+                                        capability: "none" | "mutable" | "minting";
+                                        commitment: string;
+                                    }
+                                }
+                            }
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens: NFTs</h2>
+                    <h3>UTXO Structure</h3>
+                    <div>
+                        Example with Data
+                        <pre><code class="language-javascript text-[20px]" data-line-numbers="1-13" data-trim>
+                            interface Utxo {
+                                txid: "4d5e1bbf1b8d7690d30a9d8eb3b51b9155902d88534b115f6b82862c8b8dd1fc";
+                                vout: 0;
+                                satoshis: 1000n;
+                                token: {
+                                    amount: 0n;
+                                    category: "f16675a3297463bf87fe27e7cbf6440cf0eb80644a4292af23a27dfe894c58b6";
+                                    nft: {
+                                        capability: "mutable";
+                                        commitment: "0200cbdb9d611660fcfa58b704ec3b8a230b11c35631b510eeca9d89ab4fb1b2e1f3c1bb7e69";
+                                    }
+                                }
+                            }
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens: NFTs</h2>
+                    <h3>Fields</h3>
+                    <ul class="space-y-2 text-[30px]">
+                        <li>
+                            amount: the amount of NFT on the UTXO
+                        </li>
+                        <li>
+                            category: the token ID of the NFT
+                        </li>
+                        <li>
+                            commitment: data field for the NFT (40 bytes max)
+                        </li>
+                        <li>
+                            capability:
+                            <ul>
+                                <li>
+                                    none (0x00): an immutable NFT where the commitment cannot be changed
+                                </li>
+                                <li>
+                                    mutable (0x01): commitment field (and optionally capability field) can change over time
+                                </li>
+                                <li>
+                                    minting (0x02): the NFT can create new NFTs from the same category
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+
+            <section>
+                <section data-auto-animate>
+                    <h2>CashTokens: Introspection</h2>
+                    <h3>Inputs</h3>
+                    <ul class="space-y-2 text-[30px]">
+                        <li>
+                            <code><strong>int tx.inputs[i].tokenAmount</strong></code>: amount of fungible tokens of a specific input
+                        </li>
+                        <li>
+                            <code><strong>bytes tx.inputs[i].tokenCategory</strong></code>: tokenCategory + tokenCapability of a specific input
+                        </li>
+                        <li>
+                            <code><strong>bytes tx.inputs[i].nftCommitment</strong></code>: NFT commitment data of a specific input
+                        </li>
+                    </ul>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens: Introspection</h2>
+                    <h3>Outputs</h3>
+                    <ul class="space-y-2 text-[30px]">
+                        <li>
+                            <code><strong>int tx.outputs[i].tokenAmount</strong></code>: amount of fungible tokens of a specific output
+                        </li>
+                        <li>
+                            <code><strong>bytes tx.outputs[i].tokenCategory</strong></code>: tokenCategory + tokenCapability of a specific output
+                        </li>
+                        <li>
+                            <code><strong>bytes tx.outputs[i].nftCommitment</strong></code>: NFT commitment data of a specific output
+                        </li>
+                    </ul>
+                </section>
+            </section>
+
+            <section>
+                <section data-auto-animate>
+                    <h2>CashTokens: Genesis Transaction</h2>
+                    <p class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                        A CashTokens genesis transaction is a transaction which creates a new category of CashTokens.
+                    </p>
+                    <p class="fragment text-[30px]">
+                        A UTXO with <strong><code>vout0</code></strong> is required.
+                    </p>
+                    <p class="fragment text-[30px]">
+                        The txid of the <code>vout0</code> UTXO will serve as the token category of the genesis CashToken.
+                    </p>
+                </section>
+            </section>
+
+            <section>
+                <section data-auto-animate>
+                    <h2>CashTokens: Display to Users</h2>
+                    <h3>BCMR</h3>
+                    <p class="fragment mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                        Bitcoin Cash Metadata Registry (BCMR) is an authenticated JSON file used to define metadata for tokens
+                    </p>
+                    <ul class="fragment">
+                        <li>
+                            token name
+                        </li>
+                        <li>
+                            token icon
+                        </li>
+                        <li>
+                            token description
+                        </li>
+                        <li>
+                            other data
+                        </li>
+                    </ul>
+                </section>
+            </section>
+
+            <section>
+                <section data-auto-animate>
+                    <h2>CashTokens: Creation</h2>
+                    <h3>Online</h3>
+                    <p class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                        <a href="https://cashtokens.studio" target="_blank">cashtokens.studio</a>
+                    </p>
+                </section>
+            </section>
+
+            <section>
+                <section data-auto-animate>
+                    <h2>CashTokens: Caveats</h2>
+                    <h3>Contract Side</h3>
+                    <ul class="text-4xl">
+                        <li>tokenCategory contains the nft-capability</li>
+                    </ul>
+                    <pre><code class="language-javascript text-[20px]" data-line-numbers="1" data-trim>
+                        bytes tx.inputs[i].tokenCategory
+                    </code></pre>
+                    <ul class="mt-4 p-4 pl-12 bg-white/10 rounded-lg text-[35px]">
+                        <li>
+                            sats only: 0x (empty byte string)
+                        </li>
+                        <li>
+                            FT: 32-byte token category (token ID)
+                        </li>
+                        <li>
+                            NFT: 33-byte data (32-byte token category + 1-byte NFT capability)
+                        </li>
+                    </ul>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens: Caveats</h2>
+                    <h3>Contract Side</h3>
+                    <ul class="text-4xl">
+                        <li>tokenCategory contains the nft-capability</li>
+                    </ul>
+                    <pre><code class="language-javascript text-[20px]" data-line-numbers="1-10" data-trim>
+                        // Extract the separate tokenCategory and capability
+                        bytes32 tokenCategory, bytes capability = tx.inputs[0].tokenCategory.split(32);
+
+                        // Check that the NFT is the correct category and has a "minting" capability
+                        require(providedCategory == tokenCategory);
+                        require(capability == 0x02);
+
+                        // Alternatively:
+                        // Check by concatenating the providedCategory and capability
+                        require(tx.inputs[0].tokenCategory == providedCategory + 0x02);
+                    </code></pre>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens: Caveats</h2>
+                    <h3>Contract Side</h3>
+                    <ul class="text-4xl">
+                        <li>NFT with minting capability</li>
+                    </ul>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                        If a covenant contains a minting NFT then all outputs should be carefully accounted for in the contract logic to not accidentally allow to mint extra new NFTs
+                    </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens: Caveats</h2>
+                    <h3>Contract Side</h3>
+                    <ul class="text-4xl">
+                        <li>NFT with minting capability</li>
+                    </ul>
+                    <pre><code class="language-javascript text-[20px]" data-line-numbers="1-7" data-trim>
+                        // Optionally create bch-change output at outputIndex 5
+                        if (tx.outputs.length > 5) {
+                            require(tx.outputs[5].tokenCategory == 0x, "Invalid BCH change output - should not hold any tokens");
+                        }
+
+                        // Don't allow more outputs to prevent minting extra NFTs
+                        require(tx.outputs.length <= 6, "Invalid number of outputs - should have 6 at most");
+                    </code></pre>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens: Caveats</h2>
+                    <h3>Contract Side</h3>
+                    <ul class="text-4xl">
+                        <li>"invisible" empty nfts</li>
+                    </ul>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                        Because the nft-capability has no separate introspection item, and nothing is appended to the tokenCategory in case of capability none, empty nfts can be "invisible" when combined with fungible tokens.
+                    </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens: Caveats</h2>
+                    <h3>Contract Side</h3>
+                    <ul class="text-4xl">
+                        <li>"invisible" empty nfts</li>
+                    </ul>
+                    <pre><code class="language-javascript text-[20px]" data-line-numbers="1-6" data-trim>
+                        // Input 0 might or might not have an empty nft (commitment 0x)
+                        // with providedTokenId
+                        // Either way, the tokenCategory would return providedTokenId
+                        require(tx.inputs[0].nftCommitment == 0x);
+                        require(tx.inputs[0].tokenAmount == 10);
+                        require(tx.inputs[0].tokenCategory == providedTokenId);
+                    </code></pre>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens: Caveats</h2>
+                    <h3>Transaction Building Side</h3>
+                    <ul class="text-4xl">
+                        <li>tokenCategory encoding</li>
+                    </ul>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                        The tokenCategory introspection variable returns the tokenCategory in the original unreversed order (little-endian), compared to wallets and explorers which use the reversed byte-order (big-endian).
+                    </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens: Caveats</h2>
+                    <h3>Transaction Building Side</h3>
+                    <ul class="text-4xl">
+                        <li>tokenCategory encoding</li>
+                    </ul>
+                    <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                        Solution is to reverse the endianness of the token category when passing to the contract argument.
+                    </div>
+                    <pre><code class="language-javascript text-[20px]" data-line-numbers="1-6" data-trim>
+                        const contractParams = [
+                            this.funder,
+                            changeEndianness(this.tokenId),
+                            this.adminPubkey,
+                            this.oraclePubkey,
+                        ];
+                    </code></pre>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens: Caveats</h2>
+                    <h3>Transaction Building Side</h3>
+                    <ul class="text-4xl">
+                        <li>tokenCategory encoding</li>
+                    </ul>
+                    <div>
+                        Example
+                        <pre><code class="language-javascript text-[20px]" data-line-numbers="1-6" data-trim>
+                            // big-endian
+                            const dogecashB = "8473d94f604de351cdee3030f6c354d36b257861ad8e95bbc0a06fbab2a2f9cf";
+
+                            // little-endian
+                            const dogecashL = "cff9a2b2ba6fa0c0bb958ead6178256bd354c3f63030eecd51e34d604fd97384";
+                        </code></pre>
+                    </div>
+                </section>
             </section>
 
             <section>
