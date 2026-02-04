@@ -22,27 +22,6 @@
       </q-dialog>
       <img :src="qrCodeImg"/>
     </div>
-
-    <div class="my-card">
-      <div class="text-h5">Claim from Vault</div>
-      <div v-if="claimTxid">
-        Claim Transaction ID: {{ claimTxid }}
-        <q-btn label="View in explorer" :href="'https://explorer.bch.ninja/tx/' + claimTxid" target="_blank"/>
-      </div>
-      <div v-if="claimError">
-        Claim Error: {{ claimError }}
-      </div>
-      <q-input v-model="claimRecipient" autogrow label="Recipient Address"/>
-      <q-input v-model="claimPasscode" label="Passcode"/>
-      <q-btn label="Claim" color="blue" @click="claimFromVault"/>
-
-      <q-dialog v-model="isClaiming">
-        <div class="my-card">
-          Claiming from vault
-          <q-spinner/>
-        </div>
-      </q-dialog>
-    </div>
   </div>
 </template>
 <script setup>
@@ -97,49 +76,6 @@ async function fetchBalance() {
 const qrCodeImg = ref();
 async function generateAddressQrCode() {
   qrCodeImg.value = await QRCode.toDataURL(contract.value.address);
-}
-
-const claimRecipient = ref('');
-const claimPasscode = ref('');
-
-const isClaiming = ref(false);
-const claimTxid = ref('');
-const claimError = ref('');
-
-async function claimFromVault() {
-  try {
-    isClaiming.value = true;
-    const provider = new ElectrumNetworkProvider('mainnet');
-    const transactionBuilder = new TransactionBuilder({ provider });
-  
-    const utxos = await contract.value.getUtxos();
-    const utxo = utxos[0];
-  
-    const inputSatoshis = utxo.satoshis;
-    transactionBuilder.addInput(utxo, contract.value.unlock.claim(claimPasscode.value))
-  
-    const amountToSend = BigInt(payout.value);
-    transactionBuilder.addOutput({
-      to: claimRecipient.value,
-      amount: amountToSend,
-    })
-  
-    const remainingSatoshis = inputSatoshis - 300n - amountToSend;
-    if (remainingSatoshis > 546n) {
-      transactionBuilder.addOutput({
-        to: contract.value.address,
-        amount: remainingSatoshis,
-      })
-    }
-
-    const transactionDetails = await transactionBuilder.send();
-    claimTxid.value = transactionDetails.txid;
-    claimError.value = '';
-  } catch(error) {
-    claimError.value = String(error);
-  } finally {
-    isClaiming.value = false;
-  }
 }
 </script>
 <style scoped>

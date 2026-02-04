@@ -33,6 +33,25 @@ Your task is to integrate the following features in the contract:
         - If using chipnet: `https://chipnet.bch.ninja/tx/` + `{txid}`
 
 
+## Setup 
+1. Open command line (or command prompt) and navigate to project folder
+   ```
+    cd /path/to/cashscript-ui-exercise
+   ```
+2. Run NPM install
+   ```
+   npm install
+   ```
+
+3. Run a local development server:
+   ```
+   npx quasar dev
+    or
+   npm run dev
+   ```
+4. Open `src/pages/HomePage.vue` and begin coding!
+
+
 ## Useful links:
 - VueJS Docs: https://vuejs.org/guide/introduction.html
 - VueJS Tutorial: https://vuejs.org/tutorial/#step-1
