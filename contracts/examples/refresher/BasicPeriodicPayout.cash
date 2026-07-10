@@ -1,0 +1,37 @@
+pragma cashscript ^0.13.0;
+
+/*
+    A basic version of a periodic payout where;
+    - A specific amount can only be withdrawn; and
+    - Withdrawn funds can only be sent to a specific address
+    - No rate limiting yet, more on next iteration
+*/
+contract BasicPeriodicPayout(int amount, bytes20 recipient) {
+    function withdrawFunds() {
+        // 1. Requiring a specific amount to be withdrawn
+        // Basic use of require and some introspection variable
+        require(tx.outputs[0].value == amount);
+
+        // 2. Adds more security to the contract
+        // Another basic use of introspection variable/s
+        require(tx.inputs.length == 1);
+        require(tx.outputs.length <= 2);
+
+        // 3. Withdrawn funds are sent to specific address
+        // Example of constructing locking bytecodes
+        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(recipient);
+        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);
+        
+        // 4. Ensure excess funds are returned to the contract, if there are any
+        int contractBalance = tx.inputs[0].value;
+        int excessFunds = contractBalance - amount - 1000;
+        if (excessFunds >= 546) {
+            // This is how to get the lockingBytecode of current contract
+            bytes thisLockingBytecode = tx.inputs[this.activeInputIndex].lockingBytecode;
+
+            // Ensure the excess funds are returned to the contract
+            require(tx.outputs[1].lockingBytecode == thisLockingBytecode);
+            require(tx.outputs[1].value == excessFunds);
+        }
+    }
+}
