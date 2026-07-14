@@ -1,5 +1,5 @@
 // Mocknetwork blockheight = 133700
-pragma cashscript ^0.11.0;
+pragma cashscript ^0.13.0;
 contract AbsoluteLockTimeDemo(bytes20 publicKeyHashOfRecipient, int futureBlock) {
     function spend() {
         require(tx.time >= futureBlock);

@@ -1,0 +1,55 @@
+pragma cashscript ^0.13.0;
+
+/*
+    A basic version of a faucet where
+    - A specific amount can only be withdrawn each time
+    - Withdrawals can be done in a specific interval
+    - Use of NFTs to store local state for a contract
+*/
+contract Faucet(int amount, int period) {
+    function withdrawFunds() {
+        // 4. Extract the unlock blockheight from NFT
+        int unlockTime = int(tx.inputs[0].nftCommitment);
+
+        // 5. Restrict that the current blockheight has reached the unlock blockheight
+        // Example of how timelock is used
+        require(tx.time >= unlockTime);
+
+        // 6. Update NFT data to be the next unlock time
+        int nextUnlockTime = unlockTime + period;
+        bytes nextUnlockTimeBytes = toPaddedBytes(nextUnlockTime, 8);
+        require(tx.outputs[0].nftCommitment == nextUnlockTimeBytes);
+
+        /* * * * * * * * * * * * * * * */
+        /* Below is from basic version */
+        /* but with different indexes  */
+        /* * * * * * * * * * * * * * * */
+
+        /* 1. Requiring a specific amount to be withdrawn */
+        // Basic use of require and some introspection variable
+        require(tx.outputs[0].value == amount);
+
+        /* 2. Adds more security to the contract */
+        // Another basic use of introspection variable/s
+        require(tx.inputs.length == 1);
+        require(tx.outputs.length <= 2);
+        
+        /* 3. Ensure excess funds are returned to the contract, if there are any; */
+        // We take the contract balance
+        int contractBalance = tx.inputs[0].value;
+
+        // Check the remaining funds after taking the withdraw amount and
+        // 1000 satoshis for transaction fees
+        int excessFunds = contractBalance - amount - 1000;
+
+        // Return back to contract if excess funds is large
+        if (excessFunds >= 546) {
+            // This is how to get the lockingBytecode of current contract
+            bytes thisLockingBytecode = tx.inputs[this.activeInputIndex].lockingBytecode;
+
+            // Ensure the excess funds are returned to the contract
+            require(tx.outputs[1].lockingBytecode == thisLockingBytecode);
+            require(tx.outputs[1].value == excessFunds);
+        }
+    }
+}

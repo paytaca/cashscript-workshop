@@ -52,7 +52,7 @@
         <div>
             <div class="text-2xl"><a href="https://playground.cashscript.org" data-preview-link>Example</a></div>
             <pre><code class="language-javascript" data-trim>
-                pragma cashscript ^0.11.0;
+                pragma cashscript ^0.13.0;
                 
                 contract RequireFunctionDemo() {
                     function spend(int amount) {
@@ -137,7 +137,7 @@
         <div>
             <div class="text-2xl"><a href="https://playground.cashscript.org" data-preview-link>Example</a></div>
             <pre><code class="language-javascript" data-line-numbers="5-6" data-trim>
-                pragma cashscript ^0.11.0;
+                pragma cashscript ^0.13.0;
 
                 contract MinMaxDemo() {
                     function spend(int a, int b) {
@@ -260,7 +260,7 @@
         <div>
             <div class="text-2xl"><a href="https://playground.cashscript.org" data-preview-link>Example</a></div>
             <pre><code class="language-javascript" data-line-numbers="4" data-trim>
-                pragma cashscript ^0.11.0;
+                pragma cashscript ^0.13.0;
                 contract Sha256Demo() {
                     function spend(bytes password) {
                         bytes32 secret = sha256("mysecret");
@@ -413,7 +413,7 @@
         <div>
             <div class="text-2xl"><a href="https://playground.cashscript.org" target="_blank" rel="noopener noreferrer">Example</a></div>
             <pre><code class="language-javascript" data-line-numbers="4" data-trim>
-                pragma cashscript ^0.11.0;
+                pragma cashscript ^0.13.0;
                 contract CheckDataSigDemo(pubkey publicKey) {
                     function spend(datasig signatureOfData) {
                         require(checkDataSig(signatureOfData, bytes('approve'), publicKey));
@@ -468,7 +468,7 @@
         <div>
             <div class="text-2xl"><a href="https://playground.cashscript.org" target="_blank" rel="noopener noreferrer">Example</a></div>
             <pre><code class="language-javascript" data-line-numbers="4" data-trim>
-                pragma cashscript ^0.11.0;
+                pragma cashscript ^0.13.0;
                 contract CheckSigDemo(pubkey publicKeyOfContractOwner) {
                     function spend(sig signatureOfContractOwner) {
                         require(checkSig(signatureOfContractOwner, publicKeyOfContractOwner));
