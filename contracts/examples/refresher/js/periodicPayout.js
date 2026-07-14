@@ -72,6 +72,8 @@ const withdraw = async () => {
         to: recipientAddress,
         amount,
     })
+    const currentBlock = await provider.getBlockHeight()
+    builder.setLocktime(currentBlock)
 
     const tx = await builder.send()
     console.log("Transaction sent:", tx)
