@@ -1,4 +1,4 @@
-pragma cashscript ^0.12.0;
+pragma cashscript ^0.13.0;
 
 /*
     A basic version of a periodic payout where;
