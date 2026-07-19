@@ -476,10 +476,10 @@
                     <p class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         A CashTokens genesis transaction is a transaction which creates a new category of CashTokens.
                     </p>
-                    <p class="fragment text-[30px]">
+                    <p class="text-[30px]">
                         A UTXO with <strong><code>vout0</code></strong> is required.
                     </p>
-                    <p class="fragment text-[30px]">
+                    <p class="text-[30px]">
                         The txid of the <code>vout0</code> UTXO will serve as the token category of the genesis CashToken.
                     </p>
                 </section>
@@ -669,6 +669,65 @@
                             other data
                         </li>
                     </ul>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens: Display to Users</h2>
+                    <h3>Example: FT</h3>
+                    <pre><code class="language-javascript text-[20px]" data-line-numbers="1-15" data-trim>
+                        {
+                            "name": "Paytaca LIFT Token",
+                            "uris": {
+                                "web": "https://www.paytaca.com/token",
+                                "icon": "ipfs://bafybeictwoxb4ma2ywxl545dhuvqqufiwyhacvauygcj43u2orq3zm2c4e/5932b2fd4915d6a75d3ec53282cd49118149a2176ee67ed68b1111ff0786f7fc.png"
+                            },
+                            "token": {
+                                "symbol": "LIFT",
+                                "category": "5932b2fd4915d6a75d3ec53282cd49118149a2176ee67ed68b1111ff0786f7fc",
+                                "decimals": 2
+                            },
+                            "description": "The LIFT token (Leveraging Incentives for Financial Transformation) is the utility token powering the Paytaca ecosystem. It embodies the spirit of Bayanihan, a Filipino concept of community-driven voluntary cooperation. LIFT symbolizes collective effort to advance Bitcoin Cash (BCH) adoption. Each token represents an individual's contribution toward moving BCH upward and forward, fostering a sense of community and shared purpose.",
+                            "is_nft": true,
+                            "nft_type": "sequential"
+                        }
+                    </code></pre>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens: Display to Users</h2>
+                    <div style="display: flex; justify-content: center;">
+                        <img src="../images/lift-token-data.png" width="500" height="500" alt="lift-token-data">
+                    </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens: Display to Users</h2>
+                    <h3>Example: NFT</h3>
+                    <pre><code class="language-javascript text-[20px]" data-line-numbers="1-15" data-trim>
+                        {
+                            "name": "Nowhere, Now Here V",
+                            "uris": {
+                                "web": "https://nowhereparty.social",
+                                "icon": "https://bafybeifnnsgmhkmex6rtjfl6iyvi2kykicp57y4v7uqss4gx344rh6ckve.ipfs.nftstorage.link/52658b3c013f32e6d7c95f688156e24547faff4dfbeeb4643d86a545cc535d4b.png"
+                            },
+                            "token": {
+                                "symbol": "NOWHERE-V",
+                                "category": "52658b3c013f32e6d7c95f688156e24547faff4dfbeeb4643d86a545cc535d4b",
+                                "decimals": 0
+                            },
+                            "description": "Nowhere, Now Here V",
+                            "is_nft": true,
+                            "nft_type": "sequential"
+                        }
+                    </code></pre>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens: Display to Users</h2>
+                    <div style="display: flex; justify-content: center;">
+                        <img src="../images/nft-data.png" width="250" height="250" alt="nft-data">
+                        <img src="../images/nft-extra.png" width="250" height="250" alt="nft-extra">
+                    </div>
                 </section>
 
                 <section data-auto-animate>
