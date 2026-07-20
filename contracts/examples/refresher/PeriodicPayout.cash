@@ -48,8 +48,8 @@ contract PeriodicPayout(int amount, bytes20 recipient, int period) {
             bytes thisLockingBytecode = tx.inputs[this.activeInputIndex].lockingBytecode;
 
             // Ensure the excess funds are returned to the contract
-            require(tx.outputs[1].lockingBytecode == thisLockingBytecode);
-            require(tx.outputs[1].value == excessFunds);
+            require(tx.outputs[2].lockingBytecode == thisLockingBytecode);
+            require(tx.outputs[2].value == excessFunds);
         }
     }
 }
