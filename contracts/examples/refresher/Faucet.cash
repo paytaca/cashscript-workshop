@@ -27,16 +27,16 @@ contract Faucet(int amount, int period) {
 
         /* 1. Requiring a specific amount to be withdrawn */
         // Basic use of require and some introspection variable
-        require(tx.outputs[0].value == amount);
+        require(tx.outputs[1].value == amount);
 
         /* 2. Adds more security to the contract */
         // Another basic use of introspection variable/s
-        require(tx.inputs.length == 1);
-        require(tx.outputs.length <= 2);
+        require(tx.inputs.length == 2);
+        require(tx.outputs.length <= 3);
         
         /* 3. Ensure excess funds are returned to the contract, if there are any; */
         // We take the contract balance
-        int contractBalance = tx.inputs[0].value;
+        int contractBalance = tx.inputs[1].value;
 
         // Check the remaining funds after taking the withdraw amount and
         // 1000 satoshis for transaction fees
@@ -48,8 +48,8 @@ contract Faucet(int amount, int period) {
             bytes thisLockingBytecode = tx.inputs[this.activeInputIndex].lockingBytecode;
 
             // Ensure the excess funds are returned to the contract
-            require(tx.outputs[1].lockingBytecode == thisLockingBytecode);
-            require(tx.outputs[1].value == excessFunds);
+            require(tx.outputs[2].lockingBytecode == thisLockingBytecode);
+            require(tx.outputs[2].value == excessFunds);
         }
     }
 }

@@ -971,7 +971,7 @@
                         <pre><code class="language-javascript text-[20px]" data-trim>int abs(int a)</code></pre>
                         <pre><code class="language-javascript text-[20px]" data-trim>int min(int a, int b)</code></pre>
                         <pre><code class="language-javascript text-[20px]" data-trim>int max(int a, int b)</code></pre>
-                        <pre><code class="language-javascript text-[20px]" data-trim>int within(int x, int low, int high)</code></pre>
+                        <pre><code class="language-javascript text-[20px]" data-trim>bool within(int x, int low, int high)</code></pre>
                         </div>
 
                         <!-- Hashing Functions -->
@@ -980,8 +980,7 @@
                         <pre><code class="language-javascript text-[20px]" data-trim>bytes20 ripemd160(any x)</code></pre>
                         <pre><code class="language-javascript text-[20px]" data-trim>bytes20 sha1(int x)</code></pre>
                         <pre><code class="language-javascript text-[20px]" data-trim>bytes32 sha256(any x)</code></pre>
-                        <pre><code class="language-javascript text-[20px]" data-trim>bytes32 hash160(int x)</code></pre>
-                        <pre><code class="language-javascript text-[20px]" data-trim>bytes32 hash356(int x)</code></pre>
+                        <pre><code class="language-javascript text-[20px]" data-trim>bytes20 hash160(int x)</code></pre>
                         </div>
 
                         <!-- Signature Checking Functions -->
@@ -992,6 +991,27 @@
                         <pre><code class="language-javascript text-[20px]" data-trim>bool checkDataSig(datasig s, bytes msg, pubkey pk)</code></pre>
                         </div>
 
+                        <div class="flex-1 min-w-[300px]">
+                        <div class="text-2xl mb-1">Other (NEW)</div>
+                        <pre><code class="language-javascript text-[20px]" data-trim>bytes toPaddedBytes(int value, int size)</code></pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h2>Global Functions</h2>
+                    <div>
+                        <pre><code class="language-javascript" data-trim>
+                        new LockingBytecodeP2PKH(bytes20 publicKeyHash): bytes25
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        new LockingBytecodeP2SH20(bytes20 scriptHash): bytes23
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        new LockingBytecodeP2SH32(bytes32 scriptHash): bytes35
+                        </code></pre>
+                        <pre><code class="language-javascript" data-trim>
+                        new LockingBytecodeNullData(bytes[] chunks): bytes
+                        </code></pre>
                     </div>
                 </section>
 
@@ -1064,6 +1084,26 @@
                             bytes tx.inputs[i].nftCommitment
                             // get nft commitment in ith index of cashtoken utxo output
                             bytes tx.outputs[i].nftCommitment
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>CashTokens</h2>
+                    <h3>NFT Commitment as Data</h3>
+                    <div>
+                        <div>Example: 2 variables with 4 bytes each</div>
+                        <pre><code class="language-javascript text-[20px]" data-line-numbers="1-80" data-trim>
+                            // Deconstructing
+                            // 0xbbcc0400 0x0E010000 => 0xbbcc04000e010000
+                            bytes _data1, bytes _data2 = tx.inputs[i].nftCommitment.split(4);
+                            int data1 = int(_data1); // 0xbbcc0400 => 314,555
+                            int data2 = int(_data2); // 0x0e010000 => 270
+
+                            // Reconstructing
+                            bytes data1Bytes = toPaddedBytes(data1, 4); // 314,555 => 0xbbcc0400
+                            bytes data2Bytes = toPaddedBytes(data2, 4); // 270 => 0x0e010000
+                            tx.output[i].nftCommitment = data1Bytes + data2Bytes;
                         </code></pre>
                     </div>
                 </section>
