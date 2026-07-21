@@ -48,7 +48,7 @@
                     </li>
                     <li class="flex items-center gap-3">
                         <span class="w-3 h-3 bg-blue-500 rounded-full"></span>
-                        JS or Python
+                        JavaScript or Python
                     </li>
                 </ul>
             </section>
@@ -525,7 +525,7 @@
                             category: the token ID of the NFT
                         </li>
                         <li>
-                            commitment: data field for the NFT (40 bytes max)
+                            commitment: data field for the NFT (128 bytes max)
                         </li>
                         <li>
                             capability:
@@ -725,10 +725,10 @@
                 <section data-auto-animate>
                     <h2>CashTokens: Display to Users</h2>
                     <h3>BCMR</h3>
-                    <p class="fragment mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                    <p class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         Bitcoin Cash Metadata Registry (BCMR) is an authenticated JSON file used to define metadata for tokens
                     </p>
-                    <ul class="fragment">
+                    <ul>
                         <li>
                             token name
                         </li>
@@ -1002,6 +1002,7 @@
                         <img
                             src="../images/refresher/basic-periodic-payout-tx.png"
                             style="margin: 0 auto !important;width:min(90vw, 600px);"
+                            alt="basic-periodic-payout-tx"
                         />
                     </div>
                 </section>
@@ -1080,6 +1081,7 @@
                         </div>
                     </div>
                 </section>
+
                 <section>
                     <h2>Global Functions</h2>
                     <div>
@@ -1098,17 +1100,16 @@
                     </div>
                 </section>
 
-
                 <section data-auto-animate>
                     <h2>Periodic Payout Transaction</h2>
                     <div class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
                         <img
                             src="../images/refresher/periodic-payout-tx.png"
                             style="margin: 0 auto !important;width:min(90vw, 600px);"
+                            alt="periodic-payout-tx"
                         />
                     </div>
                 </section>
-
 
                 <section data-auto-animate>
                     <h2>Global Time Lock Variables</h2>
@@ -1346,6 +1347,95 @@
             </section>
 
             <section>
+                <section data-auto-animate>
+                    <h2>JavaScript or Python</h2>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>JavaScript or Python</h2>
+                    <code class="language-bash" data-line-numbers="1" data-trim>
+                        cashscript-py
+                    </code>
+                    <div class="my-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                        A community-maintained Python SDK for CashScript development in Python
+                    </div>
+                    <a>https://cashscript-py.readthedocs.io</a>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>JavaScript or Python</h2>
+                    <code class="language-bash" data-line-numbers="1" data-trim>
+                        cashscript-py
+                    </code>
+                    <pre><code class="language-python text-[20px]" data-line-numbers="1-17" data-trim>
+                        from cashscript_py import Contract, ElectrumNetworkProvider, SignatureTemplate, TransactionBuilder
+                        from .somewhere import contract_args, alice_wif
+
+                        provider = ElectrumNetworkProvider("chipnet")
+
+                        contract = Contract(artifact, contract_args, provider)
+
+                        alice_template = SignatureTemplate(alice_wif)
+                        unlocker = contract.unlock["transfer"](alice_template)
+
+                        builder = TransactionBuilder(provider)
+
+                        # then use the builder to spend a UTXO with the contract unlocker
+                        builder.add_input(contract_utxo, unlocker)
+                        builder.add_output(...)
+                        tx_hex = builder.build()
+                        print(tx_hex)
+                    </code></pre>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>JavaScript or Python</h2>
+                    <h3>Things you can do with the Python SDK</h3>
+                    <ul class="text-[35px]">
+                        <li>initialize contract (but must use JSON artifact file)</li>
+                        <li>use existing providers (e.g. <code class="language-javascript">ElectrumNetworkProvider</code>)</li>
+                        <li>create and broadcast transactions</li>
+                        <li>generate signatures using the <code class="language-javascript">SignatureTemplate</code> class</li>
+                    </ul>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>JavaScript or Python</h2>
+                    <h3>Things you cannot do (yet) with the Python SDK</h3>
+                    <ul class="text-[35px]">
+                        <li>no equivalent to <code class="language-javascript">debug()</code> function</li>
+                        <li>cannot generate a BitAuth IDE link</li>
+                        <li>no wallet connect feature</li>
+                    </ul>
+                </section>
+
+                <section data-auto-animate>
+                    <h2>JavaScript or Python</h2>
+                    <h3>When to use</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="col-span-1">
+                            <p class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                                JavaScript
+                            </p>
+                            <ul class="text-2xl space-y-3 text-left">
+                                <li>all logic is within client-side JS environment</li>
+                                <li>server uses JS-based tech (Express.js, NestJS, etc.)</li>
+                                <li>can still be used in a Python-based server but must deploy a side-by-side NodeJS server</li>
+                            </ul>
+                        </div>
+                        <div class="col-span-1">
+                            <p class="mt-4 p-4 bg-white/10 rounded-lg text-[35px]">
+                                Python
+                            </p>
+                            <ul class="text-2xl space-y-3 text-left">
+                                <li>server uses Python-based tech (Flask, Django, etc.)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <section>
                 <h2>End</h2>
             </section>
         </div>
@@ -1372,7 +1462,6 @@
             hash: true,
             transition: 'fade',
             plugins: [RevealHighlight]
-        // ignore
         }).then(() => {
             // Initialize Mermaid after Reveal.js is ready
             mermaid.init();
