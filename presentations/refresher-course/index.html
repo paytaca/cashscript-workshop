@@ -84,18 +84,9 @@
                                 Pay-to-Public-Key-Hash (P2PKH)
                             </p>
                             <ul class="text-2xl space-y-3 text-left">
-                                <li class="flex items-center gap-3">
-                                    <span class="w-3 h-3 bg-white rounded-full"></span>
-                                    Most common address type
-                                </li>
-                                <li class="flex items-center gap-3">
-                                    <span class="w-3 h-3 bg-white rounded-full"></span>
-                                    Uses public key hash
-                                </li>
-                                <li class="flex items-center gap-3">
-                                    <span class="w-3 h-3 bg-white rounded-full"></span>
-                                    Single signature required
-                                </li>
+                                <li>Most common address type</li>
+                                <li>Uses public key hash</li>
+                                <li>Single signature required</li>
                             </ul>
                         </div>
                         <div class="col-span-1">
@@ -103,18 +94,9 @@
                                 Pay-to-Script-Hash (P2SH)
                             </p>
                             <ul class="text-2xl space-y-3 text-left">
-                                <li class="flex items-center gap-3">
-                                    <span class="w-3 h-3 bg-white rounded-full"></span>
-                                    More flexible address type
-                                </li>
-                                <li class="flex items-center gap-3">
-                                    <span class="w-3 h-3 bg-white rounded-full"></span>
-                                    Uses script hash
-                                </li>
-                                <li class="flex items-center gap-3">
-                                    <span class="w-3 h-3 bg-white rounded-full"></span>
-                                    Supports complex scripts
-                                </li>
+                                <li>More flexible address type</li>
+                                <li>Uses script hash</li>
+                                <li>Supports complex scripts</li>
                             </ul>
                         </div>
                     </div>
@@ -563,7 +545,7 @@
                         Example: Paytaca's LIFT Token
                     </p>
                     <p style="display: flex; justify-content: center;">
-                        <img src="../images/lift-token.png" alt="lift-token" width="100" height="100">
+                        <img src="../images/logos/lift-token.png" alt="lift-token" width="100" height="100">
                     </p>
                     <div>
                         <pre><code class="language-javascript text-[20px]" data-line-numbers="1" data-trim>
@@ -769,7 +751,7 @@
                 <section data-auto-animate>
                     <h2>CashTokens: Display to Users</h2>
                     <div style="display: flex; justify-content: center;">
-                        <img src="../images/lift-token-data.png" width="500" height="500" alt="lift-token-data">
+                        <img src="../images/refresher/lift-token-data.png" width="500" height="500" alt="lift-token-data">
                     </div>
                 </section>
 
@@ -798,8 +780,8 @@
                 <section data-auto-animate>
                     <h2>CashTokens: Display to Users</h2>
                     <div style="display: flex; justify-content: center;">
-                        <img src="../images/nft-data.png" width="250" height="250" alt="nft-data">
-                        <img src="../images/nft-extra.png" width="250" height="250" alt="nft-extra">
+                        <img src="../images/refresher/nft-data.png" width="250" height="250" alt="nft-data">
+                        <img src="../images/refresher/nft-extra.png" width="250" height="250" alt="nft-extra">
                     </div>
                 </section>
 
@@ -1461,7 +1443,8 @@
         Reveal.initialize({
             hash: true,
             transition: 'fade',
-            plugins: [RevealHighlight]
+            plugins: [RevealHighlight],
+            viewDistance: 99999, // Forces all slides to load immediately
         }).then(() => {
             // Initialize Mermaid after Reveal.js is ready
             mermaid.init();
